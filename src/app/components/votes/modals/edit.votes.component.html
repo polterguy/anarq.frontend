@@ -1,0 +1,74 @@
+
+<h1 mat-dialog-title>{{data.isEdit ? 'Edit' : 'Create'}} Votes</h1>
+<div mat-dialog-content>
+
+  <mat-form-field
+    *ngIf="canEditColumn('id')"
+    class="entity-edit-field">
+    <input
+      matInput
+      type="number"
+      step="1"
+      placeholder="id"
+      [(ngModel)]="data.entity.id"
+      autocomplete="off">
+  </mat-form-field>
+
+  <mat-form-field
+    *ngIf="canEditColumn('case')"
+    class="entity-edit-field">
+    <input
+      matInput
+      type="number"
+      step="1"
+      placeholder="case"
+      [(ngModel)]="data.entity.case"
+      autocomplete="off">
+  </mat-form-field>
+
+  <mat-form-field
+    *ngIf="canEditColumn('email')"
+    class="entity-edit-field">
+    <input
+      matInput
+      type="number"
+      step="1"
+      placeholder="email"
+      [(ngModel)]="data.entity.email"
+      autocomplete="off">
+  </mat-form-field>
+
+  <mat-form-field
+    *ngIf="canEditColumn('user')"
+    class="entity-edit-field">
+    <input
+      matInput
+      type="text"
+      placeholder="user"
+      [(ngModel)]="data.entity.user"
+      autocomplete="off">
+  </mat-form-field>
+
+  <mat-checkbox
+    *ngIf="canEditColumn('opinion')"
+    class="entity-edit-field"
+    [(ngModel)]="data.entity.opinion">opinion</mat-checkbox>
+
+</div>
+
+<div mat-dialog-actions>
+
+  <div class="right-aligned">
+
+    <button 
+      mat-raised-button
+      color="primary"
+      (click)="save()">Save</button>
+
+    <button
+      mat-button
+      (click)="cancel()">Cancel</button>
+
+  </div>
+
+</div>
