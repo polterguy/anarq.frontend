@@ -31,8 +31,8 @@ export class EditCasesComponent {
    * be transmitted to the server when we create records. This is done to
    * make sure we don't submit "automatic" primary key values.
    */
-  private createColumns: string[] = ['type', 'region', 'email', 'user', 'deadline', 'subject', 'body'];
-  private updateColumns: string[] = ['id', 'type', 'region', 'email', 'user', 'deadline', 'subject', 'body'];
+  private createColumns: string[] = ['region', 'subject', 'body'];
+  private updateColumns: string[] = ['id', 'type', 'deadline'];
   private primaryKeys: string[] = ['id'];
 
   /*

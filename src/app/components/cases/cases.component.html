@@ -7,7 +7,7 @@
 
     <button
       mat-button
-      *ngIf="inRole(['root','admin'])"
+      *ngIf="inRole(['root','admin', 'user'])"
       class="top-right"
       (click)="createNewRecord()">New ...</button>
 
@@ -80,28 +80,6 @@
           <label class="table-header">region</label>
         </th>
         <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.region}}</td>
-      </ng-container>
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef>
-          <mat-form-field appearance="outline" class="fill-width filter-textbox">
-            <mat-label>email</mat-label>
-            <input
-              matInput
-              placeholder="Filter ..."
-              type="number"
-              autocomplete="off"
-              [formControl]="email">
-            <mat-icon matSuffix>search</mat-icon>
-          </mat-form-field>
-          <button
-            class="sort-button"
-            (click)="sort('email')"
-            mat-button>
-            <mat-icon matSuffix>{{getSortIcon('email')}}</mat-icon>
-          </button>
-          <label class="table-header">email</label>
-        </th>
-        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.email}}</td>
       </ng-container>
       <ng-container matColumnDef="user">
         <th mat-header-cell *matHeaderCellDef>
