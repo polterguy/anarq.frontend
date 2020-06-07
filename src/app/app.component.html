@@ -110,17 +110,6 @@
     <a
       *ngIf="inRole(['root', 'admin'])"
       mat-button
-      routerLink="/roles"
-      routerLinkActive="active-link"
-      class="menu-item"
-      (click)="closeNavigator()"
-      [routerLinkActiveOptions]="{exact:true}">
-      <mat-icon matSuffix>grade</mat-icon>
-      <span class="menu-item-text">Roles</span>
-    </a>
-    <a
-      *ngIf="inRole(['root', 'admin'])"
-      mat-button
       routerLink="/translations"
       routerLinkActive="active-link"
       class="menu-item"
@@ -172,17 +161,6 @@
       [routerLinkActiveOptions]="{exact:true}">
       <mat-icon matSuffix>grade</mat-icon>
       <span class="menu-item-text">Users_kyc_documents</span>
-    </a>
-    <a
-      *ngIf="inRole(['root', 'admin'])"
-      mat-button
-      routerLink="/users"
-      routerLinkActive="active-link"
-      class="menu-item"
-      (click)="closeNavigator()"
-      [routerLinkActiveOptions]="{exact:true}">
-      <mat-icon matSuffix>grade</mat-icon>
-      <span class="menu-item-text">Users</span>
     </a>
     <a
       *ngIf="inRole(['root', 'admin'])"

@@ -20,13 +20,11 @@ import { LanguagesComponent } from './components/languages/languages.component';
 import { Pgp_key_typesComponent } from './components/pgp_key_types/pgp_key_types.component';
 import { Pgp_keysComponent } from './components/pgp_keys/pgp_keys.component';
 import { RegionsComponent } from './components/regions/regions.component';
-import { RolesComponent } from './components/roles/roles.component';
 import { TranslationsComponent } from './components/translations/translations.component';
 import { User_statusComponent } from './components/user_status/user_status.component';
 import { Users_extra_typesComponent } from './components/users_extra_types/users_extra_types.component';
 import { Users_extraComponent } from './components/users_extra/users_extra.component';
 import { Users_kyc_documentsComponent } from './components/users_kyc_documents/users_kyc_documents.component';
-import { UsersComponent } from './components/users/users.component';
 import { VotesComponent } from './components/votes/votes.component';
 
 
@@ -47,13 +45,11 @@ const routes: Routes = [
   { path: 'pgp_key_types', component: Pgp_key_typesComponent },
   { path: 'pgp_keys', component: Pgp_keysComponent },
   { path: 'regions', component: RegionsComponent },
-  { path: 'roles', component: RolesComponent },
   { path: 'translations', component: TranslationsComponent },
   { path: 'user_status', component: User_statusComponent },
   { path: 'users_extra_types', component: Users_extra_typesComponent },
   { path: 'users_extra', component: Users_extraComponent },
   { path: 'users_kyc_documents', component: Users_kyc_documentsComponent },
-  { path: 'users', component: UsersComponent },
   { path: 'votes', component: VotesComponent },
 ];
 

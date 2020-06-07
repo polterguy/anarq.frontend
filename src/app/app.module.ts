@@ -65,8 +65,6 @@ import { Pgp_keysComponent } from './components/pgp_keys/pgp_keys.component';
 import { EditPgp_keysComponent } from './components/pgp_keys/modals/edit.pgp_keys.component';
 import { RegionsComponent } from './components/regions/regions.component';
 import { EditRegionsComponent } from './components/regions/modals/edit.regions.component';
-import { RolesComponent } from './components/roles/roles.component';
-import { EditRolesComponent } from './components/roles/modals/edit.roles.component';
 import { TranslationsComponent } from './components/translations/translations.component';
 import { EditTranslationsComponent } from './components/translations/modals/edit.translations.component';
 import { User_statusComponent } from './components/user_status/user_status.component';
@@ -77,8 +75,6 @@ import { Users_extraComponent } from './components/users_extra/users_extra.compo
 import { EditUsers_extraComponent } from './components/users_extra/modals/edit.users_extra.component';
 import { Users_kyc_documentsComponent } from './components/users_kyc_documents/users_kyc_documents.component';
 import { EditUsers_kyc_documentsComponent } from './components/users_kyc_documents/modals/edit.users_kyc_documents.component';
-import { UsersComponent } from './components/users/users.component';
-import { EditUsersComponent } from './components/users/modals/edit.users.component';
 import { VotesComponent } from './components/votes/votes.component';
 import { EditVotesComponent } from './components/votes/modals/edit.votes.component';
 
@@ -115,8 +111,6 @@ export function tokenGetter() {
     EditPgp_keysComponent,
     RegionsComponent,
     EditRegionsComponent,
-    RolesComponent,
-    EditRolesComponent,
     TranslationsComponent,
     EditTranslationsComponent,
     User_statusComponent,
@@ -127,8 +121,6 @@ export function tokenGetter() {
     EditUsers_extraComponent,
     Users_kyc_documentsComponent,
     EditUsers_kyc_documentsComponent,
-    UsersComponent,
-    EditUsersComponent,
     VotesComponent,
     EditVotesComponent,
   ],
@@ -188,13 +180,11 @@ export function tokenGetter() {
     EditPgp_key_typesComponent,
     EditPgp_keysComponent,
     EditRegionsComponent,
-    EditRolesComponent,
     EditTranslationsComponent,
     EditUser_statusComponent,
     EditUsers_extra_typesComponent,
     EditUsers_extraComponent,
     EditUsers_kyc_documentsComponent,
-    EditUsersComponent,
     EditVotesComponent,
   ]
 })
