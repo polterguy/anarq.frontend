@@ -38,6 +38,7 @@ import { AppComponent } from './app.component';
 import { LoaderService } from './services/loader-service';
 import { LoaderInterceptor } from './services/loader-interceptor';
 import { FormatDatePipe } from './pipes/format-date-pipe';
+import { MarkedPipe } from './pipes/marked.pipe';
 import { environment } from 'src/environments/environment';
 
 // All components. First all "global" components.
@@ -95,6 +96,7 @@ export function tokenGetter() {
     EditUserDialogComponent,
     SecurityComponent,
     FormatDatePipe,
+    MarkedPipe,
     Case_typesComponent,
     EditCase_typesComponent,
     CasesComponent,

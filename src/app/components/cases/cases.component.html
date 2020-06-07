@@ -232,15 +232,13 @@
               (click)="editDetails(el)">
               <mat-icon matSuffix>edit</mat-icon>
             </button>
-            <p class="details"><label>id</label><span>{{el.id}}</span></p>
+            <h2 class="title">{{el.subject}}</h2>
+            <div class="body" [innerHtml]="el.body | marked"></div>
             <p class="details"><label>type</label><span>{{el.type}}</span></p>
             <p class="details"><label>region</label><span>{{el.region}}</span></p>
-            <p class="details"><label>email</label><span>{{el.email}}</span></p>
             <p class="details"><label>user</label><span>{{el.user}}</span></p>
             <p class="details"><label>created</label><span>{{el.created | formatDate}}</span></p>
             <p class="details"><label>deadline</label><span>{{el.deadline | formatDate}}</span></p>
-            <p class="details"><label>subject</label><span>{{el.subject}}</span></p>
-            <p class="details"><label>body</label><span>{{el.body}}</span></p>
           </div>
         </td>
       </ng-container>
