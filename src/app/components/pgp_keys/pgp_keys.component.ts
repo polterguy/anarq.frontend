@@ -83,7 +83,7 @@ export class Pgp_keysComponent implements OnInit {
       if (token !== null && token !== undefined) {
 
         // Yup! User is logged in!
-        this.roles = this.jwtHelper.decodeToken(token).role.split(',');
+        this.roles = this.jwtHelper.decodeToken(token).role;
       }
     }
 

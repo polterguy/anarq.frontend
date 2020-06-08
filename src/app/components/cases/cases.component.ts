@@ -80,7 +80,7 @@ export class CasesComponent implements OnInit {
       if (token !== null && token !== undefined) {
 
         // Yup! User is logged in!
-        this.roles = this.jwtHelper.decodeToken(token).role.split(',');
+        this.roles = this.jwtHelper.decodeToken(token).role;
       }
     }
 
@@ -281,7 +281,7 @@ export class CasesComponent implements OnInit {
     if (this.viewDetails.indexOf(entity) !== -1) {
       result += ' visible-details';
     }
-    if (entity.type === 'rejected') {
+    if (entity.type === 'discarded') {
       result += ' rejected';
     }
     else if (this.hasDeadline(entity)) {
@@ -350,9 +350,8 @@ export class CasesComponent implements OnInit {
   rejectCase(input: any) {
     const entity = {
       id: input.id,
-      type: 'rejected',
     };
-    this.httpService.cases_Put(entity).subscribe(res => {
+    this.httpService.cases_Reject(entity).subscribe(res => {
       this.getData(true);
     });
   }
@@ -384,7 +383,7 @@ export class CasesComponent implements OnInit {
   }
 
   allowEdit(entity: any) {
-    return entity.deadline === null || entity.deadline === undefined;
+    return entity.type === 'new';
   }
 
   hasDeadline(entity: any) {

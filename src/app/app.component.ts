@@ -51,7 +51,8 @@ export class AppComponent {
       if (token !== null && token !== undefined) {
 
         // Yup! User is logged in!
-        this.roles = this.jwtHelper.decodeToken(token).role.split(',');
+        const decoded = this.jwtHelper.decodeToken(token);
+        this.roles = decoded.role;
       }
   }
 
@@ -75,7 +76,7 @@ export class AppComponent {
       localStorage.setItem('jwt_token', res.ticket);
       this.username = '';
       this.password = '';
-      this.roles = this.jwtHelper.decodeToken(res.ticket).role.split(',');
+      this.roles = this.jwtHelper.decodeToken(res.ticket).role;
 
       // Refreshing JWT token every 5 minute.
       setTimeout(() => this.tryRefreshTicket(), 300000);
@@ -88,6 +89,12 @@ export class AppComponent {
         panelClass: ['error-snackbar'],
       });
     });
+  }
+
+  getUsername() {
+    const token = localStorage.getItem('jwt_token');
+    const decoded = this.jwtHelper.decodeToken(token);
+    return decoded.unique_name;
   }
 
   // Invoked before JWT token expires. Tries to "refresh" the JWT token, by invoking backend method.

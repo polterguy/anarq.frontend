@@ -63,7 +63,7 @@ export class EditCasesComponent implements OnInit {
   }
 
   canEditColumn(name: string) {
-    if (this.data.isAccept && name === 'type') {
+    if (this.data.isAccept && (name === 'type' || name === 'body')) {
       return false;
     }
     if (this.data.isEdit) {
@@ -82,7 +82,32 @@ export class EditCasesComponent implements OnInit {
      * Checking if we're editing an existing entity type, or if we're
      * creating a new instance.
      */
-    if (this.data.isEdit) {
+    if (this.data.isAccept) {
+
+      // Updating existing item. Invoking update HTTP REST endpoint and closing dialog.
+      const args = {
+        id: this.data.entity.id,
+        deadline: this.data.entity.deadline,
+      };
+      this.service.cases_Accept(args).subscribe(res => {
+        this.dialogRef.close(this.data.entity);
+        if (res['updated-records'] !== 1) {
+
+          // Oops, error!
+          this.snackBar.open(`Oops, number of items was ${res['updated-records']}, which is very wrong. Should have been 1`, 'Close', {
+            duration: 5000,
+            panelClass: ['error-snackbar'],
+          });
+        }
+      }, error => {
+
+        // Oops, error!
+        this.snackBar.open(error.error.message, 'Close', {
+          duration: 5000,
+          panelClass: ['error-snackbar'],
+        });
+      });
+    } else if (this.data.isEdit) {
 
       /*
        * Removing all columns that we're not supposed to transmit during "edit mode".

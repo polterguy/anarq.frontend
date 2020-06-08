@@ -26,3 +26,9 @@
     right: 0;
     z-index: 1000;
 }
+
+.username {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}

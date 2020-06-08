@@ -73,7 +73,7 @@ export class Users_extra_typesComponent implements OnInit {
       if (token !== null && token !== undefined) {
 
         // Yup! User is logged in!
-        this.roles = this.jwtHelper.decodeToken(token).role.split(',');
+        this.roles = this.jwtHelper.decodeToken(token).role;
       }
     }
 

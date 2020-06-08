@@ -106,6 +106,14 @@ export class HttpService {
     return this.httpClient.put<any>(environment.apiUrl + 'magic/modules/anarchy/cases', args);
   }
 
+  cases_Accept(args: any) {
+    return this.httpClient.put<any>(environment.apiUrl + 'magic/modules/anarchy/cases-accept', args);
+  }
+
+  cases_Reject(args: any) {
+    return this.httpClient.put<any>(environment.apiUrl + 'magic/modules/anarchy/cases-reject', args);
+  }
+
   email_types_count_Get(args: any) {
     return this.httpClient.get<any>(environment.apiUrl + 'magic/modules/anarchy/email_types-count' + this.getQueryArgs(args));
   }
