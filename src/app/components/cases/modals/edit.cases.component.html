@@ -1,63 +1,8 @@
 
-<h1 mat-dialog-title>{{data.isEdit ? 'Edit' : 'Create'}} Cases</h1>
+<h1 mat-dialog-title>
+  {{data.isAccept ? 'Accept ' : (data.isEdit ? 'Edit' : 'Create')}} Case
+</h1>
 <div mat-dialog-content>
-
-  <mat-form-field
-    *ngIf="canEditColumn('id')"
-    class="entity-edit-field">
-    <input
-      matInput
-      type="number"
-      step="1"
-      placeholder="id"
-      [(ngModel)]="data.entity.id"
-      autocomplete="off">
-  </mat-form-field>
-
-  <mat-form-field
-    *ngIf="canEditColumn('type')"
-    class="entity-edit-field">
-    <input
-      matInput
-      type="text"
-      placeholder="type"
-      [(ngModel)]="data.entity.type"
-      autocomplete="off">
-  </mat-form-field>
-
-  <mat-form-field
-    *ngIf="canEditColumn('region')"
-    class="entity-edit-field">
-    <input
-      matInput
-      type="text"
-      placeholder="region"
-      [(ngModel)]="data.entity.region"
-      autocomplete="off">
-  </mat-form-field>
-
-  <mat-form-field
-    *ngIf="canEditColumn('email')"
-    class="entity-edit-field">
-    <input
-      matInput
-      type="number"
-      step="1"
-      placeholder="email"
-      [(ngModel)]="data.entity.email"
-      autocomplete="off">
-  </mat-form-field>
-
-  <mat-form-field
-    *ngIf="canEditColumn('user')"
-    class="entity-edit-field">
-    <input
-      matInput
-      type="text"
-      placeholder="user"
-      [(ngModel)]="data.entity.user"
-      autocomplete="off">
-  </mat-form-field>
 
   <mat-form-field
     *ngIf="canEditColumn('deadline')"
@@ -76,7 +21,7 @@
 
   <mat-form-field
     *ngIf="canEditColumn('subject')"
-    class="entity-edit-field">
+    class="subject">
     <input
       matInput
       type="text"
@@ -85,14 +30,18 @@
       autocomplete="off">
   </mat-form-field>
 
+  <ngx-codemirror
+    [(ngModel)]="data.entity.body"
+    [options]="getCodeMirrorOptions()"></ngx-codemirror>
+
   <mat-form-field
-    *ngIf="canEditColumn('body')"
+    *ngIf="canEditColumn('region')"
     class="entity-edit-field">
     <input
       matInput
       type="text"
-      placeholder="body"
-      [(ngModel)]="data.entity.body"
+      placeholder="region"
+      [(ngModel)]="data.entity.region"
       autocomplete="off">
   </mat-form-field>
 

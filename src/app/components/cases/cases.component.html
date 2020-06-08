@@ -123,7 +123,7 @@
           </button>
           <label class="table-header">created</label>
         </th>
-        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.created | formatDate}}</td>
+        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.created | fromDate}}</td>
       </ng-container>
       <ng-container matColumnDef="deadline">
         <th mat-header-cell *matHeaderCellDef>
@@ -169,39 +169,17 @@
         </th>
         <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.subject}}</td>
       </ng-container>
-      <ng-container matColumnDef="body">
-        <th mat-header-cell *matHeaderCellDef>
-          <mat-form-field appearance="outline" class="fill-width filter-textbox">
-            <mat-label>body</mat-label>
-            <input
-              matInput
-              placeholder="Filter ..."
-              type="text"
-              autocomplete="off"
-              [formControl]="body">
-            <mat-icon matSuffix>search</mat-icon>
-          </mat-form-field>
-          <button
-            class="sort-button"
-            (click)="sort('body')"
-            mat-button>
-            <mat-icon matSuffix>{{getSortIcon('body')}}</mat-icon>
-          </button>
-          <label class="table-header">body</label>
-        </th>
-        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.body}}</td>
-      </ng-container>
 
       <ng-container matColumnDef="delete-instance">
         <th
           mat-header-cell
           *matHeaderCellDef
-          [ngClass]="inRole(['root','admin']) ? 'delete-column' : 'hidden'"></th>
+          [ngClass]="inRole(['root']) ? 'delete-column' : 'hidden'"></th>
 
         <td
           mat-cell
           *matCellDef="let el"
-          [ngClass]="inRole(['root','admin']) ? 'delete-column' : 'hidden'">
+          [ngClass]="inRole(['root']) ? 'delete-column' : 'hidden'">
           <button
             mat-button
             (click)="delete(el, {id: el.id})"
@@ -225,20 +203,32 @@
               (click)="toggleDetails(el)">
               <mat-icon matSuffix>close</mat-icon>
             </button>
-            <button
-              *ngIf="inRole(['root','admin'])"
-              mat-button
-              class="edit-details"
-              (click)="editDetails(el)">
-              <mat-icon matSuffix>edit</mat-icon>
-            </button>
             <h2 class="title">{{el.subject}}</h2>
             <div class="body" [innerHtml]="el.body | marked"></div>
-            <p class="details"><label>type</label><span>{{el.type}}</span></p>
-            <p class="details"><label>region</label><span>{{el.region}}</span></p>
-            <p class="details"><label>user</label><span>{{el.user}}</span></p>
-            <p class="details"><label>created</label><span>{{el.created | formatDate}}</span></p>
-            <p class="details"><label>deadline</label><span>{{el.deadline | formatDate}}</span></p>
+            <div class="items">
+              <span class="item">{{el.type}}</span>
+              <span class="item">{{el.user}}</span>
+              <span class="item">{{el.region}}</span>
+              <span class="item time"><span *ngIf="hasDeadline(el)">Closes {{el.deadline | toDate}}</span></span>
+              <span class="action-buttons">
+                <button
+                  *ngIf="inRole(['root','admin']) && allowEdit(el)"
+                  mat-button
+                  matTooltip="Accepts the case and brings it forth to a vote"
+                  class="accept-case"
+                  (click)="acceptCase(el)">
+                  <mat-icon matSuffix>check</mat-icon>
+                </button>
+                <button
+                  *ngIf="inRole(['root','admin']) && allowEdit(el)"
+                  mat-button
+                  matTooltip="Rejects and discards the case"
+                  class="reject-case"
+                  (click)="rejectCase(el)">
+                  <mat-icon matSuffix>delete</mat-icon>
+                </button>
+              </span>
+            </div>
           </div>
         </td>
       </ng-container>

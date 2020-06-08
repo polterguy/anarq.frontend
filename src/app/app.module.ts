@@ -32,12 +32,17 @@ import { ChartsModule } from 'ng2-charts';
 // Importing "oauth0" to help out with our JWT tokens.
 import { JwtModule } from '@auth0/angular-jwt';
 
+// CodeMirror includes
+import { CodemirrorModule } from '@ctrl/ngx-codemirror';
+
 // Routing, services, etc imports.
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoaderService } from './services/loader-service';
 import { LoaderInterceptor } from './services/loader-interceptor';
-import { FormatDatePipe } from './pipes/format-date-pipe';
+import { FormatDatePipe } from './pipes/format-date.pipe';
+import { FromDatePipe } from './pipes/from-date.pipe';
+import { ToDatePipe } from './pipes/to-date.pipe';
 import { MarkedPipe } from './pipes/marked.pipe';
 import { environment } from 'src/environments/environment';
 
@@ -96,6 +101,8 @@ export function tokenGetter() {
     EditUserDialogComponent,
     SecurityComponent,
     FormatDatePipe,
+    FromDatePipe,
+    ToDatePipe,
     MarkedPipe,
     Case_typesComponent,
     EditCase_typesComponent,
@@ -157,6 +164,7 @@ export function tokenGetter() {
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     ChartsModule,
+    CodemirrorModule,
   ],
   providers: [
     LoaderService, {

@@ -14,3 +14,50 @@
 .body {
     width: 100%;
 }
+
+.items {
+    padding: .5rem 1rem .5rem 1rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    background-color: #f0f0f0;
+    border-radius: .5rem;
+    width: 100%;
+    display: flex;
+    .item {
+        flex: 1;
+        margin-right: 1rem;
+        vertical-align: middle;
+        height: 100%;
+        font-weight: bold;
+        margin-top: .5rem;
+        margin-bottom: .5rem;
+    }
+    .item.time {
+        font-weight: normal;
+    }
+    .action-buttons {
+        flex: 1;
+        text-align: right;
+        .accept-case {
+            color: rgb(128, 128, 128);
+            padding-right: 0;
+        }
+        .reject-case {
+            color: rgb(128, 128, 128);
+            padding-right: 0;
+            margin-right: 0;
+        }
+    }
+}
+
+.has-deadline {
+    background-color: #f0fff0;
+}
+
+.no-deadline {
+    background-color: #fafafa;
+}
+
+.rejected {
+    background-color: #fff0f0;
+}

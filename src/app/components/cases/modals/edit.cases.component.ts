@@ -2,7 +2,7 @@
  * Anarchy, a Direct Democracy system. Copyright 2020 - Thomas Hansen thomas@servergardens.com
  */
 
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { HttpService } from 'src/app/services/http-service';
 
@@ -13,6 +13,7 @@ import { HttpService } from 'src/app/services/http-service';
  */
 export interface DialogData {
   isEdit: boolean;
+  isAccept: boolean;
   entity: any;
 }
 
@@ -24,7 +25,7 @@ export interface DialogData {
   templateUrl: './edit.cases.component.html',
   styleUrls: ['./edit.cases.component.scss']
 })
-export class EditCasesComponent {
+export class EditCasesComponent implements OnInit {
 
   /*
    * Only the following properties of the given data.entity will actually
@@ -44,7 +45,27 @@ export class EditCasesComponent {
     private snackBar: MatSnackBar,
     private service: HttpService) { }
 
+  ngOnInit(): void {
+    if (this.data.isAccept) {
+      this.data.entity.type = 'open';
+      const when = new Date();
+      when.setDate(when.getDate() + 30);
+      this.data.entity.deadline = when;
+    }
+  }
+
+  getCodeMirrorOptions() {
+    return {
+      lineNumbers: true,
+      theme: 'material',
+      mode: 'markdown'
+    };
+  }
+
   canEditColumn(name: string) {
+    if (this.data.isAccept && name === 'type') {
+      return false;
+    }
     if (this.data.isEdit) {
       return this.updateColumns.filter(x => x === name).length > 0 &&
         this.primaryKeys.filter(x => x === name).length == 0;

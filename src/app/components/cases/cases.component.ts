@@ -91,16 +91,6 @@ export class CasesComponent implements OnInit {
     this.getData();
 
     // Necessary to make sure we can have "live filtering" in our datagrid.
-    this.id = new FormControl('');
-    this.id.valueChanges
-      .pipe(debounceTime(this.debounce), distinctUntilChanged())
-      .subscribe(query => {
-        this.paginator.pageIndex = 0;
-        this.filter.offset = 0;
-        this.hasFiltered = true;
-        this.filter['id.eq'] = this.id.value;
-        this.getData();
-      });
     this.type = new FormControl('');
     this.type.valueChanges
       .pipe(debounceTime(this.debounce), distinctUntilChanged())
@@ -119,26 +109,6 @@ export class CasesComponent implements OnInit {
         this.filter.offset = 0;
         this.hasFiltered = true;
         this.filter['region.like'] = this.region.value + '%';
-        this.getData();
-      });
-    this.email = new FormControl('');
-    this.email.valueChanges
-      .pipe(debounceTime(this.debounce), distinctUntilChanged())
-      .subscribe(query => {
-        this.paginator.pageIndex = 0;
-        this.filter.offset = 0;
-        this.hasFiltered = true;
-        this.filter['email.eq'] = this.email.value;
-        this.getData();
-      });
-    this.user = new FormControl('');
-    this.user.valueChanges
-      .pipe(debounceTime(this.debounce), distinctUntilChanged())
-      .subscribe(query => {
-        this.paginator.pageIndex = 0;
-        this.filter.offset = 0;
-        this.hasFiltered = true;
-        this.filter['user.like'] = this.user.value + '%';
         this.getData();
       });
     this.created = new FormControl('');
@@ -307,10 +277,19 @@ export class CasesComponent implements OnInit {
    * window is visible or not.
    */
   getClassForRecord(entity: any) {
+    let result = 'grid-row';
     if (this.viewDetails.indexOf(entity) !== -1) {
-      return 'grid-row visible-details';
+      result += ' visible-details';
     }
-    return 'grid-row';
+    if (entity.type === 'rejected') {
+      result += ' rejected';
+    }
+    else if (this.hasDeadline(entity)) {
+      result += ' has-deadline';
+    } else {
+      result += ' no-deadline';
+    }
+    return result;
   }
 
   /*
@@ -329,7 +308,7 @@ export class CasesComponent implements OnInit {
    * Invoked when user wants to edit an entity
    * This will show a modal dialog, allowing the user to edit his record.
    */
-  editDetails(entity: any) {
+  acceptCase(entity: any) {
 
     /*
      * Cloning our entity, in case user doesn't click the "Save" button,
@@ -337,6 +316,7 @@ export class CasesComponent implements OnInit {
      */
     const data = {
       isEdit: true,
+      isAccept: true,
       entity: {},
     };
     for (const idx in entity) {
@@ -367,12 +347,23 @@ export class CasesComponent implements OnInit {
     });
   }
 
+  rejectCase(input: any) {
+    const entity = {
+      id: input.id,
+      type: 'rejected',
+    };
+    this.httpService.cases_Put(entity).subscribe(res => {
+      this.getData(true);
+    });
+  }
+
   // Creates a new data record, by showing the modal edit/create dialog.
   createNewRecord() {
 
     // Parametrizing our modal dialog correctly. Notice "idEdit" being false.
     const data = {
       isEdit: false,
+      isAccept: false,
       entity: {},
     };
 
@@ -390,6 +381,14 @@ export class CasesComponent implements OnInit {
         });
       }
     });
+  }
+
+  allowEdit(entity: any) {
+    return entity.deadline === null || entity.deadline === undefined;
+  }
+
+  hasDeadline(entity: any) {
+    return entity.deadline !== null && entity.deadline !== undefined;
   }
 
   // Invoked when an entity is deleted. Invokes HTTP service that deletes item from backend.
