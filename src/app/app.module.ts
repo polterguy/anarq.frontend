@@ -48,11 +48,11 @@ import { environment } from 'src/environments/environment';
 
 // All components. First all "global" components.
 import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './modals/login.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { CreateRoleDialogComponent } from './components/auth/modals/create-role-dialog';
 import { CreateUserDialogComponent } from './components/auth/modals/create-user-dialog';
 import { EditUserDialogComponent } from './components/auth/modals/edit-user-dialog';
-import { SecurityComponent } from './components/security/security.component';
 
 // CRUD wrapper components, both for the datagrid, and its associated editor/creator dialog.
 import { Case_typesComponent } from './components/case_types/case_types.component';
@@ -95,11 +95,11 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     HomeComponent,
+    LoginComponent,
     AuthComponent,
     CreateRoleDialogComponent,
     CreateUserDialogComponent,
     EditUserDialogComponent,
-    SecurityComponent,
     FormatDatePipe,
     FromDatePipe,
     ToDatePipe,
@@ -179,6 +179,7 @@ export function tokenGetter() {
   ],
   bootstrap: [AppComponent],
   entryComponents: [
+    LoginComponent,
     CreateRoleDialogComponent,
     CreateUserDialogComponent,
     EditUserDialogComponent,

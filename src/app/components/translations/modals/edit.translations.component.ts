@@ -2,7 +2,7 @@
  * Anarchy, a Direct Democracy system. Copyright 2020 - Thomas Hansen thomas@servergardens.com
  */
 
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { HttpService } from 'src/app/services/http-service';
 
@@ -24,7 +24,7 @@ export interface DialogData {
   templateUrl: './edit.translations.component.html',
   styleUrls: ['./edit.translations.component.scss']
 })
-export class EditTranslationsComponent {
+export class EditTranslationsComponent implements OnInit {
 
   /*
    * Only the following properties of the given data.entity will actually
@@ -34,6 +34,7 @@ export class EditTranslationsComponent {
   private createColumns: string[] = ['locale', 'key', 'content'];
   private updateColumns: string[] = ['locale', 'key', 'content'];
   private primaryKeys: string[] = ['locale', 'key'];
+  public languages: any[];
 
   /*
    * Constructor taking a bunch of services injected using dependency injection.
@@ -43,6 +44,12 @@ export class EditTranslationsComponent {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private snackBar: MatSnackBar,
     private service: HttpService) { }
+
+  ngOnInit(): void {
+    this.service.languages_Get({}).subscribe(res => {
+      this.languages = res;
+    });
+  }
 
   canEditColumn(name: string) {
     if (this.data.isEdit) {

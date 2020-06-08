@@ -10,6 +10,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 // Services your app depends upon.
 import { HttpService } from './services/http-service';
 import { LoaderService } from './services/loader-service';
+import { MatDialog } from '@angular/material';
+import { LoginComponent } from './modals/login.component';
 
 /*
  * Your actual component.
@@ -44,7 +46,8 @@ export class AppComponent {
     private httpService: HttpService,
     private jwtHelper: JwtHelperService,
     private snackBar: MatSnackBar,
-    private loaderService: LoaderService) {
+    private loaderService: LoaderService,
+    public dialog: MatDialog) {
 
       // Checking if user is logged in, at which point we initialize the roles property.
       const token = localStorage.getItem('jwt_token');
@@ -66,6 +69,25 @@ export class AppComponent {
   logout() {
     this.roles = [];
     localStorage.removeItem('jwt_token');
+    window.location.href = window.location.href;
+  }
+
+  tryLogin() {
+    // Creating our modal dialog, passing in the cloned entity, and "isEdit" as true.
+    const dialogRef = this.dialog.open(LoginComponent, {
+      width: '400px',
+      data: {},
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (res !== null && res !== undefined && res.ticket) {
+        localStorage.setItem('jwt_token', res.ticket);
+        window.location.href = window.location.href;
+      }
+    });
+  }
+
+  register() {
+    console.log('register');
   }
 
   // Attempts to login user, using the username/password combination he provided in the login form.

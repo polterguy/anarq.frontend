@@ -1,0 +1,28 @@
+
+<h1 mat-dialog-title>Login</h1>
+<div mat-dialog-content>
+
+  <mat-form-field class="fill-width">
+    <input 
+      matInput 
+      placeholder="Username"
+      type="text" 
+      [(ngModel)]="username">
+  </mat-form-field>
+
+  <mat-form-field class="fill-width">
+    <input 
+      matInput 
+      placeholder="Password"
+      type="password" 
+      [(ngModel)]="password">
+  </mat-form-field>
+
+  <div class="right-aligned">
+    <button 
+      mat-button
+      (click)="login()"
+      matTooltip="Login to your app">Login</button>
+  </div>
+
+</div>

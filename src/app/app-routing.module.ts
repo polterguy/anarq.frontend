@@ -9,7 +9,6 @@ import { Routes, RouterModule } from '@angular/router';
 // Importing components, first "global/common" components.
 import { HomeComponent } from './components/home/home.component';
 import { AuthComponent } from './components/auth/auth.component';
-import { SecurityComponent } from './components/security/security.component';
 
 // Then importing all "entity components". Basically, the datagrids for viewing entities from your backend.
 import { Case_typesComponent } from './components/case_types/case_types.component';
@@ -34,7 +33,6 @@ const routes: Routes = [
   // First common/global routes.
   { path: '', component: HomeComponent },
   { path: 'auth', component: AuthComponent },
-  { path: 'security', component: SecurityComponent },
 
   // Then routes for all entity components.
   { path: 'case_types', component: Case_typesComponent },

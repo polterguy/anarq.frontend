@@ -5,12 +5,14 @@
   <mat-form-field
     *ngIf="canEditColumn('locale')"
     class="entity-edit-field">
-    <input
+    <mat-select
       matInput
-      type="text"
-      placeholder="locale"
-      [(ngModel)]="data.entity.locale"
-      autocomplete="off">
+      placeholder="Select locale"
+      [(ngModel)]="data.entity.locale">
+      <mat-option
+        *ngFor="let cur of languages"
+        [value]="cur.locale">{{cur.description}}</mat-option>
+    </mat-select>
   </mat-form-field>
 
   <mat-form-field
