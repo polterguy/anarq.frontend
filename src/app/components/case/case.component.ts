@@ -27,4 +27,8 @@ export class CaseComponent implements OnInit {
       });
     });
   }
+
+  getCaseUrl() {
+    return window.location.href;
+  }
 }

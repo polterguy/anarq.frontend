@@ -9,6 +9,16 @@
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
+    .home-link {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        text-decoration: none;
+    }
+    .qr-code {
+        float: right;
+    }
 }
 
 .copyright {

@@ -5,6 +5,7 @@
   <ul class="front-page-cases">
     <li *ngFor="let case of cases">
       <a
+        class="case-link"
         [routerLink]="'/case/' + case.hash">
         {{case.subject}}
       </a>

@@ -24,6 +24,7 @@
     "@angular/router": "~9.0.5",
     "@auth0/angular-jwt": "^3.0.1",
     "@ctrl/ngx-codemirror": "^3.1.3",
+    "angularx-qrcode": "^2.3.4",
     "chart.js": "^2.9.3",
     "codemirror": "^5.54.0",
     "hammerjs": "^2.0.8",

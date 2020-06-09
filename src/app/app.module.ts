@@ -32,6 +32,9 @@ import { ChartsModule } from 'ng2-charts';
 // Importing "oauth0" to help out with our JWT tokens.
 import { JwtModule } from '@auth0/angular-jwt';
 
+// QR codes
+import { QRCodeModule } from 'angularx-qrcode';
+
 // CodeMirror includes
 import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 
@@ -167,6 +170,7 @@ export function tokenGetter() {
     OwlNativeDateTimeModule,
     ChartsModule,
     CodemirrorModule,
+    QRCodeModule,
   ],
   providers: [
     LoaderService, {

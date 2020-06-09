@@ -4,6 +4,16 @@
   <div
     *ngIf="item"
     class="mat-elevation-z4 case">
+    <a
+      class="home-link"
+      routerLink="/">
+      home
+    </a>
+    <qrcode
+      class="qr-code"
+      [qrdata]="getCaseUrl()"
+      [width]="128"
+      [errorCorrectionLevel]="'M'"></qrcode>
     <h1>
       {{item.subject}}
     </h1>
