@@ -3,7 +3,7 @@
  */
 
 .logo {
-    width: 100px;
+    height: 50px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -30,6 +30,11 @@
                 color: #a0a0a0;
             }
         }
+    }
+    .feed-more {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 

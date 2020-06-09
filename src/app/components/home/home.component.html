@@ -1,6 +1,7 @@
 
 <img 
   src="../assets/logo.svg"
+  title="Occupty Democracy!"
   class="logo"
   alt="Occupy Democracy!">
 <mat-card class="info-card">
@@ -17,6 +18,14 @@
       </small>
     </li>
   </ul>
+
+  <button
+    *ngIf="more"
+    mat-button
+    class="feed-more"
+    (click)="getMore()">
+    more
+  </button>
 
 </mat-card>
 <div class="copyright">

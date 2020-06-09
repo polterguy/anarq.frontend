@@ -118,11 +118,15 @@ export class CaseService {
    * 
    * @param args Generic filter condition for which open cases to return
    */
-  getOpenCases(args: any): Observable<CaseSlim[]> {
+  getOpenCases(fromId: number = null): Observable<CaseSlim[]> {
+    let query = '';
+    if (fromId) {
+      query += '?id.lt=' + fromId;
+    }
     return this.httpClient.get<CaseSlim[]>(
       environment.apiUrl +
       'magic/modules/anarchy/cases/open-cases' +
-      getQueryArgs(args));
+      query);
   }
 
   /**
