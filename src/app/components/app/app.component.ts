@@ -8,10 +8,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 // Services your app depends upon.
-import { LoaderService } from './services/loader.service';
+import { LoaderService } from '../../services/loader.service';
 import { MatDialog } from '@angular/material';
-import { LoginComponent } from './modals/login.component';
-import { UsersService } from './services/http/users.service';
+import { LoginComponent } from '../../modals/login.component';
+import { UsersService } from '../../services/http/users.service';
 
 /*
  * Your actual component.
