@@ -73,7 +73,7 @@ export class EditRegionsComponent {
       }
 
       // Updating existing item. Invoking update HTTP REST endpoint and closing dialog.
-      this.service.regions_Put(this.data.entity).subscribe(res => {
+      this.service.updateRegion(this.data.entity).subscribe(res => {
         this.dialogRef.close(this.data.entity);
         if (res['updated-records'] !== 1) {
 
@@ -103,7 +103,7 @@ export class EditRegionsComponent {
       }
 
       // Creating new item. Invoking create HTTP REST endpoint and closing dialog.
-      this.service.regions_Post(this.data.entity).subscribe(res => {
+      this.service.createRegion(this.data.entity).subscribe(res => {
         this.dialogRef.close(this.data.entity);
 
         if (res === null || res === undefined) {

@@ -73,7 +73,7 @@ export class EditEmailsComponent {
       }
 
       // Updating existing item. Invoking update HTTP REST endpoint and closing dialog.
-      this.service.emails_Put(this.data.entity).subscribe(res => {
+      this.service.updateEmail(this.data.entity).subscribe(res => {
         this.dialogRef.close(this.data.entity);
         if (res['updated-records'] !== 1) {
 
@@ -103,7 +103,7 @@ export class EditEmailsComponent {
       }
 
       // Creating new item. Invoking create HTTP REST endpoint and closing dialog.
-      this.service.emails_Post(this.data.entity).subscribe(res => {
+      this.service.createEmail(this.data.entity).subscribe(res => {
         this.dialogRef.close(this.data.entity);
 
         if (res === null || res === undefined) {

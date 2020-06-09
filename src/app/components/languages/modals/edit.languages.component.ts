@@ -73,7 +73,7 @@ export class EditLanguagesComponent {
       }
 
       // Updating existing item. Invoking update HTTP REST endpoint and closing dialog.
-      this.service.languages_Put(this.data.entity).subscribe(res => {
+      this.service.updateLanguage(this.data.entity).subscribe(res => {
         this.dialogRef.close(this.data.entity);
         if (res['updated-records'] !== 1) {
 
@@ -103,7 +103,7 @@ export class EditLanguagesComponent {
       }
 
       // Creating new item. Invoking create HTTP REST endpoint and closing dialog.
-      this.service.languages_Post(this.data.entity).subscribe(res => {
+      this.service.createLanguage(this.data.entity).subscribe(res => {
         this.dialogRef.close(this.data.entity);
 
         if (res === null || res === undefined) {

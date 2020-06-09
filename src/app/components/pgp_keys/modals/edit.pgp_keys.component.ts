@@ -73,7 +73,7 @@ export class EditPgp_keysComponent {
       }
 
       // Updating existing item. Invoking update HTTP REST endpoint and closing dialog.
-      this.service.pgp_keys_Put(this.data.entity).subscribe(res => {
+      this.service.updateKey(this.data.entity).subscribe(res => {
         this.dialogRef.close(this.data.entity);
         if (res['updated-records'] !== 1) {
 
@@ -103,7 +103,7 @@ export class EditPgp_keysComponent {
       }
 
       // Creating new item. Invoking create HTTP REST endpoint and closing dialog.
-      this.service.pgp_keys_Post(this.data.entity).subscribe(res => {
+      this.service.createKey(this.data.entity).subscribe(res => {
         this.dialogRef.close(this.data.entity);
 
         if (res === null || res === undefined) {

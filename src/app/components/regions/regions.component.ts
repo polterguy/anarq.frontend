@@ -134,7 +134,7 @@ export class RegionsComponent implements OnInit {
     this.viewDetails = [];
 
     // Retrieves items from our backend through our HTTP service layer.
-    this.httpService.regions_Get(this.filter).subscribe(res => {
+    this.httpService.getRegions(this.filter).subscribe(res => {
       this.data = res;
 
       // Checking if user wants to (re)-count items, and if so, invoking "count records" HTTP service method.
@@ -158,7 +158,7 @@ export class RegionsComponent implements OnInit {
         }
 
         // Invoking "count records" HTTP service layer method.
-        this.httpService.regions_count_Get(cloned).subscribe(res2 => {
+        this.httpService.countRegions(cloned).subscribe(res2 => {
           this.count = res2.count;
         }, error => {
 
@@ -332,7 +332,7 @@ export class RegionsComponent implements OnInit {
     }
 
     // Invoking HTTP service DELETE method.
-    this.httpService.regions_Delete(ids).subscribe(res => {
+    this.httpService.deleteRegion(ids).subscribe(res => {
 
       // Sanity checking invocation.
       if (res['deleted-records'] !== 1) {

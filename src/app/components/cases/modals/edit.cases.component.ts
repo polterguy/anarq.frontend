@@ -89,7 +89,7 @@ export class EditCasesComponent implements OnInit {
         id: this.data.entity.id,
         deadline: this.data.entity.deadline,
       };
-      this.service.cases_Accept(args).subscribe(res => {
+      this.service.acceptCase(args).subscribe(res => {
         this.dialogRef.close(this.data.entity);
         if (res['updated-records'] !== 1) {
 
@@ -119,7 +119,7 @@ export class EditCasesComponent implements OnInit {
       }
 
       // Updating existing item. Invoking update HTTP REST endpoint and closing dialog.
-      this.service.cases_Put(this.data.entity).subscribe(res => {
+      this.service.updateCase(this.data.entity).subscribe(res => {
         this.dialogRef.close(this.data.entity);
         if (res['updated-records'] !== 1) {
 
@@ -149,7 +149,7 @@ export class EditCasesComponent implements OnInit {
       }
 
       // Creating new item. Invoking create HTTP REST endpoint and closing dialog.
-      this.service.cases_Post(this.data.entity).subscribe(res => {
+      this.service.createCase(this.data.entity).subscribe(res => {
         this.dialogRef.close(this.data.entity);
 
         if (res === null || res === undefined) {

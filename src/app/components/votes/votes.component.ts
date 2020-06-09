@@ -178,7 +178,7 @@ export class VotesComponent implements OnInit {
     this.viewDetails = [];
 
     // Retrieves items from our backend through our HTTP service layer.
-    this.httpService.votes_Get(this.filter).subscribe(res => {
+    this.httpService.getVotes(this.filter).subscribe(res => {
       this.data = res;
 
       // Checking if user wants to (re)-count items, and if so, invoking "count records" HTTP service method.
@@ -202,7 +202,7 @@ export class VotesComponent implements OnInit {
         }
 
         // Invoking "count records" HTTP service layer method.
-        this.httpService.votes_count_Get(cloned).subscribe(res2 => {
+        this.httpService.countVotes(cloned).subscribe(res2 => {
           this.count = res2.count;
         }, error => {
 
@@ -376,7 +376,7 @@ export class VotesComponent implements OnInit {
     }
 
     // Invoking HTTP service DELETE method.
-    this.httpService.votes_Delete(ids).subscribe(res => {
+    this.httpService.deleteVote(ids).subscribe(res => {
 
       // Sanity checking invocation.
       if (res['deleted-records'] !== 1) {

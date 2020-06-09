@@ -181,7 +181,7 @@ export class CasesComponent implements OnInit {
     this.viewDetails = [];
 
     // Retrieves items from our backend through our HTTP service layer.
-    this.httpService.cases_Get(this.filter).subscribe(res => {
+    this.httpService.getCases(this.filter).subscribe(res => {
       this.data = res;
 
       // Checking if user wants to (re)-count items, and if so, invoking "count records" HTTP service method.
@@ -205,7 +205,7 @@ export class CasesComponent implements OnInit {
         }
 
         // Invoking "count records" HTTP service layer method.
-        this.httpService.cases_count_Get(cloned).subscribe(res2 => {
+        this.httpService.countCases(cloned).subscribe(res2 => {
           this.count = res2.count;
         }, error => {
 
@@ -351,7 +351,7 @@ export class CasesComponent implements OnInit {
     const entity = {
       id: input.id,
     };
-    this.httpService.cases_Reject(entity).subscribe(res => {
+    this.httpService.rejectCase(entity).subscribe(res => {
       this.getData(true);
     });
   }
@@ -407,7 +407,7 @@ export class CasesComponent implements OnInit {
     }
 
     // Invoking HTTP service DELETE method.
-    this.httpService.cases_Delete(ids).subscribe(res => {
+    this.httpService.deleteCases(ids).subscribe(res => {
 
       // Sanity checking invocation.
       if (res['deleted-records'] !== 1) {

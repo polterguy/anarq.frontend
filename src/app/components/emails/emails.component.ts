@@ -167,7 +167,7 @@ export class EmailsComponent implements OnInit {
     this.viewDetails = [];
 
     // Retrieves items from our backend through our HTTP service layer.
-    this.httpService.emails_Get(this.filter).subscribe(res => {
+    this.httpService.getEmail(this.filter).subscribe(res => {
       this.data = res;
 
       // Checking if user wants to (re)-count items, and if so, invoking "count records" HTTP service method.
@@ -191,7 +191,7 @@ export class EmailsComponent implements OnInit {
         }
 
         // Invoking "count records" HTTP service layer method.
-        this.httpService.emails_count_Get(cloned).subscribe(res2 => {
+        this.httpService.countEmails(cloned).subscribe(res2 => {
           this.count = res2.count;
         }, error => {
 
@@ -365,7 +365,7 @@ export class EmailsComponent implements OnInit {
     }
 
     // Invoking HTTP service DELETE method.
-    this.httpService.emails_Delete(ids).subscribe(res => {
+    this.httpService.deleteEmail(ids).subscribe(res => {
 
       // Sanity checking invocation.
       if (res['deleted-records'] !== 1) {

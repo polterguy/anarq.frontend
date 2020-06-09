@@ -39,52 +39,52 @@ export class MiscService {
     return result;
   }
 
-  regions_count_Get(args: any) {
+  countRegions(args: any) {
     return this.httpClient.get<any>(environment.apiUrl +
       'magic/modules/anarchy/misc/regions-count' + this.getQueryArgs(args));
   }
 
-  regions_Delete(args: any) {
+  deleteRegion(args: any) {
     return this.httpClient.delete<any>(environment.apiUrl +
       'magic/modules/anarchy/misc/regions' + this.getQueryArgs(args));
   }
 
-  regions_Get(args: any) {
+  getRegions(args: any) {
     return this.httpClient.get<any>(environment.apiUrl +
       'magic/modules/anarchy/misc/regions' + this.getQueryArgs(args));
   }
 
-  regions_Post(args: any) {
+  createRegion(args: any) {
     return this.httpClient.post<any>(environment.apiUrl +
       'magic/modules/anarchy/misc/regions', args);
   }
 
-  regions_Put(args: any) {
+  updateRegion(args: any) {
     return this.httpClient.put<any>(environment.apiUrl +
       'magic/modules/anarchy/misc/regions', args);
   }
 
-  votes_count_Get(args: any) {
+  countVotes(args: any) {
     return this.httpClient.get<any>(environment.apiUrl +
       'magic/modules/anarchy/misc/votes-count' + this.getQueryArgs(args));
   }
 
-  votes_Delete(args: any) {
+  deleteVote(args: any) {
     return this.httpClient.delete<any>(environment.apiUrl +
       'magic/modules/anarchy/misc/votes' + this.getQueryArgs(args));
   }
 
-  votes_Get(args: any) {
+  getVotes(args: any) {
     return this.httpClient.get<any>(environment.apiUrl +
       'magic/modules/anarchy/misc/votes' + this.getQueryArgs(args));
   }
 
-  votes_Post(args: any) {
+  createVote(args: any) {
     return this.httpClient.post<any>(environment.apiUrl +
       'magic/modules/anarchy/misc/votes', args);
   }
 
-  votes_Put(args: any) {
+  updateVote(args: any) {
     return this.httpClient.put<any>(environment.apiUrl +
       'magic/modules/anarchy/misc/votes', args);
   }

@@ -134,7 +134,7 @@ export class LanguagesComponent implements OnInit {
     this.viewDetails = [];
 
     // Retrieves items from our backend through our HTTP service layer.
-    this.httpService.languages_Get(this.filter).subscribe(res => {
+    this.httpService.getLanguages(this.filter).subscribe(res => {
       this.data = res;
 
       // Checking if user wants to (re)-count items, and if so, invoking "count records" HTTP service method.
@@ -158,7 +158,7 @@ export class LanguagesComponent implements OnInit {
         }
 
         // Invoking "count records" HTTP service layer method.
-        this.httpService.languages_count_Get(cloned).subscribe(res2 => {
+        this.httpService.countLanguages(cloned).subscribe(res2 => {
           this.count = res2.count;
         }, error => {
 
@@ -332,7 +332,7 @@ export class LanguagesComponent implements OnInit {
     }
 
     // Invoking HTTP service DELETE method.
-    this.httpService.languages_Delete(ids).subscribe(res => {
+    this.httpService.deleteLanguage(ids).subscribe(res => {
 
       // Sanity checking invocation.
       if (res['deleted-records'] !== 1) {

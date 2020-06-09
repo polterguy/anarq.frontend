@@ -39,52 +39,52 @@ export class TranslationService {
     return result;
   }
 
-  languages_count_Get(args: any) {
+  countLanguages(args: any) {
     return this.httpClient.get<any>(environment.apiUrl +
       'magic/modules/anarchy/translations/languages-count' + this.getQueryArgs(args));
   }
 
-  languages_Delete(args: any) {
+  deleteLanguage(args: any) {
     return this.httpClient.delete<any>(environment.apiUrl +
       'magic/modules/anarchy/translations/languages' + this.getQueryArgs(args));
   }
 
-  languages_Get(args: any) {
+  getLanguages(args: any) {
     return this.httpClient.get<any>(environment.apiUrl +
       'magic/modules/anarchy/translations/languages' + this.getQueryArgs(args));
   }
 
-  languages_Post(args: any) {
+  createLanguage(args: any) {
     return this.httpClient.post<any>(environment.apiUrl +
       'magic/modules/anarchy/translations/languages', args);
   }
 
-  languages_Put(args: any) {
+  updateLanguage(args: any) {
     return this.httpClient.put<any>(environment.apiUrl +
       'magic/modules/anarchy/translations/languages', args);
   }
 
-  translations_count_Get(args: any) {
+  countTranslations(args: any) {
     return this.httpClient.get<any>(environment.apiUrl +
       'magic/modules/anarchy/translations/translations-count' + this.getQueryArgs(args));
   }
 
-  translations_Delete(args: any) {
+  deleteTranslation(args: any) {
     return this.httpClient.delete<any>(environment.apiUrl +
       'magic/modules/anarchy/translations/translations' + this.getQueryArgs(args));
   }
 
-  translations_Get(args: any) {
+  getTranslation(args: any) {
     return this.httpClient.get<any>(environment.apiUrl +
       'magic/modules/anarchy/translations/translations' + this.getQueryArgs(args));
   }
 
-  translations_Post(args: any) {
+  createTranslation(args: any) {
     return this.httpClient.post<any>(environment.apiUrl +
       'magic/modules/anarchy/translations/translations', args);
   }
 
-  translations_Put(args: any) {
+  updateTranslation(args: any) {
     return this.httpClient.put<any>(environment.apiUrl +
       'magic/modules/anarchy/translations/translations', args);
   }

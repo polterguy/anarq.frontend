@@ -46,7 +46,7 @@ export class EditTranslationsComponent implements OnInit {
     private service: TranslationService) { }
 
   ngOnInit(): void {
-    this.service.languages_Get({}).subscribe(res => {
+    this.service.getLanguages({}).subscribe(res => {
       this.languages = res;
     });
   }
@@ -80,7 +80,7 @@ export class EditTranslationsComponent implements OnInit {
       }
 
       // Updating existing item. Invoking update HTTP REST endpoint and closing dialog.
-      this.service.translations_Put(this.data.entity).subscribe(res => {
+      this.service.updateTranslation(this.data.entity).subscribe(res => {
         this.dialogRef.close(this.data.entity);
         if (res['updated-records'] !== 1) {
 
@@ -110,7 +110,7 @@ export class EditTranslationsComponent implements OnInit {
       }
 
       // Creating new item. Invoking create HTTP REST endpoint and closing dialog.
-      this.service.translations_Post(this.data.entity).subscribe(res => {
+      this.service.createTranslation(this.data.entity).subscribe(res => {
         this.dialogRef.close(this.data.entity);
 
         if (res === null || res === undefined) {

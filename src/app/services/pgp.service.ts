@@ -39,52 +39,52 @@ export class PgpService {
     return result;
   }
 
-  pgp_key_types_count_Get(args: any) {
+  countKeyTypes(args: any) {
     return this.httpClient.get<any>(environment.apiUrl +
       'magic/modules/anarchy/pgp/pgp_key_types-count' + this.getQueryArgs(args));
   }
 
-  pgp_key_types_Delete(args: any) {
+  deleteKeyType(args: any) {
     return this.httpClient.delete<any>(environment.apiUrl +
       'magic/modules/anarchy/pgp/pgp_key_types' + this.getQueryArgs(args));
   }
 
-  pgp_key_types_Get(args: any) {
+  getKeyType(args: any) {
     return this.httpClient.get<any>(environment.apiUrl +
       'magic/modules/anarchy/pgp/pgp_key_types' + this.getQueryArgs(args));
   }
 
-  pgp_key_types_Post(args: any) {
+  createKeyType(args: any) {
     return this.httpClient.post<any>(environment.apiUrl +
       'magic/modules/anarchy/pgp/pgp_key_types', args);
   }
 
-  pgp_key_types_Put(args: any) {
+  updateKeyType(args: any) {
     return this.httpClient.put<any>(environment.apiUrl +
       'magic/modules/anarchy/pgp/pgp_key_types', args);
   }
 
-  pgp_keys_count_Get(args: any) {
+  countKeys(args: any) {
     return this.httpClient.get<any>(environment.apiUrl +
       'magic/modules/anarchy/pgp/pgp_keys-count' + this.getQueryArgs(args));
   }
 
-  pgp_keys_Delete(args: any) {
+  deleteKey(args: any) {
     return this.httpClient.delete<any>(environment.apiUrl +
       'magic/modules/anarchy/pgp/pgp_keys' + this.getQueryArgs(args));
   }
 
-  pgp_keys_Get(args: any) {
+  getKeys(args: any) {
     return this.httpClient.get<any>(environment.apiUrl +
       'magic/modules/anarchy/pgp/pgp_keys' + this.getQueryArgs(args));
   }
 
-  pgp_keys_Post(args: any) {
+  createKey(args: any) {
     return this.httpClient.post<any>(environment.apiUrl +
       'magic/modules/anarchy/pgp/pgp_keys', args);
   }
 
-  pgp_keys_Put(args: any) {
+  updateKey(args: any) {
     return this.httpClient.put<any>(environment.apiUrl +
       'magic/modules/anarchy/pgp/pgp_keys', args);
   }

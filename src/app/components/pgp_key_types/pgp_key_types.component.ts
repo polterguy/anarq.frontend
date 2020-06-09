@@ -134,7 +134,7 @@ export class Pgp_key_typesComponent implements OnInit {
     this.viewDetails = [];
 
     // Retrieves items from our backend through our HTTP service layer.
-    this.httpService.pgp_key_types_Get(this.filter).subscribe(res => {
+    this.httpService.getKeyType(this.filter).subscribe(res => {
       this.data = res;
 
       // Checking if user wants to (re)-count items, and if so, invoking "count records" HTTP service method.
@@ -158,7 +158,7 @@ export class Pgp_key_typesComponent implements OnInit {
         }
 
         // Invoking "count records" HTTP service layer method.
-        this.httpService.pgp_key_types_count_Get(cloned).subscribe(res2 => {
+        this.httpService.countKeyTypes(cloned).subscribe(res2 => {
           this.count = res2.count;
         }, error => {
 
@@ -332,7 +332,7 @@ export class Pgp_key_typesComponent implements OnInit {
     }
 
     // Invoking HTTP service DELETE method.
-    this.httpService.pgp_key_types_Delete(ids).subscribe(res => {
+    this.httpService.deleteKeyType(ids).subscribe(res => {
 
       // Sanity checking invocation.
       if (res['deleted-records'] !== 1) {

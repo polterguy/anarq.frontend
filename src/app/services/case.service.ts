@@ -39,67 +39,67 @@ export class CaseService {
     return result;
   }
 
-  case_types_count_Get(args: any) {
+  countCaseTypes(args: any) {
     return this.httpClient.get<any>(environment.apiUrl +
       'magic/modules/anarchy/cases/case_types-count' + this.getQueryArgs(args));
   }
 
-  case_types_Delete(args: any) {
+  deleteCaseType(args: any) {
     return this.httpClient.delete<any>(environment.apiUrl +
       'magic/modules/anarchy/cases/case_types' + this.getQueryArgs(args));
   }
 
-  case_types_Get(args: any) {
+  getCaseTypes(args: any) {
     return this.httpClient.get<any>(environment.apiUrl +
       'magic/modules/anarchy/cases/case_types' + this.getQueryArgs(args));
   }
 
-  case_types_Post(args: any) {
+  createCaseType(args: any) {
     return this.httpClient.post<any>(environment.apiUrl +
       'magic/modules/anarchy/cases/case_types', args);
   }
 
-  case_types_Put(args: any) {
+  updateCaseType(args: any) {
     return this.httpClient.put<any>(environment.apiUrl +
       'magic/modules/anarchy/cases/case_types', args);
   }
 
-  cases_count_Get(args: any) {
+  countCases(args: any) {
     return this.httpClient.get<any>(environment.apiUrl +
       'magic/modules/anarchy/cases/cases-count' + this.getQueryArgs(args));
   }
 
-  cases_Delete(args: any) {
+  deleteCases(args: any) {
     return this.httpClient.delete<any>(environment.apiUrl +
       'magic/modules/anarchy/cases/cases' + this.getQueryArgs(args));
   }
 
-  cases_Get(args: any) {
+  getCases(args: any) {
     return this.httpClient.get<any>(environment.apiUrl +
       'magic/modules/anarchy/cases/cases' + this.getQueryArgs(args));
   }
 
-  cases_GetOpen(args: any) {
+  getOpenCases(args: any) {
     return this.httpClient.get<any>(environment.apiUrl +
       'magic/modules/anarchy/cases/open-cases' + this.getQueryArgs(args));
   }
 
-  cases_Post(args: any) {
+  createCase(args: any) {
     return this.httpClient.post<any>(environment.apiUrl +
       'magic/modules/anarchy/cases/cases', args);
   }
 
-  cases_Put(args: any) {
+  updateCase(args: any) {
     return this.httpClient.put<any>(environment.apiUrl +
       'magic/modules/anarchy/cases/cases', args);
   }
 
-  cases_Accept(args: any) {
+  acceptCase(args: any) {
     return this.httpClient.put<any>(environment.apiUrl +
       'magic/modules/anarchy/cases/cases-accept', args);
   }
 
-  cases_Reject(args: any) {
+  rejectCase(args: any) {
     return this.httpClient.put<any>(environment.apiUrl +
       'magic/modules/anarchy/cases/cases-reject', args);
   }

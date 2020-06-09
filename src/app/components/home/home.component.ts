@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   constructor(private httpService: CaseService) {}
 
   ngOnInit() {
-    this.httpService.cases_GetOpen({}).subscribe(res => {
+    this.httpService.getOpenCases({}).subscribe(res => {
       this.cases = res;
     });
   }
