@@ -44,6 +44,7 @@ import { AppComponent } from './components/app/app.component';
 import { LoaderService } from './services/loader.service';
 import { LoaderInterceptor } from './services/loader.interceptor';
 import { DateFormatPipe } from './pipes/date-format.pipe';
+import { DateFormatShortPipe } from './pipes/date-format-short.pipe';
 import { DateFromPipe } from './pipes/date-from.pipe';
 import { DateToPipe } from './pipes/date-to.pipe';
 import { MarkdownPipe } from './pipes/markdown.pipe';
@@ -105,6 +106,7 @@ export function tokenGetter() {
     CreateUserDialogComponent,
     EditUserDialogComponent,
     DateFormatPipe,
+    DateFormatShortPipe,
     DateFromPipe,
     DateToPipe,
     MarkdownPipe,
