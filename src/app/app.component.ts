@@ -62,7 +62,13 @@ export class AppComponent {
   // Returns true if user is logged in, with a valid token, that's not expired.
   isLoggedIn() {
     const token = localStorage.getItem('jwt_token');
-    return token !== null && token !== undefined && !this.jwtHelper.isTokenExpired(token);
+    if (!token) {
+      return false;
+    }
+    if (this.jwtHelper.isTokenExpired(token)) {
+      return false;
+    }
+    return true;
   }
 
   // Logs the user out, and removes the token from local storage.

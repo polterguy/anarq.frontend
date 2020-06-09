@@ -195,13 +195,10 @@
       <div
         *ngIf="isLoggedIn()"
         class="login-strip">
-        <span>
-          {{getUsername()}}
-        </span>
         <button
           mat-button
           (click)="logout()">
-          Logout
+          Logout {{getUsername()}}
         </button>
       </div>
       <div
