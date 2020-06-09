@@ -17,6 +17,10 @@ export class EmailService {
 
   constructor(private httpClient: HttpClient) { }
 
+  /*
+   * Email types CRUD endpoints.
+   */
+
   countEmailTypes(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
@@ -51,6 +55,10 @@ export class EmailService {
       'magic/modules/anarchy/emails/email_types',
       args);
   }
+
+  /*
+   * Email CRUD endpoints.
+   */
 
   countEmails(args: any) {
     return this.httpClient.get<any>(

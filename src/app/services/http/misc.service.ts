@@ -17,6 +17,10 @@ export class MiscService {
 
   constructor(private httpClient: HttpClient) { }
 
+  /*
+   * Region CRUD endpoints.
+   */
+
   countRegions(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
@@ -51,6 +55,10 @@ export class MiscService {
       'magic/modules/anarchy/misc/regions',
       args);
   }
+
+  /*
+   * Votes CRUD endpoints.
+   */
 
   countVotes(args: any) {
     return this.httpClient.get<any>(

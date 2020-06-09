@@ -17,6 +17,10 @@ export class TranslationService {
 
   constructor(private httpClient: HttpClient) { }
 
+  /*
+   * Languages CRUD endpoints.
+   */
+
   countLanguages(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
@@ -51,6 +55,10 @@ export class TranslationService {
       'magic/modules/anarchy/translations/languages',
       args);
   }
+
+  /*
+   * Translations CRUD endpoints.
+   */
 
   countTranslations(args: any) {
     return this.httpClient.get<any>(

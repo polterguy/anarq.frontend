@@ -27,7 +27,16 @@ export class UsersService {
 
   constructor(private httpClient: HttpClient) { }
 
-  // Authenticates you towards your backend API.
+  /*
+   * Authenticate endpoints, and helpers.
+   */
+
+  /**
+   * Authenticates a user, returning a JWT ticket to caller.
+   * 
+   * @param username Username you are trying to authenticate
+   * @param password Password for user
+   */
   authenticate(username: string, password: string) {
     return this.httpClient.get<any>(
       environment.apiUrl +
@@ -37,14 +46,21 @@ export class UsersService {
       encodeURI(password));
   }
 
-  // Will refresh an existing JWT token, if possible.
+  /**
+   * Will create a new JWT ticket with a new expiration date, by using
+   * the existing JWT ticket for authenticating user.
+   */
   refreshTicket() {
     return this.httpClient.get<any>(
       environment.apiUrl +
       'magic/modules/system/auth/refresh-ticket');
   }
 
-  // Will refresh an existing JWT token, if possible.
+  /**
+   * Changes the currect password for the currently authenticated user.
+   * 
+   * @param password New password for user
+   */
   changeMyPassword(password: string) {
     return this.httpClient.put<any>(
       environment.apiUrl +
@@ -53,7 +69,11 @@ export class UsersService {
     });
   }
 
-  // Returns all users according to the specified filter condition.
+  /**
+   * Returns users according to the given filter condition.
+   * 
+   * @param filter Filtering criteria for what users to return
+   */
   getUsers(filter: AuthFilter = null) {
     let query = '';
     if (filter !== null) {
@@ -69,7 +89,11 @@ export class UsersService {
       query);
   }
 
-  // Returns count of users according to the specified filter condition.
+  /**
+   * Counts the numbers of users matching the specified filter condition.
+   * 
+   * @param filter Like condition for users to count
+   */
   getUsersCount(filter: string = null) {
     let query = '';
     if (filter !== null) {
@@ -81,7 +105,11 @@ export class UsersService {
       query);
   }
 
-  // Returns all roles according to the specified filter condition.
+  /**
+   * Returns all roles matching the specified filtering condition.
+   * 
+   * @param filter Filtering conditions for what roles to return
+   */
   getRoles(filter: AuthFilter = null) {
     let query = '';
     if (filter !== null) {
@@ -96,7 +124,11 @@ export class UsersService {
       'magic/modules/anarchy/users/roles' + query);
   }
 
-  // Returns count of roles according to the specified filter condition.
+  /**
+   * Returns all roles matching the specified filtering condition.
+   * 
+   * @param filter Like condition for roles to count
+   */
   getRolesCount(filter: string = null) {
     let query = '';
     if (filter !== null) {
@@ -107,7 +139,12 @@ export class UsersService {
       'magic/modules/anarchy/users/roles-count' + query);
   }
 
-  // Creates a new user.
+  /**
+   * Creates a new user in the system.
+   * 
+   * @param username Username of new user
+   * @param password Password for new user
+   */
   createUser(username: string, password: string) {
     return this.httpClient.post<any>(
       environment.apiUrl +
@@ -117,7 +154,12 @@ export class UsersService {
     });
   }
 
-  // Creates a new role.
+  /**
+   * Creates a new role in the system.
+   * 
+   * @param name Name of role to create
+   * @param description Description of role to create
+   */
   createRole(name: string, description?: string) {
     return this.httpClient.post<any>(
       environment.apiUrl +
@@ -127,7 +169,11 @@ export class UsersService {
     });
   }
 
-  // Deletes an existing user.
+  /**
+   * Deletes a specific user in the system.
+   * 
+   * @param username Username of user to delete
+   */
   deleteUser(username: string) {
     return this.httpClient.delete<any>(
       environment.apiUrl + 
@@ -135,7 +181,11 @@ export class UsersService {
       encodeURIComponent(username));
   }
 
-  // Deletes an existing role.
+  /**
+   * Deletes a specific role in the system.
+   * 
+   * @param name Name of role to delete
+   */
   deleteRole(name: string) {
     return this.httpClient.delete<any>(
       environment.apiUrl + 
@@ -143,7 +193,11 @@ export class UsersService {
       encodeURIComponent(name));
   }
 
-  // Returns all roles that the specified user belongs to.
+  /**
+   * Returns all roles that the specified user belongs to.
+   * 
+   * @param username Username of user to return roles for
+   */
   getUserRoles(username: string) {
     return this.httpClient.get<any>(
       environment.apiUrl +
@@ -151,7 +205,12 @@ export class UsersService {
       encodeURIComponent(username));
   }
 
-  // Adds a specified user to a specified role.
+  /**
+   * Associates the specified user with a new role.
+   * 
+   * @param user Username of user to add role to
+   * @param role Name of new role to associate user with
+   */
   addRoleToUser(user: string, role: string) {
     return this.httpClient.post<any>(
       environment.apiUrl +
@@ -161,7 +220,12 @@ export class UsersService {
     });
   }
 
-  // Removes a role fomr a user.
+  /**
+   * Deletes a role association for a specified user.
+   * 
+   * @param user Username of user to delete role from
+   * @param role Role to delete from user
+   */
   deleteRoleFromUser(user: string, role: string) {
     return this.httpClient.delete<any>(
       environment.apiUrl + 
@@ -169,6 +233,10 @@ export class UsersService {
       encodeURIComponent(role) +
       '&user=' + encodeURIComponent(user));
   }
+
+  /*
+   * User status CRUD endpoints.
+   */
 
   countUserStatus(args: any) {
     return this.httpClient.get<any>(
@@ -205,6 +273,10 @@ export class UsersService {
       args);
   }
 
+  /*
+   * Extra types CRUD endpoints.
+   */
+
   countExtraTypes(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
@@ -239,6 +311,10 @@ export class UsersService {
       'magic/modules/anarchy/users/users_extra_types',
       args);
   }
+
+  /*
+   * User extra CRUD endpoints.
+   */
 
   countUserExtras(args: any) {
     return this.httpClient.get<any>(
@@ -275,6 +351,10 @@ export class UsersService {
       args);
   }
 
+  /*
+   * KYC documents CRUD endpoints.
+   */
+
   countUserKycDocuments(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
@@ -309,6 +389,10 @@ export class UsersService {
       'magic/modules/anarchy/users/users_kyc_documents',
       args);
   }
+
+  /*
+   * Regions CRUD endpoints.
+   */
 
   countUserRegions(args: any) {
     return this.httpClient.get<any>(

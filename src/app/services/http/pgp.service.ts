@@ -17,6 +17,10 @@ export class PgpService {
 
   constructor(private httpClient: HttpClient) { }
 
+  /*
+   * Key types CRUD endpoints.
+   */
+
   countKeyTypes(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
@@ -51,6 +55,10 @@ export class PgpService {
       'magic/modules/anarchy/pgp/pgp_key_types',
       args);
   }
+
+  /*
+   * Keys CRUD endpoints.
+   */
 
   countKeys(args: any) {
     return this.httpClient.get<any>(

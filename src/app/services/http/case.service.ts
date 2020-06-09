@@ -17,6 +17,10 @@ export class CaseService {
 
   constructor(private httpClient: HttpClient) { }
 
+  /*
+   * Case types CRUD operations.
+   */
+
   countCaseTypes(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
@@ -52,6 +56,10 @@ export class CaseService {
       args);
   }
 
+  /*
+   * Cases CRUD operations.
+   */
+
   countCases(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
@@ -73,13 +81,6 @@ export class CaseService {
       getQueryArgs(args));
   }
 
-  getOpenCases(args: any) {
-    return this.httpClient.get<any>(
-      environment.apiUrl +
-      'magic/modules/anarchy/cases/open-cases' +
-      getQueryArgs(args));
-  }
-
   createCase(args: any) {
     return this.httpClient.post<any>(
       environment.apiUrl +
@@ -94,6 +95,27 @@ export class CaseService {
       args);
   }
 
+  /*
+   * Specialized case endpoints, for accepting and rejecting a case, etc.
+   */
+
+  /**
+   * Returns all open cases in system.
+   * 
+   * @param args Generic filter condition for which open cases to return
+   */
+  getOpenCases(args: any) {
+    return this.httpClient.get<any>(
+      environment.apiUrl +
+      'magic/modules/anarchy/cases/open-cases' +
+      getQueryArgs(args));
+  }
+
+  /**
+   * Accepts the specified case.
+   * 
+   * @param args Generic filter argument
+   */
   acceptCase(args: any) {
     return this.httpClient.put<any>(
       environment.apiUrl +
@@ -101,6 +123,11 @@ export class CaseService {
       args);
   }
 
+  /**
+   * Rejects the specified case.
+   * 
+   * @param args Generic filter argument
+   */
   rejectCase(args: any) {
     return this.httpClient.put<any>(
       environment.apiUrl +
