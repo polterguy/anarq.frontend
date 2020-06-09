@@ -46,28 +46,6 @@
       <span class="menu-item-text">Cases</span>
     </a>
     <a
-      *ngIf="inRole(['root'])"
-      mat-button
-      routerLink="/email_types"
-      routerLinkActive="active-link"
-      class="menu-item"
-      (click)="closeNavigator()"
-      [routerLinkActiveOptions]="{exact:true}">
-      <mat-icon matSuffix>grade</mat-icon>
-      <span class="menu-item-text">Email types</span>
-    </a>
-    <a
-      *ngIf="inRole(['root', 'admin'])"
-      mat-button
-      routerLink="/emails"
-      routerLinkActive="active-link"
-      class="menu-item"
-      (click)="closeNavigator()"
-      [routerLinkActiveOptions]="{exact:true}">
-      <mat-icon matSuffix>grade</mat-icon>
-      <span class="menu-item-text">Emails</span>
-    </a>
-    <a
       *ngIf="inRole(['root', 'admin'])"
       mat-button
       routerLink="/languages"
@@ -77,17 +55,6 @@
       [routerLinkActiveOptions]="{exact:true}">
       <mat-icon matSuffix>grade</mat-icon>
       <span class="menu-item-text">Languages</span>
-    </a>
-    <a
-      *ngIf="inRole(['root', 'admin', 'moderator'])"
-      mat-button
-      routerLink="/pgp_keys"
-      routerLinkActive="active-link"
-      class="menu-item"
-      (click)="closeNavigator()"
-      [routerLinkActiveOptions]="{exact:true}">
-      <mat-icon matSuffix>grade</mat-icon>
-      <span class="menu-item-text">Pgp keys</span>
     </a>
     <a
       *ngIf="inRole(['root', 'admin', 'moderator'])"
@@ -147,17 +114,6 @@
     <a
       *ngIf="inRole(['root', 'admin'])"
       mat-button
-      routerLink="/users_kyc_documents"
-      routerLinkActive="active-link"
-      class="menu-item"
-      (click)="closeNavigator()"
-      [routerLinkActiveOptions]="{exact:true}">
-      <mat-icon matSuffix>grade</mat-icon>
-      <span class="menu-item-text">Users kyc documents</span>
-    </a>
-    <a
-      *ngIf="inRole(['root', 'admin'])"
-      mat-button
       routerLink="/votes"
       routerLinkActive="active-link"
       class="menu-item"
@@ -176,17 +132,6 @@
       [routerLinkActiveOptions]="{exact:true}">
       <mat-icon matSuffix>supervisor_account</mat-icon>
       <span class="menu-item-text">Auth</span>
-    </a>
-    <a
-      *ngIf="isLoggedIn()"
-      mat-button
-      routerLink="/security"
-      routerLinkActive="active-link"
-      class="menu-item"
-      (click)="closeNavigator()"
-      [routerLinkActiveOptions]="{exact:true}">
-      <mat-icon matSuffix>account_circle</mat-icon>
-      <span class="menu-item-text">Security</span>
     </a>
   </mat-sidenav>
 

@@ -13,17 +13,12 @@ import { AuthComponent } from './components/auth/auth.component';
 // Then importing all "entity components". Basically, the datagrids for viewing entities from your backend.
 import { Case_typesComponent } from './components/case_types/case_types.component';
 import { CasesComponent } from './components/cases/cases.component';
-import { Email_typesComponent } from './components/email_types/email_types.component';
-import { EmailsComponent } from './components/emails/emails.component';
 import { LanguagesComponent } from './components/languages/languages.component';
-import { Pgp_key_typesComponent } from './components/pgp_key_types/pgp_key_types.component';
-import { Pgp_keysComponent } from './components/pgp_keys/pgp_keys.component';
 import { RegionsComponent } from './components/regions/regions.component';
 import { TranslationsComponent } from './components/translations/translations.component';
 import { User_statusComponent } from './components/user_status/user_status.component';
 import { Users_extra_typesComponent } from './components/users_extra_types/users_extra_types.component';
 import { Users_extraComponent } from './components/users_extra/users_extra.component';
-import { Users_kyc_documentsComponent } from './components/users_kyc_documents/users_kyc_documents.component';
 import { VotesComponent } from './components/votes/votes.component';
 import { CaseComponent } from './components/case/case.component';
 import { UserComponent } from './components/user/user.component';
@@ -41,17 +36,12 @@ const routes: Routes = [
   { path: 'user/:username', component: UserComponent },
   { path: 'case_types', component: Case_typesComponent },
   { path: 'cases', component: CasesComponent },
-  { path: 'email_types', component: Email_typesComponent },
-  { path: 'emails', component: EmailsComponent },
   { path: 'languages', component: LanguagesComponent },
-  { path: 'pgp_key_types', component: Pgp_key_typesComponent },
-  { path: 'pgp_keys', component: Pgp_keysComponent },
   { path: 'regions', component: RegionsComponent },
   { path: 'translations', component: TranslationsComponent },
   { path: 'user_status', component: User_statusComponent },
   { path: 'users_extra_types', component: Users_extra_typesComponent },
   { path: 'users_extra', component: Users_extraComponent },
-  { path: 'users_kyc_documents', component: Users_kyc_documentsComponent },
   { path: 'votes', component: VotesComponent },
 ];
 

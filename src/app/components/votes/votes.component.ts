@@ -30,7 +30,7 @@ export class VotesComponent implements OnInit {
 
   // Which columns we should display. Reorder to prioritize columns differently.
   // Notice! 'delete-instance' should always come last!
-  private displayedColumns: string[] = ['id', 'case', 'email', 'user', 'created', 'opinion', 'delete-instance'];
+  private displayedColumns: string[] = ['user', 'case', 'created', 'opinion', 'delete-instance'];
 
   // Current filter being applied to filter items from our backend.
   private filter: any = {
@@ -59,7 +59,6 @@ export class VotesComponent implements OnInit {
   // Form control declarations to bind up with reactive form elements.
   private id: FormControl;
   private case: FormControl;
-  private email: FormControl;
   private user: FormControl;
   private created: FormControl;
   private opinion: FormControl;
@@ -106,16 +105,6 @@ export class VotesComponent implements OnInit {
         this.filter.offset = 0;
         this.hasFiltered = true;
         this.filter['case.eq'] = this.case.value;
-        this.getData();
-      });
-    this.email = new FormControl('');
-    this.email.valueChanges
-      .pipe(debounceTime(this.debounce), distinctUntilChanged())
-      .subscribe(query => {
-        this.paginator.pageIndex = 0;
-        this.filter.offset = 0;
-        this.hasFiltered = true;
-        this.filter['email.eq'] = this.email.value;
         this.getData();
       });
     this.user = new FormControl('');

@@ -59,28 +59,6 @@
         </th>
         <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.case}}</td>
       </ng-container>
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef>
-          <mat-form-field appearance="outline" class="fill-width filter-textbox">
-            <mat-label>email</mat-label>
-            <input
-              matInput
-              placeholder="Filter ..."
-              type="number"
-              autocomplete="off"
-              [formControl]="email">
-            <mat-icon matSuffix>search</mat-icon>
-          </mat-form-field>
-          <button
-            class="sort-button"
-            (click)="sort('email')"
-            mat-button>
-            <mat-icon matSuffix>{{getSortIcon('email')}}</mat-icon>
-          </button>
-          <label class="table-header">email</label>
-        </th>
-        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.email}}</td>
-      </ng-container>
       <ng-container matColumnDef="user">
         <th mat-header-cell *matHeaderCellDef>
           <mat-form-field appearance="outline" class="fill-width filter-textbox">
@@ -194,7 +172,6 @@
             </button>
             <p class="details"><label>id</label><span>{{el.id}}</span></p>
             <p class="details"><label>case</label><span>{{el.case}}</span></p>
-            <p class="details"><label>email</label><span>{{el.email}}</span></p>
             <p class="details"><label>user</label><span>{{el.user}}</span></p>
             <p class="details"><label>created</label><span>{{el.created | date_format}}</span></p>
             <p class="details"><label>opinion</label><mat-icon *ngIf="el.opinion === true" matSuffix>check</mat-icon></p>

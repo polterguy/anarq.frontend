@@ -65,16 +65,8 @@ import { CasesComponent } from './components/cases/cases.component';
 import { CaseComponent } from './components/case/case.component';
 import { UserComponent } from './components/user/user.component';
 import { EditCasesComponent } from './components/cases/modals/edit.cases.component';
-import { Email_typesComponent } from './components/email_types/email_types.component';
-import { EditEmail_typesComponent } from './components/email_types/modals/edit.email_types.component';
-import { EmailsComponent } from './components/emails/emails.component';
-import { EditEmailsComponent } from './components/emails/modals/edit.emails.component';
 import { LanguagesComponent } from './components/languages/languages.component';
 import { EditLanguagesComponent } from './components/languages/modals/edit.languages.component';
-import { Pgp_key_typesComponent } from './components/pgp_key_types/pgp_key_types.component';
-import { EditPgp_key_typesComponent } from './components/pgp_key_types/modals/edit.pgp_key_types.component';
-import { Pgp_keysComponent } from './components/pgp_keys/pgp_keys.component';
-import { EditPgp_keysComponent } from './components/pgp_keys/modals/edit.pgp_keys.component';
 import { RegionsComponent } from './components/regions/regions.component';
 import { EditRegionsComponent } from './components/regions/modals/edit.regions.component';
 import { TranslationsComponent } from './components/translations/translations.component';
@@ -85,8 +77,6 @@ import { Users_extra_typesComponent } from './components/users_extra_types/users
 import { EditUsers_extra_typesComponent } from './components/users_extra_types/modals/edit.users_extra_types.component';
 import { Users_extraComponent } from './components/users_extra/users_extra.component';
 import { EditUsers_extraComponent } from './components/users_extra/modals/edit.users_extra.component';
-import { Users_kyc_documentsComponent } from './components/users_kyc_documents/users_kyc_documents.component';
-import { EditUsers_kyc_documentsComponent } from './components/users_kyc_documents/modals/edit.users_kyc_documents.component';
 import { VotesComponent } from './components/votes/votes.component';
 import { EditVotesComponent } from './components/votes/modals/edit.votes.component';
 
@@ -117,16 +107,8 @@ export function tokenGetter() {
     CaseComponent,
     UserComponent,
     EditCasesComponent,
-    Email_typesComponent,
-    EditEmail_typesComponent,
-    EmailsComponent,
-    EditEmailsComponent,
     LanguagesComponent,
     EditLanguagesComponent,
-    Pgp_key_typesComponent,
-    EditPgp_key_typesComponent,
-    Pgp_keysComponent,
-    EditPgp_keysComponent,
     RegionsComponent,
     EditRegionsComponent,
     TranslationsComponent,
@@ -137,8 +119,6 @@ export function tokenGetter() {
     EditUsers_extra_typesComponent,
     Users_extraComponent,
     EditUsers_extraComponent,
-    Users_kyc_documentsComponent,
-    EditUsers_kyc_documentsComponent,
     VotesComponent,
     EditVotesComponent,
   ],
@@ -195,17 +175,12 @@ export function tokenGetter() {
     EditUserDialogComponent,
     EditCase_typesComponent,
     EditCasesComponent,
-    EditEmail_typesComponent,
-    EditEmailsComponent,
     EditLanguagesComponent,
-    EditPgp_key_typesComponent,
-    EditPgp_keysComponent,
     EditRegionsComponent,
     EditTranslationsComponent,
     EditUser_statusComponent,
     EditUsers_extra_typesComponent,
     EditUsers_extraComponent,
-    EditUsers_kyc_documentsComponent,
     EditVotesComponent,
   ]
 })
