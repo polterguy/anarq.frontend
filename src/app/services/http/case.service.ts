@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 import { getQueryArgs } from '../get-query-args';
 import { CaseSlim } from 'src/app/models/case-slim';
 import { AcceptCase } from 'src/app/models/accept-case';
+import { CaseView } from 'src/app/models/case-view';
 
 /*
  * Your main HTTP service for handling cases, and related objects.
@@ -85,6 +86,13 @@ export class CaseService {
       environment.apiUrl +
       'magic/modules/anarchy/cases/cases' +
       getQueryArgs(args));
+  }
+
+  getCase(hash: string) {
+    return this.httpClient.get<CaseView>(
+      environment.apiUrl +
+      'magic/modules/anarchy/cases/case?hash=' +
+      hash);
   }
 
   createCase(args: any) {

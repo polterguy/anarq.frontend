@@ -3,7 +3,15 @@
 <mat-card class="info-card">
 
   <ul class="front-page-cases">
-    <li *ngFor="let case of cases">{{case.subject}}</li>
+    <li *ngFor="let case of cases">
+      <a
+        [routerLink]="'/case/' + case.hash">
+        {{case.subject}}
+      </a>
+      <small>
+        ({{case.user}} - {{case.deadline | toDate}})
+      </small>
+    </li>
   </ul>
 
 </mat-card>

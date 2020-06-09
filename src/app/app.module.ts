@@ -58,6 +58,7 @@ import { EditUserDialogComponent } from './components/auth/modals/edit-user-dial
 import { Case_typesComponent } from './components/case_types/case_types.component';
 import { EditCase_typesComponent } from './components/case_types/modals/edit.case_types.component';
 import { CasesComponent } from './components/cases/cases.component';
+import { CaseComponent } from './components/case/case.component';
 import { EditCasesComponent } from './components/cases/modals/edit.cases.component';
 import { Email_typesComponent } from './components/email_types/email_types.component';
 import { EditEmail_typesComponent } from './components/email_types/modals/edit.email_types.component';
@@ -107,6 +108,7 @@ export function tokenGetter() {
     Case_typesComponent,
     EditCase_typesComponent,
     CasesComponent,
+    CaseComponent,
     EditCasesComponent,
     Email_typesComponent,
     EditEmail_typesComponent,

@@ -1,0 +1,17 @@
+
+<div class="component-wrapper">
+
+  <div
+    *ngIf="item"
+    class="mat-elevation-z4 case">
+    <h1>
+      {{item.subject}}
+    </h1>
+    <div
+      [innerHtml]="item.body | marked"></div>
+  </div>
+
+</div>
+<div class="copyright">
+  Anarchy is Copyright © Thomas Hansen, info@servergardens.com, all rights reserved
+</div>

@@ -25,6 +25,7 @@ import { Users_extra_typesComponent } from './components/users_extra_types/users
 import { Users_extraComponent } from './components/users_extra/users_extra.component';
 import { Users_kyc_documentsComponent } from './components/users_kyc_documents/users_kyc_documents.component';
 import { VotesComponent } from './components/votes/votes.component';
+import { CaseComponent } from './components/case/case.component';
 
 
 // Creating our routes, one route for each entity type.
@@ -37,6 +38,7 @@ const routes: Routes = [
   // Then routes for all entity components.
   { path: 'case_types', component: Case_typesComponent },
   { path: 'cases', component: CasesComponent },
+  { path: 'case/:hash', component: CaseComponent },
   { path: 'email_types', component: Email_typesComponent },
   { path: 'emails', component: EmailsComponent },
   { path: 'languages', component: LanguagesComponent },
