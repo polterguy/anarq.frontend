@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { getQueryArgs } from '../get-query-args';
 import { AcceptCase } from 'src/app/models/accept-case';
+import { CaseSlim } from 'src/app/models/case-slim';
 
 /*
  * Your main HTTP service for handling cases, and related objects.
@@ -106,7 +107,7 @@ export class CaseService {
    * @param args Generic filter condition for which open cases to return
    */
   getOpenCases(args: any) {
-    return this.httpClient.get<any>(
+    return this.httpClient.get<CaseSlim[]>(
       environment.apiUrl +
       'magic/modules/anarchy/cases/open-cases' +
       getQueryArgs(args));

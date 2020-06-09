@@ -4,7 +4,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { CaseService } from 'src/app/services/http/case.service';
-import { Case } from './models/case';
+import { CaseSlim } from 'src/app/models/case-slim';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +13,7 @@ import { Case } from './models/case';
 })
 export class HomeComponent implements OnInit {
 
-  public cases: Case[];
+  public cases: CaseSlim[];
 
   constructor(private httpService: CaseService) {}
 
