@@ -1,9 +1,8 @@
 
 /**
- * Slim read only case model, for viewing cases
+ * Slim read only case model, for viewing cases.
  */
-export class CaseSlim
-{
+export class CaseSlim {
     deadline: Date;
     hash: string;
     region: string;

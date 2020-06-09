@@ -2,12 +2,16 @@
  * Anarchy, a Direct Democracy system. Copyright 2020 - Thomas Hansen thomas@servergardens.com
  */
 
+ // System includes
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+// Custom includes
 import { environment } from 'src/environments/environment';
 import { getQueryArgs } from '../get-query-args';
-import { AcceptCase } from 'src/app/models/accept-case';
 import { CaseSlim } from 'src/app/models/case-slim';
+import { AcceptCase } from 'src/app/models/accept-case';
 
 /*
  * Your main HTTP service for handling cases, and related objects.
@@ -106,7 +110,7 @@ export class CaseService {
    * 
    * @param args Generic filter condition for which open cases to return
    */
-  getOpenCases(args: any) {
+  getOpenCases(args: any): Observable<CaseSlim[]> {
     return this.httpClient.get<CaseSlim[]>(
       environment.apiUrl +
       'magic/modules/anarchy/cases/open-cases' +
