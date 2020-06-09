@@ -24,7 +24,7 @@ export class EmailService {
   countEmailTypes(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/cases/email_types-count' +
+      'magic/modules/anarchy/emails/email_types-count' +
       getQueryArgs(args));
   }
 

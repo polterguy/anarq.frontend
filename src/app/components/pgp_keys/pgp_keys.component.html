@@ -145,7 +145,7 @@
           </button>
           <label class="table-header">created</label>
         </th>
-        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.created | formatDate}}</td>
+        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.created | date_format}}</td>
       </ng-container>
       <ng-container matColumnDef="expires">
         <th mat-header-cell *matHeaderCellDef>
@@ -167,7 +167,7 @@
           </button>
           <label class="table-header">expires</label>
         </th>
-        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.expires | formatDate}}</td>
+        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.expires | date_format}}</td>
       </ng-container>
       <ng-container matColumnDef="enabled">
         <th mat-header-cell *matHeaderCellDef>
@@ -285,7 +285,7 @@
           </button>
           <label class="table-header">uploaded</label>
         </th>
-        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.uploaded | formatDate}}</td>
+        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.uploaded | date_format}}</td>
       </ng-container>
 
       <ng-container matColumnDef="delete-instance">
@@ -333,13 +333,13 @@
             <p class="details"><label>key_id</label><span>{{el.key_id}}</span></p>
             <p class="details"><label>type</label><span>{{el.type}}</span></p>
             <p class="details"><label>fingerprint</label><span>{{el.fingerprint}}</span></p>
-            <p class="details"><label>created</label><span>{{el.created | formatDate}}</span></p>
-            <p class="details"><label>expires</label><span>{{el.expires | formatDate}}</span></p>
+            <p class="details"><label>created</label><span>{{el.created | date_format}}</span></p>
+            <p class="details"><label>expires</label><span>{{el.expires | date_format}}</span></p>
             <p class="details"><label>enabled</label><mat-icon *ngIf="el.enabled === true" matSuffix>check</mat-icon></p>
             <p class="details"><label>revoked</label><mat-icon *ngIf="el.revoked === true" matSuffix>check</mat-icon></p>
             <p class="details"><label>strength</label><span>{{el.strength}}</span></p>
             <p class="details"><label>content</label><span>{{el.content}}</span></p>
-            <p class="details"><label>uploaded</label><span>{{el.uploaded | formatDate}}</span></p>
+            <p class="details"><label>uploaded</label><span>{{el.uploaded | date_format}}</span></p>
           </div>
         </td>
       </ng-container>

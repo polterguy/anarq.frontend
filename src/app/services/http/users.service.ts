@@ -148,7 +148,7 @@ export class UsersService {
   createUser(username: string, password: string) {
     return this.httpClient.post<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/users', {
+      'magic/modules/anarchy/users/users', {
       username,
       password,
     });
@@ -163,7 +163,7 @@ export class UsersService {
   createRole(name: string, description?: string) {
     return this.httpClient.post<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/roles', {
+      'magic/modules/anarchy/users/roles', {
       name,
       description,
     });

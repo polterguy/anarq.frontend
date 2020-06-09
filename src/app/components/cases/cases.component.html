@@ -145,7 +145,7 @@
           </button>
           <label class="table-header">deadline</label>
         </th>
-        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.deadline | formatDate}}</td>
+        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.deadline | date_format}}</td>
       </ng-container>
       <ng-container matColumnDef="subject">
         <th mat-header-cell *matHeaderCellDef>

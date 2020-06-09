@@ -123,7 +123,7 @@
           </button>
           <label class="table-header">created</label>
         </th>
-        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.created | formatDate}}</td>
+        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.created | date_format}}</td>
       </ng-container>
       <ng-container matColumnDef="opinion">
         <th mat-header-cell *matHeaderCellDef>
@@ -196,7 +196,7 @@
             <p class="details"><label>case</label><span>{{el.case}}</span></p>
             <p class="details"><label>email</label><span>{{el.email}}</span></p>
             <p class="details"><label>user</label><span>{{el.user}}</span></p>
-            <p class="details"><label>created</label><span>{{el.created | formatDate}}</span></p>
+            <p class="details"><label>created</label><span>{{el.created | date_format}}</span></p>
             <p class="details"><label>opinion</label><mat-icon *ngIf="el.opinion === true" matSuffix>check</mat-icon></p>
           </div>
         </td>
