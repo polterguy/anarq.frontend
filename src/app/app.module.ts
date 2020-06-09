@@ -40,10 +40,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoaderService } from './services/loader.service';
 import { LoaderInterceptor } from './services/loader.interceptor';
-import { FormatDatePipe } from './pipes/format-date.pipe';
-import { FromDatePipe } from './pipes/from-date.pipe';
-import { ToDatePipe } from './pipes/to-date.pipe';
-import { MarkedPipe } from './pipes/marked.pipe';
+import { DateFormatPipe } from './pipes/date-format.pipe';
+import { DateFromPipe } from './pipes/date-from.pipe';
+import { DateToPipe } from './pipes/date-to.pipe';
+import { MarkdownPipe } from './pipes/markdown.pipe';
 import { environment } from 'src/environments/environment';
 
 // All components. First all "global" components.
@@ -100,10 +100,10 @@ export function tokenGetter() {
     CreateRoleDialogComponent,
     CreateUserDialogComponent,
     EditUserDialogComponent,
-    FormatDatePipe,
-    FromDatePipe,
-    ToDatePipe,
-    MarkedPipe,
+    DateFormatPipe,
+    DateFromPipe,
+    DateToPipe,
+    MarkdownPipe,
     Case_typesComponent,
     EditCase_typesComponent,
     CasesComponent,

@@ -7,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'toDate'
 })
-export class ToDatePipe implements PipeTransform {
+export class DateToPipe implements PipeTransform {
 
   transform(value: any, args: string[]): any {
     const when = new Date(value).getTime();
