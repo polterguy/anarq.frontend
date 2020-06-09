@@ -4,7 +4,7 @@
 
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
-import { HttpService } from 'src/app/services/http-service';
+import { PgpService } from 'src/app/services/pgp.service';
 
 /*
  * Input data to dialog.
@@ -42,7 +42,7 @@ export class EditPgp_key_typesComponent {
     public dialogRef: MatDialogRef<EditPgp_key_typesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private snackBar: MatSnackBar,
-    private service: HttpService) { }
+    private service: PgpService) { }
 
   canEditColumn(name: string) {
     if (this.data.isEdit) {

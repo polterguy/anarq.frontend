@@ -7,7 +7,7 @@ import { FormControl } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material';
-import { AuthService, AuthFilter } from 'src/app/services/auth-service';
+import { UsersService, AuthFilter } from 'src/app/services/users.service';
 import { CreateRoleDialogComponent } from './modals/create-role-dialog';
 import { CreateUserDialogComponent } from './modals/create-user-dialog';
 import { EditUserDialogComponent } from './modals/edit-user-dialog';
@@ -37,7 +37,7 @@ export class AuthComponent implements OnInit {
   };
 
   constructor(
-    private service: AuthService,
+    private service: UsersService,
     private snackBar: MatSnackBar,
     public dialog: MatDialog) { }
 

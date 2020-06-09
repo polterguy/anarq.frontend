@@ -4,7 +4,7 @@
 
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
-import { HttpService } from 'src/app/services/http-service';
+import { TranslationService } from 'src/app/services/translation.service';
 
 /*
  * Input data to dialog.
@@ -43,7 +43,7 @@ export class EditTranslationsComponent implements OnInit {
     public dialogRef: MatDialogRef<EditTranslationsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private snackBar: MatSnackBar,
-    private service: HttpService) { }
+    private service: TranslationService) { }
 
   ngOnInit(): void {
     this.service.languages_Get({}).subscribe(res => {

@@ -11,8 +11,8 @@ import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { HttpService } from 'src/app/services/http-service';
 import { EditEmailsComponent } from './modals/edit.emails.component';
+import { EmailService } from 'src/app/services/email.service';
 
 /*
  * "Datagrid" component for displaying instance of Emails
@@ -66,7 +66,7 @@ export class EmailsComponent implements OnInit {
 
   // Constructor taking a bunch of services/helpers through dependency injection.
   constructor(
-    private httpService: HttpService,
+    private httpService: EmailService,
     private jwtHelper: JwtHelperService,
     private snackBar: MatSnackBar,
     public dialog: MatDialog) {

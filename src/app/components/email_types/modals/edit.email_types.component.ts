@@ -4,7 +4,7 @@
 
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
-import { HttpService } from 'src/app/services/http-service';
+import { EmailService } from 'src/app/services/email.service';
 
 /*
  * Input data to dialog.
@@ -42,7 +42,7 @@ export class EditEmail_typesComponent {
     public dialogRef: MatDialogRef<EditEmail_typesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private snackBar: MatSnackBar,
-    private service: HttpService) { }
+    private service: EmailService) { }
 
   canEditColumn(name: string) {
     if (this.data.isEdit) {

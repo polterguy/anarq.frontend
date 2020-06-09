@@ -11,8 +11,8 @@ import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { HttpService } from 'src/app/services/http-service';
 import { EditUsers_extra_typesComponent } from './modals/edit.users_extra_types.component';
+import { UsersService } from 'src/app/services/users.service';
 
 /*
  * "Datagrid" component for displaying instance of Users_extra_types
@@ -63,7 +63,7 @@ export class Users_extra_typesComponent implements OnInit {
 
   // Constructor taking a bunch of services/helpers through dependency injection.
   constructor(
-    private httpService: HttpService,
+    private httpService: UsersService,
     private jwtHelper: JwtHelperService,
     private snackBar: MatSnackBar,
     public dialog: MatDialog) {

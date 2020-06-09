@@ -11,8 +11,8 @@ import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { HttpService } from 'src/app/services/http-service';
 import { EditUser_statusComponent } from './modals/edit.user_status.component';
+import { UsersService } from 'src/app/services/users.service';
 
 /*
  * "Datagrid" component for displaying instance of User_status
@@ -63,7 +63,7 @@ export class User_statusComponent implements OnInit {
 
   // Constructor taking a bunch of services/helpers through dependency injection.
   constructor(
-    private httpService: HttpService,
+    private httpService: UsersService,
     private jwtHelper: JwtHelperService,
     private snackBar: MatSnackBar,
     public dialog: MatDialog) {

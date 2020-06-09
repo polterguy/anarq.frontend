@@ -38,8 +38,8 @@ import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 // Routing, services, etc imports.
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoaderService } from './services/loader-service';
-import { LoaderInterceptor } from './services/loader-interceptor';
+import { LoaderService } from './services/loader.service';
+import { LoaderInterceptor } from './services/loader.interceptor';
 import { FormatDatePipe } from './pipes/format-date.pipe';
 import { FromDatePipe } from './pipes/from-date.pipe';
 import { ToDatePipe } from './pipes/to-date.pipe';

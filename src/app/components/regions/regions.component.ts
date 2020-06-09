@@ -11,8 +11,8 @@ import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { HttpService } from 'src/app/services/http-service';
 import { EditRegionsComponent } from './modals/edit.regions.component';
+import { MiscService } from 'src/app/services/misc.service';
 
 /*
  * "Datagrid" component for displaying instance of Regions
@@ -63,7 +63,7 @@ export class RegionsComponent implements OnInit {
 
   // Constructor taking a bunch of services/helpers through dependency injection.
   constructor(
-    private httpService: HttpService,
+    private httpService: MiscService,
     private jwtHelper: JwtHelperService,
     private snackBar: MatSnackBar,
     public dialog: MatDialog) {

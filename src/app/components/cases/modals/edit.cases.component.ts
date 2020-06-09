@@ -4,7 +4,7 @@
 
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
-import { HttpService } from 'src/app/services/http-service';
+import { CaseService } from 'src/app/services/case.service';
 
 /*
  * Input data to dialog.
@@ -43,7 +43,7 @@ export class EditCasesComponent implements OnInit {
     public dialogRef: MatDialogRef<EditCasesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private snackBar: MatSnackBar,
-    private service: HttpService) { }
+    private service: CaseService) { }
 
   ngOnInit(): void {
     if (this.data.isAccept) {

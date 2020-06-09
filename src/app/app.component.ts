@@ -8,10 +8,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 // Services your app depends upon.
-import { HttpService } from './services/http-service';
-import { LoaderService } from './services/loader-service';
+import { LoaderService } from './services/loader.service';
 import { MatDialog } from '@angular/material';
 import { LoginComponent } from './modals/login.component';
+import { UsersService } from './services/users.service';
 
 /*
  * Your actual component.
@@ -43,7 +43,7 @@ export class AppComponent {
 
   // Constructor taking a bunch of services ++ through dependency injection.
   constructor(
-    private httpService: HttpService,
+    private httpService: UsersService,
     private jwtHelper: JwtHelperService,
     private snackBar: MatSnackBar,
     private loaderService: LoaderService,

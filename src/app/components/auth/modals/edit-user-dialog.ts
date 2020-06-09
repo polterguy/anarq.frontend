@@ -4,7 +4,7 @@
 
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar, MatSelectChange } from '@angular/material';
-import { AuthService } from 'src/app/services/auth-service';
+import { UsersService } from 'src/app/services/users.service';
 
 export interface DialogData {
   username: string;
@@ -24,7 +24,7 @@ export class EditUserDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<EditUserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private snackBar: MatSnackBar,
-    private authService: AuthService) { }
+    private authService: UsersService) { }
 
   ngOnInit() {
     this.getUserRoles();

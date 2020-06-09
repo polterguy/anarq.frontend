@@ -11,8 +11,8 @@ import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { HttpService } from 'src/app/services/http-service';
 import { EditPgp_keysComponent } from './modals/edit.pgp_keys.component';
+import { PgpService } from 'src/app/services/pgp.service';
 
 /*
  * "Datagrid" component for displaying instance of Pgp_keys
@@ -73,7 +73,7 @@ export class Pgp_keysComponent implements OnInit {
 
   // Constructor taking a bunch of services/helpers through dependency injection.
   constructor(
-    private httpService: HttpService,
+    private httpService: PgpService,
     private jwtHelper: JwtHelperService,
     private snackBar: MatSnackBar,
     public dialog: MatDialog) {

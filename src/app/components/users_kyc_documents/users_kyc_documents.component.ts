@@ -11,8 +11,8 @@ import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { HttpService } from 'src/app/services/http-service';
 import { EditUsers_kyc_documentsComponent } from './modals/edit.users_kyc_documents.component';
+import { UsersService } from 'src/app/services/users.service';
 
 /*
  * "Datagrid" component for displaying instance of Users_kyc_documents
@@ -65,7 +65,7 @@ export class Users_kyc_documentsComponent implements OnInit {
 
   // Constructor taking a bunch of services/helpers through dependency injection.
   constructor(
-    private httpService: HttpService,
+    private httpService: UsersService,
     private jwtHelper: JwtHelperService,
     private snackBar: MatSnackBar,
     public dialog: MatDialog) {

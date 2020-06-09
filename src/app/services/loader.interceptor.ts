@@ -10,7 +10,7 @@ import {
   HttpResponse
 } from '@angular/common/http';
 import { tap, catchError } from 'rxjs/operators';
-import { LoaderService } from './loader-service';
+import { LoaderService } from './loader.service';
 
 /*
  * Our HTTP interceptor that change sthe LoaderService's state according to whether or not

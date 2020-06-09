@@ -4,7 +4,7 @@
 
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
-import { AuthService } from 'src/app/services/auth-service';
+import { UsersService } from 'src/app/services/users.service';
 
 export interface DialogData {
   name: string;
@@ -22,7 +22,7 @@ export class CreateUserDialogComponent {
     public dialogRef: MatDialogRef<CreateUserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private snackBar: MatSnackBar,
-    private authService: AuthService) { }
+    private authService: UsersService) { }
 
   ok() {
     if (this.passwordRepeat !== this.data.password) {
