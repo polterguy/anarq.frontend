@@ -85,11 +85,10 @@ export class EditCasesComponent implements OnInit {
     if (this.data.isAccept) {
 
       // Updating existing item. Invoking update HTTP REST endpoint and closing dialog.
-      const args = {
+      this.service.acceptCase({
         id: this.data.entity.id,
         deadline: this.data.entity.deadline,
-      };
-      this.service.acceptCase(args).subscribe(res => {
+      }).subscribe(res => {
         this.dialogRef.close(this.data.entity);
         if (res['updated-records'] !== 1) {
 

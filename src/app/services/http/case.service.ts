@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { getQueryArgs } from '../get-query-args';
+import { AcceptCase } from 'src/app/models/accept-case';
 
 /*
  * Your main HTTP service for handling cases, and related objects.
@@ -116,7 +117,7 @@ export class CaseService {
    * 
    * @param args Generic filter argument
    */
-  acceptCase(args: any) {
+  acceptCase(args: AcceptCase) {
     return this.httpClient.put<any>(
       environment.apiUrl +
       'magic/modules/anarchy/cases/cases-accept',
