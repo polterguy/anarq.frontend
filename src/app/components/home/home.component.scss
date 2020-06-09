@@ -13,12 +13,19 @@ small {
     display: block;
 }
 .info-card {
-    margin:2rem 5rem 2rem 5rem;
+    margin:1rem 5rem 2rem 5rem;
     padding: 3rem;
     margin-top: 3rem;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    .front-page-cases {
+        list-style-type: none;
+        padding-left: 0;
+        li {
+            margin-top: 1rem;
+        }
+    }
 }
 
 .copyright {

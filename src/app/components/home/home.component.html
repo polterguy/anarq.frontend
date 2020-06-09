@@ -1,18 +1,12 @@
 
 <h1>Anarchy</h1>
-<small>Occupy democracy</small>
 <mat-card class="info-card">
-  <p>
-    Anarchy is a Direct Democracy tool, allowing you to suggest changes, and/or vote on
-    specific cases, either locally in your own village, or globally.
-    After you have registered, you will be asked to follow a KYC process, where we will
-    be asking you for some documents to prove your identity. This is because we want
-    the system to become as legal as possible, resulting in that it becomes impossible
-    for the government to ignore your votes, and such that all votes can be audited,
-    and verified.
-  </p>
-  <div class="copyright">
-    Anarchy is Copyright © Thomas Hansen, info@servergardens.com, all rights reserved
-  </div>
+
+  <ul class="front-page-cases">
+    <li *ngFor="let case of cases">{{case.subject}}</li>
+  </ul>
 
 </mat-card>
+<div class="copyright">
+  Anarchy is Copyright © Thomas Hansen, info@servergardens.com, all rights reserved
+</div>

@@ -35,6 +35,7 @@
       <span class="menu-item-text">Case types</span>
     </a>
     <a
+      *ngIf="inRole(['root', 'admin', 'moderator'])"
       mat-button
       routerLink="/cases"
       routerLinkActive="active-link"
@@ -78,6 +79,7 @@
       <span class="menu-item-text">Languages</span>
     </a>
     <a
+      *ngIf="inRole(['root', 'admin', 'moderator'])"
       mat-button
       routerLink="/pgp_keys"
       routerLinkActive="active-link"
@@ -88,6 +90,7 @@
       <span class="menu-item-text">Pgp keys</span>
     </a>
     <a
+      *ngIf="inRole(['root', 'admin', 'moderator'])"
       mat-button
       routerLink="/regions"
       routerLinkActive="active-link"

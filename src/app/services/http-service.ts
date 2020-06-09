@@ -98,6 +98,10 @@ export class HttpService {
     return this.httpClient.get<any>(environment.apiUrl + 'magic/modules/anarchy/cases' + this.getQueryArgs(args));
   }
 
+  cases_GetOpen(args: any) {
+    return this.httpClient.get<any>(environment.apiUrl + 'magic/modules/anarchy/open-cases' + this.getQueryArgs(args));
+  }
+
   cases_Post(args: any) {
     return this.httpClient.post<any>(environment.apiUrl + 'magic/modules/anarchy/cases', args);
   }
