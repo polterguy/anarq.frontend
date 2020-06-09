@@ -348,10 +348,7 @@ export class CasesComponent implements OnInit {
   }
 
   rejectCase(input: any) {
-    const entity = {
-      id: input.id,
-    };
-    this.httpService.rejectCase(entity).subscribe(res => {
+    this.httpService.rejectCase(input.id).subscribe(res => {
       this.getData(true);
     });
   }

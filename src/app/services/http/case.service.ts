@@ -128,10 +128,11 @@ export class CaseService {
    * 
    * @param args Generic filter argument
    */
-  rejectCase(args: any) {
+  rejectCase(id: number) {
     return this.httpClient.put<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/cases/cases-reject',
-      args);
+      'magic/modules/anarchy/cases/cases-reject', {
+        id
+      });
   }
 }
