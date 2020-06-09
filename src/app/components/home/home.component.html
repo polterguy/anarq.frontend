@@ -7,7 +7,7 @@
     <li *ngFor="let case of cases">
       <a
         class="case-link"
-        [routerLink]="'/case/' + case.hash">
+        [routerLink]="'/case/' + case.id">
         {{case.subject}}
       </a>
       <small>

@@ -30,7 +30,7 @@ export class Users_extra_typesComponent implements OnInit {
 
   // Which columns we should display. Reorder to prioritize columns differently.
   // Notice! 'delete-instance' should always come last!
-  private displayedColumns: string[] = ['type', 'description', 'delete-instance'];
+  private displayedColumns: string[] = ['type', 'description', 'mandatory', 'delete-instance'];
 
   // Current filter being applied to filter items from our backend.
   private filter: any = {
@@ -59,6 +59,7 @@ export class Users_extra_typesComponent implements OnInit {
   // Form control declarations to bind up with reactive form elements.
   private type: FormControl;
   private description: FormControl;
+  private mandatory: FormControl;
 
 
   // Constructor taking a bunch of services/helpers through dependency injection.
@@ -102,6 +103,16 @@ export class Users_extra_typesComponent implements OnInit {
         this.filter.offset = 0;
         this.hasFiltered = true;
         this.filter['description.like'] = this.description.value + '%';
+        this.getData();
+      });
+    this.mandatory = new FormControl('');
+    this.mandatory.valueChanges
+      .pipe(debounceTime(this.debounce), distinctUntilChanged())
+      .subscribe(query => {
+        this.paginator.pageIndex = 0;
+        this.filter.offset = 0;
+        this.hasFiltered = true;
+        this.filter['mandatory.eq'] = this.description.value;
         this.getData();
       });
   }

@@ -3,7 +3,7 @@
 
   <div class="mat-elevation-z4 relativized grid-wrapper">
 
-    <h3>Users_extra_types</h3>
+    <h3>Users extra types</h3>
 
     <button
       mat-button
@@ -59,6 +59,32 @@
         </th>
         <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.description}}</td>
       </ng-container>
+      <ng-container matColumnDef="mandatory">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-form-field appearance="outline" class="fill-width filter-textbox">
+            <mat-label>mandatory</mat-label>
+            <input
+              matInput
+              placeholder="Filter ..."
+              type="text"
+              autocomplete="off"
+              [formControl]="mandatory">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+          <button
+            class="sort-button"
+            (click)="sort('mandatory')"
+            mat-button>
+            <mat-icon matSuffix>{{getSortIcon('mandatory')}}</mat-icon>
+          </button>
+          <label class="table-header">mandatory</label>
+        </th>
+        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">
+          <mat-icon
+            *ngIf="el.mandatory"
+            matSuffix>check</mat-icon>
+        </td>
+      </ng-container>
 
       <ng-container matColumnDef="delete-instance">
         <th
@@ -102,6 +128,14 @@
             </button>
             <p class="details"><label>type</label><span>{{el.type}}</span></p>
             <p class="details"><label>description</label><span>{{el.description}}</span></p>
+            <p class="details">
+              <label>mandatory</label>
+              <span>
+              <mat-icon
+                *ngIf="el.mandatory"
+                matSuffix>check</mat-icon>
+              </span>
+            </p>
           </div>
         </td>
       </ng-container>

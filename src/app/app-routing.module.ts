@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: 'auth', component: AuthComponent },
 
   // Then routes for all entity components.
-  { path: 'case/:hash', component: CaseComponent },
+  { path: 'case/:id', component: CaseComponent },
   { path: 'user/:username', component: UserComponent },
   { path: 'case_types', component: Case_typesComponent },
   { path: 'cases', component: CasesComponent },

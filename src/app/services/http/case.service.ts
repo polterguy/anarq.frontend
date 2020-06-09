@@ -88,11 +88,11 @@ export class CaseService {
       getQueryArgs(args));
   }
 
-  getCase(hash: string) {
+  getCase(id: number) {
     return this.httpClient.get<CaseView>(
       environment.apiUrl +
-      'magic/modules/anarchy/cases/case?hash=' +
-      hash);
+      'magic/modules/anarchy/cases/case?id=' +
+      id);
   }
 
   createCase(args: any) {

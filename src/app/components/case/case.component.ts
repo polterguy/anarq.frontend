@@ -22,7 +22,7 @@ export class CaseComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(pars => {
-      this.service.getCase(pars.hash).subscribe(res => {
+      this.service.getCase(pars.id).subscribe(res => {
         this.item = res;
       });
     });
