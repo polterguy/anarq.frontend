@@ -33,3 +33,9 @@
     right: 1rem;
     z-index: 1000;
 }
+
+@media print {
+    .login-strip {
+        display: none;
+    }
+}

@@ -9,17 +9,23 @@
       routerLink="/">
       home
     </a>
+    <h1>
+      {{item.subject}}
+    </h1>
+    <div
+      class="content"
+      [innerHtml]="item.body | marked"></div>
     <qrcode
       class="qr-code"
       [qrdata]="getCaseUrl()"
       [width]="128"
       [errorCorrectionLevel]="'M'"></qrcode>
-    <h1>
-      {{item.subject}}
-    </h1>
     <div
-      [innerHtml]="item.body | marked"></div>
-    <div class="meta-data">
+      class="qr-code-description">
+      Vote by scanning the QR code
+    </div>
+    <div
+      class="meta-data">
       <div class="item">
         {{item.region}}
       </div>
@@ -39,7 +45,4 @@
     </div>
   </div>
 
-</div>
-<div class="copyright">
-  Anarchy is Copyright © Thomas Hansen, info@servergardens.com, all rights reserved
 </div>
