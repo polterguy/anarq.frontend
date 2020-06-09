@@ -51,12 +51,19 @@ export class AppComponent {
 
       // Checking if user is logged in, at which point we initialize the roles property.
       const token = localStorage.getItem('jwt_token');
-      if (token !== null && token !== undefined) {
+      if (token) {
 
         // Yup! User is logged in!
         const decoded = this.jwtHelper.decodeToken(token);
-        this.roles = decoded.role;
+        this.roles = decoded.role.split(',');
       }
+  }
+
+  shouldDisplayHomeButton() {
+    return this.roles.filter(
+      x => x === 'admin' ||
+      x === 'moderator' ||
+      x === 'root').length > 0;
   }
 
   // Returns true if user is logged in, with a valid token, that's not expired.

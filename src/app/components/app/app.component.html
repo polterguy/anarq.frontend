@@ -216,6 +216,7 @@
         </button>
       </div>
       <button
+        *ngIf="shouldDisplayHomeButton()"
         (click)="openSideNavigation()"
         class="sidenav-button"
         mat-button>Menu</button>
