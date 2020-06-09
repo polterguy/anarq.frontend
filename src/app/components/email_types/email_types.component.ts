@@ -12,7 +12,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { EditEmail_typesComponent } from './modals/edit.email_types.component';
-import { EmailService } from 'src/app/services/email.service';
+import { EmailService } from 'src/app/services/http/email.service';
 
 /*
  * "Datagrid" component for displaying instance of Email_types

@@ -12,7 +12,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { EditUsers_extraComponent } from './modals/edit.users_extra.component';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from 'src/app/services/http/users.service';
 
 /*
  * "Datagrid" component for displaying instance of Users_extra
@@ -145,7 +145,7 @@ export class Users_extraComponent implements OnInit {
     this.viewDetails = [];
 
     // Retrieves items from our backend through our HTTP service layer.
-    this.httpService.users_extra_Get(this.filter).subscribe(res => {
+    this.httpService.getUserExtra(this.filter).subscribe(res => {
       this.data = res;
 
       // Checking if user wants to (re)-count items, and if so, invoking "count records" HTTP service method.
@@ -169,7 +169,7 @@ export class Users_extraComponent implements OnInit {
         }
 
         // Invoking "count records" HTTP service layer method.
-        this.httpService.users_extra_count_Get(cloned).subscribe(res2 => {
+        this.httpService.countUserExtras(cloned).subscribe(res2 => {
           this.count = res2.count;
         }, error => {
 
@@ -343,7 +343,7 @@ export class Users_extraComponent implements OnInit {
     }
 
     // Invoking HTTP service DELETE method.
-    this.httpService.users_extra_Delete(ids).subscribe(res => {
+    this.httpService.deleteUserExtra(ids).subscribe(res => {
 
       // Sanity checking invocation.
       if (res['deleted-records'] !== 1) {

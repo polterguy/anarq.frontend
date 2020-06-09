@@ -12,7 +12,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { EditUsers_kyc_documentsComponent } from './modals/edit.users_kyc_documents.component';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from 'src/app/services/http/users.service';
 
 /*
  * "Datagrid" component for displaying instance of Users_kyc_documents
@@ -156,7 +156,7 @@ export class Users_kyc_documentsComponent implements OnInit {
     this.viewDetails = [];
 
     // Retrieves items from our backend through our HTTP service layer.
-    this.httpService.users_kyc_documents_Get(this.filter).subscribe(res => {
+    this.httpService.getUserKycDocuments(this.filter).subscribe(res => {
       this.data = res;
 
       // Checking if user wants to (re)-count items, and if so, invoking "count records" HTTP service method.
@@ -180,7 +180,7 @@ export class Users_kyc_documentsComponent implements OnInit {
         }
 
         // Invoking "count records" HTTP service layer method.
-        this.httpService.users_kyc_documents_count_Get(cloned).subscribe(res2 => {
+        this.httpService.countUserKycDocuments(cloned).subscribe(res2 => {
           this.count = res2.count;
         }, error => {
 
@@ -354,7 +354,7 @@ export class Users_kyc_documentsComponent implements OnInit {
     }
 
     // Invoking HTTP service DELETE method.
-    this.httpService.users_kyc_documents_Delete(ids).subscribe(res => {
+    this.httpService.deleteUserKycDocument(ids).subscribe(res => {
 
       // Sanity checking invocation.
       if (res['deleted-records'] !== 1) {

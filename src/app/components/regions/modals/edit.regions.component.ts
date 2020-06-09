@@ -4,7 +4,7 @@
 
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
-import { MiscService } from 'src/app/services/misc.service';
+import { MiscService } from 'src/app/services/http/misc.service';
 
 /*
  * Input data to dialog.

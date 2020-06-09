@@ -11,7 +11,7 @@ import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { CaseService } from 'src/app/services/case.service';
+import { CaseService } from 'src/app/services/http/case.service';
 import { EditCase_typesComponent } from './modals/edit.case_types.component';
 
 /*

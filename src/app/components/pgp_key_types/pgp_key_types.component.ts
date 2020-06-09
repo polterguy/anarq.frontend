@@ -12,7 +12,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { EditPgp_key_typesComponent } from './modals/edit.pgp_key_types.component';
-import { PgpService } from 'src/app/services/pgp.service';
+import { PgpService } from 'src/app/services/http/pgp.service';
 
 /*
  * "Datagrid" component for displaying instance of Pgp_key_types

@@ -4,7 +4,7 @@
 
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
-import { CaseService } from 'src/app/services/case.service';
+import { CaseService } from 'src/app/services/http/case.service';
 
 /*
  * Input data to dialog.

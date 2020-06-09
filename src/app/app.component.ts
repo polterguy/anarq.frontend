@@ -11,7 +11,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { LoaderService } from './services/loader.service';
 import { MatDialog } from '@angular/material';
 import { LoginComponent } from './modals/login.component';
-import { UsersService } from './services/users.service';
+import { UsersService } from './services/http/users.service';
 
 /*
  * Your actual component.

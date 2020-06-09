@@ -4,7 +4,7 @@
 
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar, MatSelectChange } from '@angular/material';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from 'src/app/services/http/users.service';
 
 export interface DialogData {
   username: string;

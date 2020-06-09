@@ -4,7 +4,7 @@
 
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
-import { PgpService } from 'src/app/services/pgp.service';
+import { PgpService } from 'src/app/services/http/pgp.service';
 
 /*
  * Input data to dialog.

@@ -12,7 +12,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { EditTranslationsComponent } from './modals/edit.translations.component';
-import { TranslationService } from 'src/app/services/translation.service';
+import { TranslationService } from 'src/app/services/http/translation.service';
 
 /*
  * "Datagrid" component for displaying instance of Translations

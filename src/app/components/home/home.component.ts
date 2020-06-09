@@ -3,7 +3,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { CaseService } from 'src/app/services/case.service';
+import { CaseService } from 'src/app/services/http/case.service';
 import { Case } from './models/case';
 
 @Component({

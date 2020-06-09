@@ -12,7 +12,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { EditUsers_extra_typesComponent } from './modals/edit.users_extra_types.component';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from 'src/app/services/http/users.service';
 
 /*
  * "Datagrid" component for displaying instance of Users_extra_types
@@ -134,7 +134,7 @@ export class Users_extra_typesComponent implements OnInit {
     this.viewDetails = [];
 
     // Retrieves items from our backend through our HTTP service layer.
-    this.httpService.users_extra_types_Get(this.filter).subscribe(res => {
+    this.httpService.getExtraTypes(this.filter).subscribe(res => {
       this.data = res;
 
       // Checking if user wants to (re)-count items, and if so, invoking "count records" HTTP service method.
@@ -158,7 +158,7 @@ export class Users_extra_typesComponent implements OnInit {
         }
 
         // Invoking "count records" HTTP service layer method.
-        this.httpService.users_extra_types_count_Get(cloned).subscribe(res2 => {
+        this.httpService.countExtraTypes(cloned).subscribe(res2 => {
           this.count = res2.count;
         }, error => {
 
@@ -332,7 +332,7 @@ export class Users_extra_typesComponent implements OnInit {
     }
 
     // Invoking HTTP service DELETE method.
-    this.httpService.users_extra_types_Delete(ids).subscribe(res => {
+    this.httpService.deleteExtraType(ids).subscribe(res => {
 
       // Sanity checking invocation.
       if (res['deleted-records'] !== 1) {

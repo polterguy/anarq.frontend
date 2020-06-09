@@ -12,7 +12,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { EditUser_statusComponent } from './modals/edit.user_status.component';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from 'src/app/services/http/users.service';
 
 /*
  * "Datagrid" component for displaying instance of User_status
@@ -134,7 +134,7 @@ export class User_statusComponent implements OnInit {
     this.viewDetails = [];
 
     // Retrieves items from our backend through our HTTP service layer.
-    this.httpService.user_status_Get(this.filter).subscribe(res => {
+    this.httpService.getUserStatus(this.filter).subscribe(res => {
       this.data = res;
 
       // Checking if user wants to (re)-count items, and if so, invoking "count records" HTTP service method.
@@ -158,7 +158,7 @@ export class User_statusComponent implements OnInit {
         }
 
         // Invoking "count records" HTTP service layer method.
-        this.httpService.user_status_count_Get(cloned).subscribe(res2 => {
+        this.httpService.countUserStatus(cloned).subscribe(res2 => {
           this.count = res2.count;
         }, error => {
 
@@ -332,7 +332,7 @@ export class User_statusComponent implements OnInit {
     }
 
     // Invoking HTTP service DELETE method.
-    this.httpService.user_status_Delete(ids).subscribe(res => {
+    this.httpService.deleteUserStatus(ids).subscribe(res => {
 
       // Sanity checking invocation.
       if (res['deleted-records'] !== 1) {

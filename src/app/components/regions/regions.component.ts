@@ -12,7 +12,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { EditRegionsComponent } from './modals/edit.regions.component';
-import { MiscService } from 'src/app/services/misc.service';
+import { MiscService } from 'src/app/services/http/misc.service';
 
 /*
  * "Datagrid" component for displaying instance of Regions

@@ -4,7 +4,7 @@
 
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from 'src/app/services/http/users.service';
 
 /*
  * Input data to dialog.
@@ -73,7 +73,7 @@ export class EditUser_statusComponent {
       }
 
       // Updating existing item. Invoking update HTTP REST endpoint and closing dialog.
-      this.service.user_status_Put(this.data.entity).subscribe(res => {
+      this.service.updateUserStatus(this.data.entity).subscribe(res => {
         this.dialogRef.close(this.data.entity);
         if (res['updated-records'] !== 1) {
 
@@ -103,7 +103,7 @@ export class EditUser_statusComponent {
       }
 
       // Creating new item. Invoking create HTTP REST endpoint and closing dialog.
-      this.service.user_status_Post(this.data.entity).subscribe(res => {
+      this.service.createUserStatus(this.data.entity).subscribe(res => {
         this.dialogRef.close(this.data.entity);
 
         if (res === null || res === undefined) {
