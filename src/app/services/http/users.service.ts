@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { getQueryArgs } from '../get-query-args';
+import { UserView } from 'src/app/models/user-view';
 
 /*
  * Filter for invoking "auth" methods, allowing you to filter users/roles/etc.
@@ -87,6 +88,13 @@ export class UsersService {
       environment.apiUrl +
       'magic/modules/anarchy/users/users' +
       query);
+  }
+
+  getUser(username: string) {
+    return this.httpClient.get<UserView>(
+      environment.apiUrl +
+      'magic/modules/anarchy/users/user?username=' +
+      username);
   }
 
   /**

@@ -1,0 +1,77 @@
+
+<div class="component-wrapper">
+
+  <div
+    *ngIf="item"
+    class="mat-elevation-z4 case">
+    <a
+      class="home-link"
+      routerLink="/">
+      home
+    </a>
+    <span
+      class="username">
+      {{item.username}} - {{item.status}}
+    </span>
+    <h1>
+      {{item.name}}
+    </h1>
+    <div class="summary">
+      <table class="summary-table">
+        <tr>
+          <th>Type</th>
+          <th>No</th>
+        </tr>
+        <tr>
+          <td>
+            Created
+          </td>
+          <td>
+            {{item.cases}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Votes
+          </td>
+          <td>
+            {{item.positive + item.negative}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            For
+          </td>
+          <td>
+            {{item.positive}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Against
+          </td>
+          <td>
+            {{item.negative}}
+          </td>
+        </tr>
+      </table>
+      <div class="summary-chart">
+        <canvas
+          *ngIf="shouldDisplayChart()"
+          baseChart
+          chartType="pie"
+          [data]="chartData"
+          [labels]="chartLabels"
+          [colors]="chartColors">
+        </canvas>
+      </div>
+      <div class="summary-avatar">
+        TODO
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="copyright">
+  Anarchy is Copyright © Thomas Hansen, info@servergardens.com, all rights reserved
+</div>

@@ -24,7 +24,11 @@
         {{item.region}}
       </div>
       <div class="item">
-        {{item.user}}
+        <a
+          class="user-link"
+          [routerLink]="'/user/' + item.user">
+          {{item.user}}
+        </a>
       </div>
       <div class="item">
         {{item.created | date_format_short}}

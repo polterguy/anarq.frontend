@@ -16,27 +16,28 @@
         left: 1rem;
         text-decoration: none;
     }
-    .qr-code {
-        float: right;
-        margin-top: -2rem;
-        margin-right: -2rem;
-    }
-    .meta-data {
-        padding: 1rem;
-        display: flex;
-        background-color: #fafafa;
-        margin-top: 3rem;
-        margin-left: -1rem;
-        margin-right: -1rem;
-        font-style: italic;
+    .username {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
         color: #a0a0a0;
-        font-size: .8rem;
-        .item {
+        font-style: italic;
+    }
+    .summary {
+        display: flex;
+        .summary-table {
             flex: 1;
-            .user-link {
-                text-decoration: none;
-                color: #a0a0a0;
+            tr {
+                th {
+                    text-align: left;
+                }
             }
+        }
+        .summary-chart {
+            flex: 1;
+        }
+        .summary-avatar {
+            flex: 1;
         }
     }
 }
