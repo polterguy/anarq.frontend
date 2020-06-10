@@ -38,22 +38,6 @@
             {{item.positive + item.negative}}
           </td>
         </tr>
-        <tr>
-          <td>
-            For casted
-          </td>
-          <td>
-            {{item.positive}}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Against casted
-          </td>
-          <td>
-            {{item.negative}}
-          </td>
-        </tr>
       </table>
       <div class="summary-chart">
         <canvas
@@ -83,7 +67,11 @@
       <ul>
         <li
           *ngFor="let idx of item.regions">
-          {{idx.name}}
+          <a
+            class="region-link"
+            [routerLink]="'/region/' + idx.name">
+            {{idx.name}}
+          </a>
         </li>
       </ul>
     </div>

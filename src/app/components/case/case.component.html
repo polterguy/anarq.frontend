@@ -27,7 +27,11 @@
     <div
       class="meta-data">
       <div class="item">
-        {{item.region}}
+        <a
+          class="region-link"
+          [routerLink]="'/region/' + item.region">
+          {{item.region}}
+        </a>
       </div>
       <div class="item">
         <a

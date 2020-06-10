@@ -58,12 +58,14 @@
         margin-top: 1rem;
         margin-left: -1rem;
         margin-right: -1rem;
-        font-style: italic;
         color: #a0a0a0;
-        font-size: .8rem;
         .item {
             flex: 1;
             .user-link {
+                text-decoration: none;
+                color: #a0a0a0;
+            }
+            .region-link {
                 text-decoration: none;
                 color: #a0a0a0;
             }

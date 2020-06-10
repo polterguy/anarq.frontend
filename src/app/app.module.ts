@@ -78,6 +78,7 @@ import { EditUsers_extra_typesComponent } from './components/users_extra_types/m
 import { Users_extraComponent } from './components/users_extra/users_extra.component';
 import { EditUsers_extraComponent } from './components/users_extra/modals/edit.users_extra.component';
 import { VotesComponent } from './components/votes/votes.component';
+import { RegionComponent } from './components/region/region.component';
 import { EditVotesComponent } from './components/votes/modals/edit.votes.component';
 
 
@@ -120,6 +121,7 @@ export function tokenGetter() {
     Users_extraComponent,
     EditUsers_extraComponent,
     VotesComponent,
+    RegionComponent,
     EditVotesComponent,
   ],
   imports: [

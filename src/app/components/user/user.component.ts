@@ -83,8 +83,8 @@ export class UserComponent implements OnInit {
             res.negative,
           ];
           this.pieChartLabels = [
-            'positive',
-            'negative',
+            'yes',
+            'no',
           ];
         }
         if (this.shouldDisplayRegionChart()) {

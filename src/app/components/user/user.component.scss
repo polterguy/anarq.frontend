@@ -54,6 +54,10 @@
             li {
                 float: left;
                 margin-right: 1rem;
+                .region-link {
+                    text-decoration: none;
+                    color: #a0a0a0;
+                }
             }
         }
     }

@@ -1,18 +1,20 @@
 
-<h1>Anarchu</h1>
+<h1 *ngIf="region">{{region}}</h1>
 
 <mat-card class="info-card">
+  <a
+    class="home-link"
+    routerLink="/">
+    home
+  </a>
 
-  <ul class="front-page-cases">
+  <ul class="region-cases">
     <li *ngFor="let case of cases">
       <a
         class="case-link"
         [routerLink]="'/case/' + case.id">
         {{case.subject}}
       </a>
-      <small>
-        {{case.region}}
-      </small>
     </li>
   </ul>
 
