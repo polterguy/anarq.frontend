@@ -36,7 +36,12 @@ export class UserComponent implements OnInit {
         }
       }],
       xAxes: [{
-        display: false,
+        gridLines: {
+          display: false,
+        },
+        ticks: {
+          beginAtZero: true,
+        }
       }]
     },
     legend: {
@@ -57,17 +62,6 @@ export class UserComponent implements OnInit {
       ]}];
   private barChartColors = [{
     backgroundColor: [
-      'rgba(15,15,15,0.8)',
-      'rgba(30,30,30,0.8)',
-      'rgba(45,45,45,0.8)',
-      'rgba(60,60,60,0.8)',
-      'rgba(75,75,75,0.8)',
-      'rgba(90,90,90,0.8)',
-      'rgba(105,105,105,0.8)',
-      'rgba(120,120,120,0.8)',
-      'rgba(135,135,135,0.8)',
-      'rgba(150,150,150,0.8)',
-      'rgba(165,165,165,0.8)',
       'rgba(180,180,180,0.8)',
       'rgba(195,195,195,0.8)',
       'rgba(210,210,210,0.8)',
@@ -94,7 +88,6 @@ export class UserComponent implements OnInit {
           ];
         }
         if (this.shouldDisplayRegionChart()) {
-          console.log(this.item);
           this.barChartLabels = this.item.regions.map(x => x.name);
           this.barChartData = this.item.regions.map(x => x.votes);
         }
