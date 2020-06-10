@@ -60,6 +60,7 @@
           *ngIf="shouldDisplayChart()"
           baseChart
           chartType="pie"
+          [options]="chartOptions"
           [data]="chartData"
           [labels]="chartLabels"
           [colors]="chartColors">
@@ -74,7 +75,7 @@
       <ul>
         <li
           *ngFor="let idx of item.regions">
-          {{idx}}
+          {{idx.name}} {{idx.votes}}
         </li>
       </ul>
     </div>

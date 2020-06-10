@@ -27,18 +27,6 @@
   </mat-form-field>
 
   <mat-form-field
-    *ngIf="canEditColumn('email')"
-    class="entity-edit-field">
-    <input
-      matInput
-      type="number"
-      step="1"
-      placeholder="email"
-      [(ngModel)]="data.entity.email"
-      autocomplete="off">
-  </mat-form-field>
-
-  <mat-form-field
     *ngIf="canEditColumn('user')"
     class="entity-edit-field">
     <input

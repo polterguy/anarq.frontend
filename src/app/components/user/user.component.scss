@@ -50,6 +50,11 @@
             list-style-type: none;
             padding: 0;
             margin: 0;
+            display: inline-block;
+            li {
+                float: left;
+                margin-right: 1rem;
+            }
         }
     }
 }

@@ -1,5 +1,13 @@
 
 /**
+ * Model for regions belonging to user.
+ */
+export class Region {
+    name: string;
+    votes: number;
+}
+
+/**
  * Model for accepting a case and persisting to backend.
  */
 export class UserView {
@@ -9,5 +17,5 @@ export class UserView {
     cases: number;
     positive: number;
     negative: number;
-    regions: string[];
+    regions: Region[];
 }

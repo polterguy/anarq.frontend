@@ -31,8 +31,8 @@ export class EditVotesComponent {
    * be transmitted to the server when we create records. This is done to
    * make sure we don't submit "automatic" primary key values.
    */
-  private createColumns: string[] = ['case', 'email', 'user', 'opinion'];
-  private updateColumns: string[] = ['id', 'case', 'email', 'user', 'opinion'];
+  private createColumns: string[] = ['case', 'user', 'opinion'];
+  private updateColumns: string[] = ['id', 'case', 'user', 'opinion'];
   private primaryKeys: string[] = ['id'];
 
   /*
