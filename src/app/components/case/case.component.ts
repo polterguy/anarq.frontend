@@ -15,6 +15,7 @@ import { PublicService } from 'src/app/services/http/public.service';
 export class CaseComponent implements OnInit {
 
   public item: CaseView = null;
+  public id: number;
 
   constructor(
     private service: PublicService,
@@ -22,6 +23,7 @@ export class CaseComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(pars => {
+      this.id = +pars.id;
       this.service.getCase(pars.id).subscribe(res => {
         this.item = res;
       });
@@ -30,5 +32,25 @@ export class CaseComponent implements OnInit {
 
   getCaseUrl() {
     return window.location.href;
+  }
+
+  yes() {
+    this.service.vote(this.id, true).subscribe(res => {
+      this.item.opinion = true;
+    });
+  }
+
+  no() {
+    this.service.vote(this.id, true).subscribe(res => {
+      this.item.opinion = false;
+    });
+  }
+
+  getOpinion() {
+    if (this.item.opinion) {
+      return 'Yes';
+    } else {
+      return 'No';
+    }
   }
 }

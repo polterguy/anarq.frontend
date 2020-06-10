@@ -79,6 +79,15 @@
             display: none;
         }
     }
+    .action-bar {
+        text-align: center;
+        margin-top: 2rem;
+    }
+    @media print {
+        .action-bar {
+            display: none;
+        }
+    }
 }
 
 @media print {

@@ -92,6 +92,11 @@ export class PublicService {
       query);
   }
 
+  /**
+   * Returns the specified case to caller.
+   * 
+   * @param id Case ID to return
+   */
   getCase(id: number) {
     return this.httpClient.get<CaseView>(
       environment.apiUrl +
@@ -99,10 +104,18 @@ export class PublicService {
       id);
   }
 
+  vote(id: number, vote: boolean) {
+    return this.httpClient.post<any>(
+      environment.apiUrl +
+      'magic/modules/anarchy/public/cases/vote', {
+        id,
+        vote,
+      });
+  }
+
   /*
    * User endpoints.
    */
-
   getUser(username: string) {
     return this.httpClient.get<UserView>(
       environment.apiUrl +

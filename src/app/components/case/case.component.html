@@ -47,6 +47,25 @@
         {{item.positive}} / {{item.negative}}
       </div>
     </div>
+    <div
+      class="action-bar"
+      *ngIf="item.opinion === undefined">
+      <button
+        (click)="yes()"
+        mat-button>
+        yes
+      </button>
+      <button
+        (click)="no()"
+        mat-button>
+        no
+      </button>
+    </div>
+    <div
+      class="action-bar"
+      *ngIf="item.opinion !== undefined">
+      {{getOpinion()}}
+    </div>
   </div>
 
 </div>
