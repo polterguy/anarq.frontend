@@ -37,10 +37,10 @@
         </a>
       </div>
       <div class="item">
-        {{item.created | date_format_short}}
-      </div>
-      <div class="item">
         {{item.deadline | date_format_short}}
+      </div>
+      <div class="item count">
+        {{item.positive}} / {{item.negative}}
       </div>
     </div>
   </div>

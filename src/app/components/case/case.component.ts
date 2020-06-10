@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CaseView } from 'src/app/models/case-view';
 import { PublicService } from 'src/app/services/http/public.service';
+import { ChartOptions } from 'chart.js';
+import { Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-case',

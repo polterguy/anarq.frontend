@@ -10,4 +10,6 @@ export class CaseView {
     subject: string;
     body: string;
     user: string;
+    positive: number;
+    negative: number;
 }
