@@ -57,17 +57,25 @@
       </table>
       <div class="summary-chart">
         <canvas
-          *ngIf="shouldDisplayChart()"
+          *ngIf="shouldDisplayVotesChart()"
           baseChart
           chartType="pie"
-          [options]="chartOptions"
-          [data]="chartData"
-          [labels]="chartLabels"
-          [colors]="chartColors">
+          [options]="pieChartOptions"
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          [colors]="pieChartColors">
         </canvas>
       </div>
-      <div class="summary-avatar">
-        TODO
+      <div class="summary-regions">
+        <canvas
+          *ngIf="shouldDisplayRegionChart()"
+          baseChart
+          chartType="bar"
+          [options]="barChartOptions"
+          [data]="barChartData"
+          [labels]="barChartLabels"
+          [colors]="barChartColors">
+        </canvas>
       </div>
     </div>
     <div
@@ -75,7 +83,7 @@
       <ul>
         <li
           *ngFor="let idx of item.regions">
-          {{idx.name}} {{idx.votes}}
+          {{idx.name}}
         </li>
       </ul>
     </div>
