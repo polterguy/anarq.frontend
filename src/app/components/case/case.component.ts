@@ -3,9 +3,9 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { CaseService } from 'src/app/services/http/case.service';
 import { ActivatedRoute } from '@angular/router';
 import { CaseView } from 'src/app/models/case-view';
+import { PublicService } from 'src/app/services/http/public.service';
 
 @Component({
   selector: 'app-case',
@@ -17,7 +17,7 @@ export class CaseComponent implements OnInit {
   public item: CaseView = null;
 
   constructor(
-    private service: CaseService,
+    private service: PublicService,
     private route: ActivatedRoute) {}
 
   ngOnInit() {

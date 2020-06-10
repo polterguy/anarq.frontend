@@ -67,6 +67,10 @@ export class PublicService {
     });
   }
 
+  /*
+   * Cases endpoints.
+   */
+
   /**
    * Returns all open cases in system.
    * 
@@ -82,6 +86,17 @@ export class PublicService {
       'magic/modules/anarchy/public/cases/open-cases' +
       query);
   }
+
+  getCase(id: number) {
+    return this.httpClient.get<CaseView>(
+      environment.apiUrl +
+      'magic/modules/anarchy/public/cases/case?id=' +
+      id);
+  }
+
+  /*
+   * User endpoints.
+   */
 
   getUser(username: string) {
     return this.httpClient.get<UserView>(

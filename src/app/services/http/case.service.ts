@@ -88,13 +88,6 @@ export class CaseService {
       getQueryArgs(args));
   }
 
-  getCase(id: number) {
-    return this.httpClient.get<CaseView>(
-      environment.apiUrl +
-      'magic/modules/anarchy/private/cases/case?id=' +
-      id);
-  }
-
   createCase(args: any) {
     return this.httpClient.post<any>(
       environment.apiUrl +
