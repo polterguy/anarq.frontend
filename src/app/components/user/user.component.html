@@ -24,7 +24,7 @@
         </tr>
         <tr>
           <td>
-            Created
+            Created cases
           </td>
           <td>
             {{item.cases}}
@@ -32,7 +32,7 @@
         </tr>
         <tr>
           <td>
-            Votes
+            Votes casted
           </td>
           <td>
             {{item.positive + item.negative}}
@@ -40,7 +40,7 @@
         </tr>
         <tr>
           <td>
-            For
+            For casted
           </td>
           <td>
             {{item.positive}}
@@ -48,7 +48,7 @@
         </tr>
         <tr>
           <td>
-            Against
+            Against casted
           </td>
           <td>
             {{item.negative}}
@@ -68,6 +68,15 @@
       <div class="summary-avatar">
         TODO
       </div>
+    </div>
+    <div
+      class="regions">
+      <ul>
+        <li
+          *ngFor="let idx of item.regions">
+          {{idx}}
+        </li>
+      </ul>
     </div>
   </div>
 
