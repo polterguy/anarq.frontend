@@ -30,7 +30,7 @@ export class RegionComponent implements OnInit {
       this.region = pars.region;
       this.service.getOpenCases(null, pars.region).subscribe(res => {
         this.cases = res;
-        this.more = res !== null && res.length === 5;
+        this.more = res !== null && res.length === 25;
       });
     });
   }

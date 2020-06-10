@@ -49,7 +49,7 @@
     </div>
     <div
       class="action-bar"
-      *ngIf="item.opinion === undefined">
+      *ngIf="item.opinion === undefined && isLoggedIn()">
       <button
         (click)="yes()"
         mat-button>
@@ -63,8 +63,8 @@
     </div>
     <div
       class="action-bar"
-      *ngIf="item.opinion !== undefined">
-      {{getOpinion()}}
+      *ngIf="item.opinion !== undefined && isLoggedIn()">
+      You voted {{getOpinion()}} for this
     </div>
   </div>
 

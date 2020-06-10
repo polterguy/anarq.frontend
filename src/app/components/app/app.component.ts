@@ -82,7 +82,6 @@ export class AppComponent {
   logout() {
     this.roles = [];
     localStorage.removeItem('jwt_token');
-    window.location.href = window.location.href;
   }
 
   tryLogin() {
@@ -94,7 +93,6 @@ export class AppComponent {
     dialogRef.afterClosed().subscribe(res => {
       if (res !== null && res !== undefined && res.ticket) {
         localStorage.setItem('jwt_token', res.ticket);
-        window.location.href = window.location.href;
       }
     });
   }

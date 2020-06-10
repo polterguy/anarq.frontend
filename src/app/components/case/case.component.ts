@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CaseView } from 'src/app/models/case-view';
 import { PublicService } from 'src/app/services/http/public.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-case',
@@ -19,6 +20,7 @@ export class CaseComponent implements OnInit {
 
   constructor(
     private service: PublicService,
+    private jwtHelper: JwtHelperService,
     private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -41,16 +43,27 @@ export class CaseComponent implements OnInit {
   }
 
   no() {
-    this.service.vote(this.id, true).subscribe(res => {
+    this.service.vote(this.id, false).subscribe(res => {
       this.item.opinion = false;
     });
   }
 
   getOpinion() {
     if (this.item.opinion) {
-      return 'Yes';
+      return 'yes';
     } else {
-      return 'No';
+      return 'no';
     }
+  }
+
+  isLoggedIn() {
+    const token = localStorage.getItem('jwt_token');
+    if (!token) {
+      return false;
+    }
+    if (this.jwtHelper.isTokenExpired(token)) {
+      return false;
+    }
+    return true;
   }
 }
