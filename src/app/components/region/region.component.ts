@@ -34,4 +34,11 @@ export class RegionComponent implements OnInit {
       });
     });
   }
+
+  getMore() {
+    this.service.getOpenCases(this.cases[this.cases.length - 1].id).subscribe(res => {
+      this.more = res && res.length === 25;
+      this.cases = this.cases.concat(res);
+    });
+  }
 }
