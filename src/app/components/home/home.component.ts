@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.httpService.getOpenCases().subscribe(res => {
       this.cases = res;
-      this.more = res.length === 5;
+      this.more = res !== null && res.length === 5;
     });
   }
 
