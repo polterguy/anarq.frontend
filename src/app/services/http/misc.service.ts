@@ -24,35 +24,35 @@ export class MiscService {
   countRegions(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/misc/regions-count' +
+      'magic/modules/anarchy/private/misc/regions-count' +
       getQueryArgs(args));
   }
 
   deleteRegion(args: any) {
     return this.httpClient.delete<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/misc/regions' +
+      'magic/modules/anarchy/private/misc/regions' +
       getQueryArgs(args));
   }
 
   getRegions(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/misc/regions' +
+      'magic/modules/anarchy/private/misc/regions' +
       getQueryArgs(args));
   }
 
   createRegion(args: any) {
     return this.httpClient.post<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/misc/regions',
+      'magic/modules/anarchy/private/misc/regions',
       args);
   }
 
   updateRegion(args: any) {
     return this.httpClient.put<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/misc/regions',
+      'magic/modules/anarchy/private/misc/regions',
       args);
   }
 
@@ -63,35 +63,35 @@ export class MiscService {
   countVotes(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/misc/votes-count' +
+      'magic/modules/anarchy/private/misc/votes-count' +
       getQueryArgs(args));
   }
 
   deleteVote(args: any) {
     return this.httpClient.delete<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/misc/votes' +
+      'magic/modules/anarchy/private/misc/votes' +
       getQueryArgs(args));
   }
 
   getVotes(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/misc/votes' +
+      'magic/modules/anarchy/private/misc/votes' +
       getQueryArgs(args));
   }
 
   createVote(args: any) {
     return this.httpClient.post<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/misc/votes',
+      'magic/modules/anarchy/private/misc/votes',
       args);
   }
 
   updateVote(args: any) {
     return this.httpClient.put<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/misc/votes',
+      'magic/modules/anarchy/private/misc/votes',
       args);
   }
 }

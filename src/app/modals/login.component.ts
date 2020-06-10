@@ -4,7 +4,7 @@
 
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
-import { UsersService } from '../services/http/users.service';
+import { PublicService } from '../services/http/public.service';
 
 /*
  * Input data to dialog.
@@ -33,7 +33,7 @@ export class LoginComponent {
     public dialogRef: MatDialogRef<LoginComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private snackBar: MatSnackBar,
-    private service: UsersService) { }
+    private service: PublicService) { }
 
   login() {
     this.service.authenticate(this.username, this.password).subscribe(res => {

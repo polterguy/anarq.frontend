@@ -4,10 +4,10 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UsersService } from 'src/app/services/http/users.service';
 import { UserView } from 'src/app/models/user-view';
 import { ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { PublicService } from 'src/app/services/http/public.service';
 
 @Component({
   selector: 'app-user',
@@ -33,7 +33,7 @@ export class UserComponent implements OnInit {
   ];
 
   constructor(
-    private service: UsersService,
+    private service: PublicService,
     private route: ActivatedRoute) {}
 
   ngOnInit() {

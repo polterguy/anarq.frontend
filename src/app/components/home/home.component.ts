@@ -3,8 +3,8 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { CaseService } from 'src/app/services/http/case.service';
 import { CaseSlim } from 'src/app/models/case-slim';
+import { PublicService } from 'src/app/services/http/public.service';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   public cases: CaseSlim[];
   private more: boolean;
 
-  constructor(private httpService: CaseService) {}
+  constructor(private httpService: PublicService) {}
 
   ngOnInit() {
     this.httpService.getOpenCases().subscribe(res => {

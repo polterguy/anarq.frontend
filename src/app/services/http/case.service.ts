@@ -31,35 +31,35 @@ export class CaseService {
   countCaseTypes(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/cases/case_types-count' +
+      'magic/modules/anarchy/private/cases/case_types-count' +
       getQueryArgs(args));
   }
 
   deleteCaseType(args: any) {
     return this.httpClient.delete<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/cases/case_types' +
+      'magic/modules/anarchy/private/cases/case_types' +
       getQueryArgs(args));
   }
 
   getCaseTypes(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/cases/case_types' +
+      'magic/modules/anarchy/private/cases/case_types' +
       getQueryArgs(args));
   }
 
   createCaseType(args: any) {
     return this.httpClient.post<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/cases/case_types',
+      'magic/modules/anarchy/private/cases/case_types',
       args);
   }
 
   updateCaseType(args: any) {
     return this.httpClient.put<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/cases/case_types',
+      'magic/modules/anarchy/private/cases/case_types',
       args);
   }
 
@@ -70,64 +70,48 @@ export class CaseService {
   countCases(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/cases/cases-count' +
+      'magic/modules/anarchy/private/cases/cases-count' +
       getQueryArgs(args));
   }
 
   deleteCases(args: any) {
     return this.httpClient.delete<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/cases/cases' +
+      'magic/modules/anarchy/private/cases/cases' +
       getQueryArgs(args));
   }
 
   getCases(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/cases/cases' +
+      'magic/modules/anarchy/private/cases/cases' +
       getQueryArgs(args));
   }
 
   getCase(id: number) {
     return this.httpClient.get<CaseView>(
       environment.apiUrl +
-      'magic/modules/anarchy/cases/case?id=' +
+      'magic/modules/anarchy/private/cases/case?id=' +
       id);
   }
 
   createCase(args: any) {
     return this.httpClient.post<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/cases/cases',
+      'magic/modules/anarchy/private/cases/cases',
       args);
   }
 
   updateCase(args: any) {
     return this.httpClient.put<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/cases/cases',
+      'magic/modules/anarchy/private/cases/cases',
       args);
   }
 
   /*
    * Specialized case endpoints, for accepting and rejecting a case, etc.
    */
-
-  /**
-   * Returns all open cases in system.
-   * 
-   * @param args Generic filter condition for which open cases to return
-   */
-  getOpenCases(fromId: number = null): Observable<CaseSlim[]> {
-    let query = '';
-    if (fromId) {
-      query += '?id.lt=' + fromId;
-    }
-    return this.httpClient.get<CaseSlim[]>(
-      environment.apiUrl +
-      'magic/modules/anarchy/cases/open-cases' +
-      query);
-  }
 
   /**
    * Accepts the specified case.
@@ -137,7 +121,7 @@ export class CaseService {
   acceptCase(args: AcceptCase) {
     return this.httpClient.put<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/cases/cases-accept',
+      'magic/modules/anarchy/private/cases/cases-accept',
       args);
   }
 
@@ -149,7 +133,7 @@ export class CaseService {
   rejectCase(id: number) {
     return this.httpClient.put<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/cases/cases-reject', {
+      'magic/modules/anarchy/private/cases/cases-reject', {
         id
       });
   }
