@@ -17,6 +17,7 @@ import { LanguagesComponent } from './components/languages/languages.component';
 import { RegionsComponent } from './components/regions/regions.component';
 import { TranslationsComponent } from './components/translations/translations.component';
 import { User_statusComponent } from './components/user_status/user_status.component';
+import { Users_regionsComponent } from './components/users_regions/users_regions.component';
 import { Users_extra_typesComponent } from './components/users_extra_types/users_extra_types.component';
 import { Users_extraComponent } from './components/users_extra/users_extra.component';
 import { VotesComponent } from './components/votes/votes.component';
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: 'translations', component: TranslationsComponent },
   { path: 'user_status', component: User_statusComponent },
   { path: 'users_extra_types', component: Users_extra_typesComponent },
+  { path: 'users_regions', component: Users_regionsComponent },
   { path: 'users_extra', component: Users_extraComponent },
   { path: 'votes', component: VotesComponent },
 ];

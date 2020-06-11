@@ -92,6 +92,17 @@
     <a
       *ngIf="inRole(['root', 'admin'])"
       mat-button
+      routerLink="/users_regions"
+      routerLinkActive="active-link"
+      class="menu-item"
+      (click)="closeNavigator()"
+      [routerLinkActiveOptions]="{exact:true}">
+      <mat-icon matSuffix>grade</mat-icon>
+      <span class="menu-item-text">Users regions</span>
+    </a>
+    <a
+      *ngIf="inRole(['root', 'admin'])"
+      mat-button
       routerLink="/users_extra_types"
       routerLinkActive="active-link"
       class="menu-item"

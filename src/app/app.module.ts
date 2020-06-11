@@ -73,6 +73,8 @@ import { TranslationsComponent } from './components/translations/translations.co
 import { EditTranslationsComponent } from './components/translations/modals/edit.translations.component';
 import { User_statusComponent } from './components/user_status/user_status.component';
 import { EditUser_statusComponent } from './components/user_status/modals/edit.user_status.component';
+import { Users_regionsComponent } from './components/users_regions/users_regions.component';
+import { EditUsers_regionsComponent } from './components/users_regions/modals/edit.users_regions.component';
 import { Users_extra_typesComponent } from './components/users_extra_types/users_extra_types.component';
 import { EditUsers_extra_typesComponent } from './components/users_extra_types/modals/edit.users_extra_types.component';
 import { Users_extraComponent } from './components/users_extra/users_extra.component';
@@ -116,6 +118,8 @@ export function tokenGetter() {
     EditTranslationsComponent,
     User_statusComponent,
     EditUser_statusComponent,
+    Users_regionsComponent,
+    EditUsers_regionsComponent,
     Users_extra_typesComponent,
     EditUsers_extra_typesComponent,
     Users_extraComponent,
@@ -181,6 +185,7 @@ export function tokenGetter() {
     EditRegionsComponent,
     EditTranslationsComponent,
     EditUser_statusComponent,
+    EditUsers_regionsComponent,
     EditUsers_extra_typesComponent,
     EditUsers_extraComponent,
     EditVotesComponent,

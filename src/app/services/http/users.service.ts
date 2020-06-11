@@ -232,6 +232,45 @@ export class UsersService {
   }
 
   /*
+   * User regions CRUD endpoints.
+   */
+
+  countUsersRegions(args: any) {
+    return this.httpClient.get<any>(
+      environment.apiUrl +
+      'magic/modules/anarchy/private/users/users_regions-count' +
+      getQueryArgs(args));
+  }
+
+  deleteUsersRegions(args: any) {
+    return this.httpClient.delete<any>(
+      environment.apiUrl +
+      'magic/modules/anarchy/private/users/users_regions' +
+      getQueryArgs(args));
+  }
+
+  getUsersRegions(args: any) {
+    return this.httpClient.get<any>(
+      environment.apiUrl +
+      'magic/modules/anarchy/private/users/users_regions' +
+      getQueryArgs(args));
+  }
+
+  createUsersRegions(args: any) {
+    return this.httpClient.post<any>(
+      environment.apiUrl +
+      'magic/modules/anarchy/private/users/users_regions',
+      args);
+  }
+
+  updateUsersRegions(args: any) {
+    return this.httpClient.put<any>(
+      environment.apiUrl +
+      'magic/modules/anarchy/private/users/users_regions',
+      args);
+  }
+
+  /*
    * Extra types CRUD endpoints.
    */
 
