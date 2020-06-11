@@ -47,7 +47,7 @@
     <mat-form-field
       *ngIf="emailGood === true"
       class="password">
-      <mat-label>{{passwordGood === false ? 'Password must be at least 20 characters long' : 'Password'}}</mat-label>
+      <mat-label>{{passwordGood === false ? 'Password must be at least 10 characters long' : 'Password'}}</mat-label>
       <input
         matInput
         placeholder="Password ..."
@@ -71,6 +71,17 @@
         autocomplete="new-password"
         [formControl]="passwordRepeat">
     </mat-form-field>
+
+  </div>
+
+  <div
+    class="form-row submit"
+    *ngIf="passwordRepeatGood === true">
+
+    <button
+      mat-button>
+      Register
+    </button>
 
   </div>
 

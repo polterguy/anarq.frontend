@@ -29,25 +29,22 @@ h1 {
     }
     .form-row {
         display: flex;
+        padding-left: 5rem;
+        padding-right: 5rem;
         .username {
             flex: 1;
-            margin-left: 5rem;
-            margin-right: 5rem;
         }
         .email {
             flex: 1;
-            margin-left: 5rem;
-            margin-right: 5rem;
         }
         .password {
             flex: 1;
-            margin-left: 5rem;
-            margin-right: 5rem;
         }
         .password-repeat {
             flex: 1;
-            margin-left: 5rem;
-            margin-right: 5rem;
         }
+    }
+    .form-row.submit {
+        float: right;
     }
 }

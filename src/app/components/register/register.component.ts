@@ -80,7 +80,7 @@ export class RegisterComponent implements OnInit {
     this.password.valueChanges
       .pipe(debounceTime(this.debounce), distinctUntilChanged())
       .subscribe(query => {
-        if (this.password.value.length >= 20) {
+        if (this.password.value.length >= 10) {
           this.passwordGood = true;
         } else {
           this.passwordGood = false;
