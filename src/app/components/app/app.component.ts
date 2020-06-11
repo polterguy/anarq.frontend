@@ -103,10 +103,6 @@ export class AppComponent implements OnInit {
     });
   }
 
-  register() {
-    console.log('register');
-  }
-
   // Attempts to login user, using the username/password combination he provided in the login form.
   login() {
     this.httpService.authenticate(this.username, this.password).subscribe(res => {

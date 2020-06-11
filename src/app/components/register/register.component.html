@@ -1,0 +1,25 @@
+
+  <h1>Register</h1>
+
+<mat-card
+  *ngIf="!isLoggedIn()"
+  class="register">
+  <a
+    class="home-link"
+    routerLink="/">
+    home
+  </a>
+</mat-card>
+
+<mat-card
+  *ngIf="isLoggedIn()"
+  class="register">
+  <a
+    class="home-link"
+    routerLink="/">
+    home
+  </a>
+  <h3>
+    You are already registered at the site
+  </h3>
+</mat-card>
