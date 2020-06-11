@@ -30,16 +30,19 @@ export class CasesComponent implements OnInit {
 
   // Which columns we should display. Reorder to prioritize columns differently.
   // Notice! 'delete-instance' should always come last!
-  private displayedColumns: string[] = ['region', 'subject', 'created', 'delete-instance'];
+  private displayedColumns: string[] = ['region', 'subject', 'created', 'type', 'delete-instance'];
 
   // Current filter being applied to filter items from our backend.
   private filter: any = {
-    limit: 10
+    limit: 25,
+    order: 'created',
+    direction: 'asc',
+    type: 'new',
   };
 
   // Number of items our backend reports are available in total, matching our above filter condition.
   private count = 0;
-  private hasFiltered = false;
+  private hasFiltered = true;
 
   // Number of milliseconds after a keystroke before filtering should be re-applied.
   private debounce = 400;
@@ -57,11 +60,8 @@ export class CasesComponent implements OnInit {
   private roles: string [] = [];
 
   // Form control declarations to bind up with reactive form elements.
-  private id: FormControl;
   private type: FormControl;
   private region: FormControl;
-  private email: FormControl;
-  private user: FormControl;
   private created: FormControl;
   private deadline: FormControl;
   private subject: FormControl;
@@ -92,13 +92,14 @@ export class CasesComponent implements OnInit {
 
     // Necessary to make sure we can have "live filtering" in our datagrid.
     this.type = new FormControl('');
+    this.type.setValue('new');
     this.type.valueChanges
       .pipe(debounceTime(this.debounce), distinctUntilChanged())
       .subscribe(query => {
         this.paginator.pageIndex = 0;
         this.filter.offset = 0;
         this.hasFiltered = true;
-        this.filter['type.like'] = this.type.value + '%';
+        this.filter['type'] = this.type.value;
         this.getData();
       });
     this.region = new FormControl('');
@@ -284,10 +285,10 @@ export class CasesComponent implements OnInit {
     if (entity.type === 'rejected') {
       result += ' rejected';
     }
-    else if (this.hasDeadline(entity)) {
-      result += ' has-deadline';
+    else if (entity.type === 'open') {
+      result += ' open';
     } else {
-      result += ' no-deadline';
+      result += ' undetermined';
     }
     return result;
   }
@@ -381,10 +382,6 @@ export class CasesComponent implements OnInit {
 
   allowEdit(entity: any) {
     return entity.type === 'new';
-  }
-
-  hasDeadline(entity: any) {
-    return entity.deadline !== null && entity.deadline !== undefined;
   }
 
   // Invoked when an entity is deleted. Invokes HTTP service that deletes item from backend.

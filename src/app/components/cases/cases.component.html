@@ -209,7 +209,7 @@
               <span class="item">{{el.type}}</span>
               <span class="item">{{el.user}}</span>
               <span class="item">{{el.region}}</span>
-              <span class="item time"><span *ngIf="hasDeadline(el)">Closes {{el.deadline | toDate}}</span></span>
+              <span class="item time">Closes {{el.deadline | toDate}}</span>
               <span class="action-buttons">
                 <button
                   *ngIf="inRole(['root','admin']) && allowEdit(el)"

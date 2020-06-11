@@ -63,7 +63,7 @@ export class EditCasesComponent implements OnInit {
   }
 
   canEditColumn(name: string) {
-    if (this.data.isAccept && (name === 'type' || name === 'body')) {
+    if (this.data.isAccept && (name === 'type' || name === 'body' || name === 'deadline')) {
       return false;
     }
     if (this.data.isEdit) {
