@@ -51,7 +51,12 @@ export class RegisterComponent implements OnInit {
             if (res.result === 'SUCCESS') {
               this.usernameGood = true;
             } else {
-              this.usernameGood = false;
+              this.snackBar.open(
+                'Username \'' + this.username.value + '\' is already registered', 
+                'ok', {
+                  duration: 3000,
+                });
+              this.usernameGood = null;
             }
           });
         } else {
@@ -68,7 +73,12 @@ export class RegisterComponent implements OnInit {
             if (res.result === 'SUCCESS') {
               this.emailGood = true;
             } else {
-              this.emailGood = false;
+              this.snackBar.open(
+                'Email \'' + this.email.value + '\' is already registered', 
+                'ok', {
+                  duration: 3000,
+                });
+              this.emailGood = null;
             }
           });
         } else {
@@ -78,12 +88,19 @@ export class RegisterComponent implements OnInit {
 
     this.password = new FormControl('');
     this.password.valueChanges
-      .pipe(debounceTime(this.debounce), distinctUntilChanged())
+      .pipe(debounceTime(this.debounce / 10), distinctUntilChanged())
       .subscribe(query => {
         if (this.password.value.length >= 10) {
           this.passwordGood = true;
         } else {
           this.passwordGood = false;
+        }
+        if (this.passwordRepeat.value.length > 0) {
+          if (this.password.value !== this.passwordRepeat.value) {
+            this.passwordRepeatGood = false;
+          } else {
+            this.passwordRepeatGood = true;
+          }
         }
       });
 
@@ -118,7 +135,7 @@ export class RegisterComponent implements OnInit {
     }).subscribe(res => {
       if (res.result === 'SUCCESS') {
         this.snackBar.open(
-          'Please check your email',
+          'Please check your email inbox',
           'ok', {
             duration: 3000,
           });
