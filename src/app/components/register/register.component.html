@@ -1,25 +1,97 @@
 
-  <h1>Register</h1>
+<h1>Register</h1>
 
 <mat-card
   *ngIf="!isLoggedIn()"
   class="register">
+
   <a
     class="home-link"
     routerLink="/">
     home
   </a>
+
+  <div class="form-row">
+
+    <mat-form-field
+      class="username"
+      [ngClass]="usernameGood === false ? 'error' : ''">
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        placeholder="Username ..."
+        type="text"
+        autocomplete="off"
+        [formControl]="username">
+    </mat-form-field>
+
+  </div>
+
+  <div class="form-row">
+
+    <mat-form-field
+      *ngIf="usernameGood === true"
+      class="email"
+      [ngClass]="emailGood === false ? 'error' : ''">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        placeholder="Email ..."
+        type="text"
+        autocomplete="off"
+        [formControl]="email">
+    </mat-form-field>
+
+  </div>
+
+  <div class="form-row">
+
+    <mat-form-field
+      *ngIf="emailGood === true"
+      class="password"
+      [ngClass]="passwordGood === false ? 'error' : ''">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        placeholder="Password ..."
+        type="password"
+        autocomplete="new-password"
+        [formControl]="password">
+    </mat-form-field>
+
+  </div>
+
+  <div class="form-row">
+
+    <mat-form-field
+      *ngIf="passwordGood === true"
+      class="password-repeat"
+      [ngClass]="passwordRepeatGood === false ? 'error' : ''">
+      <mat-label>Password repeat</mat-label>
+      <input
+        matInput
+        placeholder="Password repeat ..."
+        type="password"
+        autocomplete="new-password"
+        [formControl]="passwordRepeat">
+    </mat-form-field>
+
+  </div>
+
 </mat-card>
 
 <mat-card
   *ngIf="isLoggedIn()"
   class="register">
+
   <a
     class="home-link"
     routerLink="/">
     home
   </a>
+
   <h3>
     You are already registered at the site
   </h3>
+
 </mat-card>

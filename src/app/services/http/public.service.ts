@@ -14,6 +14,7 @@ import { CaseSlim } from 'src/app/models/case-slim';
 import { AcceptCase } from 'src/app/models/accept-case';
 import { CaseView } from 'src/app/models/case-view';
 import { UserView } from 'src/app/models/user-view';
+import { UsernameAvailable } from 'src/app/models/username-availability';
 
 /*
  * Your main HTTP service for handling cases, and related objects.
@@ -104,6 +105,12 @@ export class PublicService {
       id);
   }
 
+  /**
+   * Votes for a specific case.
+   * 
+   * @param id ID of case to cast vote for
+   * @param vote True if yes, otherwise false
+   */
   vote(id: number, vote: boolean) {
     return this.httpClient.post<any>(
       environment.apiUrl +
@@ -116,10 +123,23 @@ export class PublicService {
   /*
    * User endpoints.
    */
+
+  /**
+   * Returns meta information about a single user in the system.
+   * 
+   * @param username Username of user to return to caller.
+   */
   getUser(username: string) {
     return this.httpClient.get<UserView>(
       environment.apiUrl +
       'magic/modules/anarchy/public/users/user?username=' +
+      username);
+  }
+
+  usernameAvailable(username: string) {
+    return this.httpClient.get<UsernameAvailable>(
+      environment.apiUrl +
+      'magic/modules/anarchy/public/users/username-available?username=' +
       username);
   }
 }

@@ -25,5 +25,32 @@ h1 {
     h3 {
         text-align: center;
         text-transform: none;
+        flex: 100%;
+    }
+    .form-row {
+        display: flex;
+        .username {
+            flex: 1;
+            margin-left: 5rem;
+            margin-right: 5rem;
+        }
+        .email {
+            flex: 1;
+            margin-left: 5rem;
+            margin-right: 5rem;
+        }
+        .password {
+            flex: 1;
+            margin-left: 5rem;
+            margin-right: 5rem;
+        }
+        .password-repeat {
+            flex: 1;
+            margin-left: 5rem;
+            margin-right: 5rem;
+        }
+        .error input {
+            color: #f05050;
+        }
     }
 }
