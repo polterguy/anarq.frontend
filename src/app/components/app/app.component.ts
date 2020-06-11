@@ -3,7 +3,7 @@
  */
 
 // Angular imports.
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -25,7 +25,7 @@ import { PublicService } from 'src/app/services/http/public.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   // Databound towards login form parts of component.
   private username: string;
@@ -47,16 +47,21 @@ export class AppComponent {
     private jwtHelper: JwtHelperService,
     private snackBar: MatSnackBar,
     private loaderService: LoaderService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog) { }
 
-      // Checking if user is logged in, at which point we initialize the roles property.
-      const token = localStorage.getItem('jwt_token');
-      if (token) {
+  ngOnInit() {
+    this.trySetRoles();
+  }
 
-        // Yup! User is logged in!
-        const decoded = this.jwtHelper.decodeToken(token);
-        this.roles = decoded.role.split(',');
-      }
+  trySetRoles() {
+    // Checking if user is logged in, at which point we initialize the roles property.
+    const token = localStorage.getItem('jwt_token');
+    if (token) {
+
+      // Yup! User is logged in!
+      const decoded = this.jwtHelper.decodeToken(token);
+      this.roles = decoded.role.split(',');
+    }
   }
 
   shouldDisplayHomeButton() {
@@ -93,6 +98,7 @@ export class AppComponent {
     dialogRef.afterClosed().subscribe(res => {
       if (res !== null && res !== undefined && res.ticket) {
         localStorage.setItem('jwt_token', res.ticket);
+        this.trySetRoles();
       }
     });
   }

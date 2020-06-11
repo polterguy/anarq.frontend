@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CaseView } from 'src/app/models/case-view';
 import { PublicService } from 'src/app/services/http/public.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-case',
@@ -21,6 +22,7 @@ export class CaseComponent implements OnInit {
   constructor(
     private service: PublicService,
     private jwtHelper: JwtHelperService,
+    private snackBar: MatSnackBar,
     private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -39,12 +41,16 @@ export class CaseComponent implements OnInit {
   yes() {
     this.service.vote(this.id, true).subscribe(res => {
       this.item.opinion = true;
+    }, err => {
+      this.snackBar.open(err.error.message, 'ok');
     });
   }
 
   no() {
     this.service.vote(this.id, false).subscribe(res => {
       this.item.opinion = false;
+    }, err => {
+      this.snackBar.open(err.error.message, 'ok');
     });
   }
 

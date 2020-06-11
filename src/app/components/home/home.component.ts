@@ -13,7 +13,7 @@ import { PublicService } from 'src/app/services/http/public.service';
 })
 export class HomeComponent implements OnInit {
 
-  public cases: CaseSlim[];
+  public cases: CaseSlim[] = [];
   private more: boolean;
 
   constructor(private httpService: PublicService) {}
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.httpService.getOpenCases().subscribe(res => {
       this.cases = res;
-      this.more = res !== null && res.length === 5;
+      this.more = res !== null && res.length === 25;
     });
   }
 
@@ -30,5 +30,9 @@ export class HomeComponent implements OnInit {
       this.more = res && res.length === 25;
       this.cases = this.cases.concat(res);
     });
+  }
+
+  hasNoCases() {
+    return !this.cases || this.cases.length === 0;
   }
 }

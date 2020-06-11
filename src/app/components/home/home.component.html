@@ -3,8 +3,15 @@
 
 <mat-card class="info-card">
 
+  <div
+    *ngIf="hasNoCases()"
+    class="information">
+    There are no cases in system, what don't you create one?
+  </div>
+
   <ul class="front-page-cases">
-    <li *ngFor="let case of cases">
+    <li
+      *ngFor="let case of cases">
       <a
         class="case-link"
         [routerLink]="'/case/' + case.id">
