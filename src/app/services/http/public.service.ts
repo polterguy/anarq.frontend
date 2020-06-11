@@ -12,7 +12,6 @@ import { environment } from 'src/environments/environment';
 import { CaseSlim } from 'src/app/models/case-slim';
 import { CaseView } from 'src/app/models/case-view';
 import { UserView } from 'src/app/models/user-view';
-import { Availability } from 'src/app/models/availability';
 import { RegisterModel } from 'src/app/models/register-model';
 import { ResultModel } from 'src/app/models/result-model';
 
@@ -142,7 +141,7 @@ export class PublicService {
    * @param username Username to check
    */
   usernameAvailable(username: string) {
-    return this.httpClient.get<Availability>(
+    return this.httpClient.get<ResultModel>(
       environment.apiUrl +
       'magic/modules/anarchy/public/users/username-available?username=' +
       username);
@@ -154,7 +153,7 @@ export class PublicService {
    * @param email Email address to check
    */
   emailAvailable(email: string) {
-    return this.httpClient.get<Availability>(
+    return this.httpClient.get<ResultModel>(
       environment.apiUrl +
       'magic/modules/anarchy/public/users/email-available?email=' +
       email);

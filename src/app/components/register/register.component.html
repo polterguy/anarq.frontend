@@ -45,7 +45,7 @@
   <div class="form-row">
 
     <mat-form-field
-      *ngIf="emailGood === true"
+      *ngIf="emailGood === true && usernameGood === true"
       class="password item">
       <mat-label>{{passwordGood === false ? 'Password must be at least 10 characters long' : 'Password'}}</mat-label>
       <input
@@ -61,7 +61,7 @@
   <div class="form-row">
 
     <mat-form-field
-      *ngIf="passwordGood === true"
+      *ngIf="passwordGood === true && emailGood === true && usernameGood === true"
       class="password-repeat item">
       <mat-label>{{passwordRepeatGood === false ? 'Please repeat your password' : 'Repeat password'}}</mat-label>
       <input
@@ -77,7 +77,7 @@
   <div class="form-row">
 
     <div
-      *ngIf="passwordRepeatGood === true"
+      *ngIf="passwordRepeatGood === true && passwordGood === true && emailGood === true && usernameGood === true"
       class="information item">
       By clicking OK above, you accept the terms and conditions of the site,
       which includes that we will send you a couple of emails per week,
@@ -90,7 +90,7 @@
 
   <div
     class="submit"
-    *ngIf="passwordRepeatGood === true">
+    *ngIf="passwordRepeatGood === true && passwordGood === true && emailGood === true && usernameGood === true">
 
     <button
       matTooltip="Submit form and accept terms and conditions"

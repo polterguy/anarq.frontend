@@ -116,7 +116,7 @@ export class RegisterComponent implements OnInit {
       email: this.email.value,
       password: this.password.value,
     }).subscribe(res => {
-      if (res.status === 'SUCCESS') {
+      if (res.result === 'SUCCESS') {
         this.snackBar.open(
           'Please check your email',
           'ok', {
