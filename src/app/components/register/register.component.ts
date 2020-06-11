@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
     this.username.valueChanges
       .pipe(debounceTime(this.debounce), distinctUntilChanged())
       .subscribe(query => {
-        if (this.username.value.length >= 4) {
+        if (this.username.value.length >= 4 && !this.username.value.includes('@')) {
           this.service.usernameAvailable(this.username.value).subscribe(res => {
             if (res.result === 'SUCCESS') {
               this.usernameGood = true;
@@ -108,5 +108,21 @@ export class RegisterComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  register() {
+    this.service.register({
+      username: this.username.value,
+      email: this.email.value,
+      password: this.password.value,
+    }).subscribe(res => {
+      if (res.status === 'SUCCESS') {
+        this.snackBar.open(
+          'Please check your email',
+          'ok', {
+            duration: 3000,
+          });
+      }
+    });
   }
 }

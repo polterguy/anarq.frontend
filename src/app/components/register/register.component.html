@@ -15,7 +15,7 @@
 
     <mat-form-field
       class="username item">
-      <mat-label>{{usernameGood === false ? 'Username must be available and 4 characters long' : 'Username'}}</mat-label>
+      <mat-label>{{usernameGood === false ? 'Username cannot be your email address, and must be available, and at least 4 characters long' : 'Username'}}</mat-label>
       <input
         matInput
         placeholder="Username ..."
@@ -94,7 +94,8 @@
 
     <button
       matTooltip="Submit form and accept terms and conditions"
-      mat-button>
+      mat-button
+      (click)="register()">
       Submit
     </button>
 
