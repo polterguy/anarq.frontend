@@ -82,6 +82,13 @@
     .action-bar {
         text-align: center;
         margin-top: 2rem;
+        padding: 1rem;
+    }
+    .action-bar.yes {
+        background-color: #e0ffe0;
+    }
+    .action-bar.no {
+        background-color: #ffe0e0;
     }
     @media print {
         .action-bar {

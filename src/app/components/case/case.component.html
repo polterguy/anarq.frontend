@@ -40,10 +40,14 @@
           {{item.user}}
         </a>
       </div>
-      <div class="item">
-        {{item.deadline | date_format_short}}
+      <div
+        class="item"
+        [title]="item.deadline | date_format">
+        {{item.deadline | toDate}}
       </div>
-      <div class="item count">
+      <div
+       class="item count"
+       [title]="item.positive + ' for and ' + item.negative + ' against'">
         {{item.positive}} / {{item.negative}}
       </div>
     </div>
@@ -63,6 +67,7 @@
     </div>
     <div
       class="action-bar"
+      [ngClass]="getClass()"
       *ngIf="item.opinion !== undefined && isLoggedIn()">
       You voted {{getOpinion()}} for this
     </div>

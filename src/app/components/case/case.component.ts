@@ -64,6 +64,14 @@ export class CaseComponent implements OnInit {
     }
   }
 
+  getClass() {
+    if (this.item.opinion) {
+      return 'yes';
+    } else {
+      return 'no';
+    }
+  }
+
   isLoggedIn() {
     const token = localStorage.getItem('jwt_token');
     if (!token) {
