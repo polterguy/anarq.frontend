@@ -14,7 +14,7 @@
   <div class="form-row">
 
     <mat-form-field
-      class="username">
+      class="username item">
       <mat-label>{{usernameGood === false ? 'Username must be available and 4 characters long' : 'Username'}}</mat-label>
       <input
         matInput
@@ -30,7 +30,7 @@
 
     <mat-form-field
       *ngIf="usernameGood === true"
-      class="email">
+      class="email item">
       <mat-label>{{emailGood === false ? 'Email must be valid and available' : 'Email'}}</mat-label>
       <input
         matInput
@@ -46,7 +46,7 @@
 
     <mat-form-field
       *ngIf="emailGood === true"
-      class="password">
+      class="password item">
       <mat-label>{{passwordGood === false ? 'Password must be at least 10 characters long' : 'Password'}}</mat-label>
       <input
         matInput
@@ -62,7 +62,7 @@
 
     <mat-form-field
       *ngIf="passwordGood === true"
-      class="password-repeat">
+      class="password-repeat item">
       <mat-label>{{passwordRepeatGood === false ? 'Please repeat your password' : 'Repeat password'}}</mat-label>
       <input
         matInput
@@ -74,13 +74,28 @@
 
   </div>
 
+  <div class="form-row">
+
+    <div
+      *ngIf="passwordRepeatGood === true"
+      class="information item">
+      By clicking OK above, you accept the terms and conditions of the site,
+      which includes that we will send you a couple of emails per week,
+      with cases of interest to you, according to your preferred region(s).
+      We might also send you some marketing emails occassionally on behalf
+      of our sponsors. You can unsubscribe to our newsletter any time you wish.
+  </div>
+
+  </div>
+
   <div
-    class="form-row submit"
+    class="submit"
     *ngIf="passwordRepeatGood === true">
 
     <button
+      matTooltip="Submit form and accept terms and conditions"
       mat-button>
-      Register
+      Submit
     </button>
 
   </div>

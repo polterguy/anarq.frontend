@@ -22,6 +22,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
@@ -155,6 +156,7 @@ export function tokenGetter() {
     MatPaginatorModule,
     MatDialogModule,
     MatIconModule,
+    MatTooltipModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatMomentDateModule,

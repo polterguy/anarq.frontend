@@ -27,24 +27,53 @@ h1 {
         text-transform: none;
         flex: 100%;
     }
+    @keyframes fly-in {
+        0% {
+            margin-left: -100px;
+            opacity: 0;
+        }
+        100% {
+            margin-left: 0;
+            opacity: 1;
+        }
+    }
     .form-row {
         display: flex;
         padding-left: 5rem;
         padding-right: 5rem;
-        .username {
+        .item {
+            animation-name: fly-in;
+            animation-timing-function: ease-out;
+            animation-duration: .5s;
             flex: 1;
         }
-        .email {
-            flex: 1;
-        }
-        .password {
-            flex: 1;
-        }
-        .password-repeat {
-            flex: 1;
+        .information {
+            color: #a0a0a0;
+            text-align: justify;
+            font-size: .8rem;
         }
     }
-    .form-row.submit {
-        float: right;
+    @keyframes blink {
+        0% {
+            background-color: #a0ffa0;
+            box-shadow: 0 0 25px rgba(255,255,128,1);
+        }
+        100% {
+            background-color: #e0ffe0;
+            box-shadow: 0 0 15px rgba(255,255,128,.5);
+        }
+    }
+    .submit {
+        button {
+            position:absolute;
+            top: 1rem;
+            right: 1rem;
+            animation-name: blink;
+            animation-timing-function: ease-out;
+            animation-duration: .5s;
+            animation-fill-mode: forwards;
+            border: solid 1px rgba(0,0,0,.05);
+            width: 10rem;
+        }
     }
 }

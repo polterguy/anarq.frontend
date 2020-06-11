@@ -89,7 +89,7 @@ export class RegisterComponent implements OnInit {
 
     this.passwordRepeat = new FormControl('');
     this.passwordRepeat.valueChanges
-      .pipe(debounceTime(this.debounce), distinctUntilChanged())
+      .pipe(debounceTime(this.debounce / 10), distinctUntilChanged())
       .subscribe(query => {
         if (this.password.value === this.passwordRepeat.value) {
           this.passwordRepeatGood = true;
