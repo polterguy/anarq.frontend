@@ -14,9 +14,8 @@
   <div class="form-row">
 
     <mat-form-field
-      class="username"
-      [ngClass]="usernameGood === false ? 'error' : ''">
-      <mat-label>Username</mat-label>
+      class="username">
+      <mat-label>{{usernameGood === false ? 'Username must be available and 4 characters long' : 'Username'}}</mat-label>
       <input
         matInput
         placeholder="Username ..."
@@ -31,9 +30,8 @@
 
     <mat-form-field
       *ngIf="usernameGood === true"
-      class="email"
-      [ngClass]="emailGood === false ? 'error' : ''">
-      <mat-label>Email</mat-label>
+      class="email">
+      <mat-label>{{emailGood === false ? 'Email must be valid and available' : 'Email'}}</mat-label>
       <input
         matInput
         placeholder="Email ..."
@@ -48,9 +46,8 @@
 
     <mat-form-field
       *ngIf="emailGood === true"
-      class="password"
-      [ngClass]="passwordGood === false ? 'error' : ''">
-      <mat-label>Password</mat-label>
+      class="password">
+      <mat-label>{{passwordGood === false ? 'Password must be at least 20 characters long' : 'Password'}}</mat-label>
       <input
         matInput
         placeholder="Password ..."
@@ -65,9 +62,8 @@
 
     <mat-form-field
       *ngIf="passwordGood === true"
-      class="password-repeat"
-      [ngClass]="passwordRepeatGood === false ? 'error' : ''">
-      <mat-label>Password repeat</mat-label>
+      class="password-repeat">
+      <mat-label>{{passwordRepeatGood === false ? 'Please repeat your password' : 'Repeat password'}}</mat-label>
       <input
         matInput
         placeholder="Password repeat ..."

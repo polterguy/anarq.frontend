@@ -52,19 +52,10 @@ export class RegisterComponent implements OnInit {
               this.usernameGood = true;
             } else {
               this.usernameGood = false;
-              this.snackBar.open(
-                'Username cannot be taken from before',
-                'ok', {
-                  duration: 3000,
-                });
             }
           });
         } else {
-          this.snackBar.open(
-            'Your username must be at least 4 characters long',
-            'ok', {
-              duration: 3000,
-            });
+          this.usernameGood = false;
         }
       });
 
@@ -72,14 +63,16 @@ export class RegisterComponent implements OnInit {
     this.email.valueChanges
       .pipe(debounceTime(this.debounce), distinctUntilChanged())
       .subscribe(query => {
-        if (this.email.value.length >= 4) {
-          this.emailGood = true;
+        if (this.email.value.includes('@')) {
+          this.service.emailAvailable(this.email.value).subscribe(res => {
+            if (res.result === 'SUCCESS') {
+              this.emailGood = true;
+            } else {
+              this.emailGood = false;
+            }
+          });
         } else {
-          this.snackBar.open(
-            'Your email address must be a valid email',
-            'ok', {
-              duration: 3000,
-            });
+          this.emailGood = false;
         }
       });
 
@@ -90,11 +83,7 @@ export class RegisterComponent implements OnInit {
         if (this.password.value.length >= 20) {
           this.passwordGood = true;
         } else {
-          this.snackBar.open(
-            'Your password should be a sentence, and at least 20 characters long',
-            'ok', {
-              duration: 3000,
-            });
+          this.passwordGood = false;
         }
       });
 
@@ -102,14 +91,10 @@ export class RegisterComponent implements OnInit {
     this.passwordRepeat.valueChanges
       .pipe(debounceTime(this.debounce), distinctUntilChanged())
       .subscribe(query => {
-        if (this.passwordRepeat.value.length >= 20) {
-          if (this.password.value === this.passwordRepeat.value) {
-            this.passwordRepeatGood = true;
-          } else {
-            this.snackBar.open(
-              'You must repeat your password',
-              'ok');
-            }
+        if (this.password.value === this.passwordRepeat.value) {
+          this.passwordRepeatGood = true;
+        } else {
+          this.passwordRepeatGood = false;
         }
       });
     }

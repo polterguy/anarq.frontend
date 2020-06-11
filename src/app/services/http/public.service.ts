@@ -9,12 +9,10 @@ import { Observable } from 'rxjs';
 
 // Custom includes
 import { environment } from 'src/environments/environment';
-import { getQueryArgs } from '../get-query-args';
 import { CaseSlim } from 'src/app/models/case-slim';
-import { AcceptCase } from 'src/app/models/accept-case';
 import { CaseView } from 'src/app/models/case-view';
 import { UserView } from 'src/app/models/user-view';
-import { UsernameAvailable } from 'src/app/models/username-availability';
+import { Availability } from 'src/app/models/availability';
 
 /*
  * Your main HTTP service for handling cases, and related objects.
@@ -137,9 +135,16 @@ export class PublicService {
   }
 
   usernameAvailable(username: string) {
-    return this.httpClient.get<UsernameAvailable>(
+    return this.httpClient.get<Availability>(
       environment.apiUrl +
       'magic/modules/anarchy/public/users/username-available?username=' +
       username);
+  }
+
+  emailAvailable(email: string) {
+    return this.httpClient.get<Availability>(
+      environment.apiUrl +
+      'magic/modules/anarchy/public/users/email-available?email=' +
+      email);
   }
 }
