@@ -15,7 +15,5 @@ export class UserView {
     status: string;
     name: string;
     cases: number;
-    positive: number;
-    negative: number;
     regions: Region[];
 }

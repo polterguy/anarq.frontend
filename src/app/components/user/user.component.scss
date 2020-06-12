@@ -23,6 +23,12 @@
         color: #a0a0a0;
         font-style: italic;
     }
+    .verified {
+        position: absolute;
+        bottom: .5rem;
+        right: 1rem;
+        font-size: 1.8rem;
+    }
     .summary {
         display: flex;
         .summary-table {
@@ -33,11 +39,14 @@
                 }
             }
         }
-        .summary-chart {
-            flex: 1;
-        }
         .summary-regions {
             flex: 1;
+            label {
+                font-weight: bold;
+                margin-bottom: 1rem;
+                display: block;
+                text-align: center;
+            }
         }
     }
     .regions {

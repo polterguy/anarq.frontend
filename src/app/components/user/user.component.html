@@ -11,8 +11,15 @@
     </a>
     <span
       class="username">
-      {{item.username}} - {{item.status}}
+      {{item.username}}
     </span>
+    <mat-icon
+      class="verified"
+      matTooltip="User has verified his email address"
+      matSuffix
+      *ngIf="item.status === 'verified'">
+      check
+    </mat-icon>
     <h1>
       {{item.name || item.username}}
     </h1>
@@ -24,7 +31,7 @@
         </tr>
         <tr>
           <td>
-            Created cases
+            Cases created
           </td>
           <td>
             {{item.cases}}
@@ -32,25 +39,17 @@
         </tr>
         <tr>
           <td>
-            Votes casted
+            Total votes
           </td>
           <td>
-            {{item.positive + item.negative}}
+            {{getTotalVotes()}}
           </td>
         </tr>
       </table>
-      <div class="summary-chart">
-        <canvas
-          *ngIf="shouldDisplayVotesChart()"
-          baseChart
-          chartType="pie"
-          [options]="pieChartOptions"
-          [data]="pieChartData"
-          [labels]="pieChartLabels"
-          [colors]="pieChartColors">
-        </canvas>
-      </div>
-      <div class="summary-regions">
+      <div
+        class="summary-regions">
+        <label
+          *ngIf="shouldDisplayRegionChart()">Regions user has voted within</label>
         <canvas
           *ngIf="shouldDisplayRegionChart()"
           baseChart

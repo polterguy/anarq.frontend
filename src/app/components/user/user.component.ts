@@ -18,12 +18,6 @@ export class UserComponent implements OnInit {
 
   public item: UserView = null;
 
-  private pieChartOptions: ChartOptions = {
-    responsive: true,
-    legend: {
-      display: false
-    },
-  };
   private barChartOptions: ChartOptions = {
     responsive: true,
     showLines: false,
@@ -49,17 +43,9 @@ export class UserComponent implements OnInit {
     },
   };
 
-  private pieChartLabels: Label[] = [];
   private barChartLabels: Label[] = [];
-
-  private pieChartData: number[] = [];
   private barChartData: number[] = [];
 
-  private pieChartColors = [{
-      backgroundColor: [
-        'rgba(200,255,200,0.8)',
-        'rgba(255,200,200,0.8)'
-      ]}];
   private barChartColors = [{
     backgroundColor: [
       'rgba(180,180,180,0.8)',
@@ -77,16 +63,6 @@ export class UserComponent implements OnInit {
     this.route.params.subscribe(pars => {
       this.service.getUser(pars.username).subscribe(res => {
         this.item = res;
-        if (this.shouldDisplayVotesChart()) {
-          this.pieChartData = [
-            res.positive,
-            res.negative,
-          ];
-          this.pieChartLabels = [
-            'yes',
-            'no',
-          ];
-        }
         if (this.shouldDisplayRegionChart()) {
           this.barChartLabels = this.item.regions.map(x => x.name);
           this.barChartData = this.item.regions.map(x => x.votes);
@@ -95,21 +71,21 @@ export class UserComponent implements OnInit {
     });
   }
 
-  shouldDisplayVotesChart() {
-    if (!this.item) {
-      return false;
+  getTotalVotes() {
+    let result = 0;
+    if (this.item && this.item.regions) {
+      this.item.regions.forEach(idx => {
+        result += idx.votes;
+      });
     }
-    if (this.item.negative === 0 && this.item.positive === 0) {
-      return false;
-    }
-    return true;
+    return result;
   }
 
   shouldDisplayRegionChart() {
     if (!this.item) {
       return false;
     }
-    if (!this.item.regions || this.item.regions.length <= 0) {
+    if (!this.item.regions || this.item.regions.length <= 0 || this.getTotalVotes() === 0) {
       return false;
     }
     return true;

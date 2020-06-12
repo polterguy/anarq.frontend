@@ -41,4 +41,8 @@ export class RegionComponent implements OnInit {
       this.cases = this.cases.concat(res);
     });
   }
+
+  hasNoCases() {
+    return !this.cases || this.cases.length === 0;
+  }
 }
