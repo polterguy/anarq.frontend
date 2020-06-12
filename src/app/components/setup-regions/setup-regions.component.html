@@ -23,6 +23,8 @@
 
     <ul class="regions">
       <li
+        role="button"
+        (click)="selectRegion(idx)"
         *ngFor="let idx of getFilteredRegions()">
         {{idx}}
       </li>

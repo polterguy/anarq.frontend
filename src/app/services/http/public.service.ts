@@ -185,9 +185,20 @@ export class PublicService {
       model);
   }
 
+  /**
+   * Returns all regions in system.
+   */
   getRegions() {
     return this.httpClient.get<RegionsModel>(
       environment.apiUrl +
       'magic/modules/anarchy/public/regions/regions');
+  }
+
+  setRegion(region: string) {
+    return this.httpClient.put<ResultModel>(
+      environment.apiUrl +
+      'magic/modules/anarchy/public/users/set-region', {
+        region
+      });
   }
 }

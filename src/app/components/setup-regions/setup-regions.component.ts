@@ -5,6 +5,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PublicService } from 'src/app/services/http/public.service';
 import { RegionsModel } from 'src/app/models/regions-model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-setup-regions',
@@ -16,7 +17,9 @@ export class SetupRegionsComponent implements OnInit {
   private regions: RegionsModel = null;
   private filter: string = null;
 
-  constructor(private service: PublicService) { }
+  constructor(
+    private service: PublicService,
+    private router: Router) { }
 
   ngOnInit() {
     this.service.getRegions().subscribe(res => {
@@ -32,5 +35,13 @@ export class SetupRegionsComponent implements OnInit {
       return this.regions.regions;
     }
     return this.regions.regions.filter(x => x.toLocaleLowerCase().includes(this.filter.toLocaleLowerCase()));
+  }
+
+  selectRegion(region: string) {
+    this.service.setRegion(region).subscribe(res => {
+      if (res.result === 'SUCCESS') {
+        this.router.navigate(['/region/' + region])
+      }
+    });
   }
 }
