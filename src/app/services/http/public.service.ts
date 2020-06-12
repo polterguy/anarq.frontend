@@ -194,6 +194,20 @@ export class PublicService {
       'magic/modules/anarchy/public/regions/regions');
   }
 
+  /**
+   * Returns all regions in system associated with the currently logged in user.
+   */
+  getMyRegions() {
+    return this.httpClient.get<RegionsModel>(
+      environment.apiUrl +
+      'magic/modules/anarchy/public/regions/my-regions');
+  }
+
+  /**
+   * Used during registration of user to associate user with one region.
+   * 
+   * @param region Region to associate user with
+   */
   setRegion(region: string) {
     return this.httpClient.put<ResultModel>(
       environment.apiUrl +

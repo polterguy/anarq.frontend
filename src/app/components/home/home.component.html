@@ -33,4 +33,19 @@
     ...
   </button>
 
+  <div
+    *ngIf="regions"
+    class="regions">
+    <ul>
+      <li
+        *ngFor="let idx of regions.regions">
+        <a
+          class="region-link"
+          [routerLink]="'/region/' + idx">
+          {{idx}}
+        </a>
+      </li>
+    </ul>
+  </div>
+
 </mat-card>
