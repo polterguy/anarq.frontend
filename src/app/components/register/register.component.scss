@@ -16,6 +16,9 @@ h1 {
     margin-left: auto;
     margin-right: auto;
     position: relative;
+    .progress {
+        margin: 2rem 5rem 2rem 5rem;
+    }
     .home-link {
         position: absolute;
         top: 1rem;
@@ -51,6 +54,16 @@ h1 {
             color: #a0a0a0;
             text-align: justify;
             font-size: .8rem;
+            .bottom-slogan {
+                text-align: center;
+                font-weight: bold;
+                color: #303030;
+                display: block;
+                font-size: 1.1rem;
+                margin-top: 1rem;
+                margin-top: 2rem;
+                margin-bottom: 1rem;
+            }
         }
     }
     @keyframes blink {
@@ -84,10 +97,9 @@ h1 {
         position: absolute;
     }
     .submit {
+        margin: 2rem 5rem 2rem 5rem;
+        text-align: center;
         button {
-            position:absolute;
-            bottom: 1rem;
-            right: 1rem;
             animation-name: blink;
             animation-timing-function: ease-out;
             animation-duration: .5s;

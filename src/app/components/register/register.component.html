@@ -11,6 +11,12 @@
     home
   </a>
 
+  <div class="progress">
+    <mat-progress-bar
+      mode="determinate"
+      [value]="getProgress()"></mat-progress-bar>
+  </div>
+
   <div class="form-row">
 
     <mat-form-field
@@ -120,7 +126,7 @@
       *ngIf="passwordRepeatGood === true && passwordGood === true && phoneGood === true && emailGood === true && usernameGood === true"
       class="information item">
       <p>
-        By clicking the Submit button, you guarantee us that the above information is
+        By clicking the Submit button, you promise us that the above information is
         accurate, that you have given us your full legal name, a cell phone number registered
         to you, and that you accept the terms and conditions of the site.
         You also accept that we are allowed to occassionally send you marketing emails,
@@ -128,17 +134,25 @@
         marketing material in these emails.
       </p>
       <p>
-        We might also send you a text message, to your registered phone number, to verify
-        that it belongs to you - And we will also check up the yellow pages, to verify that
+        We might also send you a text message to your registered phone, to verify
+        that it belongs to you - And we might also check up the yellow pages, to verify that
         you have given us your correct full name, as can be found in official public archives
         where you live.
         This is necessary in order to make sure votes you cast are as legally sound as possible,
         and to such use your vote to influence politicians in and around the area where you live.
       </p>
       <p>
+        Votes you cast are kept private, and will not be shared by us with the general public, and
+        your cell phone number or email will never be shared with any 3rd parties. However, your
+        legal name is publicly available, and statistics about how you vote is also visible for
+        other users of the site, in addition to your region(s) - But exactly what cases you choose
+        to vote for, and how you choose to vote, is never disclosed by us to any 3rd parties.
+      </p>
+      <p>
         Welcome to AnarchU! Direct Democracy! Where Your Voice Matters!
       </p>
-  </div>
+      <label class="bottom-slogan">Free Speech, One Each!</label>
+    </div>
 
   </div>
 
@@ -147,7 +161,7 @@
     *ngIf="passwordRepeatGood === true && passwordGood === true && phoneGood === true && emailGood === true && usernameGood === true">
 
     <button
-      matTooltip="Submit form and accept terms and conditions"
+      matTooltip="Submit form and accept the terms and conditions of the site"
       mat-button
       (click)="register()">
       Submit
