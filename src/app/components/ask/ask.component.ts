@@ -4,7 +4,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { PublicService } from 'src/app/services/http/public.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -28,7 +28,8 @@ export class AskComponent implements OnInit {
   constructor(
     private httpService: PublicService,
     private route: ActivatedRoute,
-    private jwtHelper: JwtHelperService) { }
+    private jwtHelper: JwtHelperService,
+    private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(pars => {
@@ -72,5 +73,17 @@ export class AskComponent implements OnInit {
       theme: 'material',
       mode: 'markdown'
     };
+  }
+
+  submit() {
+    this.httpService.submitCase({
+      subject: this.subject.value,
+      body: this.body,
+      region: this.region,
+    }).subscribe(res => {
+      if (res.result === 'SUCCESS') {
+        this.router.navigate(['/case/' + res.extra]);
+      }
+    });
   }
 }

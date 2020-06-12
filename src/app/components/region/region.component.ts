@@ -3,12 +3,10 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CaseView } from 'src/app/models/case-view';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PublicService } from 'src/app/services/http/public.service';
-import { ChartOptions } from 'chart.js';
-import { Label } from 'ng2-charts';
 import { CaseSlim } from 'src/app/models/case-slim';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-region',
@@ -20,10 +18,13 @@ export class RegionComponent implements OnInit {
   public cases: CaseSlim[];
   private more: boolean;
   public region: string = null;
+  public canCreateCase = false;
 
   constructor(
     private service: PublicService,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute,
+    private router: Router,
+    private jwtHelper: JwtHelperService) {}
 
   ngOnInit() {
     this.route.params.subscribe(pars => {
@@ -32,6 +33,11 @@ export class RegionComponent implements OnInit {
         this.cases = res;
         this.more = res !== null && res.length === 25;
       });
+      if (this.isLoggedIn()) {
+        this.service.canCreateCase(this.region).subscribe(res => {
+          this.canCreateCase = res.result === 'SUCCESS';
+        });
+      }
     });
   }
 
@@ -44,5 +50,21 @@ export class RegionComponent implements OnInit {
 
   hasNoCases() {
     return !this.cases || this.cases.length === 0;
+  }
+
+  // Returns true if user is logged in, with a valid token, that's not expired.
+  isLoggedIn() {
+    const token = localStorage.getItem('jwt_token');
+    if (!token) {
+      return false;
+    }
+    if (this.jwtHelper.isTokenExpired(token)) {
+      return false;
+    }
+    return true;
+  }
+
+  askQuestion() {
+    this.router.navigate(['/ask/' + this.region]);
   }
 }

@@ -3,6 +3,18 @@
 
 <mat-card class="info-card">
 
+  <button
+    mat-button
+    class="add-case"
+    *ngIf="canCreateCase"
+    (click)="askQuestion()"
+    matTooltip="Ask a new question">
+    <mat-icon
+      matSuffix>
+      help_outline
+    </mat-icon>
+  </button>
+
   <a
     class="home-link"
     routerLink="/">

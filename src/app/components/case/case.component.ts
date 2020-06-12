@@ -41,7 +41,11 @@ export class CaseComponent implements OnInit {
   yes() {
     this.service.vote(this.id, true).subscribe(res => {
       this.item.opinion = true;
-      this.snackBar.open('Your vote has been registered', 'ok');
+      this.snackBar.open(
+        'Your vote has been registered',
+        'ok', {
+          duration: 2000,
+        });
     }, err => {
       this.snackBar.open(err.error.message, 'ok');
     });
@@ -50,7 +54,11 @@ export class CaseComponent implements OnInit {
   no() {
     this.service.vote(this.id, false).subscribe(res => {
       this.item.opinion = false;
-      this.snackBar.open('Your vote has been registered', 'ok');
+      this.snackBar.open(
+        'Your vote has been registered',
+        'ok', {
+          duration: 2000
+        });
     }, err => {
       this.snackBar.open(err.error.message, 'ok');
     });

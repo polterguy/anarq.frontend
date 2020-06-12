@@ -16,6 +16,7 @@ import { RegisterModel } from 'src/app/models/register-model';
 import { ResultModel } from 'src/app/models/result-model';
 import { VerifyEmailModel } from 'src/app/models/verify-email-model';
 import { RegionsModel } from 'src/app/models/regions-model';
+import { CaseModel } from 'src/app/models/case-model';
 
 /*
  * Your main HTTP service for handling cases, and related objects.
@@ -227,5 +228,17 @@ export class PublicService {
       environment.apiUrl +
       'magic/modules/anarchy/public/users/can-create-case?region=' +
       region);
+  }
+
+  /**
+   * Submits a new case to the backend.
+   * 
+   * @param model Case data
+   */
+  submitCase(model: CaseModel) {
+    return this.httpClient.post<ResultModel>(
+      environment.apiUrl +
+      'magic/modules/anarchy/public/users/create-case',
+      model);
   }
 }
