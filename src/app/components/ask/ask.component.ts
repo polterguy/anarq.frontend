@@ -20,6 +20,7 @@ export class AskComponent implements OnInit {
   public region: string;
   public canCreateCase = false;
   private subjectGood?: boolean = null;
+  private body = ''
 
   // Number of milliseconds after a keystroke before filtering should be re-applied.
   private debounce = 800;
@@ -45,6 +46,8 @@ export class AskComponent implements OnInit {
       .subscribe(query => {
         if (this.subject.value.length >= 25 && this.subject.value.endsWith('?')) {
           this.subjectGood = true;
+        } else if (this.subject.value.length === 0) {
+          this.subjectGood = null;
         } else {
           this.subjectGood = false;
         }
@@ -61,5 +64,13 @@ export class AskComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  getCodeMirrorOptions() {
+    return {
+      lineNumbers: true,
+      theme: 'material',
+      mode: 'markdown'
+    };
   }
 }

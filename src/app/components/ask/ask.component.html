@@ -12,9 +12,25 @@
       home
     </a>
 
+    <div
+      *ngIf="canCreateCase === false && isLoggedIn()">
+      You cannot create a case in '{{region}}' since you just recently created one.
+      <ul>
+        <li>For 'norge' you can only create one case per week</li>
+        <li>For all other regions you can create one case every day</li>
+      </ul>
+      This is to avoid a single user spamming the entire feed, asking too many questions.
+    </div>
+
+    <div
+      *ngIf="!isLoggedIn()">
+      Only logged in users can create cases.
+    </div>
+
     <mat-form-field
+      *ngIf="canCreateCase"
       class="subject">
-      <mat-label>{{subjectGood === false ? 'Subject must be at least 25 characters long, and end with a question mark ?' : 'Subject'}}</mat-label>
+      <mat-label>{{subjectGood === false ? 'Subject must be at least 25 characters long, and end with a question mark ?' : (subjectGood === null ? 'Subject' : 'Acceptable')}}</mat-label>
       <input
         matInput
         placeholder="Subject ..."
@@ -22,6 +38,23 @@
         autocomplete="off"
         [formControl]="subject">
     </mat-form-field>
+
+    <label
+      *ngIf="subjectGood === true"
+      class="body-label">Body (markdown)</label>
+
+    <ngx-codemirror
+      *ngIf="subjectGood === true"
+      [(ngModel)]="body"
+      [options]="getCodeMirrorOptions()"></ngx-codemirror>
+
+    <div class="submit"
+      *ngIf="subjectGood === true">
+      <button
+        mat-button>
+        Submit
+      </button>
+    </div>
 
   </div>
 
