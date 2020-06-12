@@ -7,16 +7,20 @@ h1 {
     text-align: center;
     margin-top: 2rem;
 }
+small.slogan {
+    display: block;
+    text-align: center;
+    margin-top: .5rem;
+    color: #a0a0a0;
+    font-size: .85rem;
+}
 .info-card {
-    margin:1rem 5rem 2rem 5rem;
+    margin:-.75rem 5rem 2rem 5rem;
     padding: 3rem;
-    margin-top: 3rem;
+    margin-top: 2rem;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
-    .information {
-        
-    }
     .front-page-cases {
         list-style-type: none;
         padding-left: 0;
