@@ -54,6 +54,7 @@ import { environment } from 'src/environments/environment';
 
 // All components. First all "global" components.
 import { HomeComponent } from './components/home/home.component';
+import { AskComponent } from './components/ask/ask.component';
 import { LoginComponent } from './modals/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthComponent } from './components/auth/auth.component';
@@ -99,6 +100,7 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     HomeComponent,
+    AskComponent,
     LoginComponent,
     RegisterComponent,
     AuthComponent,

@@ -1,0 +1,28 @@
+
+<h1>Ask a question in '{{region}}'</h1>
+
+<div class="component-wrapper">
+
+  <div
+    class="mat-elevation-z4 ask">
+
+    <a
+      class="home-link"
+      routerLink="/">
+      home
+    </a>
+
+    <mat-form-field
+      class="subject">
+      <mat-label>{{subjectGood === false ? 'Subject must be at least 25 characters long, and end with a question mark ?' : 'Subject'}}</mat-label>
+      <input
+        matInput
+        placeholder="Subject ..."
+        type="text"
+        autocomplete="off"
+        [formControl]="subject">
+    </mat-form-field>
+
+  </div>
+
+</div>

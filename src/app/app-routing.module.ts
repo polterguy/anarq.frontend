@@ -27,12 +27,14 @@ import { RegionComponent } from './components/region/region.component';
 import { RegisterComponent } from './components/register/register.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { SetupRegionsComponent } from './components/setup-regions/setup-regions.component';
+import { AskComponent } from './components/ask/ask.component';
 
 
 // Creating our routes, one route for each entity type.
 const routes: Routes = [
 
   { path: '', component: HomeComponent },
+  { path: 'ask/:region', component: AskComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'verify-email/:username/:hash', component: VerifyEmailComponent },

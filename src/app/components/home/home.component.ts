@@ -7,6 +7,7 @@ import { CaseSlim } from 'src/app/models/case-slim';
 import { PublicService } from 'src/app/services/http/public.service';
 import { RegionsModel } from 'src/app/models/regions-model';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private httpService: PublicService,
-    private jwtHelper: JwtHelperService) {}
+    private router: Router,
+    private jwtHelper: JwtHelperService) { }
 
   ngOnInit() {
     this.httpService.getOpenCases().subscribe(res => {
@@ -60,5 +62,9 @@ export class HomeComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  askQuestion() {
+    this.router.navigate(['/ask/norge']);
   }
 }

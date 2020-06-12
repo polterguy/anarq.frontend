@@ -8,6 +8,7 @@
     mat-button
     class="add-case"
     *ngIf="canCreateCase"
+    (click)="askQuestion()"
     matTooltip="Ask a new question">
     <mat-icon
       matSuffix>
