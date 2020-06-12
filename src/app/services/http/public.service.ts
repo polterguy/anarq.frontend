@@ -15,6 +15,7 @@ import { UserView } from 'src/app/models/user-view';
 import { RegisterModel } from 'src/app/models/register-model';
 import { ResultModel } from 'src/app/models/result-model';
 import { VerifyEmailModel } from 'src/app/models/verify-email-model';
+import { RegionsModel } from 'src/app/models/regions-model';
 
 /*
  * Your main HTTP service for handling cases, and related objects.
@@ -172,10 +173,21 @@ export class PublicService {
       model);
   }
 
+  /**
+   * Verifies a user's email address.
+   * 
+   * @param model Email address and hash generated during signup
+   */
   verifyEmail(model: VerifyEmailModel) {
     return this.httpClient.post<ResultModel>(
       environment.apiUrl +
       'magic/modules/anarchy/public/users/verify-email',
       model);
+  }
+
+  getRegions() {
+    return this.httpClient.get<RegionsModel>(
+      environment.apiUrl +
+      'magic/modules/anarchy/public/regions/regions');
   }
 }

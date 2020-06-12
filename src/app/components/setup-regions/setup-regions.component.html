@@ -7,7 +7,26 @@
     <p>
       Before you can start voting and creating cases, we need to know roughly where you live.
       This is to prevent users from outside of your county to influence your local democracy.
+      Click the municipal where you live below.
     </p>
+
+    <mat-form-field class="filter">
+      <mat-label>Filter</mat-label>
+      <input
+        matInput
+        placeholder="Filter ..."
+        type="text"
+        autocomplete="off"
+        [(ngModel)]="filter">
+      <mat-icon>search</mat-icon>
+    </mat-form-field>
+
+    <ul class="regions">
+      <li
+        *ngFor="let idx of getFilteredRegions()">
+        {{idx}}
+      </li>
+    </ul>
 
   </div>
 
