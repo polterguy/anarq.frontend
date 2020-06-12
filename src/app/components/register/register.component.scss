@@ -63,10 +63,30 @@ h1 {
             box-shadow: 0 0 15px rgba(255,255,128,.5);
         }
     }
+    .password mat-icon,
+    .password-repeat mat-icon {
+        margin-top: -12px;
+        right: 12px;
+        float: right;
+        color: #a0a0ff;
+        cursor: pointer;
+        z-index: 1000;
+        position: absolute;
+    }
+    .name mat-icon,
+    .phone mat-icon {
+        margin-top: -12px;
+        right: 12px;
+        float: right;
+        color: #a0a0ff;
+        cursor: pointer;
+        z-index: 1000;
+        position: absolute;
+    }
     .submit {
         button {
             position:absolute;
-            top: 1rem;
+            bottom: 1rem;
             right: 1rem;
             animation-name: blink;
             animation-timing-function: ease-out;

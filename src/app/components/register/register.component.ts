@@ -18,12 +18,18 @@ export class RegisterComponent implements OnInit {
 
   private username: FormControl;
   private email: FormControl;
+  private name: FormControl;
+  private phone: FormControl;
   private password: FormControl;
   private passwordRepeat: FormControl;
+  private passwordReadable = false;
+  private passwordRepeatReadable = false;
 
   // Validation of fields.
   private usernameGood?: boolean = null;
   private emailGood?: boolean = null;
+  private nameGood?: boolean = null;
+  private phoneGood?: boolean = null;
   private passwordGood?: boolean = null;
   private passwordRepeatGood?: boolean = null;
 
@@ -86,6 +92,28 @@ export class RegisterComponent implements OnInit {
         }
       });
 
+    this.name = new FormControl('');
+    this.name.valueChanges
+      .pipe(debounceTime(this.debounce / 10), distinctUntilChanged())
+      .subscribe(query => {
+        if (this.name.value.length > 5 && this.name.value.includes(' ')) {
+          this.nameGood = true;
+        } else {
+          this.nameGood = false;
+        }
+      });
+
+    this.phone = new FormControl('');
+    this.phone.valueChanges
+      .pipe(debounceTime(this.debounce), distinctUntilChanged())
+      .subscribe(query => {
+        if (this.phone.value.length >= 8) {
+          this.phoneGood = true;
+        } else {
+          this.phoneGood = false;
+        }
+      });
+
     this.password = new FormControl('');
     this.password.valueChanges
       .pipe(debounceTime(this.debounce / 10), distinctUntilChanged())
@@ -127,11 +155,34 @@ export class RegisterComponent implements OnInit {
     return true;
   }
 
+  makePasswordReadable() {
+    this.passwordReadable = !this.passwordReadable;
+    this.passwordRepeatReadable = !this.passwordRepeatReadable;
+  }
+
+  showNameInformation() {
+    this.snackBar.open(
+      'In order to legally ensure you are an existing person, we need your full legal name, exactly as it can be found in the yellow pages.',
+      'ok', {
+        duration: 10000,
+      });
+  }
+
+  showPhoneInformation() {
+    this.snackBar.open(
+      'In order to legally ensure you are an existing person, we need your cell phone number, exactly as it can be found in the yellow pages.',
+      'ok', {
+        duration: 10000,
+      });
+  }
+
   register() {
     this.service.register({
       username: this.username.value,
       email: this.email.value,
       password: this.password.value,
+      full_name: this.name.value,
+      phone: this.phone.value,
     }).subscribe(res => {
       if (res.result === 'SUCCESS') {
         this.snackBar.open(
@@ -140,6 +191,12 @@ export class RegisterComponent implements OnInit {
             duration: 3000,
           });
       }
+    }, err => {
+      this.snackBar.open(
+        err.error.message, 
+        'ok', {
+          duration: 5000,
+        });
     });
   }
 }

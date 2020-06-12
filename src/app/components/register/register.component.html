@@ -14,6 +14,22 @@
   <div class="form-row">
 
     <mat-form-field
+      class="email item">
+      <mat-label>{{emailGood === false ? 'Email must be valid and available' : 'Email'}}</mat-label>
+      <input
+        matInput
+        placeholder="Email ..."
+        type="text"
+        autocomplete="off"
+        [formControl]="email">
+    </mat-form-field>
+
+  </div>
+
+  <div class="form-row">
+
+    <mat-form-field
+      *ngIf="emailGood === true"
       class="username item">
       <mat-label>{{usernameGood === false ? 'Username cannot be your email address' : 'Username'}}</mat-label>
       <input
@@ -30,14 +46,17 @@
 
     <mat-form-field
       *ngIf="usernameGood === true"
-      class="email item">
-      <mat-label>{{emailGood === false ? 'Email must be valid and available' : 'Email'}}</mat-label>
+      class="name item">
+      <mat-label>{{nameGood === false ? 'Name must be your full legal name' : 'Full legal name'}}</mat-label>
       <input
         matInput
-        placeholder="Email ..."
+        placeholder="Full name ..."
         type="text"
         autocomplete="off"
-        [formControl]="email">
+        [formControl]="name">
+      <mat-icon
+        matTooltip="Why ...?"
+        (click)="showNameInformation()">info</mat-icon>
     </mat-form-field>
 
   </div>
@@ -45,15 +64,36 @@
   <div class="form-row">
 
     <mat-form-field
-      *ngIf="emailGood === true && usernameGood === true"
+      *ngIf="nameGood === true"
+      class="phone item">
+      <mat-label>{{phoneGood === false ? 'Phone number must be a registered cell phone in your name' : 'Cell phone'}}</mat-label>
+      <input
+        matInput
+        placeholder="Cell phone ..."
+        type="text"
+        autocomplete="off"
+        [formControl]="phone">
+      <mat-icon
+        matTooltip="Why ...?"
+        (click)="showPhoneInformation()">info</mat-icon>
+    </mat-form-field>
+
+  </div>
+
+  <div class="form-row">
+
+    <mat-form-field
+      *ngIf="nameGood === true && phoneGood === true && usernameGood === true && nameGood === true"
       class="password item">
       <mat-label>{{passwordGood === false ? 'Password must be at least 10 characters long' : 'Password'}}</mat-label>
       <input
         matInput
         placeholder="Password ..."
-        type="password"
+        [type]="passwordReadable ? 'text' : 'password'"
         autocomplete="new-password"
         [formControl]="password">
+      <mat-icon
+        (click)="makePasswordReadable()">remove_red_eye</mat-icon>
     </mat-form-field>
 
   </div>
@@ -61,13 +101,13 @@
   <div class="form-row">
 
     <mat-form-field
-      *ngIf="passwordGood === true && emailGood === true && usernameGood === true"
+      *ngIf="nameGood === true && phoneGood === true && usernameGood === true && nameGood === true"
       class="password-repeat item">
       <mat-label>{{passwordRepeatGood === false ? 'Please repeat your password' : 'Repeat password'}}</mat-label>
       <input
         matInput
         placeholder="Password repeat ..."
-        type="password"
+        [type]="passwordRepeatReadable ? 'text' : 'password'"
         autocomplete="new-password"
         [formControl]="passwordRepeat">
     </mat-form-field>
@@ -77,20 +117,34 @@
   <div class="form-row">
 
     <div
-      *ngIf="passwordRepeatGood === true && passwordGood === true && emailGood === true && usernameGood === true"
+      *ngIf="passwordRepeatGood === true && passwordGood === true && phoneGood === true && emailGood === true && usernameGood === true"
       class="information item">
-      By clicking OK above, you accept the terms and conditions of the site,
-      which includes that we will send you a couple of emails per week,
-      with cases of interest to you, according to your preferred region(s).
-      We might also send you some marketing emails occassionally on behalf
-      of our sponsors. You can unsubscribe to our newsletter any time you wish.
+      <p>
+        By clicking the Submit button, you guarantee us that the above information is
+        accurate, that you have given us your full legal name, a cell phone number registered
+        to you, and that you accept the terms and conditions of the site.
+        You also accept that we are allowed to occassionally send you marketing emails,
+        according to your registered preferences, and that we might include 3rd party
+        marketing material in these emails.
+      </p>
+      <p>
+        We might also send you a text message, to your registered phone number, to verify
+        that it belongs to you - And we will also check up the yellow pages, to verify that
+        you have given us your correct full name, as can be found in official public archives
+        where you live.
+        This is necessary in order to make sure votes you cast are as legally sound as possible,
+        and to such use your vote to influence politicians in and around the area where you live.
+      </p>
+      <p>
+        Welcome to AnarchU! Direct Democracy! Where Your Voice Matters!
+      </p>
   </div>
 
   </div>
 
   <div
     class="submit"
-    *ngIf="passwordRepeatGood === true && passwordGood === true && emailGood === true && usernameGood === true">
+    *ngIf="passwordRepeatGood === true && passwordGood === true && phoneGood === true && emailGood === true && usernameGood === true">
 
     <button
       matTooltip="Submit form and accept terms and conditions"
