@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   public cases: CaseSlim[] = [];
   private more: boolean;
   public regions: RegionsModel = null;
+  public canCreateCase = false;
 
   constructor(
     private httpService: PublicService,
@@ -31,6 +32,9 @@ export class HomeComponent implements OnInit {
     if (this.isLoggedIn()) {
       this.httpService.getMyRegions().subscribe(res => {
         this.regions = res;
+      });
+      this.httpService.canCreateCase('norge').subscribe(res => {
+        this.canCreateCase = res.result === 'SUCCESS';
       });
     }
   }

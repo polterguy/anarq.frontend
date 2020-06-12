@@ -15,12 +15,19 @@ small.slogan {
     font-size: .85rem;
 }
 .info-card {
-    margin:-.75rem 5rem 2rem 5rem;
+    margin: -.75rem 5rem 2rem 5rem;
     padding: 3rem;
     margin-top: 2rem;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
+    .add-case {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        color: #909090;
+    }
     .front-page-cases {
         list-style-type: none;
         padding-left: 0;

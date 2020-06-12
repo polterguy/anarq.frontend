@@ -215,4 +215,17 @@ export class PublicService {
         region
       });
   }
+
+  /**
+   * Checks to see if the currently logged in user can legally create
+   * a new case within the specified region.
+   * 
+   * @param region Region to check
+   */
+  canCreateCase(region: string) {
+    return this.httpClient.get<ResultModel>(
+      environment.apiUrl +
+      'magic/modules/anarchy/public/users/can-create-case?region=' +
+      region);
+  }
 }
