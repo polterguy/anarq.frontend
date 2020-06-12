@@ -67,6 +67,7 @@ import { EditCase_typesComponent } from './components/case_types/modals/edit.cas
 import { CasesComponent } from './components/cases/cases.component';
 import { CaseComponent } from './components/case/case.component';
 import { UserComponent } from './components/user/user.component';
+import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { EditCasesComponent } from './components/cases/modals/edit.cases.component';
 import { LanguagesComponent } from './components/languages/languages.component';
 import { EditLanguagesComponent } from './components/languages/modals/edit.languages.component';
@@ -113,6 +114,7 @@ export function tokenGetter() {
     CasesComponent,
     CaseComponent,
     UserComponent,
+    VerifyEmailComponent,
     EditCasesComponent,
     LanguagesComponent,
     EditLanguagesComponent,

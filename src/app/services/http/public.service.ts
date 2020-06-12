@@ -14,6 +14,7 @@ import { CaseView } from 'src/app/models/case-view';
 import { UserView } from 'src/app/models/user-view';
 import { RegisterModel } from 'src/app/models/register-model';
 import { ResultModel } from 'src/app/models/result-model';
+import { VerifyEmailModel } from 'src/app/models/verify-email-model';
 
 /*
  * Your main HTTP service for handling cases, and related objects.
@@ -159,10 +160,22 @@ export class PublicService {
       email);
   }
 
+  /**
+   * Registers a user on the site, with the specified data.
+   * 
+   * @param model Data to register
+   */
   register(model: RegisterModel) {
     return this.httpClient.post<ResultModel>(
       environment.apiUrl +
       'magic/modules/anarchy/public/users/register',
+      model);
+  }
+
+  verifyEmail(model: VerifyEmailModel) {
+    return this.httpClient.post<ResultModel>(
+      environment.apiUrl +
+      'magic/modules/anarchy/public/users/verify-email',
       model);
   }
 }
