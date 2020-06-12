@@ -4,4 +4,5 @@
  */
 export class ResultModel {
     result: string;
+    extra?: string;
 }

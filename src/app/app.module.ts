@@ -68,6 +68,7 @@ import { CasesComponent } from './components/cases/cases.component';
 import { CaseComponent } from './components/case/case.component';
 import { UserComponent } from './components/user/user.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { SetupRegionsComponent } from './components/setup-regions/setup-regions.component';
 import { EditCasesComponent } from './components/cases/modals/edit.cases.component';
 import { LanguagesComponent } from './components/languages/languages.component';
 import { EditLanguagesComponent } from './components/languages/modals/edit.languages.component';
@@ -115,6 +116,7 @@ export function tokenGetter() {
     CaseComponent,
     UserComponent,
     VerifyEmailComponent,
+    SetupRegionsComponent,
     EditCasesComponent,
     LanguagesComponent,
     EditLanguagesComponent,

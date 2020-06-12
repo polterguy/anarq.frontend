@@ -8,6 +8,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { MatSnackBar } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -41,6 +42,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private service: PublicService,
     private jwtHelper: JwtHelperService,
+    private router: Router,
     private snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -210,6 +212,9 @@ export class RegisterComponent implements OnInit {
             duration: 3000,
           });
         this.done = true
+        setTimeout(
+          () => this.router.navigate(['/']),
+          5000);
       }
     }, err => {
       this.snackBar.open(

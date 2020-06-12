@@ -4,7 +4,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { PublicService } from 'src/app/services/http/public.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 
 @Component({
@@ -19,6 +19,7 @@ export class VerifyEmailComponent implements OnInit {
   constructor (
     private service: PublicService,
     private route: ActivatedRoute,
+    private router: Router,
     private snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -29,11 +30,15 @@ export class VerifyEmailComponent implements OnInit {
       }).subscribe(res => {
         if (res.result === 'SUCCESS') {
           this.success = true;
+          localStorage.setItem('jwt_token', res.extra);
           this.snackBar.open(
             'Your email address was successfully confirmed',
             'ok', {
               duration: 5000,
             });
+            setTimeout(
+              () => this.router.navigate(['/setup-regions']),
+              2000);
         } else {
           this.success = false;
           this.snackBar.open(
