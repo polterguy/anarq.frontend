@@ -2,7 +2,7 @@
 <h1>Register</h1>
 
 <mat-card
-  *ngIf="!isLoggedIn()"
+  *ngIf="!isLoggedIn() && !done"
   class="register">
 
   <a
@@ -185,4 +185,26 @@
     You are already registered at the site
   </h3>
 
+</mat-card>
+
+<mat-card
+  *ngIf="done"
+  class="register">
+
+  <a
+    class="home-link"
+    routerLink="/">
+    home
+  </a>
+
+  <p>
+    Thank you for registering, please confirm your email address now. Afterwards you can start
+    using the site, and register your vote on individual cases, and create cases if you wish.
+    Notice, cases you create yourself are publicly visible and associated with your user and
+    full name - But votes you cast, and which cases you vote for, are kept hidden from the
+    general public.
+  </p>
+  <p>
+    Your email address and phone number will never be shared with any 3rd parties though.
+  </p>
 </mat-card>

@@ -25,6 +25,7 @@ export class RegisterComponent implements OnInit {
   private passwordReadable = false;
   private passwordRepeatReadable = false;
   private progress = 0;
+  private done = false;
 
   // Validation of fields.
   private usernameGood?: boolean = null;
@@ -208,6 +209,7 @@ export class RegisterComponent implements OnInit {
           'ok', {
             duration: 3000,
           });
+        this.done = true
       }
     }, err => {
       this.snackBar.open(
