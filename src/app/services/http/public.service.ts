@@ -248,4 +248,20 @@ export class PublicService {
       'magic/modules/anarchy/public/users/create-case',
       model);
   }
+
+  /**
+   * Returns all open cases in system.
+   * 
+   * @param args Generic filter condition for which open cases to return
+   */
+  getUserCases(username: string, offset: number = 0): Observable<CaseSlim[]> {
+    let query = '?username=' + username;
+    if (offset) {
+      query += '&offset=' + offset;
+    }
+    return this.httpClient.get<CaseSlim[]>(
+      environment.apiUrl +
+      'magic/modules/anarchy/public/cases/users-cases' +
+      query);
+  }
 }

@@ -8,6 +8,7 @@ import { UserView } from 'src/app/models/user-view';
 import { ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { PublicService } from 'src/app/services/http/public.service';
+import { CaseSlim } from 'src/app/models/case-slim';
 
 @Component({
   selector: 'app-user',
@@ -17,6 +18,7 @@ import { PublicService } from 'src/app/services/http/public.service';
 export class UserComponent implements OnInit {
 
   public item: UserView = null;
+  public cases: CaseSlim[] = null;
 
   private barChartOptions: ChartOptions = {
     responsive: true,
@@ -67,6 +69,9 @@ export class UserComponent implements OnInit {
           this.barChartLabels = this.item.regions.map(x => x.name);
           this.barChartData = this.item.regions.map(x => x.votes);
         }
+        this.service.getUserCases(pars.username).subscribe(res => {
+          this.cases = res;
+        });
       });
     });
   }

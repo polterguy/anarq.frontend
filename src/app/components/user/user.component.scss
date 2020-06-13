@@ -2,7 +2,7 @@
  * Anarchy, a Direct Democracy system. Copyright 2020 - Thomas Hansen thomas@servergardens.com
  */
 
-.case {
+.user {
     margin:1rem 5rem 2rem 5rem;
     padding: 3rem;
     margin-top: 3rem;
@@ -67,6 +67,22 @@
                     text-decoration: none;
                     color: rgb(85, 26, 139);
                 }
+            }
+        }
+    }
+    .cases {
+        list-style-type: none;
+        padding: 0;
+        margin: 2rem 0 2rem 0;
+        li {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            a {
+                text-decoration: none;
+            }
+            small {
+                font-size: .8rem;
+                color: #a0a0a0;
             }
         }
     }

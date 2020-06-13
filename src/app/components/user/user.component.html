@@ -3,7 +3,8 @@
 
   <div
     *ngIf="item"
-    class="mat-elevation-z4 case">
+    class="mat-elevation-z4 user">
+
     <a
       class="home-link"
       mat-button
@@ -11,10 +12,12 @@
       routerLink="/">
       <mat-icon>home</mat-icon>
     </a>
+
     <span
       class="username">
       {{item.username}}
     </span>
+
     <mat-icon
       class="verified"
       matTooltip="User has verified his email address"
@@ -22,10 +25,11 @@
       *ngIf="item.status === 'verified'">
       check
     </mat-icon>
-    <h1>
-      {{item.name || item.username}}
-    </h1>
+
+    <h1>{{item.name || item.username}}</h1>
+
     <div class="summary">
+
       <table class="summary-table">
         <tr>
           <th>Type</th>
@@ -48,6 +52,7 @@
           </td>
         </tr>
       </table>
+
       <div
         class="summary-regions">
         <canvas
@@ -60,7 +65,9 @@
           [colors]="barChartColors">
         </canvas>
       </div>
+
     </div>
+
     <div
       class="regions">
       <ul>
@@ -74,6 +81,20 @@
         </li>
       </ul>
     </div>
+
+    <ul
+      *ngIf="cases !== null"
+      class="cases">
+      <li
+        *ngFor="let idx of cases">
+        <a
+          class="case-link"
+          [routerLink]="'/case/' + idx.id">
+          {{idx.subject}}
+        </a>
+      </li>
+    </ul>
+
   </div>
 
 </div>
