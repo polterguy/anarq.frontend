@@ -59,7 +59,7 @@ export class CaseComponent implements OnInit {
     this.service.vote(this.id, false).subscribe(res => {
       this.item.opinion = false;
       this.snackBar.open(
-        'A receipt of your vote was sent to your registered email address',
+        'A cryptographically signed email receipt of your vote was sent to your registered email address. Please keep this email safe somewhere in case of auditing of the system.',
         'ok', {
           duration: 5000,
         });
