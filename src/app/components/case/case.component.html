@@ -6,6 +6,7 @@
     class="mat-elevation-z4 case">
     <a
       class="home-link"
+      matTooltip="Go back to cases"
       mat-button
       routerLink="/">
       <mat-icon>home</mat-icon>
@@ -30,7 +31,7 @@
       <div class="item">
         <a
           class="region-link"
-          [matTooltip]="'Case was brought forth to the public in the anarchistic republic of ' + capitalize(item.region)"
+          [matTooltip]="'Case was brought forth to the anarchistic republic of ' + capitalize(item.region)"
           [routerLink]="'/region/' + item.region">
           {{item.region}}
         </a>
@@ -62,14 +63,14 @@
         class="yes"
         matTooltip="Give your aye to this case"
         mat-stroked-button>
-        Aye
+        Yes
       </button>
       <button
         (click)="no()"
         class="no"
         matTooltip="Give your nay to this case"
         mat-stroked-button>
-        Nay
+        No
       </button>
     </div>
     <div

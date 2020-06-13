@@ -66,9 +66,9 @@ export class CaseComponent implements OnInit {
 
   getOpinion() {
     if (this.item.opinion) {
-      return 'aye';
+      return 'yes';
     } else {
-      return 'nay';
+      return 'no';
     }
   }
 
