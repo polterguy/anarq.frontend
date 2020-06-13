@@ -26,11 +26,30 @@
     }
 }
 
+@keyframes waiter {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 .ajax-wait {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
+    width: 100vw;
+    height: 100vw;
+    background-color: rgba(0,0,0,.5);
     z-index: 1000;
+    animation: waiter .5s ease-in;
+    animation-fill-mode: forwards;
+}
+.spinner {
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
 }
 
 .login-strip {

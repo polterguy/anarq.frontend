@@ -1,10 +1,13 @@
 
-<mat-spinner
+<div
   *ngIf="loaderService.isLoading | async"
-  mode="indeterminate"
-  diameter="50"
   class="ajax-wait">
-</mat-spinner>
+  <mat-spinner
+    mode="indeterminate"
+    class="spinner"
+    diameter="50">
+  </mat-spinner>
+</div>
 
 <mat-sidenav-container
   mode="side"

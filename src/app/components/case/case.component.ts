@@ -41,10 +41,17 @@ export class CaseComponent implements OnInit {
   yes() {
     this.service.vote(this.id, true).subscribe(res => {
       this.item.opinion = true;
+      this.snackBar.open(
+        'A receipt of your vote was sent to your registered email address',
+        'ok', {
+          duration: 5000,
+        });
     }, err => {
-      this.snackBar.open(err.error.message, 'ok', {
-        duration: 5000,
-      });
+      this.snackBar.open(
+        err.error.message,
+        'ok', {
+          duration: 5000,
+        });
     });
   }
 
@@ -52,9 +59,9 @@ export class CaseComponent implements OnInit {
     this.service.vote(this.id, false).subscribe(res => {
       this.item.opinion = false;
       this.snackBar.open(
-        'Your vote has been registered',
+        'A receipt of your vote was sent to your registered email address',
         'ok', {
-          duration: 2000
+          duration: 5000,
         });
     }, err => {
       this.snackBar.open(err.error.message, 'ok');

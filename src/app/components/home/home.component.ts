@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit {
   }
 
   getCount(item: CaseSlim) {
-    return item.positive + '/' + item.votes;
+    return item.positive + '/' + (item.votes - item.positive);
   }
 
   hasNoCases() {
