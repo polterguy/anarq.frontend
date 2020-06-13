@@ -183,7 +183,7 @@ export class RegisterComponent implements OnInit {
 
   showNameInformation() {
     this.snackBar.open(
-      'In order to legally ensure you are an existing person, we need your full legal name, exactly as it can be found in the yellow pages.',
+      'In order to legally ensure you are an existing person, we need your full legal name, exactly as it can be found in the yellow pages. And yes, we will check this up!',
       'ok', {
         duration: 10000,
       });
@@ -191,7 +191,7 @@ export class RegisterComponent implements OnInit {
 
   showPhoneInformation() {
     this.snackBar.open(
-      'In order to legally ensure you are an existing person, we need your cell phone number, exactly as it can be found in the yellow pages.',
+      'In order to legally ensure you are an existing person, we need your cell phone number, exactly as it can be found in the yellow pages. And yes, we will check this up!',
       'ok', {
         duration: 10000,
       });

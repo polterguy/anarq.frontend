@@ -43,6 +43,11 @@ export class SetupRegionsComponent implements OnInit {
     this.service.setRegion(region).subscribe(res => {
       if (res.result === 'SUCCESS') {
         this.router.navigate(['/'])
+        this.snackBar.open(
+          'Congratulations, you are now an active participant in Direct Democracy',
+          'ok', {
+            duration: 5000,
+          });
       } else {
         this.snackBar.open(
           res.extra,
