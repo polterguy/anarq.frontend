@@ -27,7 +27,13 @@ export class HomeComponent implements OnInit {
     private jwtHelper: JwtHelperService) { }
 
   ngOnInit() {
-    this.httpService.getOpenCases().subscribe(res => {
+    let username = null;
+    const token = localStorage.getItem('jwt_token');
+    if (token) {
+      const parsed = this.jwtHelper.decodeToken(token);
+      username = parsed.unique_name;
+    }
+    this.httpService.getOpenCases(null, null, username).subscribe(res => {
       this.cases = res;
       this.more = res !== null && res.length === 25;
     });
@@ -48,6 +54,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  getCount(item: CaseSlim) {
+    return item.positive + '/' + item.votes;
+  }
+
   hasNoCases() {
     return !this.cases || this.cases.length === 0;
   }
@@ -62,9 +72,5 @@ export class HomeComponent implements OnInit {
       return false;
     }
     return true;
-  }
-
-  askQuestion() {
-    this.router.navigate(['/ask/norge']);
   }
 }

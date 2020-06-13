@@ -8,4 +8,6 @@ export class CaseSlim {
     region: string;
     subject: string;
     user: string;
+    votes: number;
+    positive: number;
 }
