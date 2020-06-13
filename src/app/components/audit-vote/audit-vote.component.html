@@ -1,0 +1,48 @@
+
+<h1>Audit your vote</h1>
+
+<div class="component-wrapper">
+
+  <div
+    [ngClass]="getCssClass()"
+    class="mat-elevation-z4 audit">
+
+    <mat-icon
+      class="checks-out"
+      *ngIf="voteGood === true">check</mat-icon>
+
+    <div
+      *ngIf="voteGood === true">
+      <p>
+        Your vote's receipt checks out, and does not seem to have been tampered with.
+      </p>
+      <ul>
+        <li>{{yes}} ayes at the point the vote was cast</li>
+        <li>{{no}} nays at the point vote was cast</li>
+      </ul>
+      <p>
+        <a
+          [routerLink]="'/case/' + caseId">
+          Check out how the case is proceeding
+        </a>
+      </p>
+    </div>
+
+    <mat-icon
+      class="tampered-with"
+      *ngIf="voteGood === false">error</mat-icon>
+
+    <div
+      *ngIf="voteGood === false"
+      class="danger">
+      <p>
+        Your vote has been tampered with!
+      </p>
+      <p>
+        {{extra}}
+      </p>
+    </div>
+
+  </div>
+
+</div>

@@ -57,6 +57,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AskComponent } from './components/ask/ask.component';
 import { LoginComponent } from './modals/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AuditVoteComponent } from './components/audit-vote/audit-vote.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { CreateRoleDialogComponent } from './components/auth/modals/create-role-dialog';
 import { CreateUserDialogComponent } from './components/auth/modals/create-user-dialog';
@@ -103,6 +104,7 @@ export function tokenGetter() {
     AskComponent,
     LoginComponent,
     RegisterComponent,
+    AuditVoteComponent,
     AuthComponent,
     CreateRoleDialogComponent,
     CreateUserDialogComponent,

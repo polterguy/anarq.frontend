@@ -13,7 +13,7 @@ import { CaseSlim } from 'src/app/models/case-slim';
 import { CaseView } from 'src/app/models/case-view';
 import { UserView } from 'src/app/models/user-view';
 import { RegisterModel } from 'src/app/models/register-model';
-import { ResultModel } from 'src/app/models/result-model';
+import { ResultModel, ResultAuditModel } from 'src/app/models/result-model';
 import { VerifyEmailModel } from 'src/app/models/verify-email-model';
 import { RegionsModel } from 'src/app/models/regions-model';
 import { CaseModel } from 'src/app/models/case-model';
@@ -263,5 +263,12 @@ export class PublicService {
       environment.apiUrl +
       'magic/modules/anarchy/public/cases/users-cases' +
       query);
+  }
+
+  auditVote(hash: string) {
+    return this.httpClient.get<ResultAuditModel>(
+      environment.apiUrl +
+      'magic/modules/anarchy/public/votes/audit?hash=' +
+      hash);
   }
 }

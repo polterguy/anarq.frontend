@@ -6,3 +6,9 @@ export class ResultModel {
     result: string;
     extra?: string;
 }
+
+export class ResultAuditModel extends ResultModel {
+    case?: number;
+    yes?: number;
+    no?: number;
+}
