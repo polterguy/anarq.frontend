@@ -60,6 +60,10 @@ export class RegionComponent implements OnInit {
     });
   }
 
+  getRegion(region: string) {
+    return region.charAt(0).toUpperCase() + region.slice(1);
+  }
+
   getCount(item: CaseSlim) {
     return item.positive + '/' + item.votes;
   }

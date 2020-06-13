@@ -13,15 +13,14 @@
     .home-link {
         position: absolute;
         top: 1rem;
-        left: 1rem;
+        right: 1rem;
         text-decoration: none;
     }
     .username {
         position: absolute;
-        top: 1rem;
-        right: 1rem;
+        top: 1.5rem;
+        left: 1.5rem;
         color: #a0a0a0;
-        font-style: italic;
     }
     .verified {
         position: absolute;
@@ -63,9 +62,10 @@
             li {
                 float: left;
                 margin-right: 1rem;
+                text-transform: capitalize;
                 .region-link {
                     text-decoration: none;
-                    color: #a0a0a0;
+                    color: rgb(85, 26, 139);
                 }
             }
         }

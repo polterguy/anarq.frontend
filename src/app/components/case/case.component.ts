@@ -66,10 +66,14 @@ export class CaseComponent implements OnInit {
 
   getOpinion() {
     if (this.item.opinion) {
-      return 'yes';
+      return 'aye';
     } else {
-      return 'no';
+      return 'nay';
     }
+  }
+
+  capitalize(region: string) {
+    return region.charAt(0).toUpperCase() + region.slice(1);
   }
 
   getClass() {

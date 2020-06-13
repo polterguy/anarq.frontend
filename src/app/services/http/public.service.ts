@@ -90,6 +90,9 @@ export class PublicService {
       }
     } else if (region !== null) {
       query += '?region=' + region;
+      if(username !== null) {
+        query += '&username=' + username;
+      }
     } else if (username !== null) {
       query += '?username=' + username;
     }

@@ -4,27 +4,28 @@
 <mat-card class="info-card">
 
   <button
-    mat-button
+    mat-stroked-button
     class="add-case"
     *ngIf="canCreateCase"
     (click)="askQuestion()"
-    matTooltip="Ask a new question">
+    [matTooltip]="'Bring forth a question to the people\'s court of ' + getRegion(region)">
     <mat-icon
       matSuffix>
-      help_outline
+      account_balance
     </mat-icon>
   </button>
 
   <a
     class="home-link"
+    mat-button
     routerLink="/">
-    home
+    <mat-icon>home</mat-icon>
   </a>
 
   <div
     *ngIf="hasNoCases()"
     class="information">
-    There are no cases in system, what don't you create one?
+    Seems that you are all caught up :)
   </div>
 
   <ul class="region-cases">

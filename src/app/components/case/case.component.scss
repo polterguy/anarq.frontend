@@ -16,7 +16,7 @@
     .home-link {
         position: absolute;
         top: 1rem;
-        left: 1rem;
+        right: 1rem;
         text-decoration: none;
     }
     .votes-chart {
@@ -63,11 +63,12 @@
             flex: 1;
             .user-link {
                 text-decoration: none;
-                color: #a0a0a0;
+                color: rgb(85, 26, 139);
             }
             .region-link {
+                text-transform: capitalize;
                 text-decoration: none;
-                color: #a0a0a0;
+                color: rgb(85, 26, 139);
             }
         }
         .item.count {
@@ -83,12 +84,13 @@
         text-align: center;
         margin-top: 2rem;
         padding: 1rem;
-    }
-    .action-bar.yes {
-        background-color: #e0ffe0;
-    }
-    .action-bar.no {
-        background-color: #ffe0e0;
+        .yes {
+            width: 10rem;
+            margin-right: 1rem;
+        }
+        .no {
+            width: 10rem;
+        }
     }
     @media print {
         .action-bar {

@@ -6,6 +6,7 @@
     display: block;
     text-align: center;
     margin-top: 2rem;
+    text-transform: capitalize;
 }
 .info-card {
     margin:1rem 5rem 2rem 5rem;
@@ -16,14 +17,14 @@
     margin-right: auto;
     .add-case {
         position: absolute;
-        top: 1rem;
+        bottom: 1rem;
         right: 1rem;
-        color: #909090;
+        width: 10rem;
     }
     .home-link {
         position: absolute;
         top: 1rem;
-        left: 1rem;
+        right: 1rem;
         text-decoration: none;
     }
     .region-cases {

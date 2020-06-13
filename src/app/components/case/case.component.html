@@ -6,8 +6,9 @@
     class="mat-elevation-z4 case">
     <a
       class="home-link"
+      mat-button
       routerLink="/">
-      home
+      <mat-icon>home</mat-icon>
     </a>
     <h1>
       {{item.subject}}
@@ -29,6 +30,7 @@
       <div class="item">
         <a
           class="region-link"
+          [matTooltip]="'Case was brought forth to the public in the anarchistic republic of ' + capitalize(item.region)"
           [routerLink]="'/region/' + item.region">
           {{item.region}}
         </a>
@@ -36,18 +38,19 @@
       <div class="item">
         <a
           class="user-link"
+          [matTooltip]="'Case was brought forth to the public by user ' + item.user"
           [routerLink]="'/user/' + item.user">
           {{item.user}}
         </a>
       </div>
       <div
         class="item"
-        [title]="item.deadline | date_format">
+        [matTooltip]="'Aye and nay can be given until ' + (item.deadline | date_format)">
         {{item.deadline | toDate}}
       </div>
       <div
        class="item count"
-       [title]="item.positive + ' for and ' + item.negative + ' against'">
+       [matTooltip]="item.positive + ' aye and ' + item.negative + ' nay'">
         {{item.positive}} / {{item.negative}}
       </div>
     </div>
@@ -56,13 +59,17 @@
       *ngIf="item.opinion === undefined && isLoggedIn()">
       <button
         (click)="yes()"
-        mat-button>
-        yes
+        class="yes"
+        matTooltip="Give your aye to this case"
+        mat-stroked-button>
+        Aye
       </button>
       <button
         (click)="no()"
-        mat-button>
-        no
+        class="no"
+        matTooltip="Give your nay to this case"
+        mat-stroked-button>
+        Nay
       </button>
     </div>
     <div
