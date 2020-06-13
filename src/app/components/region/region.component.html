@@ -34,6 +34,9 @@
         [routerLink]="'/case/' + case.id">
         {{case.subject}}
       </a>
+      <small>
+        ({{getCount(case)}})
+      </small>
     </li>
   </ul>
 

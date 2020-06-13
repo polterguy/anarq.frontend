@@ -27,9 +27,15 @@ export class RegionComponent implements OnInit {
     private jwtHelper: JwtHelperService) {}
 
   ngOnInit() {
+    let username = null;
+    const token = localStorage.getItem('jwt_token');
+    if (token) {
+      const parsed = this.jwtHelper.decodeToken(token);
+      username = parsed.unique_name;
+    }
     this.route.params.subscribe(pars => {
       this.region = pars.region;
-      this.service.getOpenCases(null, pars.region).subscribe(res => {
+      this.service.getOpenCases(null, this.region, username).subscribe(res => {
         this.cases = res;
         this.more = res !== null && res.length === 25;
       });
@@ -42,10 +48,20 @@ export class RegionComponent implements OnInit {
   }
 
   getMore() {
-    this.service.getOpenCases(this.cases[this.cases.length - 1].id).subscribe(res => {
+    let username = null;
+    const token = localStorage.getItem('jwt_token');
+    if (token) {
+      const parsed = this.jwtHelper.decodeToken(token);
+      username = parsed.unique_name;
+    }
+    this.service.getOpenCases(this.cases.length, this.region, username).subscribe(res => {
       this.more = res && res.length === 25;
       this.cases = this.cases.concat(res);
     });
+  }
+
+  getCount(item: CaseSlim) {
+    return item.positive + '/' + item.votes;
   }
 
   hasNoCases() {
