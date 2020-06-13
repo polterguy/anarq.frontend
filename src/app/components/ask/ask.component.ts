@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-ask',
@@ -26,6 +27,7 @@ export class AskComponent implements OnInit {
   private debounce = 800;
 
   constructor(
+    private snackBar: MatSnackBar,
     private httpService: PublicService,
     private route: ActivatedRoute,
     private jwtHelper: JwtHelperService,
@@ -83,6 +85,12 @@ export class AskComponent implements OnInit {
     }).subscribe(res => {
       if (res.result === 'SUCCESS') {
         this.router.navigate(['/case/' + res.extra]);
+      } else {
+        this.snackBar.open(
+          res.extra, 
+          'ok', {
+            duration: 5000
+          });
       }
     });
   }

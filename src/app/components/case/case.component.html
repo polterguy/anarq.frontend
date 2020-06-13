@@ -6,7 +6,7 @@
     class="mat-elevation-z4 case">
     <a
       class="home-link"
-      matTooltip="Go back to cases"
+      matTooltip="See all open cases"
       mat-button
       routerLink="/">
       <mat-icon>home</mat-icon>
@@ -31,7 +31,7 @@
       <div class="item">
         <a
           class="region-link"
-          [matTooltip]="'Case was brought forth to the anarchistic republic of ' + capitalize(item.region)"
+          [matTooltip]="'Question was asked in ' + capitalize(item.region)"
           [routerLink]="'/region/' + item.region">
           {{item.region}}
         </a>
@@ -39,14 +39,14 @@
       <div class="item">
         <a
           class="user-link"
-          [matTooltip]="'Case was brought forth to the public by user ' + item.user"
+          [matTooltip]="'Case was brought forth to the public by ' + item.user"
           [routerLink]="'/user/' + item.user">
           {{item.user}}
         </a>
       </div>
       <div
         class="item"
-        [matTooltip]="'Aye and nay can be given until ' + (item.deadline | date_format)">
+        [matTooltip]="'Votes can be cast until ' + (item.deadline | date_format)">
         {{item.deadline | toDate}}
       </div>
       <div
@@ -61,23 +61,28 @@
       <button
         (click)="yes()"
         class="yes"
-        matTooltip="Give your aye to this case"
+        matTooltip="Vote aye to this case"
         mat-stroked-button>
-        Yes
+        <mat-icon>thumb_up</mat-icon>
       </button>
       <button
         (click)="no()"
         class="no"
-        matTooltip="Give your nay to this case"
+        matTooltip="Vote nay to this case"
         mat-stroked-button>
-        No
+        <mat-icon>thumb_down</mat-icon>
       </button>
     </div>
     <div
       class="action-bar"
       [ngClass]="getClass()"
       *ngIf="item.opinion !== undefined && isLoggedIn()">
-      You voted {{getOpinion()}} for this
+      <mat-icon
+        matTooltip="You voted aye for this case"
+        *ngIf="item.opinion === true">thumb_up</mat-icon>
+      <mat-icon
+        matTooltip="You voted nay for this case"
+        *ngIf="item.opinion === false">thumb_down</mat-icon>
     </div>
   </div>
 

@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { PublicService } from 'src/app/services/http/public.service';
 import { RegionsModel } from 'src/app/models/regions-model';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-setup-regions',
@@ -18,6 +19,7 @@ export class SetupRegionsComponent implements OnInit {
   private filter: string = null;
 
   constructor(
+    private snackBar: MatSnackBar,
     private service: PublicService,
     private router: Router) { }
 
@@ -40,7 +42,13 @@ export class SetupRegionsComponent implements OnInit {
   selectRegion(region: string) {
     this.service.setRegion(region).subscribe(res => {
       if (res.result === 'SUCCESS') {
-        this.router.navigate(['/region/' + region])
+        this.router.navigate(['/'])
+      } else {
+        this.snackBar.open(
+          res.extra,
+          'ok', {
+            duration: 5000,
+          });
       }
     });
   }

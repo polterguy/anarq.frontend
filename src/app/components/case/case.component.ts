@@ -41,13 +41,10 @@ export class CaseComponent implements OnInit {
   yes() {
     this.service.vote(this.id, true).subscribe(res => {
       this.item.opinion = true;
-      this.snackBar.open(
-        'Your vote has been registered',
-        'ok', {
-          duration: 2000,
-        });
     }, err => {
-      this.snackBar.open(err.error.message, 'ok');
+      this.snackBar.open(err.error.message, 'ok', {
+        duration: 5000,
+      });
     });
   }
 
@@ -62,14 +59,6 @@ export class CaseComponent implements OnInit {
     }, err => {
       this.snackBar.open(err.error.message, 'ok');
     });
-  }
-
-  getOpinion() {
-    if (this.item.opinion) {
-      return 'yes';
-    } else {
-      return 'no';
-    }
   }
 
   capitalize(region: string) {

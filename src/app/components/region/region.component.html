@@ -1,5 +1,9 @@
 
-<h1 *ngIf="region">{{region}}</h1>
+<h1
+  *ngIf="region"
+  [matTooltip]="'The People\'s Court of Law @ The Independent Republic of ' + getRegion(region)">
+  {{region}}
+</h1>
 
 <mat-card class="info-card">
 
@@ -18,7 +22,7 @@
   <a
     class="home-link"
     mat-button
-    matTooltip="Go back to all open cases"
+    matTooltip="See all open cases"
     routerLink="/">
     <mat-icon>home</mat-icon>
   </a>
