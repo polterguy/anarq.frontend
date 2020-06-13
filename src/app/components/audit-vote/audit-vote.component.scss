@@ -7,6 +7,11 @@ h1 {
     text-align: center;
     margin-top: 2rem;
 }
+h4 {
+    display: block;
+    text-align: center;
+    margin-top: -1rem;
+}
 .audit {
     margin: -1.75rem 5rem 2rem 5rem;
     padding: 3rem;
@@ -25,6 +30,11 @@ h1 {
         top: 1rem;
         right: 3rem;
         font-size: 3rem;
+    }
+    .previous {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
     }
 }
 .audit.danger {

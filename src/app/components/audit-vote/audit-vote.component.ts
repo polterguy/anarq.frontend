@@ -18,6 +18,8 @@ export class AuditVoteComponent implements OnInit {
   public caseId: number = null;
   public yes: number = null;
   public no: number = null;
+  public previous: string = null;
+  private hash: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,12 +27,18 @@ export class AuditVoteComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(pars => {
+      this.hash = pars.hash;
       this.service.auditVote(pars.hash).subscribe(res => {
         if (res.result === 'SUCCESS') {
           this.voteGood = true;
           this.caseId = res.case;
           this.yes = res.yes;
           this.no = res.no;
+          if (res.previous) {
+            this.previous = res.previous;
+          } else {
+            this.previous = null;
+          }
         } else {
           this.voteGood = false;
           this.extra = res.extra;

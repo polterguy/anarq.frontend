@@ -11,4 +11,5 @@ export class ResultAuditModel extends ResultModel {
     case?: number;
     yes?: number;
     no?: number;
+    previous?: string;
 }
