@@ -44,7 +44,7 @@ export class SetupRegionsComponent implements OnInit {
       if (res.result === 'SUCCESS') {
         this.router.navigate(['/'])
         this.snackBar.open(
-          'Congratulations, you are now an active participant in Direct Democracy',
+          'Congratulations, you are now allowed to vote and propose cases at AnarchU',
           'ok', {
             duration: 5000,
           });
