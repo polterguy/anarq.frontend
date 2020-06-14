@@ -27,10 +27,6 @@ import { LoginComponent } from '../../modals/login.component';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  // Databound towards login form parts of component.
-  private username: string;
-  private password: string;
-
   // Databound towards your side navigation. If true, it implies the navbar menu is expanded.
   private sidenavOpened = false;
 
@@ -40,6 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
    * to show, and which we want to hide.
    */
   private token: any = null;
+  private isLoggedIn = false;
 
   /*
    * Message service subscription, allowing us to communicate with other components
@@ -70,6 +67,8 @@ export class AppComponent implements OnInit, OnDestroy {
         localStorage.removeItem('jwt_token');
       } else {
         this.token = this.jwtHelper.decodeToken(token);
+        this.isLoggedIn = true;
+        this.tryRefreshTicket();
       }
     }
 
@@ -109,6 +108,7 @@ export class AppComponent implements OnInit, OnDestroy {
           }
           localStorage.setItem('jwt_token', msg.content);
           this.token = this.jwtHelper.decodeToken(msg.content);
+          this.isLoggedIn = true;
           this.messageService.sendMessage({
             name: Messages.APP_LOGGED_IN,
             content: this.token,
@@ -119,12 +119,13 @@ export class AppComponent implements OnInit, OnDestroy {
         case Messages.APP_LOGOUT:
           localStorage.removeItem('jwt_token');
           this.token = null;
+          this.isLoggedIn = false;
           this.messageService.sendMessage({
             name: Messages.APP_LOGGED_OUT
           });
           break;
 
-        // Sent when user is logging out for some reasons.
+        // Sent when the JWT token has been refreshed.
         case Messages.APP_TOKEN_REFRESHED:
           this.snackBar.open(
             'Your JWT token was refreshed',
@@ -136,6 +137,11 @@ export class AppComponent implements OnInit, OnDestroy {
         // Sent when some component needs the JWT token for some reasons.
         case Messages.APP_GET_JWT_TOKEN:
           msg.content = this.token;
+          break;
+
+        // Sent when some component needs the username for some reasons.
+        case Messages.APP_GET_USERNAME:
+          msg.content = this.token?.unique_name ?? null;
           break;
 
       }
@@ -151,14 +157,6 @@ export class AppComponent implements OnInit, OnDestroy {
     return this.token?.roles?.filter(x => {
       return x === 'admin' || x === 'moderator' || x === 'root';
     })?.length > 0 || false;
-  }
-
-  /*
-   * Returns true if user is logged in, with a valid token,
-   * that's not expired.
-   */
-  isLoggedIn() {
-    return this.token !== null;
   }
 
   /*
@@ -195,19 +193,26 @@ export class AppComponent implements OnInit, OnDestroy {
   tryRefreshTicket() {
 
     // Verifying user hasn't logged out since timer was created.
-    if (this.isLoggedIn()) {
+    if (this.isLoggedIn) {
 
       // Invokes refresh backend method.
       this.httpService.refreshTicket().subscribe(res => {
 
         // Success, updating JWT token, and invoking "self" 5 minutes from now.
         localStorage.setItem('jwt_token', res.ticket);
+        this.token = this.jwtHelper.decodeToken(res.ticket);
+        this.messageService.sendMessage({
+          name: Messages.APP_TOKEN_REFRESHED,
+          content: this.token,
+        });
         setTimeout(() => this.tryRefreshTicket(), 300000);
 
       }, error => {
 
         // Oops, some sort of error.
         console.error(error);
+        this.token = null;
+        this.isLoggedIn = false;
         this.snackBar.open(
           'You have been automatically logged out, due to failing to refresh your token. Server message: ' + error,
           'Close', {

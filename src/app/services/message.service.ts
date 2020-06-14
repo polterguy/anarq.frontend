@@ -25,12 +25,11 @@ export class Messages {
     static readonly APP_LOGGED_IN = 'app:logged_in';
 
     /**
-     * Sent after user has successfully refreshed his JWT token.
+     * Sent when user wants to logout.
      * 
-     * The value provided as input is the results from JwtHelperService's
-     * decodeToken function.
+     * Assumes no content, and returns no content.
      */
-    static readonly APP_TOKEN_REFRESHED = 'app:token_refresh';
+    static readonly APP_LOGOUT = 'app:logout';
 
     /**
      * Sent when user has been successfully logged out.
@@ -40,11 +39,12 @@ export class Messages {
     static readonly APP_LOGGED_OUT = 'app:logged_out';
 
     /**
-     * Sent when user wants to logout.
+     * Sent after user has successfully refreshed his JWT token.
      * 
-     * Assumes no content, and returns no content.
+     * The value provided as input is the results from JwtHelperService's
+     * decodeToken function.
      */
-    static readonly APP_LOGOUT = 'app:logout';
+    static readonly APP_TOKEN_REFRESHED = 'app:token_refresh';
 
     /**
      * Returns decoded token as content.
@@ -53,6 +53,11 @@ export class Messages {
      * decodeToken function.
      */
     static readonly APP_GET_JWT_TOKEN = 'app:get_jwt_token';
+
+    /**
+     * Returns username to caller.
+     */
+    static readonly APP_GET_USERNAME = 'app:get_username';
 }
 
 /**
@@ -87,6 +92,20 @@ export class MessageService {
    */
   sendMessage(message: Message) {
     this.subject.next(message);
+  }
+
+  /**
+   * Sends a message to any subscribers.
+   * 
+   * @param message Message to transmit to other listeners
+   */
+  getValue(name: string) {
+    let msg = {
+      name,
+      content: null,
+    };
+    this.subject.next(msg);
+    return msg.content;
   }
 
   /**

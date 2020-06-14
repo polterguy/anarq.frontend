@@ -152,7 +152,7 @@
   <mat-sidenav-content>
     <div>
       <div
-        *ngIf="isLoggedIn()"
+        *ngIf="isLoggedIn === true"
         class="login-strip">
         <button
           mat-button
@@ -161,7 +161,7 @@
         </button>
       </div>
       <div
-        *ngIf="!isLoggedIn()"
+        *ngIf="isLoggedIn === false"
         class="login-strip">
         <button
           mat-button
