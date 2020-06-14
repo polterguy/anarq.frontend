@@ -3,29 +3,29 @@
  */
 
 // Angular imports.
-import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 // Services your app depends upon.
 import { LoaderService } from '../../services/loader.service';
-import { MatDialog } from '@angular/material';
+import { MessageService, Messages } from '../../services/message.service'
+import { PublicService } from '../../services/http/public.service';
+
+// Custom components needed in this component.
+import { Subscription } from 'rxjs';
 import { LoginComponent } from '../../modals/login.component';
-import { PublicService } from 'src/app/services/http/public.service';
 
 /*
- * Your actual component.
- *
- * Notice, this is your app's main "wire frame", and supplies you with
- * a login form, a navigation menu, in addition to some other helper functions,
- * such as automatically refreshing your JWT token before it expires, etc.
+ * This is your app's main "wire frame" component.
  */
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
   // Databound towards login form parts of component.
   private username: string;
@@ -39,57 +39,139 @@ export class AppComponent implements OnInit {
    * user belongs to. Notice, this is needed to figure out which navbar items we want
    * to show, and which we want to hide.
    */
-  private roles: string [] = [];
+  private token: any = null;
 
-  // Constructor taking a bunch of services ++ through dependency injection.
+  /*
+   * Message service subscription, allowing us to communicate with other components
+   * in a publish/subscribe manner.
+   */
+  private messageSubscription: Subscription;
+
+  /*
+   * Constructor, doing nothing except taking a bunch of services.
+   */
   constructor(
     private httpService: PublicService,
     private jwtHelper: JwtHelperService,
     private snackBar: MatSnackBar,
     private loaderService: LoaderService,
-    public dialog: MatDialog) { }
+    private messageService: MessageService,
+    private dialog: MatDialog) { }
 
+  /*
+   * OnInit implementation for component.
+   */
   ngOnInit() {
-    this.trySetRoles();
-  }
 
-  trySetRoles() {
-    // Checking if user is logged in, at which point we initialize the roles property.
+    // Initializing roles.
     const token = localStorage.getItem('jwt_token');
     if (token) {
-
-      // Yup! User is logged in!
-      const decoded = this.jwtHelper.decodeToken(token);
-      this.roles = decoded.role.split(',');
+      if (this.jwtHelper.isTokenExpired()) {
+        localStorage.removeItem('jwt_token');
+      } else {
+        this.token = this.jwtHelper.decodeToken(token);
+      }
     }
+
+    // Initializing subscriptions.
+    this.messageSubscription = this.initSubscriptions();
   }
 
-  shouldDisplayHomeButton() {
-    return this.roles.filter(
-      x => x === 'admin' ||
-      x === 'moderator' ||
-      x === 'root').length > 0;
+  /*
+   * OnDestroy implementation for component.
+   */
+  ngOnDestroy() {
+    this.messageSubscription?.unsubscribe();
   }
 
-  // Returns true if user is logged in, with a valid token, that's not expired.
+  /*
+   * Initializing subscriptions for component, and returns
+   * subscription to caller.
+   */
+  private initSubscriptions() {
+
+    /*
+     * Making sure we subscribe to relevant messages.
+     */
+    return this.messageService.getMessage().subscribe(msg => {
+
+      switch (msg.name) {
+
+        // Sent when user is logging in.
+        case Messages.APP_LOGIN:
+          if (!msg.content) {
+            throw 'No JWT token provided when trying to login';
+          }
+          localStorage.removeItem('jwt_token');
+          this.token = null;
+          if (this.jwtHelper.isTokenExpired(msg.content)) {
+            throw 'Token is expired';
+          }
+          localStorage.setItem('jwt_token', msg.content);
+          this.token = this.jwtHelper.decodeToken(msg.content);
+          this.messageService.sendMessage({
+            name: Messages.APP_LOGGED_IN,
+            content: this.token,
+          });
+          break;
+
+        // Sent when user is logging out for some reasons.
+        case Messages.APP_LOGOUT:
+          localStorage.removeItem('jwt_token');
+          this.token = null;
+          this.messageService.sendMessage({
+            name: Messages.APP_LOGGED_OUT
+          });
+          break;
+
+        // Sent when user is logging out for some reasons.
+        case Messages.APP_TOKEN_REFRESHED:
+          this.snackBar.open(
+            'Your JWT token was refreshed',
+            'ok', {
+              duration: 2000,
+            });
+          break;
+
+        // Sent when some component needs the JWT token for some reasons.
+        case Messages.APP_GET_JWT_TOKEN:
+          msg.content = this.token;
+          break;
+
+      }
+    });
+  }
+
+  /*
+   * Determines if menu button should be shown, which
+   * is only tru if the user belongs to a role that have
+   * access to one or more of the menu items in the menu.
+   */
+  shouldDisplayMenuButton() {
+    return this.token?.roles?.filter(x => {
+      return x === 'admin' || x === 'moderator' || x === 'root';
+    })?.length > 0 || false;
+  }
+
+  /*
+   * Returns true if user is logged in, with a valid token,
+   * that's not expired.
+   */
   isLoggedIn() {
-    const token = localStorage.getItem('jwt_token');
-    if (!token) {
-      return false;
-    }
-    if (this.jwtHelper.isTokenExpired(token)) {
-      return false;
-    }
-    return true;
+    return this.token !== null;
   }
 
-  // Logs the user out, and removes the token from local storage.
+  /*
+   * Logs the user out, and removes the token from local storage.
+   */
   logout() {
-    this.roles = [];
-    localStorage.removeItem('jwt_token');
+    this.messageService.sendMessage({
+      name: Messages.APP_LOGOUT,
+    });
   }
 
   tryLogin() {
+
     // Creating our modal dialog, passing in the cloned entity, and "isEdit" as true.
     const dialogRef = this.dialog.open(LoginComponent, {
       width: '400px',
@@ -97,39 +179,16 @@ export class AppComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(res => {
       if (res !== null && res !== undefined && res.ticket) {
-        localStorage.setItem('jwt_token', res.ticket);
-        this.trySetRoles();
+        this.messageService.sendMessage({
+          name: Messages.APP_LOGIN,
+          content: res.ticket
+        });
       }
     });
   }
 
-  // Attempts to login user, using the username/password combination he provided in the login form.
-  login() {
-    this.httpService.authenticate(this.username, this.password).subscribe(res => {
-
-      // Success! User is authenticated.
-      localStorage.setItem('jwt_token', res.ticket);
-      this.username = '';
-      this.password = '';
-      this.roles = this.jwtHelper.decodeToken(res.ticket).role;
-
-      // Refreshing JWT token every 5 minute.
-      setTimeout(() => this.tryRefreshTicket(), 300000);
-    }, (error: any) => {
-
-      // Oops, authentication error, or something similar.
-      console.error(error);
-      this.snackBar.open(error.error.message, 'Close', {
-        duration: 3000,
-        panelClass: ['error-snackbar'],
-      });
-    });
-  }
-
   getUsername() {
-    const token = localStorage.getItem('jwt_token');
-    const decoded = this.jwtHelper.decodeToken(token);
-    return decoded.unique_name;
+    return this.token?.unique_name || null;
   }
 
   // Invoked before JWT token expires. Tries to "refresh" the JWT token, by invoking backend method.
@@ -149,13 +208,11 @@ export class AppComponent implements OnInit {
 
         // Oops, some sort of error.
         console.error(error);
-        this.snackBar.open(error, 'Close', {
-          duration: 3000,
-          panelClass: ['error-snackbar'],
-        });
-
-        // Invoking "self" 5 minutes from now.
-        setTimeout(() => this.tryRefreshTicket(), 300000);
+        this.snackBar.open(
+          'You have been automatically logged out, due to failing to refresh your token. Server message: ' + error,
+          'Close', {
+            panelClass: ['error-snackbar'],
+          });
       });
     }
   }
@@ -176,7 +233,7 @@ export class AppComponent implements OnInit {
       return true;
     }
     for (const idx of roles) {
-      if (this.roles.indexOf(idx) !== -1) {
+      if (this.token?.roles?.indexOf(idx) !== -1) {
         return true;
       }
     }

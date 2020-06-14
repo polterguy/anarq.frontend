@@ -8,18 +8,18 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Importing components, first "global/common" components.
 import { HomeComponent } from './components/home/home.component';
-import { AuthComponent } from './components/auth/auth.component';
+import { AuthComponent } from './components/private/auth/auth.component';
 
 // Then importing all "entity components". Basically, the datagrids for viewing entities from your backend.
-import { Case_typesComponent } from './components/case_types/case_types.component';
-import { CasesComponent } from './components/cases/cases.component';
-import { LanguagesComponent } from './components/languages/languages.component';
-import { RegionsComponent } from './components/regions/regions.component';
-import { TranslationsComponent } from './components/translations/translations.component';
-import { User_statusComponent } from './components/user_status/user_status.component';
-import { Users_regionsComponent } from './components/users_regions/users_regions.component';
-import { Users_extra_typesComponent } from './components/users_extra_types/users_extra_types.component';
-import { Users_extraComponent } from './components/users_extra/users_extra.component';
+import { Case_typesComponent } from './components/private/case_types/case_types.component';
+import { CasesComponent } from './components/private/cases/cases.component';
+import { LanguagesComponent } from './components/private/languages/languages.component';
+import { RegionsComponent } from './components/private/regions/regions.component';
+import { TranslationsComponent } from './components/private/translations/translations.component';
+import { User_statusComponent } from './components/private/user_status/user_status.component';
+import { Users_regionsComponent } from './components/private/users_regions/users_regions.component';
+import { Users_extra_typesComponent } from './components/private/users_extra_types/users_extra_types.component';
+import { Users_extraComponent } from './components/private/users_extra/users_extra.component';
 import { VotesComponent } from './components/votes/votes.component';
 import { CaseComponent } from './components/case/case.component';
 import { UserComponent } from './components/user/user.component';

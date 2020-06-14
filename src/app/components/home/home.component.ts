@@ -8,6 +8,7 @@ import { PublicService } from 'src/app/services/http/public.service';
 import { RegionsModel } from 'src/app/models/regions-model';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-home',
@@ -23,8 +24,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private httpService: PublicService,
-    private router: Router,
-    private jwtHelper: JwtHelperService) { }
+    private jwtHelper: JwtHelperService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     let username = null;
@@ -36,13 +37,31 @@ export class HomeComponent implements OnInit {
     this.httpService.getOpenCases(null, null, username).subscribe(res => {
       this.cases = res;
       this.more = res !== null && res.length === 25;
+    }, err => {
+      this.snackBar.open(
+        err.errror.message,
+        'ok', {
+          duration: 5000
+        });
     });
     if (this.isLoggedIn()) {
       this.httpService.getMyRegions().subscribe(res => {
         this.regions = res;
+      }, err => {
+        this.snackBar.open(
+          err.errror.message,
+          'ok', {
+            duration: 5000
+          });
       });
       this.httpService.canCreateCase('norge').subscribe(res => {
         this.canCreateCase = res.result === 'SUCCESS';
+      }, err => {
+        this.snackBar.open(
+          err.errror.message,
+          'ok', {
+            duration: 5000
+          });
       });
     }
   }
@@ -57,6 +76,12 @@ export class HomeComponent implements OnInit {
     this.httpService.getOpenCases(this.cases.length, null, username).subscribe(res => {
       this.more = res && res.length === 25;
       this.cases = this.cases.concat(res);
+    }, err => {
+      this.snackBar.open(
+        err.errror.message,
+        'ok', {
+          duration: 5000
+        });
     });
   }
 

@@ -44,13 +44,14 @@ export class CaseComponent implements OnInit {
       this.snackBar.open(
         'A cryptographically signed email receipt of your vote was sent to your registered email address. Please keep this email safe somewhere in case of auditing of the system.',
         'ok', {
-          duration: 5000,
+          duration: 10000,
         });
     }, err => {
+      console.error(err);
       this.snackBar.open(
         err.error.message,
         'ok', {
-          duration: 5000,
+          duration: 10000,
         });
     });
   }
@@ -61,10 +62,15 @@ export class CaseComponent implements OnInit {
       this.snackBar.open(
         'A cryptographically signed email receipt of your vote was sent to your registered email address. Please keep this email safe somewhere in case of auditing of the system.',
         'ok', {
-          duration: 5000,
+          duration: 10000,
         });
     }, err => {
-      this.snackBar.open(err.error.message, 'ok');
+      console.error(err);
+      this.snackBar.open(
+        err.error.message,
+        'ok', {
+          duration: 10000,
+        });
     });
   }
 

@@ -16,8 +16,6 @@ export class AuditVoteComponent implements OnInit {
   public voteGood: boolean = null;
   public extra: string = null;
   public caseId: number = null;
-  public yes: number = null;
-  public no: number = null;
   public previous: string = null;
   private hash: string;
 
@@ -32,8 +30,6 @@ export class AuditVoteComponent implements OnInit {
         if (res.result === 'SUCCESS') {
           this.voteGood = true;
           this.caseId = res.case;
-          this.yes = res.yes;
-          this.no = res.no;
           if (res.previous) {
             this.previous = res.previous;
           } else {

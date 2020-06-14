@@ -17,12 +17,8 @@
     <div
       *ngIf="voteGood === true">
       <p>
-        Your vote's receipt checks out, and does not seem to have been tampered with.
+        Receipt checks out, and does not seem to have been tampered with.
       </p>
-      <ul>
-        <li>{{yes}} ayes at the point the vote was cast</li>
-        <li>{{no}} nays at the point vote was cast</li>
-      </ul>
       <p>
         <a
           [routerLink]="'/case/' + caseId">
@@ -51,5 +47,13 @@
     </div>
 
   </div>
+
+  <a
+    *ngIf="voteGood === true"
+    mat-stroked-button
+    class="home-button"
+    routerLink="/">
+    Home
+  </a>
 
 </div>
