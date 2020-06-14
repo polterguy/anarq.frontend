@@ -36,6 +36,11 @@
                 th {
                     text-align: left;
                 }
+                td {
+                    .email {
+                        text-decoration: none;
+                    }
+                }
             }
         }
         .summary-regions {

@@ -13,7 +13,9 @@ export class Region {
 export class UserView {
     username: string;
     status: string;
-    name: string;
     cases: number;
     regions: Region[];
+    name?: string;
+    phone?: string;
+    email?: string;
 }

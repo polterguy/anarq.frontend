@@ -33,7 +33,7 @@
       <table class="summary-table">
         <tr>
           <th>Type</th>
-          <th>No</th>
+          <th>Value</th>
         </tr>
         <tr>
           <td>
@@ -49,6 +49,23 @@
           </td>
           <td>
             {{getTotalVotes()}}
+          </td>
+        </tr>
+        <tr *ngIf="item.phone">
+          <td>
+            Phone
+          </td>
+          <td>
+            {{item.phone}}
+          </td>
+        </tr>
+        <tr *ngIf="item.email">
+          <td colspan="2">
+            <a
+              [href]="'mailto:' + item.email"
+              class="email">
+              {{item.email}}
+            </a>
           </td>
         </tr>
       </table>
