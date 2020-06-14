@@ -2,20 +2,37 @@
  * Anarchy, a Direct Democracy system. Copyright 2020 - Thomas Hansen thomas@servergardens.com
  */
 
-import { Component, OnInit } from '@angular/core';
+/*
+ * Common system imports.
+ */
+import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { UserView } from 'src/app/models/user-view';
-import { ChartOptions } from 'chart.js';
-import { Label } from 'ng2-charts';
-import { PublicService } from 'src/app/services/http/public.service';
-import { CaseSlim } from 'src/app/models/case-slim';
 
+/*
+ * Helper library imports.
+ */
+import { Label } from 'ng2-charts';
+import { ChartOptions } from 'chart.js';
+
+/*
+ * Custom imports for component.
+ */
+import { UserView } from 'src/app/models/user-view';
+import { CaseSlim } from 'src/app/models/case-slim';
+import { BaseComponent } from 'src/app/helpers/base.components';
+import { MessageService, Messages } from 'src/app/services/message.service';
+import { PublicService } from 'src/app/services/http/public.service';
+
+/**
+ * Component for viewing users registered at site.
+ */
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit {
+export class UserComponent extends BaseComponent {
 
   public item: UserView = null;
   public cases: CaseSlim[] = null;
@@ -57,11 +74,70 @@ export class UserComponent implements OnInit {
       'rgba(240,240,240,0.8)',
     ]}];
 
+  /**
+   * Constructor for component.
+   * 
+   * @param service Service to retrieve data from server.
+   * @param messages Message publishing/subscription bus service.
+   * @param snack Snack bar required by base class to show errors.
+   * @param route Activated route service to allow us to figure out which user was requested.
+   */
   constructor(
-    private service: PublicService,
-    private route: ActivatedRoute) {}
+    protected service: PublicService,
+    protected messages: MessageService,
+    protected snack: MatSnackBar,
+    private route: ActivatedRoute)
+  {
+    super(service, messages, snack);
+  }
 
-  ngOnInit() {
+  /**
+   * @inheritDoc
+   * 
+   * We just fetch the user data here.
+   */
+  protected init() {
+    this.fetchUser();
+  }
+
+  /**
+   * @inheritDoc
+   * 
+   * We're only interested in handling when the user is logging in, since
+   * that prohibits him from registering again, and we redirect him to the
+   * main landing page of the site if he does.
+   */
+  protected initSubscriptions() {
+
+    /*
+     * Making sure we subscribe to relevant messages.
+     */
+    return this.messages.getMessage().subscribe(msg => {
+
+      switch (msg.name) {
+
+        /*
+         * The only message we're really interested in, is when user is logging in,
+         * or logging out, at which point we fetch the user data again, since the
+         * authenticated user might be a moderator, admin, or root user.
+         */
+        case Messages.APP_LOGGED_IN:
+          this.fetchUser();
+          break;
+
+        case Messages.APP_LOGGED_OUT:
+          this.fetchUser();
+          break;
+      }
+    });
+  }
+
+  /**
+   * Fetches the user from the backend.
+   */
+  private fetchUser() {
+
+    // Need to parse parameters to figure out what user to retrieve.
     this.route.params.subscribe(pars => {
       this.service.getUser(pars.username).subscribe(res => {
         this.item = res;
@@ -76,7 +152,10 @@ export class UserComponent implements OnInit {
     });
   }
 
-  getTotalVotes() {
+  /**
+   * Returns the total number of votes user has voted over.
+   */
+  private getTotalVotes() {
     let result = 0;
     if (this.item && this.item.regions) {
       this.item.regions.forEach(idx => {
@@ -86,6 +165,9 @@ export class UserComponent implements OnInit {
     return result;
   }
 
+  /**
+   * Returns true if region chart is supposed to be displayed.
+   */
   shouldDisplayRegionChart() {
     if (!this.item) {
       return false;
