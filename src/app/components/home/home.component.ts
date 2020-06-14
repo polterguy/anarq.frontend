@@ -110,6 +110,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
+  /*
+   * Returns all open cases relevant to client, which depends upon whether or
+   * not the client is logged in or not.
+   * 
+   * If the client is logged in, he will only see open cases in regions relevant
+   * to him or her. If client is not logged in, all cases will be returned, and no
+   * filter applied.
+   */
   getOpenCases() {
 
     // Retrieving username first.
@@ -120,6 +128,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.cases = res;
       this.more = res !== null && res.length === 25;
     }, err => {
+
+      // Oops ...!!
+      console.error(err);
       this.snackBar.open(
         err.errror.message,
         'ok', {
@@ -147,6 +158,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
+  /*
+   * Returns next "batch" of cases relevant to the client.
+   */
   getMore() {
 
     // Retrieving username first.
@@ -166,13 +180,5 @@ export class HomeComponent implements OnInit, OnDestroy {
           duration: 5000
         });
     });
-  }
-
-  getCount(item: CaseSlim) {
-    return item.positive + '/' + (item.votes - item.positive);
-  }
-
-  hasNoCases() {
-    return !this.cases || this.cases.length === 0;
   }
 }
