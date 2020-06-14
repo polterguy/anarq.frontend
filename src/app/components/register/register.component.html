@@ -2,7 +2,7 @@
 <h1>Register</h1>
 
 <mat-card
-  *ngIf="!isLoggedIn() && !done"
+  *ngIf="!done"
   class="register">
 
   <a
@@ -15,7 +15,7 @@
   <div class="progress">
     <mat-progress-bar
       mode="determinate"
-      [value]="getProgress()"></mat-progress-bar>
+      [value]="progress"></mat-progress-bar>
   </div>
 
   <div class="form-row">
@@ -73,7 +73,7 @@
     <mat-form-field
       *ngIf="nameGood === true"
       class="phone item">
-      <mat-label>{{phoneGood === false ? 'Phone number must be a registered cell phone in your name' : 'Cell phone'}}</mat-label>
+      <mat-label>{{phoneGood === false ? 'Phone number must be a registered cell phone in your name, and contain only numbers (no spaces)' : 'Cell phone'}}</mat-label>
       <input
         matInput
         placeholder="Cell phone ..."
@@ -100,7 +100,7 @@
         autocomplete="new-password"
         [formControl]="password">
       <mat-icon
-        (click)="makePasswordReadable()">remove_red_eye</mat-icon>
+        (click)="togglePasswordReadability()">remove_red_eye</mat-icon>
     </mat-form-field>
 
   </div>
@@ -129,7 +129,7 @@
       <p>
         By clicking the Submit button, you promise us that the above information is
         accurate, that you have given us your full legal name, a cell phone number registered
-        to you, and that you accept the terms and conditions of the site.
+        in your name, and that you accept the terms and conditions of the site.
         You also accept that we are allowed to occassionally send you marketing emails,
         according to your registered preferences, and that we might include 3rd party
         marketing material in these emails.
@@ -145,12 +145,13 @@
       <p>
         Votes you cast are kept private, and will not be shared by us with the general public, and
         your cell phone number or email will never be shared with any 3rd parties. However, your
-        legal name is publicly available, and statistics about how you vote is also visible for
-        other users of the site, in addition to your region(s) - But exactly which cases you choose
-        to vote for, and how you choose to vote, is never disclosed by us to any 3rd parties.
+        legal name is publicly available, in addition to your region(s) - But exactly how you
+        choose to vote, is never disclosed by us to any 3rd parties, unless required by a 3rd party
+        auditing organisation, such as the United Nations or WikiLeaks to validate votes in a case.
       </p>
       <p>
-        Welcome to AnarchU! Direct Democracy! Where Your Voice Matters!
+        Welcome to AnarchU! Direct Democracy! Where Your Voice Matters! We simply exchanged the Y,
+        with U, and then it all started making sense!
       </p>
       <label class="bottom-slogan">Free Speech, One Each!</label>
     </div>
@@ -169,22 +170,6 @@
     </button>
 
   </div>
-
-</mat-card>
-
-<mat-card
-  *ngIf="isLoggedIn()"
-  class="register">
-
-  <a
-    class="home-link"
-    routerLink="/">
-    home
-  </a>
-
-  <h3>
-    You are already registered at the site
-  </h3>
 
 </mat-card>
 

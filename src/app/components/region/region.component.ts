@@ -2,13 +2,20 @@
  * Anarchy, a Direct Democracy system. Copyright 2020 - Thomas Hansen thomas@servergardens.com
  */
 
+/*
+ * Common system imports.
+ */
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
+
+/*
+ * Custom imports for component.
+ */
 import { CaseSlim } from 'src/app/models/case-slim';
 import { BaseComponent } from 'src/app/helpers/base.components';
-import { MessageService, Messages } from 'src/app/services/message.service';
 import { PublicService } from 'src/app/services/http/public.service';
+import { MessageService, Messages } from 'src/app/services/message.service';
 
 /**
  * Component for viewing cases within a single region in the system.
@@ -22,10 +29,10 @@ import { PublicService } from 'src/app/services/http/public.service';
 })
 export class RegionComponent extends BaseComponent {
 
-  public cases: CaseSlim[] = [];
+  private cases: CaseSlim[] = [];
   private more: boolean;
-  public region: string = null;
-  public canCreateCase = false;
+  private region: string = null;
+  private canCreateCase = false;
 
   /**
    * Constructor for component.
@@ -33,6 +40,8 @@ export class RegionComponent extends BaseComponent {
    * @param service Service to retrieve data from server.
    * @param messages Message publishing/subscription bus service.
    * @param snack Snack bar required by base class to show errors.
+   * @param route Activated route, used to figure out region user wants to retrieve items from.
+   * @param router Router to allow us to redirect user to router links.
    */
   constructor(
     protected service: PublicService,
@@ -51,6 +60,8 @@ export class RegionComponent extends BaseComponent {
    * or not the user is logged in or not.
    */
   protected init() {
+
+    // We need to figure out which region we're in before we fetch items.
     this.route.params.subscribe(pars => {
       this.region = pars.region;
       this.getNextBatch();
@@ -59,6 +70,12 @@ export class RegionComponent extends BaseComponent {
 
   /**
    * @inheritDoc
+   * 
+   * We are only interested in logging out and in of the system, since
+   * that changes the cases the user should see, according to whether
+   * or not he has previously voted for the case or not.
+   * 
+   * Psst, we only show cases the user has NOT voted for by default.
    */
   protected initSubscriptions() {
 
@@ -95,7 +112,7 @@ export class RegionComponent extends BaseComponent {
   /**
    * Returns next "batch" of cases relevant to the client.
    */
-  public getNextBatch() {
+  private getNextBatch() {
 
     // Retrieving username, if any for currently authenticated client.
     const username = this.messages.getValue(Messages.APP_GET_USERNAME);
@@ -114,7 +131,7 @@ export class RegionComponent extends BaseComponent {
    * 
    * @param region Region name
    */
-  capitalize(region: string) {
+  private capitalize(region: string) {
     return region.charAt(0).toUpperCase() + region.slice(1);
   }
 
@@ -124,14 +141,14 @@ export class RegionComponent extends BaseComponent {
    * 
    * @param item Case item
    */
-  getCount(item: CaseSlim) {
+  private getCount(item: CaseSlim) {
     return item.positive + '/' + (item.votes - item.positive);
   }
 
   /**
    * Asks a question within the current region.
    */
-  askQuestion() {
+  private askQuestion() {
     this.router.navigate(['/ask/' + this.region]);
   }
 }

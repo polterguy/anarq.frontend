@@ -2,30 +2,48 @@
  * Anarchy, a Direct Democracy system. Copyright 2020 - Thomas Hansen thomas@servergardens.com
  */
 
-import { Component, OnInit } from '@angular/core';
-import { PublicService } from 'src/app/services/http/public.service';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { MatSnackBar } from '@angular/material';
-import { FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+/*
+ * Common system imports.
+ */
 import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
+/*
+ * Custom imports for component.
+ */
+import { BaseComponent } from 'src/app/helpers/base.components';
+import { MessageService, Messages } from 'src/app/services/message.service';
+import { PublicService } from 'src/app/services/http/public.service';
+
+/**
+ * Component for allowing users to register at the site.
+ */
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent extends BaseComponent {
 
+  // Form controls, necessary to validate values during writing.
   private username: FormControl;
   private email: FormControl;
   private name: FormControl;
   private phone: FormControl;
   private password: FormControl;
   private passwordRepeat: FormControl;
+
+  // If true, password is readable, and not hidden in input.
   private passwordReadable = false;
   private passwordRepeatReadable = false;
+
+  // Progress of registration.
   private progress = 0;
+
+  // If true, user has successfully registered, and we show information about verifying his or her email.
   private done = false;
 
   // Validation of fields.
@@ -36,47 +54,81 @@ export class RegisterComponent implements OnInit {
   private passwordGood?: boolean = null;
   private passwordRepeatGood?: boolean = null;
 
-  // Number of milliseconds after a keystroke before filtering should be re-applied.
+  // Number of milliseconds after a keystroke before validating value of control.
   private debounce = 800;
-  
-  constructor(
-    private service: PublicService,
-    private jwtHelper: JwtHelperService,
-    private router: Router,
-    private snackBar: MatSnackBar) { }
 
-  ngOnInit() {
-    if (this.isLoggedIn()) {
-      this.snackBar.open(
+  /**
+   * Constructor for component.
+   * 
+   * @param service Service to retrieve data from server.
+   * @param messages Message publishing/subscription bus service.
+   * @param snack Snack bar required by base class to show errors.
+   * @param router Router to allow us to redirect user to router links.
+   */
+  constructor(
+    protected service: PublicService,
+    protected messages: MessageService,
+    protected snack: MatSnackBar,
+    private router: Router)
+  {
+    super(service, messages, snack);
+  }
+
+  /**
+   * @inheritDoc
+   * 
+   * We simply check if user is registered at site from before, or
+   * more specifically if he is logged in, and if so, we tell him so,
+   * and redirects him to main landing page of site after some 2 seconds.
+   * 
+   * In addition, we initialize all the FormControls for each input field.
+   */
+  protected init() {
+
+    // Checking if user is already logged in, at which point we prohibit him from registering again.
+    if (this.messages.getValue(Messages.APP_GET_USERNAME)) {
+      this.snack.open(
         'You are already registered at this site',
         'ok');
+      setTimeout(() => this.router.navigate(['/']), 1000);
     }
 
+    /*
+     * Initializing FormControl instances.
+     *
+     * Notice, since we want to validate data as the user is
+     * typing in characters, we use debouncing until value has
+     * not changed for some specific amount of time, at which point
+     * we try to validate the data.
+     */
+
+    // Email control.
     this.email = new FormControl('');
     this.email.valueChanges
       .pipe(debounceTime(this.debounce), distinctUntilChanged())
       .subscribe(query => {
-        if (this.email.value.includes('@')) {
+        if (this.email.value.includes('@') && this.email.value.includes('.')) {
           this.service.emailAvailable(this.email.value).subscribe(res => {
             if (res.result === 'SUCCESS') {
               this.progress = 20;
               this.emailGood = true;
             } else {
               this.progress = 0;
-              this.snackBar.open(
-                'Email \'' + this.email.value + '\' is already registered, or not a valid email address', 
+              this.snack.open(
+                res.extra,
                 'ok', {
                   duration: 5000,
                 });
-              this.emailGood = null;
+              this.emailGood = false;
             }
-          });
+          }, error => this.handleError);
         } else {
           this.progress = 0;
           this.emailGood = false;
         }
       });
 
+    // Username control.
     this.username = new FormControl('');
     this.username.valueChanges
       .pipe(debounceTime(this.debounce), distinctUntilChanged())
@@ -88,20 +140,21 @@ export class RegisterComponent implements OnInit {
               this.usernameGood = true;
             } else {
               this.progress = 20;
-              this.snackBar.open(
+              this.snack.open(
                 'Username \'' + this.username.value + '\' is already registered', 
                 'ok', {
                   duration: 3000,
                 });
               this.usernameGood = null;
             }
-          });
+          }, error => this.handleError);
         } else {
           this.progress = 20;
           this.usernameGood = false;
         }
       });
 
+    // Full name control.
     this.name = new FormControl('');
     this.name.valueChanges
       .pipe(debounceTime(this.debounce), distinctUntilChanged())
@@ -115,11 +168,13 @@ export class RegisterComponent implements OnInit {
         }
       });
 
+    // Phone control
     this.phone = new FormControl('');
     this.phone.valueChanges
       .pipe(debounceTime(this.debounce), distinctUntilChanged())
       .subscribe(query => {
-        if (this.phone.value.length >= 8) {
+        const regex = /^[0-9]{8}$/
+        if (regex.test(this.phone.value)) {
           this.progress = 80;
           this.phoneGood = true;
         } else {
@@ -128,6 +183,7 @@ export class RegisterComponent implements OnInit {
         }
       });
 
+    // Password control.
     this.password = new FormControl('');
     this.password.valueChanges
       .pipe(debounceTime(this.debounce / 10), distinctUntilChanged())
@@ -147,6 +203,7 @@ export class RegisterComponent implements OnInit {
         }
       });
 
+    // Password repeat control.
     this.passwordRepeat = new FormControl('');
     this.passwordRepeat.valueChanges
       .pipe(debounceTime(this.debounce / 10), distinctUntilChanged())
@@ -161,39 +218,57 @@ export class RegisterComponent implements OnInit {
       });
   }
 
-  getProgress() {
-    return this.progress;
+  /**
+   * @inheritDoc
+   * 
+   * We're only interested in handling when the user is logging in, since
+   * that prohibits him from registering again, and we redirect him to the
+   * main landing page of the site if he does.
+   */
+  protected initSubscriptions() {
+
+    /*
+     * Making sure we subscribe to relevant messages.
+     */
+    return this.messages.getMessage().subscribe(msg => {
+
+      switch (msg.name) {
+
+        /*
+         * The only message we're really interested in, is when user is logging in,
+         * at which point we tell him he is already registered, and redirects him
+         * to main landing page of site.
+         */
+        case Messages.APP_LOGGED_IN:
+          this.snack.open(
+            'You can only register once at the site.',
+            'ok', {
+              duration: 2000,
+            });
+          setTimeout(() => this.router.navigate(['/']), 1000);
+          break;
+      }
+    });
   }
 
-  isLoggedIn() {
-    const token = localStorage.getItem('jwt_token');
-    if (!token) {
-      return false;
-    }
-    if (this.jwtHelper.isTokenExpired(token)) {
-      return false;
-    }
-    return true;
-  }
-
-  makePasswordReadable() {
+  togglePasswordReadability() {
     this.passwordReadable = !this.passwordReadable;
     this.passwordRepeatReadable = !this.passwordRepeatReadable;
   }
 
   showNameInformation() {
-    this.snackBar.open(
-      'In order to legally ensure you are an existing person, we need your full legal name, exactly as it can be found in the yellow pages. And yes, we will check this up!',
+    this.snack.open(
+      'In order to legally ensure you are an existing person, we need your full legal name, exactly as it can be found in the yellow pages. And yes, we will check this up! But we will never disclose your information to the general public.',
       'ok', {
-        duration: 10000,
+        duration: 25000,
       });
   }
 
   showPhoneInformation() {
-    this.snackBar.open(
-      'In order to legally ensure you are an existing person, we need your cell phone number, exactly as it can be found in the yellow pages. And yes, we will check this up!',
+    this.snack.open(
+      'In order to legally ensure you are an existing person, we need your cell phone number, exactly as it can be found in the yellow pages. And yes, we will check this up! But we will never disclose your information to the general public.',
       'ok', {
-        duration: 10000,
+        duration: 25000,
       });
   }
 
@@ -206,7 +281,7 @@ export class RegisterComponent implements OnInit {
       phone: this.phone.value,
     }).subscribe(res => {
       if (res.result === 'SUCCESS') {
-        this.snackBar.open(
+        this.snack.open(
           'Please check your email inbox',
           'ok', {
             duration: 3000,
@@ -217,7 +292,7 @@ export class RegisterComponent implements OnInit {
           5000);
       }
     }, err => {
-      this.snackBar.open(
+      this.snack.open(
         err.error.message, 
         'ok', {
           duration: 5000,

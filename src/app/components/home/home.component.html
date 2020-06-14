@@ -22,7 +22,7 @@
         {{idx.subject}}
       </a>
       <small>
-        {{idx.region}} ({{idx.positive + '/' + (idx.votes - idx.positive)}})
+        {{capitalize(idx.region)}} ({{idx.positive + '/' + (idx.votes - idx.positive)}})
       </small>
     </li>
   </ul>
@@ -31,7 +31,7 @@
     *ngIf="more"
     mat-button
     class="feed-more"
-    matTooltip="Get 5 next items"
+    matTooltip="Get 25 next items"
     (click)="getNextBatch()">
     More
   </button>
@@ -45,7 +45,7 @@
         <a
           class="region-link"
           [routerLink]="'/region/' + idx">
-          {{idx}}
+          {{capitalize(idx)}}
         </a>
       </li>
     </ul>
