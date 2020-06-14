@@ -159,7 +159,9 @@ export class RegisterComponent extends BaseComponent {
     this.name.valueChanges
       .pipe(debounceTime(this.debounce), distinctUntilChanged())
       .subscribe(query => {
-        if (this.name.value.length > 5 && this.name.value.includes(' ')) {
+        if (this.name.value.length > 5 &&
+          this.name.value.includes(' ') &&
+          this.name.value.toLowerCase() !== this.name.value) {
           this.progress = 60;
           this.nameGood = true;
         } else {
@@ -251,11 +253,17 @@ export class RegisterComponent extends BaseComponent {
     });
   }
 
+  /**
+   * Toggles whether or not password should be shown in plain text or not.
+   */
   togglePasswordReadability() {
     this.passwordReadable = !this.passwordReadable;
     this.passwordRepeatReadable = !this.passwordRepeatReadable;
   }
 
+  /**
+   * Shows information about why we need the full legal name for users.
+   */
   showNameInformation() {
     this.snack.open(
       'In order to legally ensure you are an existing person, we need your full legal name, exactly as it can be found in the yellow pages. And yes, we will check this up! But we will never disclose your information to the general public.',
@@ -264,6 +272,9 @@ export class RegisterComponent extends BaseComponent {
       });
   }
 
+  /**
+   * Shows information about why we need the phone number for users.
+   */
   showPhoneInformation() {
     this.snack.open(
       'In order to legally ensure you are an existing person, we need your cell phone number, exactly as it can be found in the yellow pages. And yes, we will check this up! But we will never disclose your information to the general public.',
@@ -272,7 +283,12 @@ export class RegisterComponent extends BaseComponent {
       });
   }
 
+  /**
+   * Submits the form and registers the user at the site.
+   */
   register() {
+
+    // Invokes HTTP service layer to register the user at the site.
     this.service.register({
       username: this.username.value,
       email: this.email.value,
@@ -281,6 +297,11 @@ export class RegisterComponent extends BaseComponent {
       phone: this.phone.value,
     }).subscribe(res => {
       if (res.result === 'SUCCESS') {
+
+        /*
+         * Success, showing general information to user, asking him to check his email inbox,
+         * to verify his email address.
+         */
         this.snack.open(
           'Please check your email inbox',
           'ok', {
@@ -291,12 +312,6 @@ export class RegisterComponent extends BaseComponent {
           () => this.router.navigate(['/']),
           5000);
       }
-    }, err => {
-      this.snack.open(
-        err.error.message, 
-        'ok', {
-          duration: 5000,
-        });
-    });
+    }, error => this.handleError);
   }
 }
