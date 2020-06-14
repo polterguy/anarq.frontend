@@ -15,14 +15,14 @@
 
   <ul class="front-page-cases">
     <li
-      *ngFor="let case of cases">
+      *ngFor="let idx of cases">
       <a
         class="case-link"
-        [routerLink]="'/case/' + case.id">
-        {{case.subject}}
+        [routerLink]="'/case/' + idx.id">
+        {{idx.subject}}
       </a>
       <small>
-        {{case.region}} ({{case.positive + '/' + (case.votes - case.positive)}})
+        {{idx.region}} ({{idx.positive + '/' + (idx.votes - idx.positive)}})
       </small>
     </li>
   </ul>
@@ -32,16 +32,16 @@
     mat-button
     class="feed-more"
     matTooltip="Get 5 next items"
-    (click)="getMore()">
-    ...
+    (click)="getNextBatch()">
+    More
   </button>
 
   <div
-    *ngIf="regions"
+    *ngIf="regions.length > 0"
     class="regions">
     <ul>
       <li
-        *ngFor="let idx of regions.regions">
+        *ngFor="let idx of regions">
         <a
           class="region-link"
           [routerLink]="'/region/' + idx">

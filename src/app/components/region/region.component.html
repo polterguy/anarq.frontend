@@ -1,7 +1,7 @@
 
 <h1
   *ngIf="region"
-  [matTooltip]="'The People\'s Court of Law @ The Independent Republic of ' + getRegion(region)">
+  [matTooltip]="'The People\'s Court of Law @ The Independent Republic of ' + capitalize(region)">
   {{region}}
 </h1>
 
@@ -12,7 +12,7 @@
     class="add-case"
     *ngIf="canCreateCase"
     (click)="askQuestion()"
-    [matTooltip]="'Bring forth a question to the people\'s court of ' + getRegion(region)">
+    [matTooltip]="'Bring forth a question to the people\'s court of ' + capitalize(region)">
     <mat-icon
       matSuffix>
       account_balance
@@ -28,7 +28,7 @@
   </a>
 
   <div
-    *ngIf="hasNoCases()"
+    *ngIf="cases.length === 0"
     class="information">
     Seems that you are all caught up :)
   </div>
@@ -50,8 +50,8 @@
     *ngIf="more"
     mat-button
     class="feed-more"
-    matTooltip="Get 5 next items"
-    (click)="getMore()">
+    matTooltip="Get 25 next items"
+    (click)="getCases()">
     ...
   </button>
 

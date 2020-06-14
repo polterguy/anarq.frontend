@@ -202,7 +202,15 @@ export class AppComponent extends BaseComponent {
       data: {},
     });
     dialogRef.afterClosed().subscribe(res => {
+
+      // Checking of 'OK' was clicked.
       if (res !== null && res !== undefined && res.ticket) {
+
+        /*
+         * We have a valid JWT ticket, now making sure all components
+         * interested in knowing gets to know, and allowing component
+         * responsible for storing JWT token correctly handle it as is.
+         */
         this.messages.sendMessage({
           name: Messages.APP_LOGIN,
           content: res.ticket
