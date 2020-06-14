@@ -46,16 +46,16 @@ export class HomeComponent extends BaseComponent {
   /**
    * Constructor for component.
    * 
-   * @param httpService Service to retrieve data from server.
-   * @param messageService Message publishing/subscription bus service.
-   * @param snackBar Snack bar required by base class to show errors.
+   * @param service Service to retrieve data from server.
+   * @param messages Message publishing/subscription bus service.
+   * @param snack Snack bar required by base class to show errors.
    */
   constructor(
-    protected httpService: PublicService,
-    protected messageService: MessageService,
-    protected snackBar: MatSnackBar)
+    protected service: PublicService,
+    protected messages: MessageService,
+    protected snack: MatSnackBar)
   {
-    super(httpService, messageService, snackBar);
+    super(service, messages, snack);
   }
 
   /**
@@ -64,10 +64,10 @@ export class HomeComponent extends BaseComponent {
   public getMore() {
 
     // Retrieving username first.
-    const username = this.messageService.getValue(Messages.APP_GET_USERNAME);
+    const username = this.messages.getValue(Messages.APP_GET_USERNAME);
 
     // Getting next batch of cases.
-    this.httpService.getOpenCases(this.cases.length, null, username).subscribe(res => {
+    this.service.getOpenCases(this.cases.length, null, username).subscribe(res => {
       this.more = res && res.length === 25;
       this.cases = this.cases.concat(res);
     }, err => this.handleError);
@@ -81,7 +81,7 @@ export class HomeComponent extends BaseComponent {
     /*
      * Making sure we subscribe to relevant messages.
      */
-    return this.messageService.getMessage().subscribe(msg => {
+    return this.messages.getMessage().subscribe(msg => {
 
       switch (msg.name) {
 
@@ -127,10 +127,10 @@ export class HomeComponent extends BaseComponent {
   private getOpenCases() {
 
     // Retrieving username first.
-    const username = this.messageService.getValue(Messages.APP_GET_USERNAME);
+    const username = this.messages.getValue(Messages.APP_GET_USERNAME);
 
     // Getting open cases relevant to user, or all cases if no username was given.
-    this.httpService.getOpenCases(null, null, username).subscribe(res => {
+    this.service.getOpenCases(null, null, username).subscribe(res => {
       this.cases = res;
       this.more = res !== null && res.length === 25;
     }, err => this.handleError);
@@ -140,7 +140,7 @@ export class HomeComponent extends BaseComponent {
      * all regions for currently logged in user.
      */
     if (username !== null) {
-      this.httpService.getMyRegions().subscribe(res => {
+      this.service.getMyRegions().subscribe(res => {
         this.regions = res;
       }, err => this.handleError);
     }

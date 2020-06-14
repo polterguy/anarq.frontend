@@ -1,6 +1,6 @@
 
 /*
- * system imports.
+ * System imports.
  */
 import { MatSnackBar } from '@angular/material';
 import { OnInit, OnDestroy } from '@angular/core';
@@ -28,13 +28,14 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
   /**
    * Constructor for class.
    * 
-   * @param messageService Message service to use for publish/subscribe events.
-   * @param snackBar Snackbar to use for displaying messages
+   * @param service HTTP service to retrieve data from the backend.
+   * @param messages Message service to use for publish/subscribe events.
+   * @param snack Snackbar to use for displaying messages.
    */
   constructor(
-    protected httpService: PublicService,
-    protected messageService: MessageService,
-    protected snackBar: MatSnackBar) { }
+    protected service: PublicService,
+    protected messages: MessageService,
+    protected snack: MatSnackBar) { }
 
   /**
    * Implementation of OnInit.
@@ -56,7 +57,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
 
   /**
    * Abstract method you must implement when deriving from class, to be able to handle
-   * events.
+   * messages and events using the publish/subscribe pattern.
    */
   protected abstract initSubscriptions() : Subscription;
 
@@ -72,7 +73,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
    */
   protected handleError(error: any) {
     console.error(error);
-    this.snackBar.open(
+    this.snack.open(
       error.error.message,
       'ok', {
         duration: 5000

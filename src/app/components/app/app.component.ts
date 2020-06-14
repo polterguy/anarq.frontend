@@ -16,6 +16,7 @@ import { PublicService } from '../../services/http/public.service';
 // Custom components needed in this component.
 import { Subscription } from 'rxjs';
 import { LoginComponent } from '../../modals/login.component';
+import { BaseComponent } from 'src/app/helpers/base.components';
 
 /*
  * This is your app's main "wire frame" component.
@@ -25,7 +26,7 @@ import { LoginComponent } from '../../modals/login.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent extends BaseComponent {
 
   // Databound towards your side navigation. If true, it implies the navbar menu is expanded.
   private sidenavOpened = false;
@@ -38,29 +39,33 @@ export class AppComponent implements OnInit, OnDestroy {
   private token: any = null;
   private isLoggedIn = false;
 
-  /*
-   * Message service subscription, allowing us to communicate with other components
-   * in a publish/subscribe manner.
-   */
-  private messageSubscription: Subscription;
-
-  /*
-   * Constructor, doing nothing except taking a bunch of services.
+  /**
+   * 
+   * @param loaderService Service used to show/hide Ajax spinner during invocations towards the server.
+   * @param service @inheritDoc
+   * @param messages @inheritDoc
+   * @param snack @inheritDoc
+   * @param jwtHelper JWT helper service, to decode and parse JWT tokens.
+   * @param dialog Material dialog helper, used to display login window.
    */
   constructor(
-    private httpService: PublicService,
+    public loaderService: LoaderService,
+    protected service: PublicService,
+    protected messages: MessageService,
+    protected snack: MatSnackBar,
     private jwtHelper: JwtHelperService,
-    private snackBar: MatSnackBar,
-    private loaderService: LoaderService,
-    private messageService: MessageService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog)
+  {
+    super(service, messages, snack);
+  }
 
-  /*
-   * OnInit implementation for component.
+  /**
+   * @inheritDoc
+   * 
+   * Implementation simply returns all open cases, which depends upon whether
+   * or not the user is logged in or not.
    */
-  ngOnInit() {
-
-    // Initializing roles.
+  protected init() {
     const token = localStorage.getItem('jwt_token');
     if (token) {
       if (this.jwtHelper.isTokenExpired()) {
@@ -71,32 +76,30 @@ export class AppComponent implements OnInit, OnDestroy {
         this.tryRefreshTicket();
       }
     }
-
-    // Initializing subscriptions.
-    this.messageSubscription = this.initSubscriptions();
   }
 
-  /*
-   * OnDestroy implementation for component.
-   */
-  ngOnDestroy() {
-    this.messageSubscription?.unsubscribe();
-  }
-
-  /*
+  /**
+   * @inheritDoc
+   * 
    * Initializing subscriptions for component, and returns
    * subscription to caller.
    */
-  private initSubscriptions() {
+  protected initSubscriptions() {
 
     /*
      * Making sure we subscribe to relevant messages.
      */
-    return this.messageService.getMessage().subscribe(msg => {
+    return this.messages.getMessage().subscribe(msg => {
 
       switch (msg.name) {
 
-        // Sent when user is logging in.
+        /*
+         * Sent when user is logging in.
+         *
+         * Notice, normally this message would only be raised from within
+         * this component, but to make things extendible, we still use messaging
+         * to accomplish this.
+         */
         case Messages.APP_LOGIN:
           if (!msg.content) {
             throw 'No JWT token provided when trying to login';
@@ -109,37 +112,56 @@ export class AppComponent implements OnInit, OnDestroy {
           localStorage.setItem('jwt_token', msg.content);
           this.token = this.jwtHelper.decodeToken(msg.content);
           this.isLoggedIn = true;
-          this.messageService.sendMessage({
+          this.messages.sendMessage({
             name: Messages.APP_LOGGED_IN,
             content: this.token,
           });
           break;
 
-        // Sent when user is logging out for some reasons.
+        /*
+         * Published when user is logging out for some reasons.
+         *
+         * Notice, normally this message would only be raised from within
+         * this component, but to make things extendible, we still use messaging
+         * to accomplish this.
+         */
         case Messages.APP_LOGOUT:
           localStorage.removeItem('jwt_token');
           this.token = null;
           this.isLoggedIn = false;
-          this.messageService.sendMessage({
+          this.messages.sendMessage({
             name: Messages.APP_LOGGED_OUT
           });
           break;
 
-        // Sent when the JWT token has been refreshed.
+        /*
+         * Published when JWT token has been refreshed for some reasons.
+         *
+         * Notice, normally this message would only be raised from within
+         * this component, but to make things extendible, we still use messaging
+         * to accomplish this.
+         */
         case Messages.APP_TOKEN_REFRESHED:
-          this.snackBar.open(
+          this.snack.open(
             'Your JWT token was refreshed',
             'ok', {
               duration: 2000,
             });
           break;
 
-        // Sent when some component needs the JWT token for some reasons.
+        /*
+         * Published when some other component needs the JWT token for some reasons.
+         *
+         * Will return the JWT token in 'decoded' format.
+         */
         case Messages.APP_GET_JWT_TOKEN:
           msg.content = this.token;
           break;
 
-        // Sent when some component needs the username for some reasons.
+        /*
+         * Published when some other component needs the username of the
+         * currently authenticated user for some reasons.
+         */
         case Messages.APP_GET_USERNAME:
           msg.content = this.token?.unique_name ?? null;
           break;
@@ -148,27 +170,31 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
-  /*
+  /**
    * Determines if menu button should be shown, which
-   * is only tru if the user belongs to a role that have
+   * is only true if the user belongs to a role that have
    * access to one or more of the menu items in the menu.
    */
-  shouldDisplayMenuButton() {
-    return this.token?.roles?.filter(x => {
+  public shouldDisplayMenuButton() {
+    return this.token?.roles?.filter((x: any) => {
       return x === 'admin' || x === 'moderator' || x === 'root';
     })?.length > 0 || false;
   }
 
-  /*
-   * Logs the user out, and removes the token from local storage.
+  /**
+   * Logs the user out, and removes the JWT token from local storage.
    */
-  logout() {
-    this.messageService.sendMessage({
+  public logout() {
+    this.messages.sendMessage({
       name: Messages.APP_LOGOUT,
     });
   }
 
-  tryLogin() {
+  /**
+   * Tries to login the user, by showing a modal dialog, allowing him
+   * or her to type in their username/password combination.
+   */
+  public tryLogin() {
 
     // Creating our modal dialog, passing in the cloned entity, and "isEdit" as true.
     const dialogRef = this.dialog.open(LoginComponent, {
@@ -177,7 +203,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe(res => {
       if (res !== null && res !== undefined && res.ticket) {
-        this.messageService.sendMessage({
+        this.messages.sendMessage({
           name: Messages.APP_LOGIN,
           content: res.ticket
         });
@@ -185,55 +211,61 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
-  getUsername() {
+  /**
+   * Returns the username of the currently authenticated user, or
+   * null if client is not authenticated.
+   */
+  public getUsername() {
     return this.token?.unique_name || null;
   }
 
-  // Invoked before JWT token expires. Tries to "refresh" the JWT token, by invoking backend method.
+  /**
+   * Refreshes the JWT token by invoking the HTTP service's endpoint
+   * for refreshing the JWT token.
+   */
   tryRefreshTicket() {
 
     // Verifying user hasn't logged out since timer was created.
     if (this.isLoggedIn) {
 
       // Invokes refresh backend method.
-      this.httpService.refreshTicket().subscribe(res => {
+      this.service.refreshTicket().subscribe(res => {
 
         // Success, updating JWT token, and invoking "self" 5 minutes from now.
         localStorage.setItem('jwt_token', res.ticket);
         this.token = this.jwtHelper.decodeToken(res.ticket);
-        this.messageService.sendMessage({
+        this.messages.sendMessage({
           name: Messages.APP_TOKEN_REFRESHED,
           content: this.token,
         });
         setTimeout(() => this.tryRefreshTicket(), 300000);
 
-      }, error => {
-
-        // Oops, some sort of error.
-        console.error(error);
-        this.token = null;
-        this.isLoggedIn = false;
-        this.snackBar.open(
-          'You have been automatically logged out, due to failing to refresh your token. Server message: ' + error,
-          'Close', {
-            panelClass: ['error-snackbar'],
-          });
-      });
+      }, error => this.handleError);
     }
   }
 
-  // Invoked when side navigation menu should be showed.
-  openSideNavigation() {
+  /**
+   * Opens up the side navigation menu.
+   */
+  public openSideNavigation() {
     this.sidenavOpened = true;
   }
 
-  // Invoked when side navigation menu should be hidden.
-  closeNavigator() {
+  /**
+   * Closes the side navigation menu.
+   */
+  public closeNavigator() {
     this.sidenavOpened = false;
   }
 
-  // Returns true if user belongs to (at least) one of the specified role names.
-  inRole(roles: string[]) {
+  /**
+   * Checks to see if the currently authenticated user, if any,
+   * belongs to one or more of the roles given as an argument.
+   * Notice, if list is empty or null, method will always return true.
+   * 
+   * @param roles Roles to check if user belongs to.
+   */
+  public inRole(roles: string[]) {
     if (roles === null || roles === undefined || roles.length === 0) {
       return true;
     }
