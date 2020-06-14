@@ -7,7 +7,7 @@
     [ngClass]="getCssClass()"
     class="mat-elevation-z4 audit">
 
-    <h4>{{hash}}</h4>
+    <h4>{{username}} - {{hash}}</h4>
 
     <mat-icon
       class="checks-out"
@@ -17,7 +17,17 @@
     <div
       *ngIf="voteGood === true">
       <p>
-        Receipt checks out, and does not seem to have been tampered with.
+        Receipt checks out, and does not seem to have been tampered with. Notice, others can only
+        see that you voted for this case, and not what vote you cast. In case an external auditing
+        of the system is required, you might need to forward your original receipt email to an
+        independent 3rd party organisation, such as the United Nations or WikiLeaks, to allow
+        them to audit the votes for this case.
+      </p>
+      <p>
+        <strong>
+          AnarchU will never disclose your vote to anybody, except an independent 3rd party
+          auditing organisation. Neither should you.
+        </strong>
       </p>
       <p>
         <a
