@@ -5,10 +5,8 @@
 /*
  * Common system imports.
  */
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
-import { Subscription } from 'rxjs';
 
 /*
  * Custom imports for component.
@@ -17,8 +15,9 @@ import { CaseSlim } from 'src/app/models/case-slim';
 import { PublicService } from 'src/app/services/http/public.service';
 import { RegionsModel } from 'src/app/models/regions-model';
 import { MessageService, Messages } from 'src/app/services/message.service';
+import { BaseComponent } from 'src/app/helpers/base.components';
 
-/*
+/**
  * This is the component for the main home page, or the
  * landing page at the root URL for the app.
  */
@@ -27,12 +26,12 @@ import { MessageService, Messages } from 'src/app/services/message.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent extends BaseComponent {
 
   /*
    * List of cases relevant to the user.
    */
-  public cases: CaseSlim[] = [];
+  private cases: CaseSlim[] = [];
 
   /*
    * If true, user can fetch more cases relevant to his current option.
@@ -42,45 +41,42 @@ export class HomeComponent implements OnInit, OnDestroy {
   /*
    * Wrapper for all regions relevant to the user.
    */
-  public regions: RegionsModel = null;
+  private regions: RegionsModel = null;
 
-  /*
-   * Message service subscription, allowing us to communicate with other components
-   * in a publish/subscribe manner.
-   */
-  private messageSubscription: Subscription;
-
-  /*
-   * Constructor, doing nothing except taking a bunch of services.
+  /**
+   * Constructor for component.
+   * 
+   * @param httpService Service to retrieve data from server.
+   * @param messageService Message publishing/subscription bus service.
+   * @param snackBar Snack bar required by base class to show errors.
    */
   constructor(
-    private httpService: PublicService,
-    private jwtHelper: JwtHelperService,
-    private messageService: MessageService,
-    private snackBar: MatSnackBar) { }
-
-  /*
-   * OnInit implementation for component.
-   */
-  ngOnInit() {
-    this.getOpenCases();
-
-    // Initializing subscriptions.
-    this.messageSubscription = this.initSubscriptions();
+    protected httpService: PublicService,
+    protected messageService: MessageService,
+    protected snackBar: MatSnackBar)
+  {
+    super(httpService, messageService, snackBar);
   }
 
-  /*
-   * OnDestroy implementation for component.
+  /**
+   * Returns next "batch" of cases relevant to the client.
    */
-  ngOnDestroy() {
-    this.messageSubscription?.unsubscribe();
+  public getMore() {
+
+    // Retrieving username first.
+    const username = this.messageService.getValue(Messages.APP_GET_USERNAME);
+
+    // Getting next batch of cases.
+    this.httpService.getOpenCases(this.cases.length, null, username).subscribe(res => {
+      this.more = res && res.length === 25;
+      this.cases = this.cases.concat(res);
+    }, err => this.handleError);
   }
 
-  /*
-   * Initializing subscriptions for component, and returns
-   * subscription to caller.
+  /**
+   * @inheritDoc
    */
-  private initSubscriptions() {
+  protected initSubscriptions() {
 
     /*
      * Making sure we subscribe to relevant messages.
@@ -110,6 +106,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * @inheritDoc
+   * 
+   * Implementation simply returns all open cases, which depends upon whether
+   * or not the user is logged in or not.
+   */
+  protected init() {
+    this.getOpenCases();
+  }
+
   /*
    * Returns all open cases relevant to client, which depends upon whether or
    * not the client is logged in or not.
@@ -118,7 +124,7 @@ export class HomeComponent implements OnInit, OnDestroy {
    * to him or her. If client is not logged in, all cases will be returned, and no
    * filter applied.
    */
-  getOpenCases() {
+  private getOpenCases() {
 
     // Retrieving username first.
     const username = this.messageService.getValue(Messages.APP_GET_USERNAME);
@@ -127,16 +133,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.httpService.getOpenCases(null, null, username).subscribe(res => {
       this.cases = res;
       this.more = res !== null && res.length === 25;
-    }, err => {
-
-      // Oops ...!!
-      console.error(err);
-      this.snackBar.open(
-        err.errror.message,
-        'ok', {
-          duration: 5000
-        });
-    });
+    }, err => this.handleError);
 
     /*
      * Checking if user is logged in, and if so, we retrieve
@@ -145,40 +142,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (username !== null) {
       this.httpService.getMyRegions().subscribe(res => {
         this.regions = res;
-      }, err => {
-
-        // Oops ...!!
-        console.error(err);
-        this.snackBar.open(
-          err.errror.message,
-          'ok', {
-            duration: 5000
-          });
-      });
+      }, err => this.handleError);
     }
-  }
-
-  /*
-   * Returns next "batch" of cases relevant to the client.
-   */
-  getMore() {
-
-    // Retrieving username first.
-    const username = this.messageService.getValue(Messages.APP_GET_USERNAME);
-
-    // Getting next batch of cases.
-    this.httpService.getOpenCases(this.cases.length, null, username).subscribe(res => {
-      this.more = res && res.length === 25;
-      this.cases = this.cases.concat(res);
-    }, err => {
-
-      // Oops ...!!
-      console.error(err);
-      this.snackBar.open(
-        err.errror.message,
-        'ok', {
-          duration: 5000
-        });
-    });
   }
 }
