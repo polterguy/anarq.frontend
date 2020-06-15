@@ -5,6 +5,7 @@
 /*
  * Common system imports.
  */
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 
@@ -41,7 +42,8 @@ export class HomeComponent extends BaseComponent {
   constructor(
     protected service: PublicService,
     protected messages: MessageService,
-    protected snack: MatSnackBar)
+    protected snack: MatSnackBar,
+    private router: Router)
   {
     super(service, messages, snack);
   }
@@ -133,7 +135,16 @@ export class HomeComponent extends BaseComponent {
 
       // User is authenticated, retrieving user's regions.
       this.service.getMyRegions().subscribe(res => {
-        this.regions = res.regions;
+        if (res && res.regions && res.regions.length > 0) {
+          this.regions = res.regions;
+        } else {
+          setTimeout(() => this.router.navigate(['/setup-regions']), 2000);
+          this.snack.open(
+            'You need to setup your regions',
+            'ok', {
+              duration: 2000,
+            });
+        }
       }, err => this.handleError);
     }
   }
