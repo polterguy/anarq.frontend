@@ -20,7 +20,7 @@ import { User_statusComponent } from './components/private/user_status/user_stat
 import { Users_regionsComponent } from './components/private/users_regions/users_regions.component';
 import { Users_extra_typesComponent } from './components/private/users_extra_types/users_extra_types.component';
 import { Users_extraComponent } from './components/private/users_extra/users_extra.component';
-import { VotesComponent } from './components/votes/votes.component';
+import { VotesComponent } from './components/private/votes/votes.component';
 import { CaseComponent } from './components/case/case.component';
 import { UserComponent } from './components/user/user.component';
 import { RegionComponent } from './components/region/region.component';

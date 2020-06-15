@@ -24,7 +24,7 @@
     <mat-form-field
       *ngIf="canCreateCase"
       class="subject">
-      <mat-label>{{subjectGood === false ? 'Subject must be at least 25 characters long, and end with a question mark ?' : (subjectGood === null ? 'Subject' : 'Acceptable')}}</mat-label>
+      <mat-label>{{subjectGood === false ? 'Subject must be 15-100 characters long, and end with a question mark ?' : (subjectGood === null ? 'Subject' : 'Acceptable')}}</mat-label>
       <input
         matInput
         placeholder="Subject ..."

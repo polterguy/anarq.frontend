@@ -9,12 +9,12 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 /*
  * Custom imports for component.
  */
 import { BaseComponent } from 'src/app/helpers/base.components';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { PublicService } from 'src/app/services/http/public.service';
 import { MessageService, Messages } from 'src/app/services/message.service';
 
@@ -69,7 +69,9 @@ export class AskComponent extends BaseComponent {
     this.subject.valueChanges
       .pipe(debounceTime(this.debounce / 10), distinctUntilChanged())
       .subscribe(query => {
-        if (this.subject.value.length >= 25 && this.subject.value.endsWith('?')) {
+        if (this.subject.value.length >= 15 &&
+          this.subject.value.length <= 100 &&
+          this.subject.value.endsWith('?')) {
           this.subjectGood = true;
         } else if (this.subject.value.length === 0) {
           this.subjectGood = null;
