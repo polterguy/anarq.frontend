@@ -59,6 +59,9 @@ export class HomeComponent extends BaseComponent {
 
   /**
    * @inheritDoc
+   * 
+   * The only messages we are interested in, is when user logs in and out,
+   * since that changes the cases he sees.
    */
   protected initSubscriptions() {
 

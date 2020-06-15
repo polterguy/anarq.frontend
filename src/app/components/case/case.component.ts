@@ -2,30 +2,104 @@
  * Anarchy, a Direct Democracy system. Copyright 2020 - Thomas Hansen thomas@servergardens.com
  */
 
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CaseView } from 'src/app/models/case-view';
-import { PublicService } from 'src/app/services/http/public.service';
-import { JwtHelperService } from '@auth0/angular-jwt';
+/*
+ * Common system imports.
+ */
+import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
 
+/*
+ * Custom imports for component.
+ */
+import { CaseView } from 'src/app/models/case-view';
+import { BaseComponent } from 'src/app/helpers/base.components';
+import { MessageService, Messages } from 'src/app/services/message.service';
+import { PublicService } from 'src/app/services/http/public.service';
+
+/**
+ * This is the component for viewing a single case.
+ */
 @Component({
   selector: 'app-case',
   templateUrl: './case.component.html',
   styleUrls: ['./case.component.scss']
 })
-export class CaseComponent implements OnInit {
+export class CaseComponent extends BaseComponent {
 
-  public item: CaseView = null;
-  public id: number;
+  private item: CaseView = null;
+  private id: number;
+  private isLoggedIn = false;
 
+  /**
+   * Constructor for component.
+   * 
+   * @param service Service to retrieve data from server.
+   * @param messages Message publishing/subscription bus service.
+   * @param snack Snack bar required by base class to show errors.
+   * @param route Necessary to figure out parameters, to retrieve which case user is viewing.
+   */
   constructor(
-    private service: PublicService,
-    private jwtHelper: JwtHelperService,
-    private snackBar: MatSnackBar,
-    private route: ActivatedRoute) {}
+    protected service: PublicService,
+    protected messages: MessageService,
+    protected snack: MatSnackBar,
+    private route: ActivatedRoute)
+  {
+    super(service, messages, snack);
+  }
 
-  ngOnInit() {
+  /**
+   * @inheritDoc
+   * 
+   * Implementation simply returns all open cases, which depends upon whether
+   * or not the user is logged in or not.
+   */
+  protected init() {
+
+    // Checking if user is logged in or not.
+    this.isLoggedIn = this.messages.getValue(Messages.APP_GET_USERNAME);
+
+    // Retrieving case data.
+    this.getCaseData();
+  }
+
+  /**
+   * @inheritDoc
+   * 
+   * The only messages we are interested in, is when user logs in and out,
+   * since that might change the case data he sees, depending upon how the
+   * user voted for the case.
+   */
+  protected initSubscriptions() {
+
+    /*
+     * Making sure we subscribe to relevant messages.
+     */
+    return this.messages.getMessage().subscribe(msg => {
+
+      switch (msg.name) {
+
+        /*
+         * Notice, what data the user sees about the case, might depend upo
+         * his authentication.
+         */
+        case Messages.APP_LOGGED_OUT:
+          this.isLoggedIn = false;
+          this.getCaseData();
+          break;
+
+        case Messages.APP_LOGGED_IN:
+          this.isLoggedIn = true;
+          this.getCaseData();
+          break;
+      }
+    });
+  }
+
+  /**
+   * Fetches case data from backend.
+   */
+  private getCaseData() {
     this.route.params.subscribe(pars => {
       this.id = +pars.id;
       this.service.getCase(pars.id).subscribe(res => {
@@ -34,66 +108,62 @@ export class CaseComponent implements OnInit {
     });
   }
 
+  /**
+   * Returns the URL for the currently viewed page.
+   * 
+   * This is necessary to create our QR code in the HTML parts
+   * of the component.
+   */
   getCaseUrl() {
     return window.location.href;
   }
 
+  /**
+   * User votes yes for case.
+   */
   yes() {
     this.service.vote(this.id, true).subscribe(res => {
       this.item.opinion = true;
-      this.snackBar.open(
+      this.snack.open(
         'A cryptographically signed email receipt of your vote was sent to your registered email address. Please keep this email safe somewhere in case of auditing of the system.',
         'ok', {
           duration: 10000,
         });
-    }, err => {
-      console.error(err);
-      this.snackBar.open(
-        err.error.message,
-        'ok', {
-          duration: 10000,
-        });
-    });
+    }, error => this.handleError);
   }
 
+  /**
+   * User votes no for case.
+   */
   no() {
     this.service.vote(this.id, false).subscribe(res => {
       this.item.opinion = false;
-      this.snackBar.open(
+      this.snack.open(
         'A cryptographically signed email receipt of your vote was sent to your registered email address. Please keep this email safe somewhere in case of auditing of the system.',
         'ok', {
           duration: 10000,
         });
-    }, err => {
-      console.error(err);
-      this.snackBar.open(
-        err.error.message,
-        'ok', {
-          duration: 10000,
-        });
-    });
+    }, error => this.handleError);
   }
 
+  /**
+   * Capitalizes the specified string.
+   * 
+   * @param region Region to capitalize name of.
+   */
   capitalize(region: string) {
     return region.charAt(0).toUpperCase() + region.slice(1);
   }
 
+  /**
+   * Returns CSS class for case, which is invoked only if user has voted
+   * for the case.
+   */
   getClass() {
     if (this.item.opinion) {
       return 'yes';
     } else {
       return 'no';
     }
-  }
-
-  isLoggedIn() {
-    const token = localStorage.getItem('jwt_token');
-    if (!token) {
-      return false;
-    }
-    if (this.jwtHelper.isTokenExpired(token)) {
-      return false;
-    }
-    return true;
   }
 }

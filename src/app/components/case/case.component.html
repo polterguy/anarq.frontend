@@ -57,7 +57,7 @@
     </div>
     <div
       class="action-bar"
-      *ngIf="item.opinion === undefined && isLoggedIn()">
+      *ngIf="item.opinion === undefined && isLoggedIn">
       <button
         (click)="yes()"
         class="yes"
@@ -76,7 +76,7 @@
     <div
       class="action-bar"
       [ngClass]="getClass()"
-      *ngIf="item.opinion !== undefined && isLoggedIn()">
+      *ngIf="item.opinion !== undefined && isLoggedIn">
       <mat-icon
         matTooltip="You voted yes. Only you can see your vote."
         *ngIf="item.opinion === true">thumb_up</mat-icon>

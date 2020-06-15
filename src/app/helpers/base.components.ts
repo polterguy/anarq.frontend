@@ -56,15 +56,15 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Init method, invoked when component is initialized.
+   */
+  protected abstract init() : void;
+
+  /**
    * Abstract method you must implement when deriving from class, to be able to handle
    * messages and events using the publish/subscribe pattern.
    */
   protected abstract initSubscriptions() : Subscription;
-
-  /**
-   * Init method, invoked when component is initialized.
-   */
-  protected abstract init() : void;
 
   /**
    * Handles an error for you.
