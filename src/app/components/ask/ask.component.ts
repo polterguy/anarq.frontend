@@ -59,6 +59,35 @@ export class AskComponent extends BaseComponent {
   /**
    * @inheritDoc
    * 
+   * Implementation initializes FormControl for subject, and checks if
+   * user is allowed to ask a question in current region.
+   */
+  protected init() {
+
+    // Making sure we initialize subject FormControl.
+    this.subject = new FormControl('');
+    this.subject.valueChanges
+      .pipe(debounceTime(this.debounce / 10), distinctUntilChanged())
+      .subscribe(query => {
+        if (this.subject.value.length >= 25 && this.subject.value.endsWith('?')) {
+          this.subjectGood = true;
+        } else if (this.subject.value.length === 0) {
+          this.subjectGood = null;
+        } else {
+          this.subjectGood = false;
+        }
+      });
+
+    // Checking if user is allowed to ask questions in this region.
+    this.checkIfUserCanCreateCase();
+
+    // Verifying user is logged in.
+    this.isLoggedIn = this.messages.getValue(Messages.APP_GET_USERNAME);
+  }
+
+  /**
+   * @inheritDoc
+   * 
    * We are only interested in logging out and in of the system, since
    * that changes whether or not user is allowed to ask a question or not.
    */
@@ -86,35 +115,6 @@ export class AskComponent extends BaseComponent {
           break;
       }
     });
-  }
-
-  /**
-   * @inheritDoc
-   * 
-   * Implementation initializes FormControl for subject, and checks if
-   * user is allowed to ask a question in current region.
-   */
-  protected init() {
-
-    // Making sure we initialize subject FormControl.
-    this.subject = new FormControl('');
-    this.subject.valueChanges
-      .pipe(debounceTime(this.debounce / 10), distinctUntilChanged())
-      .subscribe(query => {
-        if (this.subject.value.length >= 25 && this.subject.value.endsWith('?')) {
-          this.subjectGood = true;
-        } else if (this.subject.value.length === 0) {
-          this.subjectGood = null;
-        } else {
-          this.subjectGood = false;
-        }
-      });
-
-    // Checking if user is allowed to ask questions in this region.
-    this.checkIfUserCanCreateCase();
-
-    // Verifying user is logged in.
-    this.isLoggedIn = this.messages.getValue(Messages.APP_GET_USERNAME);
   }
 
   /**
