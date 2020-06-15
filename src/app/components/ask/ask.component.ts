@@ -76,7 +76,8 @@ export class AskComponent extends BaseComponent {
          * at which point user's ability to ask questions might change.
          */
         case Messages.APP_LOGGED_OUT:
-          this.checkIfUserCanCreateCase();
+          this.isLoggedIn = false;
+          this.canCreateCase = false;
           break;
 
         case Messages.APP_LOGGED_IN:
