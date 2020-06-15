@@ -170,7 +170,7 @@ export class UserComponent extends BaseComponent {
   /**
    * Returns true if region chart is supposed to be displayed.
    */
-  shouldDisplayRegionChart() {
+  private shouldDisplayRegionChart() {
     if (!this.item) {
       return false;
     }

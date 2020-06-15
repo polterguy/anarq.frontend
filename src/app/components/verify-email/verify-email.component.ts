@@ -2,27 +2,61 @@
  * Anarchy, a Direct Democracy system. Copyright 2020 - Thomas Hansen thomas@servergardens.com
  */
 
-import { Component, OnInit } from '@angular/core';
-import { PublicService } from 'src/app/services/http/public.service';
-import { ActivatedRoute, Router } from '@angular/router';
+/*
+ * Common system imports.
+ */
+import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
 
+/*
+ * Custom imports for component.
+ */
+import { PublicService } from 'src/app/services/http/public.service';
+import { BaseComponent } from 'src/app/helpers/base.components';
+import { MessageService, Messages } from 'src/app/services/message.service';
+
+/**
+ * Component for verifying your email address.
+ * 
+ * Component automatically logs in user, and redirects
+ * him immediately to component for setting up regions.
+ */
 @Component({
   selector: 'app-verify-email',
   templateUrl: './verify-email.component.html',
   styleUrls: ['./verify-email.component.scss']
 })
-export class VerifyEmailComponent implements OnInit {
+export class VerifyEmailComponent extends BaseComponent {
 
   private success: boolean = null;
 
-  constructor (
-    private service: PublicService,
+  /**
+   * Constructor for component.
+   * 
+   * @param service Service to retrieve data from server.
+   * @param messages Message publishing/subscription bus service.
+   * @param snack Snack bar required by base class to show errors.
+   * @param route Necessary to retrieve hash for verifying email address of user.
+   * @param router Necessary to redirect user after having setup his regions.
+   */
+  constructor(
+    protected service: PublicService,
+    protected messages: MessageService,
+    protected snack: MatSnackBar,
     private route: ActivatedRoute,
-    private router: Router,
-    private snackBar: MatSnackBar) { }
+    private router: Router)
+  {
+    super(service, messages, snack);
+  }
 
-  ngOnInit() {
+  /**
+   * @inheritDoc
+   * 
+   * Implementation simply verifies user's email address, and logs him in
+   * immediately afterwards, if success.
+   */
+  protected init() {
     this.route.params.subscribe(pars => {
       this.service.verifyEmail({
         username: pars.username,
@@ -30,30 +64,34 @@ export class VerifyEmailComponent implements OnInit {
       }).subscribe(res => {
         if (res.result === 'SUCCESS') {
           this.success = true;
-          localStorage.setItem('jwt_token', res.extra);
-          this.snackBar.open(
-            'Your email address was successfully confirmed',
+          this.messages.sendMessage({
+            name: Messages.APP_LOGIN,
+            content: res.extra
+          });
+          this.snack.open(
+            'Your email address was successfully confirmed. Now you must tell us where you live.',
             'ok', {
               duration: 5000,
             });
-            setTimeout(
-              () => this.router.navigate(['/setup-regions']),
-              2000);
+            setTimeout(() => this.router.navigate(['/setup-regions']), 2000);
         } else {
           this.success = false;
-          this.snackBar.open(
-            'Something went wrong, did you confirm your email address previously?',
+          this.snack.open(
+            res.extra,
             'ok', {
               duration: 5000,
             });
         }
       });
-    }, err => {
-      this.snackBar.open(
-        err.error.message,
-        'ok', {
-        duration: 5000,
-      })
-    });
+    }, error => this.handleError);
+  }
+
+  /**
+   * @inheritDoc
+   * 
+   * Component is not really interested in any messages.
+   */
+  protected initSubscriptions() {
+    return null;
   }
 }
