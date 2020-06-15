@@ -34,9 +34,13 @@ import { PublicService } from 'src/app/services/http/public.service';
 })
 export class UserComponent extends BaseComponent {
 
+  // User's information.
   public item: UserView = null;
+
+  // All cases user has suggested.
   public cases: CaseSlim[] = null;
 
+  // Bar chart options, and data.
   private barChartOptions: ChartOptions = {
     responsive: true,
     showLines: false,
@@ -61,10 +65,8 @@ export class UserComponent extends BaseComponent {
       display: false
     },
   };
-
   private barChartLabels: Label[] = [];
   private barChartData: number[] = [];
-
   private barChartColors = [{
     backgroundColor: [
       'rgba(180,180,180,0.8)',

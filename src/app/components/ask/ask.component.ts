@@ -2,47 +2,100 @@
  * Anarchy, a Direct Democracy system. Copyright 2020 - Thomas Hansen thomas@servergardens.com
  */
 
-import { Component, OnInit } from '@angular/core';
-import { PublicService } from 'src/app/services/http/public.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
+/*
+ * Common system imports.
+ */
+import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
 
+/*
+ * Custom imports for component.
+ */
+import { BaseComponent } from 'src/app/helpers/base.components';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { PublicService } from 'src/app/services/http/public.service';
+import { MessageService, Messages } from 'src/app/services/message.service';
+
+/**
+ * This is the component for asking a question.
+ */
 @Component({
   selector: 'app-ask',
   templateUrl: './ask.component.html',
   styleUrls: ['./ask.component.scss']
 })
-export class AskComponent implements OnInit {
+export class AskComponent extends BaseComponent {
 
   private subject: FormControl;
-  public region: string;
-  public canCreateCase = false;
+  private region: string;
+  private isLoggedIn = false;
+  private canCreateCase = false;
   private subjectGood?: boolean = null;
   private body = ''
 
   // Number of milliseconds after a keystroke before filtering should be re-applied.
   private debounce = 800;
 
+  /**
+   * Constructor for component.
+   * 
+   * @param service Service to retrieve data from server.
+   * @param messages Message publishing/subscription bus service.
+   * @param snack Snack bar required by base class to show errors.
+   * @param rounter Necessary to redirect user asfter process is done.
+   */
   constructor(
-    private snackBar: MatSnackBar,
-    private httpService: PublicService,
+    protected service: PublicService,
+    protected messages: MessageService,
+    protected snack: MatSnackBar,
     private route: ActivatedRoute,
-    private jwtHelper: JwtHelperService,
-    private router: Router) { }
+    private router: Router)
+  {
+    super(service, messages, snack);
+  }
 
-  ngOnInit() {
-    this.route.params.subscribe(pars => {
-      this.region = pars.region;
-      if (this.isLoggedIn()) {
-        this.httpService.canCreateCase(this.region).subscribe(res => {
-          this.canCreateCase = res.result === 'SUCCESS';
-        });
+  /**
+   * @inheritDoc
+   * 
+   * We are only interested in logging out and in of the system, since
+   * that changes whether or not user is allowed to ask a question or not.
+   */
+  protected initSubscriptions() {
+
+    /*
+     * Making sure we subscribe to relevant messages.
+     */
+    return this.messages.getMessage().subscribe(msg => {
+
+      switch (msg.name) {
+
+        /*
+         * The only message we really care about, is when user logs in or out,
+         * at which point user's ability to ask questions might change.
+         */
+        case Messages.APP_LOGGED_OUT:
+          this.checkIfUserCanCreateCase();
+          break;
+
+        case Messages.APP_LOGGED_IN:
+          this.isLoggedIn = true;
+          this.checkIfUserCanCreateCase();
+          break;
       }
     });
+  }
 
+  /**
+   * @inheritDoc
+   * 
+   * Implementation initializes FormControl for subject, and checks if
+   * user is allowed to ask a question in current region.
+   */
+  protected init() {
+
+    // Making sure we initialize subject FormControl.
     this.subject = new FormControl('');
     this.subject.valueChanges
       .pipe(debounceTime(this.debounce / 10), distinctUntilChanged())
@@ -55,21 +108,37 @@ export class AskComponent implements OnInit {
           this.subjectGood = false;
         }
       });
+
+    // Checking if user is allowed to ask questions in this region.
+    this.checkIfUserCanCreateCase();
+
+    // Verifying user is logged in.
+    this.isLoggedIn = this.messages.getValue(Messages.APP_GET_USERNAME);
   }
 
-  // Returns true if user is logged in, with a valid token, that's not expired.
-  isLoggedIn() {
-    const token = localStorage.getItem('jwt_token');
-    if (!token) {
-      return false;
-    }
-    if (this.jwtHelper.isTokenExpired(token)) {
-      return false;
-    }
-    return true;
+  /**
+   * Checks to see if user can ask a question in current region or not.
+   */
+  private checkIfUserCanCreateCase() {
+
+    // Retrieving username first.
+    const username = this.messages.getValue(Messages.APP_GET_USERNAME);
+
+    // Figuring out if user is allowed to ask qustions in this region or not.
+    this.route.params.subscribe(pars => {
+      this.region = pars.region;
+      if (username) {
+        this.service.canCreateCase(this.region).subscribe(res => {
+          this.canCreateCase = res.result === 'SUCCESS';
+        });
+      }
+    }, error => this.handleError);
   }
 
-  getCodeMirrorOptions() {
+  /**
+   * Returns the CodeMirror options for the HTML parts of the component.
+   */
+  private getCodeMirrorOptions() {
     return {
       lineNumbers: true,
       theme: 'material',
@@ -77,8 +146,11 @@ export class AskComponent implements OnInit {
     };
   }
 
+  /**
+   * Submits the question to the backend.
+   */
   submit() {
-    this.httpService.submitCase({
+    this.service.submitCase({
       subject: this.subject.value,
       body: this.body,
       region: this.region,
@@ -86,12 +158,12 @@ export class AskComponent implements OnInit {
       if (res.result === 'SUCCESS') {
         this.router.navigate(['/case/' + res.extra]);
       } else {
-        this.snackBar.open(
+        this.snack.open(
           res.extra, 
           'ok', {
             duration: 5000
           });
       }
-    });
+    }, error => this.handleError);
   }
 }

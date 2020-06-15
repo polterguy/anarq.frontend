@@ -66,6 +66,9 @@ export class RegionComponent extends BaseComponent {
       this.region = pars.region;
       this.getNextBatch();
     });
+
+    // Checking if user can ask a question in current region.
+    this.canAskQuestion();
   }
 
   /**
@@ -99,12 +102,34 @@ export class RegionComponent extends BaseComponent {
         case Messages.APP_LOGGED_OUT:
           this.cases = [];
           this.getNextBatch();
+          this.canAskQuestion();
           break;
 
         case Messages.APP_LOGGED_IN:
           this.cases = [];
           this.getNextBatch();
+          this.canAskQuestion();
           break;
+      }
+    });
+  }
+
+  /**
+   * Returns true if user is legally allowed to ask a question in
+   * current region.
+   */
+  private canAskQuestion() {
+
+    // Retrieving username first.
+    const username = this.messages.getValue(Messages.APP_GET_USERNAME);
+
+    // Figuring out if user is allowed to ask qustions in this region or not.
+    this.route.params.subscribe(pars => {
+      this.region = pars.region;
+      if (username) {
+        this.service.canCreateCase(this.region).subscribe(res => {
+          this.canCreateCase = res.result === 'SUCCESS';
+        });
       }
     });
   }

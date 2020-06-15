@@ -21,8 +21,8 @@ import { BaseComponent } from 'src/app/helpers/base.components';
  * landing page at the root URL for the app.
  */
 @Component({
-  selector: 'app-home',
   templateUrl: './home.component.html',
+  selector: 'app-home',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent extends BaseComponent {
