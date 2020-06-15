@@ -212,6 +212,15 @@ export class PublicService {
   }
 
   /**
+   * Returns true if user is allowed to set his regions.
+   */
+  canSetRegions() {
+    return this.httpClient.get<ResultModel>(
+      environment.apiUrl +
+      'magic/modules/anarchy/public/users/can-set-region');
+  }
+
+  /**
    * Used during registration of user to associate user with one region.
    * 
    * @param region Region to associate user with
