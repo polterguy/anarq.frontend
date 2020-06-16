@@ -40,8 +40,15 @@ export class RegisterComponent extends BaseComponent {
   private passwordReadable = false;
   private passwordRepeatReadable = false;
 
+  // If true, we show additional information about the field.
+  private showNameInfo = false;
+  private showPhoneInfo = false;
+
   // Progress of registration.
   private progress = 0;
+
+  // Whether or not user agrees to the terms and conditions of the site.
+  private agree = false;
 
   // If true, user has successfully registered, and we show information about verifying his or her email.
   private done = false;
@@ -177,8 +184,20 @@ export class RegisterComponent extends BaseComponent {
       .subscribe(query => {
         const regex = /^[0-9]{8}$/
         if (regex.test(this.phone.value)) {
-          this.progress = 80;
-          this.phoneGood = true;
+          this.service.phoneAvailable(this.phone.value).subscribe(res => {
+            if (res.result === 'SUCCESS') {
+              this.progress = 80;
+              this.phoneGood = true;
+            } else {
+              this.progress = 60;
+              this.snack.open(
+                res.extra,
+                'ok', {
+                  duration: 10000,
+                });
+              this.phoneGood = false;
+            }
+          }, error => this.handleError);
         } else {
           this.progress = 60;
           this.phoneGood = false;
@@ -265,22 +284,14 @@ export class RegisterComponent extends BaseComponent {
    * Shows information about why we need the full legal name for users.
    */
   showNameInformation() {
-    this.snack.open(
-      'In order to legally ensure you are an existing person, we need your full legal name, exactly as it can be found in the yellow pages. And yes, we will check this up! But we will never disclose your information to the general public.',
-      'ok', {
-        duration: 25000,
-      });
+    this.showNameInfo = !this.showNameInfo;
   }
 
   /**
    * Shows information about why we need the phone number for users.
    */
   showPhoneInformation() {
-    this.snack.open(
-      'In order to legally ensure you are an existing person, we need your cell phone number, exactly as it can be found in the yellow pages. And yes, we will check this up! But we will never disclose your information to the general public.',
-      'ok', {
-        duration: 25000,
-      });
+    this.showPhoneInfo = !this.showPhoneInfo;
   }
 
   /**

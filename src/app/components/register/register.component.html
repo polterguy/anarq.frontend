@@ -68,6 +68,24 @@
 
   </div>
 
+  <div
+    *ngIf="showNameInfo"
+    class="form-row">
+
+    <div class="info">
+      <p>
+        In order to make sure you are a real person, and preventing people from registering
+        fake profiles, and such influence votes - We ask you kindly to give us your full name,
+        as it can be found in the yellow pages. Notice, if you cannot prove you are a legal
+        person and citizen of country of registration, <strong>we might suspend your account</strong>.
+      </p>
+      <p>
+        We will never disclose your personal information to any 3rd parties.
+      </p>
+    </div>
+
+  </div>
+
   <div class="form-row">
 
     <mat-form-field
@@ -84,6 +102,24 @@
         matTooltip="Why ...?"
         (click)="showPhoneInformation()">help</mat-icon>
     </mat-form-field>
+
+  </div>
+
+  <div
+    *ngIf="showPhoneInfo"
+    class="form-row">
+
+    <div class="info">
+      <p>
+        In order to make sure you are a real person, and preventing people from registering
+        fake profiles, and such influence votes - We ask you kindly to give us your phone number,
+        as it can be found in the yellow pages. Notice, if you cannot prove you are a legal
+        person and citizen of country of registration, <strong>we might suspend your account</strong>.
+      </p>
+      <p>
+        We will never disclose your personal information to any 3rd parties.
+      </p>
+    </div>
 
   </div>
 
@@ -126,35 +162,39 @@
     <div
       *ngIf="passwordRepeatGood === true && passwordGood === true && phoneGood === true && emailGood === true && usernameGood === true"
       class="information item">
+
+      <label class="bottom-slogan">Terms and Conditions</label>
+
       <p>
-        By clicking the Submit button, you promise us that the above information is
-        accurate, that you have given us your full legal name, a cell phone number registered
-        in your name, and that you accept the terms and conditions of the site.
-        You also accept that we are allowed to occassionally send you marketing emails,
-        according to your registered preferences, and that we might include 3rd party
-        marketing material in these emails.
+        By clicking the Submit button below, you guarantee us that the above information is
+        correct, that you have given us your full legal name, and a cell phone number registered
+        to you in the country where you are registering.
       </p>
+
       <p>
-        We might also send you a text message to your registered phone, to verify
-        that it belongs to you - And we might also check up the yellow pages, to verify that
-        you have given us your correct full name, as can be found in official public archives
-        where you live.
-        This is necessary in order to make sure votes you cast are as legally sound as possible,
-        and to such use your vote to influence politicians in and around the area where you live.
+        You also explicitly give us permission to <strong>send you email receipts, of every single vote you
+        cast in the system</strong>.
       </p>
+
       <p>
-        Votes you cast are kept private, and will not be shared by us with the general public, and
-        your cell phone number or email will never be shared with any 3rd parties. However, your
-        legal name is publicly available, in addition to your region(s) - But exactly how you
-        choose to vote, is never disclosed by us to any 3rd parties, unless required by a 3rd party
-        auditing organisation, such as the United Nations or WikiLeaks to validate votes in a case.
+        Votes you cast are kept private, and will not be shared with anyone, and the same is true
+        about your private information. The only exception is in case of that the United Nations
+        appoints an independent 3rd party to audit votes in your region for a particular case - At
+        which point we will under supervision allow auditing of your vote, on individual cases,
+        by an independent 3rd party organisation, appointed by the United Nations (only!)
+        At which point the independent 3rd party organisation might contact you to verify your
+        vote for security reasons.
       </p>
-      <p>
-        Welcome to AnarchU! Direct Democracy! Where Your Voice Matters! We simply exchanged the Y,
-        with U, and then it all started making sense!
-      </p>
-      <label class="bottom-slogan">Free Speech, One Each!</label>
+
     </div>
+
+  </div>
+
+  <div class="form-row center">
+
+    <mat-checkbox
+      *ngIf="passwordRepeatGood === true && passwordGood === true && phoneGood === true && emailGood === true && usernameGood === true"
+      [(ngModel)]="agree">I agree to the above terms and conditions</mat-checkbox>
 
   </div>
 
@@ -165,6 +205,7 @@
     <button
       matTooltip="Submit form and accept the terms and conditions of the site"
       mat-button
+      [disabled]="!agree"
       (click)="register()">
       Submit
     </button>

@@ -177,6 +177,18 @@ export class PublicService {
   }
 
   /**
+   * Checks to see if specified phone number is available or not.
+   * 
+   * @param phone Phone number to check
+   */
+  phoneAvailable(phone: string) {
+    return this.httpClient.get<ResultModel>(
+      environment.apiUrl +
+      'magic/modules/anarchy/public/users/phone-available?phone=' +
+      phone);
+  }
+
+  /**
    * Registers a user on the site, with the specified data.
    * 
    * @param model Data to register

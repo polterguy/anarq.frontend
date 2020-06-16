@@ -50,6 +50,13 @@ h1 {
             animation-duration: .5s;
             flex: 1;
         }
+        .info {
+            animation-name: fly-in;
+            animation-timing-function: ease-out;
+            animation-duration: .5s;
+            color: #a0a0a0;
+            flex: 1;
+        }
         .information {
             color: #a0a0a0;
             text-align: justify;
@@ -64,6 +71,14 @@ h1 {
                 margin-top: 2rem;
                 margin-bottom: 1rem;
             }
+        }
+    }
+    .form-row.center {
+        mat-checkbox {
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
         }
     }
     @keyframes blink {
