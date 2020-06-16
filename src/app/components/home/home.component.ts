@@ -16,6 +16,7 @@ import { CaseSlim } from 'src/app/models/case-slim';
 import { PublicService } from 'src/app/services/http/public.service';
 import { MessageService, Messages } from 'src/app/services/message.service';
 import { BaseComponent } from 'src/app/helpers/base.components';
+import { StatisticsModel } from 'src/app/models/statistics-model';
 
 /**
  * This is the component for the main home page, or the
@@ -31,6 +32,7 @@ export class HomeComponent extends BaseComponent {
   private cases: CaseSlim[] = [];
   private more: boolean = false;
   private regions: string[] = [];
+  private statistics: StatisticsModel = null;
 
   /**
    * Constructor for component.
@@ -57,6 +59,9 @@ export class HomeComponent extends BaseComponent {
   protected init() {
     this.getNextBatch();
     this.getRegions();
+    this.service.getStatistics().subscribe(res => {
+      this.statistics = res;
+    });
   }
 
   /**

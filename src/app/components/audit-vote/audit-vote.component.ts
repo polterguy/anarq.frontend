@@ -31,7 +31,6 @@ export class AuditVoteComponent extends BaseComponent {
   public caseId: number = null;
   public previous: string = null;
   private hash: string;
-  private username: string = null;
 
   /**
    * Constructor for component.
@@ -61,7 +60,6 @@ export class AuditVoteComponent extends BaseComponent {
       this.hash = pars.hash;
       this.service.auditVote(pars.hash).subscribe(res => {
         if (res.result === 'SUCCESS') {
-          this.username = res.username;
           this.voteGood = true;
           this.caseId = res.case;
           if (res.previous) {

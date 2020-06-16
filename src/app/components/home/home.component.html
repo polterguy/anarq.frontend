@@ -2,8 +2,8 @@
 <img 
   src="../assets/justice.svg" 
   class="logo"
-  matTooltip="Replacing the Y with U"
-  alt="Replacing the Y with U">
+  matTooltip="AnarchU - Replacing the Y with U"
+  alt="AnarchU - Replacing the Y with U">
 
 <mat-card class="info-card">
 
@@ -47,6 +47,29 @@
           [routerLink]="'/region/' + idx">
           {{capitalize(idx)}}
         </a>
+      </li>
+    </ul>
+  </div>
+
+  <div
+    *ngIf="statistics"
+    class="statistics">
+    <ul>
+      <li
+        [matTooltip]="'There are ' + statistics.users + ' users in the system'">
+        Users {{statistics.users}}
+      </li>
+      <li
+        [matTooltip]="'There are ' + statistics.cases + ' cases in the system'">
+        Cases {{statistics.cases}}
+      </li>
+      <li
+        [matTooltip]="'There are ' + statistics.cases + ' open cases in the system'">
+        Open {{statistics.open}}
+      </li>
+      <li
+        [matTooltip]="'There are ' + statistics.cases + ' votes cast in the system'">
+        Votes {{statistics.votes}}
       </li>
     </ul>
   </div>

@@ -10,5 +10,4 @@ export class ResultModel {
 export class ResultAuditModel extends ResultModel {
     case?: number;
     previous?: string;
-    username?: string;
 }

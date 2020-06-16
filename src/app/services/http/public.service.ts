@@ -17,6 +17,7 @@ import { ResultModel, ResultAuditModel } from 'src/app/models/result-model';
 import { VerifyEmailModel } from 'src/app/models/verify-email-model';
 import { RegionsModel } from 'src/app/models/regions-model';
 import { CaseModel } from 'src/app/models/case-model';
+import { StatisticsModel } from 'src/app/models/statistics-model';
 
 /*
  * Your main HTTP service for handling cases, and related objects.
@@ -68,6 +69,12 @@ export class PublicService {
       'magic/modules/system/auth/change-password', {
       password,
     });
+  }
+
+  getStatistics() {
+    return this.httpClient.get<StatisticsModel>(
+      environment.apiUrl +
+      'magic/modules/anarchy/public/meta/statistics');
   }
 
   /*
@@ -123,7 +130,7 @@ export class PublicService {
   vote(id: number, vote: boolean) {
     return this.httpClient.post<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/cases/vote', {
+      'magic/modules/anarchy/public/votes/vote', {
         id,
         vote,
       });
@@ -217,7 +224,7 @@ export class PublicService {
   canSetRegions() {
     return this.httpClient.get<ResultModel>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/users/can-set-region');
+      'magic/modules/anarchy/public/regions/can-set-region');
   }
 
   /**
@@ -242,7 +249,7 @@ export class PublicService {
   canCreateCase(region: string) {
     return this.httpClient.get<ResultModel>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/users/can-create-case?region=' +
+      'magic/modules/anarchy/public/cases/can-create-case?region=' +
       region);
   }
 
@@ -254,7 +261,7 @@ export class PublicService {
   submitCase(model: CaseModel) {
     return this.httpClient.post<ResultModel>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/users/create-case',
+      'magic/modules/anarchy/public/cases/create-case',
       model);
   }
 

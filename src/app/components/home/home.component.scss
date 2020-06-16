@@ -66,4 +66,24 @@
             }
         }
     }
+    .statistics {
+        background-color: #fafafa;
+        padding: .5rem 2rem .5rem 2rem;
+        margin-top: 3rem;
+        margin-left: -2rem;
+        margin-right: -2rem;
+        margin-bottom: -2rem;
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: inline-block;
+            li {
+                float: left;
+                margin-right: 1rem;
+                color: #c0c0c0;
+                font-size: .8rem;
+            }
+        }
+    }
 }

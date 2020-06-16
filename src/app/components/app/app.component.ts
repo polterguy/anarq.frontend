@@ -142,11 +142,7 @@ export class AppComponent extends BaseComponent {
          * to accomplish this.
          */
         case Messages.APP_TOKEN_REFRESHED:
-          this.snack.open(
-            'Your JWT token was refreshed',
-            'ok', {
-              duration: 2000,
-            });
+          console.log('Your JWT token was refreshed');
           break;
 
         /*

@@ -160,6 +160,11 @@ export class AskComponent extends BaseComponent {
     }).subscribe(res => {
       if (res.result === 'SUCCESS') {
         this.router.navigate(['/case/' + res.extra]);
+        this.snack.open(
+          'Case will be open for votes for exactly 30 days from now on',
+          'ok', {
+            duration: 10000,
+          })
       } else {
         this.snack.open(
           res.extra, 
