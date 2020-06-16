@@ -135,7 +135,7 @@ export class AskComponent extends BaseComponent {
           this.canCreateCase = res.result === 'SUCCESS';
         });
       }
-    }, error => this.handleError);
+    }, error => this.handleError(error));
   }
 
   /**
@@ -172,6 +172,6 @@ export class AskComponent extends BaseComponent {
             duration: 5000
           });
       }
-    }, error => this.handleError);
+    }, error => this.handleError(error));
   }
 }

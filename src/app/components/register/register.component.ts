@@ -135,7 +135,7 @@ export class RegisterComponent extends BaseComponent {
                 });
               this.emailGood = false;
             }
-          }, error => this.handleError);
+          }, error => this.handleError(error));
         } else {
           this.progress = 0;
           this.emailGood = false;
@@ -161,7 +161,7 @@ export class RegisterComponent extends BaseComponent {
                 });
               this.usernameGood = null;
             }
-          }, error => this.handleError);
+          }, error => this.handleError(error));
         } else {
           this.progress = 20;
           this.usernameGood = false;
@@ -204,7 +204,7 @@ export class RegisterComponent extends BaseComponent {
                 });
               this.phoneGood = false;
             }
-          }, error => this.handleError);
+          }, error => this.handleError(error));
         } else {
           this.progress = 60;
           this.phoneGood = false;
@@ -330,6 +330,6 @@ export class RegisterComponent extends BaseComponent {
           () => this.router.navigate(['/']),
           5000);
       }
-    }, error => this.handleError);
+    }, error => this.handleError(error));
   }
 }

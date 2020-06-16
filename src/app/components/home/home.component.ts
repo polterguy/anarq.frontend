@@ -121,7 +121,7 @@ export class HomeComponent extends BaseComponent {
     this.service.getOpenCases(null, null, username).subscribe(res => {
       this.more = res !== null && res.length === 25;
       this.cases = res;
-    }, err => this.handleError);
+    }, error => this.handleError(error));
   }
 
   /**
@@ -150,7 +150,7 @@ export class HomeComponent extends BaseComponent {
               duration: 2000,
             });
         }
-      }, err => this.handleError);
+      }, error => this.handleError(error));
     }
   }
 

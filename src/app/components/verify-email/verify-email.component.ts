@@ -84,7 +84,7 @@ export class VerifyEmailComponent extends BaseComponent {
             setTimeout(() => this.router.navigate(['/']), 2000);
         }
       });
-    }, error => this.handleError);
+    }, error => this.handleError(error));
   }
 
   /**

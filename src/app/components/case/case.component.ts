@@ -129,7 +129,7 @@ export class CaseComponent extends BaseComponent {
         'ok', {
           duration: 10000,
         });
-    }, error => this.handleError);
+    }, error => this.handleError(error));
   }
 
   /**
@@ -143,7 +143,7 @@ export class CaseComponent extends BaseComponent {
         'ok', {
           duration: 10000,
         });
-    }, error => this.handleError);
+    }, error => this.handleError(error));
   }
 
   /**

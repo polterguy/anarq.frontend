@@ -71,7 +71,7 @@ export class AuditVoteComponent extends BaseComponent {
           this.voteGood = false;
           this.extra = res.extra;
         }
-      }, error => this.handleError);
+      }, error => this.handleError(error));
     });
   }
 

@@ -116,8 +116,8 @@ export class SetupRegionsComponent extends BaseComponent {
         this.canSetRegions = res.result === 'SUCCESS';
         this.service.getRegions().subscribe(res => {
           this.regions = res;
-        }, error => this.handleError);
-      }, error => this.handleError);
+        }, error => this.handleError(error));
+      }, error => this.handleError(error));
     } else {
       this.canSetRegions = false;
     }
@@ -145,6 +145,6 @@ export class SetupRegionsComponent extends BaseComponent {
             duration: 5000,
           });
       }
-    }, error => this.handleError);
+    }, error => this.handleError(error));
   }
 }

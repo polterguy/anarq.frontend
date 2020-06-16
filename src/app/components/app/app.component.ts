@@ -253,7 +253,7 @@ export class AppComponent extends BaseComponent {
         });
         setTimeout(() => this.tryRefreshTicket(), 300000);
 
-      }, error => this.handleError);
+      }, error => this.handleError(error));
     }
   }
 
