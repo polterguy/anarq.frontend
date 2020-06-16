@@ -17,6 +17,13 @@ a {
     color: #7070ff;
     text-decoration: none;
 }
+.home-link {
+    position: absolute !important;
+    top: 1rem;
+    right: 1rem;
+    width: 5rem;
+    display: block;
+}
 
 .sidenav-container {
     position: absolute;

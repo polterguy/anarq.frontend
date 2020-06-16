@@ -8,22 +8,16 @@ h1 {
 
 .users {
     margin:1rem 5rem 2rem 5rem;
-    padding: 3rem 3rem 7rem 3rem;
+    padding: 3rem 3rem 2rem 3rem;
     margin-top: -2.25rem;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
-    .home-link {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        text-decoration: none;
-    }
     .filter {
-        width: calc(100% - 6rem);
-        margin-left: 3rem;
-        margin-right: 3rem;
+        width: calc(100% - 10rem);
+        margin-left: 5rem;
+        margin-right: 5rem;
     }
     .users-list {
         margin-top: 2rem;
