@@ -20,20 +20,34 @@ h1 {
         right: 1rem;
         text-decoration: none;
     }
+    .filter {
+        width: calc(100% - 6rem);
+        margin-left: 3rem;
+        margin-right: 3rem;
+    }
     .users-list {
+        margin-top: 2rem;
         list-style-type: none;
         padding: 0;
-        margin: 2rem 0 2rem 0;
         li {
-            margin-top: 1rem;
+            margin-left: -1rem;
+            margin-right: -1rem;
             font-size: 1.2rem;
             a {
-                min-width: 15rem;
-                display: inline-block;
+                display: block;
+                padding: 1rem 1rem 1rem 1rem;
+                span {
+                    display: inline-block;
+                    min-width: 25rem;
+                    max-width: 80%;
+                }
+                small {
+                    font-size: .8rem;
+                    color: #a0a0a0;
+                }
             }
-            small {
-                font-size: .8rem;
-                color: #a0a0a0;
+            a:hover {
+                background-color: rgba(0,0,0,.1);
             }
         }
     }

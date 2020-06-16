@@ -297,11 +297,15 @@ export class PublicService {
   /**
    * Returns users in system by popularity.
    */
-  getUsers(offset: number) {
+  getUsers(offset: number, filter: string = null) {
+    let query = '?offset=' + offset;
+    if (filter) {
+      query += '&filter=' + encodeURIComponent(filter);
+    }
     return this.httpClient.get<UserSlimModel[]>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/users/users?offset=' +
-      offset);
+      'magic/modules/anarchy/public/users/users' +
+      query);
   }
 
   /**

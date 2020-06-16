@@ -14,17 +14,30 @@
       <mat-icon>home</mat-icon>
     </a>
 
+    <mat-form-field
+      class="filter">
+      <mat-label>Filter</mat-label>
+      <input
+        matInput
+        placeholder="Filter"
+        type="text"
+        autocomplete="off"
+        [formControl]="filter">
+    </mat-form-field>
+
     <ul
       class="users-list">
       <li
         *ngFor="let idx of users">
         <a
           [routerLink]="'/user/' + idx.username">
-          {{idx.username}}
+          <span>
+            {{idx.username}}
+          </span>
+          <small>
+            {{idx.votes}} votes
+          </small>
         </a>
-        <small>
-          {{idx.votes}} votes
-        </small>
       </li>
     </ul>
 

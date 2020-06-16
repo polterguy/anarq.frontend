@@ -6,6 +6,7 @@
  * Common system imports.
  */
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 
 /*
@@ -15,6 +16,7 @@ import { UserSlimModel } from 'src/app/models/user-slim-model';
 import { BaseComponent } from 'src/app/helpers/base.components';
 import { PublicService } from 'src/app/services/http/public.service';
 import { MessageService, Messages } from 'src/app/services/message.service';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 /**
  * Component for viewing users registered at site.
@@ -28,8 +30,14 @@ export class UsersComponent extends BaseComponent {
 
   // Offset from where to start fetching users.
   private offset = 0;
+
+  // Users currently viewed.
   private users: UserSlimModel[] = [];
+
+  // If true, there are more items.
   private more = false;
+
+  private filter: FormControl;
 
   /**
    * Constructor for component.
@@ -53,6 +61,13 @@ export class UsersComponent extends BaseComponent {
    * Fetching first 25 users.
    */
   protected init() {
+    this.filter = new FormControl('');
+    this.filter.valueChanges
+      .pipe(debounceTime(400), distinctUntilChanged())
+      .subscribe(query => {
+        this.users = [];
+        this.getNextBatch();
+      });
     this.getNextBatch();
   }
 
@@ -68,7 +83,11 @@ export class UsersComponent extends BaseComponent {
    */
   private getNextBatch() {
     this.offset += this.users.length;
-    this.service.getUsers(this.offset).subscribe(res => {
+    let filter = null;
+    if (this.filter.value.length > 0) {
+      filter = this.filter.value;
+    }
+    this.service.getUsers(this.offset, filter).subscribe(res => {
       this.more = res.length === 25;
       this.users = this.users.concat(res);
     });
