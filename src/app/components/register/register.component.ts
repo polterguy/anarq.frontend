@@ -92,6 +92,13 @@ export class RegisterComponent extends BaseComponent {
    */
   protected init() {
 
+    // Hiding register link.
+    setTimeout(() => {
+      this.messages.sendMessage({
+        name: Messages.APP_HIDE_LOGIN_REGISTER,
+      });
+    }, 1);
+
     // Checking if user is already logged in, at which point we prohibit him from registering again.
     if (this.messages.getValue(Messages.APP_GET_USERNAME)) {
       this.snack.open(

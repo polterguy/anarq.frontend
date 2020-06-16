@@ -5,16 +5,10 @@
   *ngIf="!done"
   class="register">
 
-  <a
-    class="home-link"
-    mat-button
-    routerLink="/">
-    <mat-icon>home</mat-icon>
-  </a>
-
   <div class="progress">
     <mat-progress-bar
       mode="determinate"
+      matTooltip="Progress of registration process"
       [value]="progress"></mat-progress-bar>
   </div>
 
@@ -75,9 +69,10 @@
     <div class="info">
       <p>
         In order to make sure you are a real person, and preventing people from registering
-        fake profiles, and such influence votes - We ask you kindly to give us your full name,
+        fake profiles, and such influence votes - We ask you to kindly give us your full name,
         as it can be found in the yellow pages. Notice, if you cannot prove you are a legal
-        person and citizen of country of registration, <strong>we might suspend your account</strong>.
+        person and citizen of country of registration, <strong>we might suspend your account</strong>,
+        and yes, we will check this up!
       </p>
       <p>
         We will never disclose your personal information to any 3rd parties.
@@ -112,9 +107,14 @@
     <div class="info">
       <p>
         In order to make sure you are a real person, and preventing people from registering
-        fake profiles, and such influence votes - We ask you kindly to give us your phone number,
+        fake profiles, and such influence votes - We ask you to kindly give us your phone number,
         as it can be found in the yellow pages. Notice, if you cannot prove you are a legal
-        person and citizen of country of registration, <strong>we might suspend your account</strong>.
+        person and citizen of country of registration, <strong>we might suspend your account</strong>,
+        and yes, we will check this up!
+      </p>
+      <p>
+        Notice, we might also send you a text message, to have you verify your phone number
+        as you use the site.
       </p>
       <p>
         We will never disclose your personal information to any 3rd parties.
@@ -177,13 +177,14 @@
       </p>
 
       <p>
-        Votes you cast are kept private, and will not be shared with anyone, and the same is true
-        about your private information. The only exception is in case of that the United Nations
-        appoints an independent 3rd party to audit votes in your region for a particular case - At
-        which point we will under supervision allow auditing of your vote, on individual cases,
+        Votes you cast, and your private information, will never be shared by us with anyone.
+        The only exception is in case of that the United Nations appoints an independent 3rd
+        party to audit votes in your region for a particular case - At which point we will
+        under strict supervision allow auditing of your vote, on individual cases,
         by an independent 3rd party organisation, appointed by the United Nations (only!)
         At which point the independent 3rd party organisation might contact you to verify your
-        vote for security reasons.
+        vote for security reasons, in order to influence legislation in and around the area
+        where you live, according to your vote's value.
       </p>
 
     </div>
@@ -203,7 +204,7 @@
     *ngIf="passwordRepeatGood === true && passwordGood === true && phoneGood === true && emailGood === true && usernameGood === true">
 
     <button
-      matTooltip="Submit form and accept the terms and conditions of the site"
+      matTooltip="Submit the form and accept the terms and conditions of the site"
       mat-button
       [disabled]="!agree"
       (click)="register()">

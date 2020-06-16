@@ -58,6 +58,16 @@ export class Messages {
      * Returns username to caller.
      */
     static readonly APP_GET_USERNAME = 'app:get_username';
+
+    /**
+     * Sent when register link should be shown.
+     */
+    static readonly APP_SHOW_LOGIN_REGISTER = 'app:show_login_register';
+
+    /**
+     * Sent when register link should be hidden.
+     */
+    static readonly APP_HIDE_LOGIN_REGISTER = 'app:hide_login_register';
 }
 
 /**

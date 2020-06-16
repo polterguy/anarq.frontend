@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 /*
  * Custom imports for component.
  */
-import { MessageService } from '../services/message.service';
+import { MessageService, Messages } from '../services/message.service';
 import { PublicService } from '../services/http/public.service';
 
 
@@ -45,6 +45,19 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.messageSubscription = this.initSubscriptions();
+
+    /*
+     * Making sure we show registration link by default
+     * This logic allows us to "override" displaying of
+     * register link in sub-components, by sending the
+     * message that should hide the register link in init()
+     * method.
+     */
+    setTimeout(() => {
+      this.messages.sendMessage({
+        name: Messages.APP_SHOW_LOGIN_REGISTER,
+      });
+    }, 1);
     this.init();
   }
 

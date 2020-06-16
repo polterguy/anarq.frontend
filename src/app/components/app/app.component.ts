@@ -38,6 +38,7 @@ export class AppComponent extends BaseComponent {
    */
   private token: any = null;
   private isLoggedIn = false;
+  private showRegisterLink = true;
 
   /**
    * 
@@ -161,6 +162,14 @@ export class AppComponent extends BaseComponent {
         case Messages.APP_GET_USERNAME:
           msg.content = this.token?.unique_name ?? null;
           break;
+
+        case Messages.APP_SHOW_LOGIN_REGISTER:
+          this.showRegisterLink = true;
+          break
+  
+        case Messages.APP_HIDE_LOGIN_REGISTER:
+          this.showRegisterLink = false;
+          break
 
       }
     });
