@@ -149,8 +149,9 @@ export class UserComponent extends BaseComponent {
         }
         this.service.getUserCases(pars.username).subscribe(res => {
           this.cases = res;
-        });
-      });
+          console.log(this.cases);
+        }, error => this.handleError(error));
+      }, error => this.handleError(error));
     });
   }
 
@@ -178,5 +179,14 @@ export class UserComponent extends BaseComponent {
       return false;
     }
     return true;
+  }
+
+  /**
+   * Capitalizes region's name, making sure it starts with a CAPS character.
+   * 
+   * @param region Region name
+   */
+  private capitalize(region: string) {
+    return region.charAt(0).toUpperCase() + region.slice(1);
   }
 }

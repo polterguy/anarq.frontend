@@ -34,16 +34,13 @@
     </mat-form-field>
 
     <label
-      *ngIf="subjectGood === true"
-      class="body-label">Body (markdown)</label>
+      class="body-label">{{'Body (Markdown ' + body.length + '/2.500)' }}</label>
 
     <ngx-codemirror
-      *ngIf="subjectGood === true"
       [(ngModel)]="body"
       [options]="getCodeMirrorOptions()"></ngx-codemirror>
 
-    <div class="submit"
-      *ngIf="subjectGood === true">
+    <div class="submit">
       <button
         mat-button
         (click)="submit()">

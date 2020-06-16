@@ -19,6 +19,25 @@ import { PublicService } from 'src/app/services/http/public.service';
 import { MessageService, Messages } from 'src/app/services/message.service';
 
 /**
+ * Max length support for CodeMirror.
+ */
+const enforceMaxLength = function(cm, change) {
+  var maxLength = cm.getOption("maxLength");
+  if (maxLength && change.update) {
+      var str = change.text.join("\n");
+      var delta = str.length-(cm.indexFromPos(change.to) - cm.indexFromPos(change.from));
+      if (delta <= 0) { return true; }
+      delta = cm.getValue().length+delta-maxLength;
+      if (delta > 0) {
+          str = str.substr(0, str.length-delta);
+          change.update(change.from, change.to, str.split("\n"));
+      }
+  }
+  return true;
+}
+
+
+/**
  * This is the component for asking a question.
  */
 @Component({
@@ -85,6 +104,12 @@ export class AskComponent extends BaseComponent {
 
     // Verifying user is logged in.
     this.isLoggedIn = this.messages.getValue(Messages.APP_GET_USERNAME);
+
+    // Making sure we get max length support on CM instance.
+    setTimeout(() => {
+      const cm = document.querySelector('.CodeMirror')['CodeMirror'];
+      cm.on("beforeChange", enforceMaxLength);
+    }, 1);
   }
 
   /**
@@ -145,7 +170,8 @@ export class AskComponent extends BaseComponent {
     return {
       lineNumbers: true,
       theme: 'material',
-      mode: 'markdown'
+      mode: 'markdown',
+      maxLength: 2500,
     };
   }
 

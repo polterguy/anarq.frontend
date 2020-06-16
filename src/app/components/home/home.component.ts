@@ -33,6 +33,7 @@ export class HomeComponent extends BaseComponent {
   private more: boolean = false;
   private regions: string[] = [];
   private statistics: StatisticsModel = null;
+  private sorting = 'popular';
 
   /**
    * Constructor for component.
@@ -57,6 +58,10 @@ export class HomeComponent extends BaseComponent {
    * or not the user is logged in or not.
    */
   protected init() {
+    const sorting = localStorage.getItem('home_sorting');
+    if (sorting) {
+      this.sorting = sorting;
+    }
     this.getNextBatch();
     this.getRegions();
     this.service.getStatistics().subscribe(res => {
@@ -104,6 +109,12 @@ export class HomeComponent extends BaseComponent {
     });
   }
 
+  private sortingChanged() {
+    this.cases = [];
+    this.getNextBatch();
+    localStorage.setItem('home_sorting', this.sorting);
+  }
+
   /**
    * Returns all open cases relevant to client, which depends upon whether or
    * not the client is logged in or not.
@@ -118,7 +129,7 @@ export class HomeComponent extends BaseComponent {
     const username = this.messages.getValue(Messages.APP_GET_USERNAME);
 
     // Getting open cases relevant to user, or all cases if no username was given.
-    this.service.getOpenCases(null, null, username).subscribe(res => {
+    this.service.getOpenCases(null, null, username, this.sorting).subscribe(res => {
       this.more = res !== null && res.length === 25;
       this.cases = res;
     }, error => this.handleError(error));

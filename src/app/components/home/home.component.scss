@@ -18,6 +18,12 @@
     margin-left: auto;
     margin-right: auto;
     position: relative;
+    .sorting {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 7rem;
+    }
     .add-case {
         position: absolute;
         top: 1rem;

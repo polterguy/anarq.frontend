@@ -7,6 +7,20 @@
 
 <mat-card class="info-card">
 
+  <mat-form-field
+    class="sorting">
+    <mat-select
+      [(ngModel)]="sorting"
+      (selectionChange)="sortingChanged($event)">
+      <mat-option value="popular">
+        Popular
+      </mat-option>
+      <mat-option value="newest">
+        Newest
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <div
     *ngIf="!cases || cases.length === 0"
     class="information">
@@ -68,7 +82,7 @@
         Open {{statistics.open}}
       </li>
       <li
-        [matTooltip]="'There are ' + statistics.cases + ' votes cast in the system'">
+        [matTooltip]="'There are ' + statistics.votes + ' votes cast in the system'">
         Votes {{statistics.votes}}
       </li>
     </ul>

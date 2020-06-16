@@ -106,9 +106,14 @@
         *ngFor="let idx of cases">
         <a
           class="case-link"
+          [ngClass]="idx.voted === 1 ? 'voted' : ''"
+          [matTooltip]="idx.voted === 1 ? 'You have already voted for this case' : 'You have not given your vote in this case'"
           [routerLink]="'/case/' + idx.id">
           {{idx.subject}}
         </a>
+        <small>
+          {{capitalize(idx.region)}} ({{idx.positive + '/' + (idx.votes - idx.positive)}})
+        </small>
       </li>
     </ul>
 

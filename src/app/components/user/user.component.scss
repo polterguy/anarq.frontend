@@ -90,5 +90,13 @@
                 color: #a0a0a0;
             }
         }
+        li {
+            a {
+                color: #7070ff;
+            }
+            a.voted {
+                color: #a0a0a0;
+            }
+        }
     }
 }

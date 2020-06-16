@@ -86,22 +86,38 @@ export class PublicService {
    * 
    * @param args Generic filter condition for which open cases to return
    */
-  getOpenCases(offset: number = null, region: string = null, username: string = null): Observable<CaseSlim[]> {
+  getOpenCases(
+    offset: number = null,
+    region: string = null,
+    username: string = null,
+    sorting: string = null): Observable<CaseSlim[]> {
     let query = '';
     if (offset) {
       query += '?offset=' + offset;
-      if (region !== null) {
-        query += '&region=' + region;
-      } else if(username !== null) {
-        query += '&username=' + username;
+    }
+    if (region) {
+      if (query.includes('?')) {
+        query += '&';
+      } else {
+        query += '?';
       }
-    } else if (region !== null) {
-      query += '?region=' + region;
-      if(username !== null) {
-        query += '&username=' + username;
+      query += 'region=' + encodeURIComponent(region);
+    }
+    if (username) {
+      if (query.includes('?')) {
+        query += '&';
+      } else {
+        query += '?';
       }
-    } else if (username !== null) {
-      query += '?username=' + username;
+      query += 'username=' + encodeURIComponent(username);
+    }
+    if (sorting) {
+      if (query.includes('?')) {
+        query += '&';
+      } else {
+        query += '?';
+      }
+      query += 'sorting=' + encodeURIComponent(sorting);
     }
     return this.httpClient.get<CaseSlim[]>(
       environment.apiUrl +

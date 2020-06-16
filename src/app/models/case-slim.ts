@@ -10,4 +10,5 @@ export class CaseSlim {
     user: string;
     votes: number;
     positive: number;
+    voted: number;
 }
