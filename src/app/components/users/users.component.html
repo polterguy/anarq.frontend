@@ -1,0 +1,42 @@
+
+<h1>Users in system</h1>
+
+<div class="component-wrapper">
+
+  <div
+    class="mat-elevation-z4 users">
+
+    <a
+      class="home-link"
+      mat-button
+      matTooltip="See all open cases"
+      routerLink="/">
+      <mat-icon>home</mat-icon>
+    </a>
+
+    <ul
+      class="users-list">
+      <li
+        *ngFor="let idx of users">
+        <a
+          [routerLink]="'/user/' + idx.username">
+          {{idx.username}}
+        </a>
+        <small>
+          {{idx.votes}} votes
+        </small>
+      </li>
+    </ul>
+
+    <button
+      *ngIf="more"
+      mat-button
+      class="feed-more"
+      matTooltip="Get 25 next users"
+      (click)="getNextBatch()">
+      More
+    </button>
+
+  </div>
+
+</div>

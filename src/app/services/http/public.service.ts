@@ -18,6 +18,7 @@ import { VerifyEmailModel } from 'src/app/models/verify-email-model';
 import { RegionsModel } from 'src/app/models/regions-model';
 import { CaseModel } from 'src/app/models/case-model';
 import { StatisticsModel } from 'src/app/models/statistics-model';
+import { UserSlimModel } from 'src/app/models/user-slim-model';
 
 /*
  * Your main HTTP service for handling cases, and related objects.
@@ -291,6 +292,16 @@ export class PublicService {
       environment.apiUrl +
       'magic/modules/anarchy/public/cases/create-case',
       model);
+  }
+
+  /**
+   * Returns users in system by popularity.
+   */
+  getUsers(offset: number) {
+    return this.httpClient.get<UserSlimModel[]>(
+      environment.apiUrl +
+      'magic/modules/anarchy/public/users/users?offset=' +
+      offset);
   }
 
   /**

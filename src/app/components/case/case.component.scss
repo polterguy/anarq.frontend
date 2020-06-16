@@ -63,12 +63,10 @@
             flex: 1;
             .user-link {
                 text-decoration: none;
-                color: rgb(85, 26, 139);
             }
             .region-link {
                 text-transform: capitalize;
                 text-decoration: none;
-                color: rgb(85, 26, 139);
             }
         }
         .item.count {
@@ -90,6 +88,9 @@
         }
         .no {
             width: 10rem;
+        }
+        .your-vote {
+            font-size: 2rem;
         }
     }
     @media print {

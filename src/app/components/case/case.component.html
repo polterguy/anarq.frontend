@@ -78,9 +78,11 @@
       [ngClass]="getClass()"
       *ngIf="item.opinion !== undefined && isLoggedIn">
       <mat-icon
+        class="your-vote"
         matTooltip="You voted yes. Only you can see your vote."
         *ngIf="item.opinion === true">thumb_up</mat-icon>
       <mat-icon
+        class="your-vote"
         matTooltip="You voted no. Only you can see your vote."
         *ngIf="item.opinion === false">thumb_down</mat-icon>
     </div>

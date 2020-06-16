@@ -67,6 +67,7 @@ import { CreateUserDialogComponent } from './components/private/auth/modals/crea
  * during the scaffolding process.
  */
 import { CaseComponent } from './components/case/case.component';
+import { UsersComponent } from './components/users/users.component';
 import { UserComponent } from './components/user/user.component';
 import { VotesComponent } from './components/private/votes/votes.component';
 import { CasesComponent } from './components/private/cases/cases.component';
@@ -119,6 +120,7 @@ export function tokenGetter() {
     EditCase_typesComponent,
     CasesComponent,
     CaseComponent,
+    UsersComponent,
     UserComponent,
     VerifyEmailComponent,
     SetupRegionsComponent,

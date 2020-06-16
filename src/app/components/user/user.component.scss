@@ -33,13 +33,15 @@
         .summary-table {
             flex: 1;
             tr {
-                th {
-                    text-align: left;
-                }
                 td {
+                    border-bottom: solid 1px #f0f0f0;
+                    padding: .25rem;
                     .email {
                         text-decoration: none;
                     }
+                }
+                td:nth-child(2) {
+                    text-align: right;
                 }
             }
         }
@@ -70,7 +72,6 @@
                 text-transform: capitalize;
                 .region-link {
                     text-decoration: none;
-                    color: rgb(85, 26, 139);
                 }
             }
         }
@@ -82,18 +83,12 @@
         li {
             margin-top: 1rem;
             font-size: 1.2rem;
-            a {
-                text-decoration: none;
-            }
             small {
                 font-size: .8rem;
                 color: #a0a0a0;
             }
         }
         li {
-            a {
-                color: #7070ff;
-            }
             a.voted {
                 color: #a0a0a0;
             }

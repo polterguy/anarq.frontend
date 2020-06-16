@@ -29,6 +29,7 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
 import { SetupRegionsComponent } from './components/setup-regions/setup-regions.component';
 import { AskComponent } from './components/ask/ask.component';
 import { AuditVoteComponent } from './components/audit-vote/audit-vote.component';
+import { UsersComponent } from './components/users/users.component';
 
 
 // Creating our routes, one route for each entity type.
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: 'verify-email/:username/:hash', component: VerifyEmailComponent },
   { path: 'setup-regions', component: SetupRegionsComponent },
   { path: 'case/:id', component: CaseComponent },
+  { path: 'users', component: UsersComponent },
   { path: 'user/:username', component: UserComponent },
   { path: 'region/:region', component: RegionComponent },
   { path: 'case_types', component: Case_typesComponent },

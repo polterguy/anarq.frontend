@@ -32,11 +32,7 @@
 
       <table class="summary-table">
         <tr>
-          <th>Type</th>
-          <th>Value</th>
-        </tr>
-        <tr>
-          <td>
+          <td matTooltip="This is how many cases the user has created">
             Cases created
           </td>
           <td>
@@ -44,8 +40,16 @@
           </td>
         </tr>
         <tr>
+          <td matTooltip="This is how many votes user has received on his or her own cases">
+            Votes given
+          </td>
           <td>
-            Total votes
+            {{item.votes}}
+          </td>
+        </tr>
+        <tr>
+          <td matTooltip="This is how many votes the user has given">
+            Votes
           </td>
           <td>
             {{getTotalVotes()}}

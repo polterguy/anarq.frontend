@@ -18,4 +18,5 @@ export class UserView {
     name?: string;
     phone?: string;
     email?: string;
+    votes: number;
 }

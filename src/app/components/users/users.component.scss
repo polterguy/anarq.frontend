@@ -1,0 +1,45 @@
+/*
+ * Anarchy, a Direct Democracy system. Copyright 2020 - Thomas Hansen thomas@servergardens.com
+ */
+
+h1 {
+    text-align: center;
+}
+
+.users {
+    margin:1rem 5rem 2rem 5rem;
+    padding: 3rem 3rem 7rem 3rem;
+    margin-top: -2.25rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    .home-link {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        text-decoration: none;
+    }
+    .users-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 2rem 0 2rem 0;
+        li {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            a {
+                min-width: 15rem;
+                display: inline-block;
+            }
+            small {
+                font-size: .8rem;
+                color: #a0a0a0;
+            }
+        }
+    }
+    .feed-more {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

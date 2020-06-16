@@ -149,7 +149,6 @@ export class UserComponent extends BaseComponent {
         }
         this.service.getUserCases(pars.username).subscribe(res => {
           this.cases = res;
-          console.log(this.cases);
         }, error => this.handleError(error));
       }, error => this.handleError(error));
     });
