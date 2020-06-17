@@ -118,7 +118,11 @@ export class AskComponent extends BaseComponent {
      */
     this.service.isFirstCase().subscribe(res => {
       this.showInfo = res.first;
-      localStorage.setItem('first_case', JSON.stringify(res));
+      if (this.showInfo) {
+        localStorage.setItem('first_case', JSON.stringify(res));
+      } else {
+        localStorage.removeItem('first_case');
+      }
     }, error => this.handleError(error));
   }
 

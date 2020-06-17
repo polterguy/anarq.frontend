@@ -27,7 +27,12 @@
   <div
     *ngIf="cases.length === 0"
     class="information">
-    Seems that you are all caught up :)
+    <span>
+      Seems that you are all caught up.
+    </span>
+    <span *ngIf="canCreateCase">
+      Why don't you create a new case yourself?
+    </span>
   </div>
 
   <ul class="region-cases">

@@ -4,6 +4,63 @@
   <div
     *ngIf="item"
     class="mat-elevation-z4 case">
+
+    <div
+      *ngIf="firstCase"
+      class="first-information">
+
+      <button
+        mat-stroked-button
+        class="close"
+        (click)="closeInfo()">
+        All RIGHT BABY, I'm ready to roll!
+      </button>
+
+      <h3>Read this</h3>
+
+      <p>
+        Since this is the first case you create, we'd like to give you some piece of advice
+        in regards to how to market your case. First of all, if you <strong>print the case</strong>,
+        the case
+        will probably fit quite well on a piece of A4 paper, and contain a QR code allowing
+        others to read your case online, and vote for whatever their opinion reflects in regards
+        to the case. This allows you to completely bypass any conventional censoring regimes,
+        such as those found at Facebook and Twitter, by simply marketing your case on conventional
+        paper, and hang these sheets of paper up in the local area where you live. But please, try to follow
+        the law in whatever region you happen to live in, and don't spam your entire local
+        neighbourhood with sheets of paper, violating other individuals right to use their own
+        real estate as they see fit themselves.
+      </p>
+
+      <p>
+        In fact, the cases you create in AnarQ are almost like <em>"pre defined"</em> marketing
+        brochures in such a regard, allowing you to literally use them as brochures, and hand
+        them out during political rallies, demonstrations, and such, and also hang them up at
+        places in your local neighbourhood. We refer to this idea as <em>"guerilla politics"</em>,
+        since it allows you to completely bypass any traditional censorship regime in traditional
+        online social media, and/or conventional press. The idea is kind of like that you are your
+        own press!
+      </p>
+
+      <p>
+        Check out how your case looks like in print by clicking <strong>CTRL+P</strong> to see a preview
+        of how it will end up looking.
+      </p>
+
+      <p>
+        <strong>Notice!</strong> In addition to this, you might also want to share your case online,
+        on for instance Twitter and Facebook. But printing out your case, makes you less dependent
+        upon these websites and their censorship regime, which history have taught us is pretty bad
+        unfortunately.
+      </p>
+
+      <span
+        class="slogan">
+        Free Speech! One Each!
+      </span>
+
+    </div>
+
     <a
       class="home-link"
       matTooltip="See all open cases"
@@ -11,23 +68,29 @@
       routerLink="/">
       <mat-icon>home</mat-icon>
     </a>
+
     <h1>
       {{item.subject}}
     </h1>
+
     <div
       class="content"
       [innerHtml]="item.body | marked"></div>
+
     <qrcode
       class="qr-code"
       [qrdata]="getCaseUrl()"
       [width]="128"
       [errorCorrectionLevel]="'M'"></qrcode>
+
     <div
       class="qr-code-description">
       Vote for case above
     </div>
+
     <div
       class="meta-data">
+
       <div class="item">
         <a
           class="region-link"
@@ -36,6 +99,7 @@
           {{item.region}}
         </a>
       </div>
+
       <div class="item">
         <a
           class="user-link"
@@ -44,20 +108,25 @@
           {{item.user}}
         </a>
       </div>
+
       <div
         class="item"
         [matTooltip]="'Votes can be cast until ' + (item.deadline | date_format)">
         {{item.deadline | toDate}}
       </div>
+
       <div
        class="item count"
        [matTooltip]="item.positive + ' aye and ' + item.negative + ' nay'">
         {{item.positive}} / {{item.negative}}
       </div>
+
     </div>
+
     <div
       class="action-bar"
       *ngIf="item.opinion === undefined && isLoggedIn">
+
       <button
         (click)="yes()"
         class="yes"
@@ -65,6 +134,7 @@
         mat-stroked-button>
         <mat-icon>thumb_up</mat-icon>
       </button>
+
       <button
         (click)="no()"
         class="no"
@@ -72,20 +142,28 @@
         mat-stroked-button>
         <mat-icon>thumb_down</mat-icon>
       </button>
+
     </div>
+
     <div
       class="action-bar"
       [ngClass]="getClass()"
       *ngIf="item.opinion !== undefined && isLoggedIn">
+
       <mat-icon
         class="your-vote"
+        role="button"
         matTooltip="You voted yes. Only you can see your vote."
         *ngIf="item.opinion === true">thumb_up</mat-icon>
+
       <mat-icon
         class="your-vote"
+        role="button"
         matTooltip="You voted no. Only you can see your vote."
         *ngIf="item.opinion === false">thumb_down</mat-icon>
+
     </div>
+
   </div>
 
 </div>

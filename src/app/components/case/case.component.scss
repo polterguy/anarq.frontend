@@ -10,6 +10,36 @@
     margin-left: auto;
     margin-right: auto;
     position: relative;
+    .first-information {
+        background-color: #e0ffe0;
+        border-radius: .5rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        padding: 4rem 2rem 3rem 2rem;
+        position: relative;
+        h3 {
+            text-transform: none;
+        }
+        .close {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+        }
+        .slogan {
+            text-align: center;
+            display: block;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top:2rem;
+            margin-bottom: 2rem;
+        }
+    }
+    @media print {
+        .first-information {
+            display: none;
+        }
+    }
+
     h1 {
         text-align: center;
     }

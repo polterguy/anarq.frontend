@@ -69,6 +69,12 @@ export class HomeComponent extends BaseComponent {
     this.service.getStatistics().subscribe(res => {
       this.statistics = res;
     });
+
+    /*
+     * Removing first case property, to avoid it showing up on every
+     * single case user views.
+     */
+    localStorage.removeItem('first_case');
   }
 
   /**

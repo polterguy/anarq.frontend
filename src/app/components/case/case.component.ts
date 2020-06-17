@@ -13,9 +13,10 @@ import { ActivatedRoute } from '@angular/router';
  * Custom imports for component.
  */
 import { CaseView } from 'src/app/models/case-view';
+import { FirstCaseModel } from 'src/app/models/first-case';
 import { BaseComponent } from 'src/app/helpers/base.components';
-import { MessageService, Messages } from 'src/app/services/message.service';
 import { PublicService } from 'src/app/services/http/public.service';
+import { MessageService, Messages } from 'src/app/services/message.service';
 
 /**
  * This is the component for viewing a single case.
@@ -30,6 +31,7 @@ export class CaseComponent extends BaseComponent {
   private item: CaseView = null;
   private id: number;
   private isLoggedIn = false;
+  private firstCase = false;
 
   /**
    * Constructor for component.
@@ -61,6 +63,15 @@ export class CaseComponent extends BaseComponent {
 
     // Retrieving case data.
     this.getCaseData();
+
+    // Checking if this is the first case user created.
+    const json = localStorage.getItem('first_case');
+    if (json) {
+      const firstCase = <FirstCaseModel>JSON.parse(json);
+      if (firstCase.first) {
+        this.firstCase = true;
+      }
+    }
   }
 
   /**
@@ -165,5 +176,9 @@ export class CaseComponent extends BaseComponent {
     } else {
       return 'no';
     }
+  }
+
+  private closeInfo() {
+    this.firstCase = false;
   }
 }
