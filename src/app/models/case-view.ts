@@ -12,4 +12,5 @@ export class CaseView {
     positive: number;
     negative: number;
     opinion?: boolean;
+    closed: number;
 }

@@ -3,6 +3,7 @@
 
   <div
     *ngIf="item"
+    [ngClass]="getCssClassForCase()"
     class="mat-elevation-z4 case">
 
     <div
@@ -84,8 +85,15 @@
       [errorCorrectionLevel]="'M'"></qrcode>
 
     <div
+      *ngIf="item.closed !== 1"
       class="qr-code-description">
       Vote for case above
+    </div>
+
+    <div
+      *ngIf="item.closed === 1"
+      class="qr-code-description">
+      Check out how the case did
     </div>
 
     <div
@@ -111,8 +119,15 @@
 
       <div
         class="item"
+        *ngIf="item.closed === 0"
         [matTooltip]="'Votes can be cast until ' + (item.deadline | date_format)">
         {{item.deadline | toDate}}
+      </div>
+
+      <div
+        class="item"
+        *ngIf="item.closed === 1">
+        {{getCaseResult(item)}}
       </div>
 
       <div
@@ -125,7 +140,7 @@
 
     <div
       class="action-bar"
-      *ngIf="item.opinion === undefined && isLoggedIn">
+      *ngIf="item.opinion === undefined && isLoggedIn && item.closed !== 1">
 
       <button
         (click)="yes()"

@@ -76,6 +76,22 @@ export class UserComponent extends BaseComponent {
       'rgba(240,240,240,0.8)',
     ]}];
 
+  // Bar chart options, and data.
+  private pieChartOptions: ChartOptions = {
+    responsive: true,
+    legend: {
+      display: false
+    },
+  };
+  private pieChartLabels: Label[] = [];
+  private pieChartData: number[] = [];
+  private pieChartColors = [{
+    backgroundColor: [
+      'rgba(180,255,180,0.8)',
+      'rgba(255,180,180,0.8)',
+      'rgba(180,180,180,0.8)',
+    ]}];
+
   /**
    * Constructor for component.
    * 
@@ -147,6 +163,10 @@ export class UserComponent extends BaseComponent {
           this.barChartLabels = this.item.regions.map(x => x.name);
           this.barChartData = this.item.regions.map(x => x.votes);
         }
+        if (this.shouldDisplayWinningsChart()) {
+          this.pieChartLabels = ['Won cases', 'Lost cases', 'Tied cases'];
+          this.pieChartData = [this.item.won, this.item.lost, this.item.tied];
+        }
         this.service.getUserCases(pars.username).subscribe(res => {
           this.cases = res;
         }, error => this.handleError(error));
@@ -178,6 +198,19 @@ export class UserComponent extends BaseComponent {
       return false;
     }
     return true;
+  }
+
+  /**
+   * Returns true if winnings chart is supposed to be displayed.
+   */
+  private shouldDisplayWinningsChart() {
+    if (!this.item) {
+      return false;
+    }
+    if (this.item.won > 0 || this.item.lost > 0 || this.item.tied > 0) {
+      return true;
+    }
+    return false;
   }
 
   /**

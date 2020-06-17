@@ -15,8 +15,11 @@ export class UserView {
     status: string;
     cases: number;
     regions: Region[];
+    votes: number;
+    won?: number;
+    lost?: number;
+    tied?: number;
     name?: string;
     phone?: string;
     email?: string;
-    votes: number;
 }

@@ -123,7 +123,7 @@ export class PublicService {
     }
     return this.httpClient.get<CaseSlim[]>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/cases/open-cases' +
+      'magic/modules/anarchy/public/cases/cases' +
       query);
   }
 

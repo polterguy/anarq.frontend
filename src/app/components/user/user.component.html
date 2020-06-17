@@ -76,6 +76,7 @@
 
       <div
         class="summary-regions">
+        <label>Votes user has given per region</label>
         <canvas
           *ngIf="shouldDisplayRegionChart()"
           baseChart
@@ -84,6 +85,20 @@
           [data]="barChartData"
           [labels]="barChartLabels"
           [colors]="barChartColors">
+        </canvas>
+      </div>
+
+      <div
+        *ngIf="shouldDisplayWinningsChart()"
+        class="summary-winnings">
+        <label>Winnings and loosings</label>
+        <canvas
+          baseChart
+          chartType="pie"
+          [options]="pieChartOptions"
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          [colors]="pieChartColors">
         </canvas>
       </div>
 

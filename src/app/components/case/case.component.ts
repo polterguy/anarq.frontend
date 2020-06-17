@@ -178,7 +178,38 @@ export class CaseComponent extends BaseComponent {
     }
   }
 
+  /**
+   * Closes additional info for first created case.
+   */
   private closeInfo() {
     this.firstCase = false;
+  }
+
+  /**
+   * Returns a friendly string declaring whether ot not case was won or lost
+   */
+  private getCaseResult() {
+    if (this.item.positive > this.item.negative) {
+      return 'Case was won';
+    } else if (this.item.positive < this.item.negative) {
+      return 'Case was lost';
+    } else {
+      return 'Case was not determined';
+    }
+  }
+
+  private getCssClassForCase() {
+    if (this.item.closed === 0) {
+      // Case is still open.
+      return 'open';
+    } else {
+      if (this.item.positive > this.item.negative) {
+        return 'won';
+      } else if (this.item.positive < this.item.negative) {
+        return 'lost';
+      } else {
+        return 'indetermined';
+      }
+    }
   }
 }

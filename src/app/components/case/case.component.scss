@@ -124,9 +124,26 @@
     }
 }
 
+.case.open {
+    background-color: #ffffff;
+}
+
+.case.won {
+    background-color: #f0fff0;
+}
+
+.case.lost {
+    background-color: #fff0f0;
+}
+
+.case.indetermined {
+    background-color: #f0f0f0;
+}
+
 @media print {
     .case {
         box-shadow: none;
+        background-color: #ffffff;
     }
 }
 

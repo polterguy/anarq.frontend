@@ -22,34 +22,91 @@
         right: 1rem;
         font-size: 1.8rem;
     }
-    .summary {
-        display: flex;
-        .summary-table {
-            flex: 1;
-            border-collapse: collapse;
-            tr {
-                td {
-                    border-bottom: solid 1px #f0f0f0;
-                    padding: .5rem 0 .5rem 0;
-                    .email {
-                        text-decoration: none;
+    @media (min-width: 801px) {
+        .summary {
+            display: flex;
+            .summary-table {
+                flex: 1;
+                border-collapse: collapse;
+                width: 50%;
+                tr {
+                    td {
+                        border-bottom: solid 1px #f0f0f0;
+                        padding: .5rem 0 .5rem 0;
+                        .email {
+                            text-decoration: none;
+                        }
+                    }
+                    td:nth-child(2) {
+                        text-align: right;
                     }
                 }
-                td:nth-child(2) {
-                    text-align: right;
+                tr:hover {
+                    background-color: rgba(0,0,0,.1);
                 }
             }
-            tr:hover {
-                background-color: rgba(0,0,0,.1);
+            .summary-regions {
+                flex: 1;
+                margin-left: 1rem;
+                width: 25%;
+                label {
+                    text-align: center;
+                    display: block;
+                    color: #a0a0a0;
+                    margin-bottom: .5rem;
+                    font-size: .8rem;
+                }
+            }
+            .summary-winnings {
+                flex: 1;
+                margin-left: 1rem;
+                width: 25%;
+                label {
+                    text-align: center;
+                    display: block;
+                    color: #a0a0a0;
+                    margin-bottom: .5rem;
+                    font-size: .8rem;
+                }
             }
         }
-        .summary-regions {
-            flex: 1;
-            label {
-                font-weight: bold;
-                margin-bottom: 1rem;
-                display: block;
-                text-align: center;
+    }
+    @media (max-width: 800px) {
+        .summary {
+            display: block;
+            .summary-table {
+                border-collapse: collapse;
+                tr {
+                    td {
+                        border-bottom: solid 1px #f0f0f0;
+                        padding: .5rem 0 .5rem 0;
+                        .email {
+                            text-decoration: none;
+                        }
+                    }
+                    td:nth-child(2) {
+                        text-align: right;
+                    }
+                }
+                tr:hover {
+                    background-color: rgba(0,0,0,.1);
+                }
+            }
+            .summary-table,
+            .summary-regions,
+            .summary-winnings {
+                label {
+                    text-align: center;
+                    display: block;
+                    color: #a0a0a0;
+                    margin-bottom: .5rem;
+                    font-size: .8rem;
+                }
+            }
+            .summary-regions, .summary-winnings {
+                margin-left: 3rem;
+                margin-right: 3rem;
+                margin-top: 4rem;
             }
         }
     }

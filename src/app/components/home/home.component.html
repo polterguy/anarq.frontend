@@ -10,24 +10,29 @@
       (selectionChange)="sortingChanged($event)">
       <mat-option
         value="popular"
-        matTooltip="Show cases you haven't voted for yet, and sort by most popular">
+        matTooltip="Show open cases you haven't voted for yet, and sort by most popular">
         Popular
       </mat-option>
       <mat-option
         value="newest"
-        matTooltip="Show cases you haven't voted for, and sort by most recent">
+        matTooltip="Show open cases you haven't voted for, and sort by most recent">
         Newest
+      </mat-option>
+      <mat-option
+        value="closed"
+        matTooltip="Show closed cases, and sort by most popular">
+        Closed
       </mat-option>
       <mat-option
         value="my-cases"
         *ngIf="userIsLoggedIn()"
-        matTooltip="Show only cases you have created yourself, sorted by most popular">
+        matTooltip="Show cases you have created yourself, sorted by most popular">
         My cases
       </mat-option>
       <mat-option
         value="my-voted-cases"
         *ngIf="userIsLoggedIn()"
-        matTooltip="Show only cases you have voted for, by the most popular case first">
+        matTooltip="Show cases you have voted for, by the most popular case first">
         Cases I have voted for
       </mat-option>
     </mat-select>
