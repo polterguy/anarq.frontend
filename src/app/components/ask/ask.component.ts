@@ -52,7 +52,8 @@ export class AskComponent extends BaseComponent {
   private isLoggedIn = false;
   private canCreateCase = false;
   private subjectGood?: boolean = null;
-  private body = ''
+  private body = '';
+  private showInfo = false;
 
   // Number of milliseconds after a keystroke before filtering should be re-applied.
   private debounce = 800;
@@ -110,6 +111,15 @@ export class AskComponent extends BaseComponent {
       const cm = document.querySelector('.CodeMirror')['CodeMirror'];
       cm.on("beforeChange", enforceMaxLength);
     }, 1);
+
+    /*
+     * Checking if this is user's first case, at which point we show
+     * the general information about how to create a new case.
+     */
+    this.service.isFirstCase().subscribe(res => {
+      this.showInfo = res.first;
+      localStorage.setItem('first_case', JSON.stringify(res));
+    }, error => this.handleError(error));
   }
 
   /**
@@ -199,5 +209,21 @@ export class AskComponent extends BaseComponent {
           });
       }
     }, error => this.handleError(error));
+  }
+
+  /**
+   * Capitalizes region's name, making sure it starts with a CAPS character.
+   * 
+   * @param region Region name
+   */
+  private capitalize(region: string) {
+    return region.charAt(0).toUpperCase() + region.slice(1);
+  }
+
+  /**
+   * Closes information content box.
+   */
+  closeInfo() {
+    this.showInfo = false;
   }
 }

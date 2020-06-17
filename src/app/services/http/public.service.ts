@@ -19,6 +19,7 @@ import { RegionsModel } from 'src/app/models/regions-model';
 import { CaseModel } from 'src/app/models/case-model';
 import { StatisticsModel } from 'src/app/models/statistics-model';
 import { UserSlimModel } from 'src/app/models/user-slim-model';
+import { FirstCaseModel } from 'src/app/models/first-case';
 
 /*
  * Your main HTTP service for handling cases, and related objects.
@@ -167,6 +168,15 @@ export class PublicService {
       environment.apiUrl +
       'magic/modules/anarchy/public/users/user?username=' +
       username);
+  }
+
+  /**
+   * Returns true if user has not created any cases yet.
+   */
+  isFirstCase() {
+    return this.httpClient.get<FirstCaseModel>(
+      environment.apiUrl +
+      'magic/modules/anarchy/public/users/is-first-case');
   }
 
   /**

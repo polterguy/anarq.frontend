@@ -111,8 +111,8 @@ export class HomeComponent extends BaseComponent {
 
   private sortingChanged() {
     this.cases = [];
-    this.getNextBatch();
     localStorage.setItem('home_sorting', this.sorting);
+    this.getNextBatch();
   }
 
   /**

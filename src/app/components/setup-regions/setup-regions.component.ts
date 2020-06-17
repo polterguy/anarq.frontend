@@ -134,7 +134,7 @@ export class SetupRegionsComponent extends BaseComponent {
       if (res.result === 'SUCCESS') {
         this.router.navigate(['/'])
         this.snack.open(
-          'Congratulations, you are now allowed to vote and propose cases at AnarchU',
+          'Congratulations, you are now allowed to vote and propose cases at AnarQ',
           'ok', {
             duration: 5000,
           });

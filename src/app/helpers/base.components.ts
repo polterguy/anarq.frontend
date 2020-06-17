@@ -87,7 +87,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
   protected handleError(error: any) {
     console.error(error);
     this.snack.open(
-      error.error.message,
+      error.error?.message || (error.status + ' - ' + error.statusText),
       'ok', {
         duration: 5000
       });
