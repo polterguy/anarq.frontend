@@ -16,12 +16,7 @@
 
     <div
       *ngIf="canCreateCase === false && isLoggedIn">
-      You cannot create a case in '{{region}}' since you just recently created one.
-      <ul>
-        <li>For 'norge' you can only create one case per week</li>
-        <li>For all other regions you can create one case every day</li>
-      </ul>
-      This is to avoid a single user spamming the entire feed, asking too many questions.
+      {{translate('CannotCreateCaseInRegion', [region])}}
     </div>
 
     <div
