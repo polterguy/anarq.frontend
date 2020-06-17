@@ -20,6 +20,8 @@ import { CaseModel } from 'src/app/models/case-model';
 import { StatisticsModel } from 'src/app/models/statistics-model';
 import { UserSlimModel } from 'src/app/models/user-slim-model';
 import { FirstCaseModel } from 'src/app/models/first-case';
+import { LanguageModel } from 'src/app/models/language-model';
+import { TranslationModel } from 'src/app/models/translation-model';
 
 /*
  * Your main HTTP service for handling cases, and related objects.
@@ -152,6 +154,29 @@ export class PublicService {
         id,
         vote,
       });
+  }
+
+  /*
+   * Localization endpoints.
+   */
+
+  /**
+   * Returns all languages system supports.
+   */
+  getLanguages() {
+    return this.httpClient.get<LanguageModel[]>(
+      environment.apiUrl +
+      'magic/modules/anarchy/public/meta/languages');
+  }
+
+  /**
+   * Returns all translations in system for the given locale.
+   */
+  getTranslations(locale: string) {
+    return this.httpClient.get<TranslationModel[]>(
+      environment.apiUrl +
+      'magic/modules/anarchy/public/meta/translations?locale=' +
+      encodeURIComponent(locale));
   }
 
   /*

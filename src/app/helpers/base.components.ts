@@ -2,15 +2,16 @@
 /*
  * System imports.
  */
+import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 import { OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
 
 /*
  * Custom imports for component.
  */
-import { MessageService, Messages } from '../services/message.service';
+import { TranslationModel } from '../models/translation-model';
 import { PublicService } from '../services/http/public.service';
+import { MessageService, Messages } from '../services/message.service';
 
 
 /**
@@ -18,6 +19,8 @@ import { PublicService } from '../services/http/public.service';
  * as error handling, etc.
  */
 export abstract class BaseComponent implements OnInit, OnDestroy {
+
+  protected static translations: TranslationModel[] = [];
 
   /**
    * Message service subscription, allowing us to communicate with other components
@@ -91,5 +94,19 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
       'ok', {
         duration: 5000
       });
+  }
+
+  protected translate(key: string, args: any[] = null) {
+    const result = BaseComponent.translations.filter(x => x.key === key);
+    let returnValue = key;
+    if (result && result.length > 0) {
+      returnValue = result[0].content;
+      if (args && args.length > 0) {
+        for(var idx = 0; idx < args.length; idx++) {
+          returnValue = returnValue.replace('{' + idx + '}', args[idx]);
+        }
+      }
+    }
+    return returnValue; // Defaulting to key value, which normally is English'ish.
   }
 }

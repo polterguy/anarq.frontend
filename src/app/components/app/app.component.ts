@@ -3,19 +3,19 @@
  */
 
 // Angular imports.
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Component, OnInit, OnDestroy } from '@angular/core';
 
 // Services your app depends upon.
 import { LoaderService } from '../../services/loader.service';
-import { MessageService, Messages } from '../../services/message.service'
 import { PublicService } from '../../services/http/public.service';
+import { MessageService, Messages } from '../../services/message.service'
 
 // Custom components needed in this component.
-import { Subscription } from 'rxjs';
 import { LoginComponent } from '../../modals/login.component';
+import { LanguageModel } from 'src/app/models/language-model';
 import { BaseComponent } from 'src/app/helpers/base.components';
 
 /*
@@ -30,6 +30,7 @@ export class AppComponent extends BaseComponent {
 
   // Databound towards your side navigation. If true, it implies the navbar menu is expanded.
   private sidenavOpened = false;
+  private language: string = 'en';
 
   /*
    * Smaller optimisation to make it easier to check which roles currently logged in
@@ -39,6 +40,7 @@ export class AppComponent extends BaseComponent {
   private token: any = null;
   private isLoggedIn = false;
   private showRegisterLink = true;
+  private languages: LanguageModel[] = [];
 
   /**
    * 
@@ -77,6 +79,22 @@ export class AppComponent extends BaseComponent {
         this.tryRefreshTicket();
       }
     }
+
+    // Retrieving supported languages.
+    this.service.getLanguages().subscribe(res => {
+      this.languages = res;
+    }, error => this.handleError(error));
+
+    // Checking if we have stored a current language selection for user.
+    const storedLanguage = localStorage.getItem('stored_language');
+    if (storedLanguage) {
+      this.language = storedLanguage;
+    }
+
+    // Retrieving translations for currently selected language.
+    this.service.getTranslations(this.language).subscribe(res => {
+      BaseComponent.translations = res;
+    }, error => this.handleError(error));
   }
 
   /**
@@ -143,7 +161,7 @@ export class AppComponent extends BaseComponent {
          * to accomplish this.
          */
         case Messages.APP_TOKEN_REFRESHED:
-          console.log('Your JWT token was refreshed');
+          console.log('JWT token was refreshed');
           break;
 
         /*
@@ -181,7 +199,7 @@ export class AppComponent extends BaseComponent {
    * access to one or more of the menu items in the menu.
    */
   public shouldDisplayMenuButton() {
-    return this.token?.roles?.filter((x: any) => {
+    return this.token?.role?.split(',').filter((x: any) => {
       return x === 'admin' || x === 'moderator' || x === 'root';
     })?.length > 0 || false;
   }
@@ -288,5 +306,15 @@ export class AppComponent extends BaseComponent {
       }
     }
     return false;
+  }
+
+  /**
+   * Invoked when language is selected.
+   */
+  private languageSelected() {
+    this.service.getTranslations(this.language).subscribe(res => {
+      BaseComponent.translations = res;
+      localStorage.setItem('stored_language', this.language);
+    }, error => this.handleError(error));
   }
 }

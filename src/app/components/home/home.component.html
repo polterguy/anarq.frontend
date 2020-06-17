@@ -13,25 +13,25 @@
       (selectionChange)="sortingChanged($event)">
       <mat-option
         value="popular">
-        Popular
+        {{translate('Popular')}}
       </mat-option>
       <mat-option
         value="newest">
-        Newest
+        {{translate('Newest')}}
       </mat-option>
       <mat-option
         value="closed">
-        Closed
+        {{translate('Closed')}}
       </mat-option>
       <mat-option
         value="my-cases"
         *ngIf="userIsLoggedIn()">
-        My cases
+        {{translate('MyCases')}}
       </mat-option>
       <mat-option
         value="my-voted-cases"
         *ngIf="userIsLoggedIn()">
-        Cases I have voted for
+        {{translate('CasesIHaveVotedFor')}}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -40,7 +40,7 @@
     *ngIf="!cases || cases.length === 0"
     class="information">
     <span>
-      Nothing to see here!
+      {{translate('NothingToSeeHere')}}
     </span>
   </div>
 
@@ -62,9 +62,9 @@
     *ngIf="more"
     mat-button
     class="feed-more"
-    matTooltip="Get 25 next items"
+    [matTooltip]="translate('Get25NextItems')"
     (click)="getNextBatch()">
-    More
+    {{translate('More')}}
   </button>
 
   <div
@@ -87,22 +87,22 @@
     class="statistics">
     <ul>
       <li
-        [matTooltip]="'There are ' + statistics.users + ' users in the system'">
+        [matTooltip]="translate('ThereAreXUsersInSystem', [statistics.users])">
         <a routerLink="/users">
-          Users {{statistics.users}}
+          {{translate('Users')}} {{statistics.users}}
         </a>
       </li>
       <li
-        [matTooltip]="'There are ' + statistics.cases + ' cases in the system'">
-        Cases {{statistics.cases}}
+        [matTooltip]="translate('ThereAreXCasesInSystem', [statistics.cases])">
+        {{translate('Cases')}} {{statistics.cases}}
       </li>
       <li
-        [matTooltip]="'There are ' + statistics.cases + ' open cases in the system'">
-        Open {{statistics.open}}
+        [matTooltip]="translate('ThereAreXOpenCasesInSystem', [statistics.open])">
+        {{translate('Open')}} {{statistics.open}}
       </li>
       <li
-        [matTooltip]="'There are ' + statistics.votes + ' votes cast in the system'">
-        Votes {{statistics.votes}}
+        [matTooltip]="translate('ThereAreXVotesInSystem', [statistics.votes])">
+        {{translate('Votes')}} {{statistics.votes}}
       </li>
     </ul>
   </div>

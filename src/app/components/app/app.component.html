@@ -152,6 +152,21 @@
   <mat-sidenav-content>
     <div>
       <div
+        class="languages">
+        <mat-form-field>
+          <mat-select
+            placeholder="Language"
+            (selectionChange)="languageSelected()"
+            [(ngModel)]="language">
+            <mat-option
+              *ngFor="let idx of languages"
+              [value]="idx.locale">
+              {{idx.description}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div
         *ngIf="isLoggedIn === true"
         class="login-strip">
         <button
@@ -167,11 +182,12 @@
           mat-button
           routerLink="/register">
           Register
+          {{translate('Register')}}
         </button>
         <button
           mat-button
           (click)="tryLogin()">
-          Login
+          {{translate('Login')}}
         </button>
       </div>
       <button

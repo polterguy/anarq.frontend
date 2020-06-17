@@ -59,6 +59,13 @@
     z-index: 1000;
 }
 
+.languages {
+    position: absolute;
+    top: 1rem;
+    right: 10rem;
+    display: block;
+}
+
 @media print {
     .login-strip {
         display: none;

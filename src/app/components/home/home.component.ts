@@ -13,10 +13,10 @@ import { MatSnackBar } from '@angular/material';
  * Custom imports for component.
  */
 import { CaseSlim } from 'src/app/models/case-slim';
-import { PublicService } from 'src/app/services/http/public.service';
-import { MessageService, Messages } from 'src/app/services/message.service';
 import { BaseComponent } from 'src/app/helpers/base.components';
 import { StatisticsModel } from 'src/app/models/statistics-model';
+import { PublicService } from 'src/app/services/http/public.service';
+import { MessageService, Messages } from 'src/app/services/message.service';
 
 /**
  * This is the component for the main home page, or the
@@ -165,7 +165,7 @@ export class HomeComponent extends BaseComponent {
         } else {
           setTimeout(() => this.router.navigate(['/setup-regions']), 2000);
           this.snack.open(
-            'You need to setup your regions',
+            this.translate('YouNeedToSetupRegions'),
             'ok', {
               duration: 2000,
             });
