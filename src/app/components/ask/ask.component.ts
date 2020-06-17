@@ -105,13 +105,7 @@ export class AskComponent extends BaseComponent {
     this.checkIfUserCanCreateCase();
 
     // Verifying user is logged in.
-    this.isLoggedIn = this.messages.getValue(Messages.APP_GET_USERNAME);
-
-    // Making sure we get max length support on CM instance.
-    setTimeout(() => {
-      const cm = document.querySelector('.CodeMirror')['CodeMirror'];
-      cm.on("beforeChange", enforceMaxLength);
-    }, 1);
+    this.isLoggedIn = this.messages.getValue(Messages.APP_GET_USERNAME) !== null;
 
     /*
      * Checking if this is user's first case, at which point we show
@@ -173,6 +167,14 @@ export class AskComponent extends BaseComponent {
       if (username) {
         this.service.canCreateCase(this.region).subscribe(res => {
           this.canCreateCase = res.result === 'SUCCESS';
+
+          // Making sure we get max length support on CM instance.
+          if (this.isLoggedIn && this.canCreateCase) {
+            setTimeout(() => {
+              const cm = document.querySelector('.CodeMirror')['CodeMirror'];
+              cm.on("beforeChange", enforceMaxLength);
+            }, 1);
+          }
         });
       }
     }, error => this.handleError(error));

@@ -30,7 +30,7 @@
     </div>
 
     <div
-      *ngIf="showInfo"
+      *ngIf="isLoggedIn && showInfo"
       class="first-information">
 
       <button
@@ -84,7 +84,7 @@
     </div>
 
     <mat-form-field
-      *ngIf="canCreateCase"
+      *ngIf="isLoggedIn && canCreateCase"
       class="subject">
       <mat-label>{{subjectGood === false ? 'Subject must be 15-100 characters long, and end with a question mark ?' : (subjectGood === null ? 'Subject' : 'Acceptable')}}</mat-label>
       <input
@@ -96,13 +96,18 @@
     </mat-form-field>
 
     <label
-      class="body-label">{{'Body (Markdown ' + body.length + '/2500)' }}</label>
+      *ngIf="isLoggedIn && canCreateCase"
+      matTooltip="Feel free to use Markdown, but NO LINKS!"
+      class="body-label">{{'Body ' + body.length + ' of 2500' }}</label>
 
     <ngx-codemirror
+      *ngIf="isLoggedIn && canCreateCase"
       [(ngModel)]="body"
       [options]="getCodeMirrorOptions()"></ngx-codemirror>
 
-    <div class="submit">
+    <div
+      class="submit"
+      *ngIf="isLoggedIn && canCreateCase">
       <mat-form-field>
         <mat-select
           placeholder="Deadline"

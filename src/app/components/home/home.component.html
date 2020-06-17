@@ -1,5 +1,8 @@
 
-<h1>AnarQ<small> Where YOU are the Government!</small></h1>
+<h1
+  matTooltip="Where YOU are the Government!">
+  AnarQ
+</h1>
 
 <mat-card class="info-card">
 
@@ -9,30 +12,25 @@
       [(ngModel)]="sorting"
       (selectionChange)="sortingChanged($event)">
       <mat-option
-        value="popular"
-        matTooltip="Show open cases you haven't voted for yet, and sort by most popular">
+        value="popular">
         Popular
       </mat-option>
       <mat-option
-        value="newest"
-        matTooltip="Show open cases you haven't voted for, and sort by most recent">
+        value="newest">
         Newest
       </mat-option>
       <mat-option
-        value="closed"
-        matTooltip="Show closed cases, and sort by most popular">
+        value="closed">
         Closed
       </mat-option>
       <mat-option
         value="my-cases"
-        *ngIf="userIsLoggedIn()"
-        matTooltip="Show cases you have created yourself, sorted by most popular">
+        *ngIf="userIsLoggedIn()">
         My cases
       </mat-option>
       <mat-option
         value="my-voted-cases"
-        *ngIf="userIsLoggedIn()"
-        matTooltip="Show cases you have voted for, by the most popular case first">
+        *ngIf="userIsLoggedIn()">
         Cases I have voted for
       </mat-option>
     </mat-select>
