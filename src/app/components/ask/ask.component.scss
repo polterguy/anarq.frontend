@@ -48,6 +48,11 @@ h1 {
     .submit {
         text-align: right;
         margin-top: 1rem;
+        mat-form-field {
+            width: 10rem;
+            display: inline-block;
+            margin-right: 1rem;
+        }
         button {
             width: 10rem;
         }

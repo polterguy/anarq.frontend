@@ -54,6 +54,7 @@ export class AskComponent extends BaseComponent {
   private subjectGood?: boolean = null;
   private body = '';
   private showInfo = false;
+  private deadline: string = 'short';
 
   // Number of milliseconds after a keystroke before filtering should be re-applied.
   private debounce = 800;
@@ -197,6 +198,7 @@ export class AskComponent extends BaseComponent {
       subject: this.subject.value,
       body: this.body,
       region: this.region,
+      deadline: this.deadline,
     }).subscribe(res => {
       if (res.result === 'SUCCESS') {
         this.router.navigate(['/case/' + res.extra]);

@@ -79,7 +79,7 @@
         of the most liberal Freedom of Speech Laws in Europe, and we intend to take advantage of that to the <strong>FULL EXTENT OF THE LAW</strong>.
       </p>
 
-      <span class="slogan">Happy AnarQ :)</span>
+      <span class="slogan">Happy AnarQ</span>
 
     </div>
 
@@ -103,6 +103,27 @@
       [options]="getCodeMirrorOptions()"></ngx-codemirror>
 
     <div class="submit">
+      <mat-form-field>
+        <mat-select
+          placeholder="Deadline"
+          [(ngModel)]="deadline">
+          <mat-option
+            value="short"
+            matTooltip="Case will only accept votes for 72 hours (3 days)">
+            Short
+          </mat-option>
+          <mat-option
+            value="medium"
+            matTooltip="Case will accept votes for 7 days">
+            Medium
+          </mat-option>
+          <mat-option
+            value="long"
+            matTooltip="Case will accept votes for 30 days">
+            Long
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
       <button
         mat-stroked-button
         [disabled]="body.length < 50"
