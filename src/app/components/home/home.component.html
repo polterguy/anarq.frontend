@@ -12,16 +12,26 @@
     <mat-select
       [(ngModel)]="sorting"
       (selectionChange)="sortingChanged($event)">
-      <mat-option value="popular">
+      <mat-option
+        value="popular"
+        matTooltip="Show cases you haven't voted for yet, and sort by most popular">
         Popular
       </mat-option>
-      <mat-option value="newest">
+      <mat-option
+        value="newest"
+        matTooltip="Show cases you haven't voted for, and sort by most recent">
         Newest
       </mat-option>
-      <mat-option value="my-cases">
+      <mat-option
+        value="my-cases"
+        *ngIf="userIsLoggedIn()"
+        matTooltip="Show only cases you have created yourself, sorted by most popular">
         My cases
       </mat-option>
-      <mat-option value="my-voted-cases">
+      <mat-option
+        value="my-voted-cases"
+        *ngIf="userIsLoggedIn()"
+        matTooltip="Show only cases you have voted for, by the most popular case first">
         Cases I have voted for
       </mat-option>
     </mat-select>

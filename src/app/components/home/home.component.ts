@@ -58,9 +58,11 @@ export class HomeComponent extends BaseComponent {
    * or not the user is logged in or not.
    */
   protected init() {
-    const sorting = localStorage.getItem('home_sorting');
-    if (sorting) {
-      this.sorting = sorting;
+    if (this.messages.getValue(Messages.APP_GET_USERNAME) !== null) {
+      const sorting = localStorage.getItem('home_sorting');
+      if (sorting) {
+        this.sorting = sorting;
+      }
     }
     this.getNextBatch();
     this.getRegions();
@@ -97,6 +99,7 @@ export class HomeComponent extends BaseComponent {
         case Messages.APP_LOGGED_OUT:
           this.cases = [];
           this.regions = [];
+          this.sorting = 'popular';
           this.getNextBatch();
           break;
 
@@ -172,5 +175,12 @@ export class HomeComponent extends BaseComponent {
    */
   private capitalize(region: string) {
     return region.charAt(0).toUpperCase() + region.slice(1);
+  }
+
+  /**
+   * Returns true if user is logged in.
+   */
+  private userIsLoggedIn() {
+    return this.messages.getValue(Messages.APP_GET_USERNAME) !== null;
   }
 }
