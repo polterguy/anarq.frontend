@@ -10,6 +10,16 @@
     margin-top: 1rem;
     margin-bottom: -1rem;
 }
+h1 {
+    text-align: center;
+    small {
+        font-size: .8rem;
+        color: #a0a0a0;
+        vertical-align: middle;
+        display: inline-block;
+        margin-left: 2rem;
+    }
+}
 .info-card {
     margin: -.75rem 5rem 2rem 5rem;
     padding: 3rem;

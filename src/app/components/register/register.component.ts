@@ -161,7 +161,11 @@ export class RegisterComponent extends BaseComponent {
                 });
               this.usernameGood = null;
             }
-          }, error => this.handleError(error));
+          }, error => {
+            this.progress = 20;
+            this.usernameGood = false;
+            this.handleError(error);
+          });
         } else {
           this.progress = 20;
           this.usernameGood = false;

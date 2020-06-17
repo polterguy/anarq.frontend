@@ -32,7 +32,7 @@
     <mat-form-field
       *ngIf="emailGood === true"
       class="username item">
-      <mat-label>{{usernameGood === false ? 'Username cannot be your email address' : 'Username'}}</mat-label>
+      <mat-label>{{usernameGood === false ? '4-30 characters, a-z, 0-9 and \'-\' or \'_\'. Also, username cannot be your email address' : 'Username'}}</mat-label>
       <input
         matInput
         placeholder="Username ..."

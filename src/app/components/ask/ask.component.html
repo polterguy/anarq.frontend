@@ -1,5 +1,5 @@
 
-<h1>Ask a question in {{capitalize(region)}}</h1>
+<h1>Start a political rally in {{capitalize(region)}}</h1>
 
 <div class="component-wrapper">
 
@@ -102,7 +102,9 @@
 
     <div class="submit">
       <button
-        mat-button
+        mat-stroked-button
+        [disabled]="body.length < 50"
+        [matTooltip]="'Submits your case to the people\'s court of ' + capitalize(region)"
         (click)="submit()">
         Submit
       </button>

@@ -45,9 +45,9 @@ export class PublicService {
     return this.httpClient.get<any>(
       environment.apiUrl +
       'magic/modules/system/auth/authenticate?username=' +
-      encodeURI(username) +
+      encodeURIComponent(username) +
       '&password=' +
-      encodeURI(password));
+      encodeURIComponent(password));
   }
 
   /**
@@ -167,7 +167,7 @@ export class PublicService {
     return this.httpClient.get<UserView>(
       environment.apiUrl +
       'magic/modules/anarchy/public/users/user?username=' +
-      username);
+      encodeURIComponent(username));
   }
 
   /**
@@ -188,7 +188,7 @@ export class PublicService {
     return this.httpClient.get<ResultModel>(
       environment.apiUrl +
       'magic/modules/anarchy/public/users/username-available?username=' +
-      username);
+      encodeURIComponent(username));
   }
 
   /**
@@ -200,7 +200,7 @@ export class PublicService {
     return this.httpClient.get<ResultModel>(
       environment.apiUrl +
       'magic/modules/anarchy/public/users/email-available?email=' +
-      email);
+      encodeURIComponent(email));
   }
 
   /**
@@ -212,7 +212,7 @@ export class PublicService {
     return this.httpClient.get<ResultModel>(
       environment.apiUrl +
       'magic/modules/anarchy/public/users/phone-available?phone=' +
-      phone);
+      encodeURIComponent(phone));
   }
 
   /**
@@ -289,7 +289,7 @@ export class PublicService {
     return this.httpClient.get<ResultModel>(
       environment.apiUrl +
       'magic/modules/anarchy/public/cases/can-create-case?region=' +
-      region);
+      encodeURIComponent(region));
   }
 
   /**
@@ -324,7 +324,7 @@ export class PublicService {
    * @param args Generic filter condition for which open cases to return
    */
   getUserCases(username: string, offset: number = 0): Observable<CaseSlim[]> {
-    let query = '?username=' + username;
+    let query = '?username=' + encodeURIComponent(username);
     if (offset) {
       query += '&offset=' + offset;
     }
@@ -338,6 +338,6 @@ export class PublicService {
     return this.httpClient.get<ResultAuditModel>(
       environment.apiUrl +
       'magic/modules/anarchy/public/votes/audit?hash=' +
-      hash);
+      encodeURIComponent(hash));
   }
 }
