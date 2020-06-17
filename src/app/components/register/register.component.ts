@@ -64,6 +64,9 @@ export class RegisterComponent extends BaseComponent {
   // Number of milliseconds after a keystroke before validating value of control.
   private debounce = 800;
 
+  // Captcha response.
+  private captchaResponse: string = null;
+
   /**
    * Constructor for component.
    * 
@@ -286,7 +289,7 @@ export class RegisterComponent extends BaseComponent {
   /**
    * Toggles whether or not password should be shown in plain text or not.
    */
-  togglePasswordReadability() {
+  private togglePasswordReadability() {
     this.passwordReadable = !this.passwordReadable;
     this.passwordRepeatReadable = !this.passwordRepeatReadable;
   }
@@ -294,21 +297,32 @@ export class RegisterComponent extends BaseComponent {
   /**
    * Shows information about why we need the full legal name for users.
    */
-  showNameInformation() {
+  private showNameInformation() {
     this.showNameInfo = !this.showNameInfo;
   }
 
   /**
    * Shows information about why we need the phone number for users.
    */
-  showPhoneInformation() {
+  private showPhoneInformation() {
     this.showPhoneInfo = !this.showPhoneInfo;
   }
 
   /**
-   * Submits the form and registers the user at the site.
+   * Invoked when user has been determined to be a human being.
+   * 
+   * @param data Data from reCAPTCHA
    */
-  register() {
+  private captchaResolved(data) {
+    this.captchaResponse = data;
+  }
+
+  /**
+   * Invoked when user clicks the submit button.
+   * 
+   * @param token reCAPTCHA token, for verifyin user is a human being
+   */
+  private register() {
 
     // Invokes HTTP service layer to register the user at the site.
     this.service.register({
@@ -317,6 +331,7 @@ export class RegisterComponent extends BaseComponent {
       password: this.password.value,
       full_name: this.name.value,
       phone: this.phone.value,
+      captcha: this.captchaResponse,
     }).subscribe(res => {
       if (res.result === 'SUCCESS') {
 
@@ -333,6 +348,12 @@ export class RegisterComponent extends BaseComponent {
         setTimeout(
           () => this.router.navigate(['/']),
           5000);
+      } else {
+        this.snack.open(
+          res.extra,
+          'ok', {
+            duration: 5000,
+          });
       }
     }, error => this.handleError(error));
   }

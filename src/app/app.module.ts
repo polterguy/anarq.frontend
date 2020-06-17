@@ -35,6 +35,12 @@ import { ChartsModule } from 'ng2-charts';
 import { JwtModule } from '@auth0/angular-jwt';
 import { QRCodeModule } from 'angularx-qrcode';
 import { CodemirrorModule } from '@ctrl/ngx-codemirror';
+import {
+  RecaptchaModule,
+  RECAPTCHA_SETTINGS,
+  RecaptchaSettings
+} from 'ng-recaptcha';
+import { RECAPTCHA_LANGUAGE } from 'ng-recaptcha';
 
 // Importing routing, services, pipes, etc.
 import { DateToPipe } from './pipes/date-to.pipe';
@@ -177,6 +183,7 @@ export function tokenGetter() {
     OwlNativeDateTimeModule,
     ChartsModule,
     CodemirrorModule,
+    RecaptchaModule,
     QRCodeModule,
   ],
   providers: [
@@ -188,6 +195,16 @@ export function tokenGetter() {
     {
       provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS,
       useValue: { useUtc: true }
+    },
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: {
+        siteKey: '6Lf45KUZAAAAANEJqSIWprWAYofIAdDunxysuaaG',
+      } as RecaptchaSettings,
+    },
+    {
+      provide: RECAPTCHA_LANGUAGE,
+      useValue: 'no', // Use Norwegian language
     },
     MessageService,
   ],

@@ -8,4 +8,5 @@ export class RegisterModel {
     password: string;
     full_name: string;
     phone: string;
+    captcha: string;
 }
