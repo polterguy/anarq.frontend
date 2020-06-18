@@ -21,7 +21,7 @@
 
     <div
       *ngIf="!isLoggedIn">
-      Only logged in users can create cases.
+      {{translate('OnlyLoggedInUsersCanCreateCases')}}
     </div>
 
     <div
@@ -32,59 +32,20 @@
         mat-stroked-button
         class="close"
         (click)="closeInfo()">
-        OK, I get it!
+        {{translate('OKIGotIt')}}
       </button>
 
-      <h3>READ THIS FIRST!</h3>
-
-      <p>
-        Since this is the first case you create, you should <strong>carefully read the following information</strong>,
-        to avoid problems and confusion. Don't worry though, we won't show it to you again, after you have created
-        your first case.
-      </p>
-
-      <ol>
-        <li>Our servers are hosted in Sweden, which means that what you write must be legal to write according to <strong>SWEDISH LAW</strong>.</li>
-        <li>Besides from that, we don't allow posts that can be perrceived as bullying of vulnerable individuals.</li>
-        <li>Every question's subject must end with a question mark '?', then in its description you can write more informally to rally support for whatever side you want. However, the subject must be a valid question.</li>
-        <li>Every case must have a clearly defined yes/no answer, making it easy for others to understand what their votes imply. All cases that are difficult to <strong>clearly answer yes or no to</strong>, will be rejected by a moderator.</li>
-        <li>You can only create <strong>one case PER DAY in the region of Norge</strong>, so phrase your case carefully.</li>
-        <li>You can only create <strong>one case every 3 hours in other regions</strong>, so phrase your case carefully.</li>
-        <li>The reasons for the above rules, is to avoid a single individual completely taking over the front page feed, both at the national level, and at the regional level.</li>
-        <li>You cannot delete your case, and neither will we censor cases, unless they are violating our terms and conditions. <strong>So phrase your case carefully</strong>. Your case might very well never be possible to remove due to these reasons. So make sure you are willing to publicly ask whatever question you are about to ask before you click the submit button.</li>
-        <li><strong>NO LYNCHING HERE!</strong> We will censor cases that we for personal reasons feel are attempts at lynching individuals.</li>
-        <li><strong>NO OUTING OF CHILDREN</strong>, in any ways, what so ever - And <strong>especially not</strong> anything that might be seen as <strong>sexually explicit content</strong> about children. If you mention the full names, and/or personal data, of any human being below the age of 18, <strong>WE WILL CENSOR YOUR CASE</strong>!</li>
-        <li>Your subject line must be between 15 and 100 characters long, and it must end with a question mark.</li>
-        <li>Your content must be between 50 and 2500 characters long.</li>
-        <li>A piece of advice is to read a couple of the existing cases in the system, before creating your own cases, to get a general feeling of how cases can be created.</li>
-        <li>You should also phrase your question such that whatever results you wish to see, is everybody answering <strong><em>"YES"</em></strong>! The reasons is that we calculate a <em>"won"</em> case this way, and lost cases as cases where more than 50% of the voters gave you a <em>"no"</em>. And your user is granted <em>"political points"</em> by calculating the ratio of won cases this way.</li>
-      </ol>
-
-      <p>
-        Any case not according to the above terms and conditions, will be rejected and censored. AnarQ is first and foremost
-        an attempt at creating a serious <strong>Direct Democratic Political System</strong>, to influence our government to
-        do the right thing - And not your <em>"traditional social media platform"</em>. However, it is allowed to have fun here ... :)
-      </p>
-
-      <p>
-        As a general rule of thumb though, you will probably experience that you have much larger Freedom of Speeech
-        at AnarQ, than you have most other places online, and we are very careful when it comes to censoring cases. In fact,
-        the Swedish Freedom of Speech laws, combined with our ISP's extreme believe in these laws (they are the ones
-        hosting WikiLeaks.Org), are the reasons why we are hosting our site in Sweden. In general, Sweden have some
-        of the most liberal Freedom of Speech Laws in Europe, and we intend to take advantage of that to the <strong>FULL EXTENT OF THE LAW</strong>.
-      </p>
-
-      <span class="slogan">Happy AnarQ</span>
+      <div [innerHTML]="translate('ReadThisFirstCase')"></div>
 
     </div>
 
     <mat-form-field
       *ngIf="isLoggedIn && canCreateCase"
       class="subject">
-      <mat-label>{{subjectGood === false ? 'Subject must be 15-100 characters long, and end with a question mark ?' : (subjectGood === null ? 'Subject' : 'Acceptable')}}</mat-label>
+      <mat-label>{{subjectGood === false ? translate('SubjectMustBe') : (subjectGood === null ? translate('Subject') : translate('Acceptable'))}}</mat-label>
       <input
         matInput
-        placeholder="Subject ..."
+        [placeholder]="translate('Subject') + ' ...'"
         type="text"
         autocomplete="off"
         [formControl]="subject">
@@ -92,8 +53,10 @@
 
     <label
       *ngIf="isLoggedIn && canCreateCase"
-      matTooltip="Feel free to use Markdown, but NO LINKS!"
-      class="body-label">{{'Body ' + body.length + ' of 2500' }}</label>
+      [matTooltip]="translate('FeelFreeToUseMarkdown')"
+      class="body-label">
+      {{translate('BodyLength', [body.length, '2500'])}}
+    </label>
 
     <ngx-codemirror
       *ngIf="isLoggedIn && canCreateCase"
@@ -105,31 +68,31 @@
       *ngIf="isLoggedIn && canCreateCase">
       <mat-form-field>
         <mat-select
-          placeholder="Deadline"
+          [placeholder]="translate('Deadline')"
           [(ngModel)]="deadline">
           <mat-option
             value="short"
-            matTooltip="Case will only accept votes for 72 hours (3 days)">
-            Short
+            [matTooltip]="translate('CaseOpenShort', ['3'])">
+            {{translate('ShortDeadline')}}
           </mat-option>
           <mat-option
             value="medium"
-            matTooltip="Case will accept votes for 7 days">
-            Medium
+            [matTooltip]="translate('CaseOpenMedium', ['7'])">
+            {{translate('MediumDeadline')}}
           </mat-option>
           <mat-option
             value="long"
-            matTooltip="Case will accept votes for 30 days">
-            Long
+            [matTooltip]="translate('CaseOpenLong', ['30'])">
+            {{translate('LongDeadline')}}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <button
         mat-stroked-button
         [disabled]="body.length < 50"
-        [matTooltip]="'Submits your case to the people\'s court of ' + capitalize(region)"
+        [matTooltip]="translate('SubmitCaseToPeopleRepublic', [capitalize(region)])"
         (click)="submit()">
-        Submit
+        {{translate('Submit')}}
       </button>
     </div>
 

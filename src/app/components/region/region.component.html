@@ -1,7 +1,7 @@
 
 <h1
   *ngIf="region"
-  [matTooltip]="'The People\'s Court of Law @ The Independent Republic of ' + capitalize(region)">
+  [matTooltip]="translate('ThePeoplesCourt', [capitalize(region)])">
   {{region}}
 </h1>
 
@@ -12,14 +12,14 @@
     class="add-case"
     *ngIf="canCreateCase"
     (click)="askQuestion()"
-    [matTooltip]="'Bring forth a question to the people\'s court of ' + capitalize(region)">
+    [matTooltip]="translate('BringForthAQuestion', [capitalize(region)])">
     ?
   </button>
 
   <a
     class="home-link"
     mat-button
-    matTooltip="See all open cases"
+    [matTooltip]="translate('SeeAllOpenCases')"
     routerLink="/">
     <mat-icon>home</mat-icon>
   </a>
@@ -28,10 +28,10 @@
     *ngIf="cases.length === 0"
     class="information">
     <span>
-      Seems that you are all caught up.
+      {{translate('SeemsAllCaughtUp')}}
     </span>
     <span *ngIf="canCreateCase">
-      Why don't you create a new case yourself?
+      {{translate('WhyNotCreate')}}
     </span>
   </div>
 
@@ -52,7 +52,7 @@
     *ngIf="more"
     mat-button
     class="feed-more"
-    matTooltip="Get 25 next items"
+    [matTooltip]="translate('GetXNextItems', ['25'])"
     (click)="getCases()">
     ...
   </button>

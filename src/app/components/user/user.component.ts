@@ -21,8 +21,8 @@ import { ChartOptions } from 'chart.js';
 import { UserView } from 'src/app/models/user-view';
 import { CaseSlim } from 'src/app/models/case-slim';
 import { BaseComponent } from 'src/app/helpers/base.components';
-import { MessageService, Messages } from 'src/app/services/message.service';
 import { PublicService } from 'src/app/services/http/public.service';
+import { MessageService, Messages } from 'src/app/services/message.service';
 
 /**
  * Component for viewing users registered at site.
@@ -164,7 +164,10 @@ export class UserComponent extends BaseComponent {
           this.barChartData = this.item.regions.map(x => x.votes);
         }
         if (this.shouldDisplayWinningsChart()) {
-          this.pieChartLabels = ['Won cases', 'Lost cases', 'Tied cases'];
+          this.pieChartLabels = [
+            this.translate('WonCases'),
+            this.translate('LostCases'),
+            this.translate('TiedCases')];
           this.pieChartData = [this.item.won, this.item.lost, this.item.tied];
         }
         this.service.getUserCases(pars.username).subscribe(res => {
@@ -194,7 +197,9 @@ export class UserComponent extends BaseComponent {
     if (!this.item) {
       return false;
     }
-    if (!this.item.regions || this.item.regions.length <= 0 || this.getTotalVotes() === 0) {
+    if (!this.item.regions ||
+      this.item.regions.length <= 0 ||
+      this.getTotalVotes() === 0) {
       return false;
     }
     return true;

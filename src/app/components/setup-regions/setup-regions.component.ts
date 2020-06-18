@@ -12,9 +12,9 @@ import { MatSnackBar } from '@angular/material';
 /*
  * Custom imports for component.
  */
-import { PublicService } from 'src/app/services/http/public.service';
 import { RegionsModel } from 'src/app/models/regions-model';
 import { BaseComponent } from 'src/app/helpers/base.components';
+import { PublicService } from 'src/app/services/http/public.service';
 import { MessageService, Messages } from 'src/app/services/message.service';
 
 /**
@@ -134,7 +134,7 @@ export class SetupRegionsComponent extends BaseComponent {
       if (res.result === 'SUCCESS') {
         this.router.navigate(['/'])
         this.snack.open(
-          'Congratulations, you are now allowed to vote and propose cases at AnarQ',
+          this.translate('Congratulations'),
           'ok', {
             duration: 5000,
           });

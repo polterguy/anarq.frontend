@@ -8,7 +8,7 @@
     <a
       class="home-link"
       mat-button
-      matTooltip="See all open cases"
+      [matTooltip]="translate('Home')"
       routerLink="/">
       <mat-icon>home</mat-icon>
     </a>
@@ -20,7 +20,7 @@
 
     <mat-icon
       class="verified"
-      matTooltip="User has verified his email address"
+      [matTooltip]="translate('UserHasVerifiedEmail')"
       matSuffix
       *ngIf="item.status === 'verified'">
       check
@@ -32,23 +32,26 @@
 
       <table class="summary-table">
         <tr>
-          <td matTooltip="This is how many cases the user has created">
-            Cases created
+          <td
+            [matTooltip]="translate('ThisIsHowManyCases')">
+            {{translate('CasesCreated')}}
           </td>
           <td>
             {{item.cases}}
           </td>
         </tr>
         <tr>
-          <td matTooltip="This is how many votes user has received on his or her own cases">
-            Votes given
+          <td
+            [matTooltip]="translate('ThisIsHowManyVotesReceived')">
+            {{translate('VotesGiven')}}
           </td>
           <td>
             {{item.votes}}
           </td>
         </tr>
         <tr>
-          <td matTooltip="This is how many votes the user has given">
+          <td
+            [matTooltip]="translate('ThisIsHowManyVotesGiven')">
             Votes
           </td>
           <td>
@@ -57,7 +60,7 @@
         </tr>
         <tr *ngIf="item.phone">
           <td>
-            Phone
+            {{translate('Phone')}}
           </td>
           <td>
             {{item.phone}}
@@ -76,7 +79,9 @@
 
       <div
         class="summary-regions">
-        <label>Votes user has given per region</label>
+        <label>
+          {{translate('VotesUserHasGivenPerRegion')}}
+        </label>
         <canvas
           *ngIf="shouldDisplayRegionChart()"
           baseChart
@@ -91,7 +96,9 @@
       <div
         *ngIf="shouldDisplayWinningsChart()"
         class="summary-winnings">
-        <label>Winnings and loosings</label>
+        <label>
+          {{translate('WinningsAndLoosings')}}
+        </label>
         <canvas
           baseChart
           chartType="pie"
@@ -126,7 +133,7 @@
         <a
           class="case-link"
           [ngClass]="idx.voted === 1 ? 'voted' : ''"
-          [matTooltip]="idx.voted === 1 ? 'You have already voted for this case' : 'You have not given your vote in this case'"
+          [matTooltip]="idx.voted === 1 ? translate('YouHaveAlreadyVoted') : translate('YouHaveNotVoted')'"
           [routerLink]="'/case/' + idx.id">
           {{idx.subject}}
         </a>

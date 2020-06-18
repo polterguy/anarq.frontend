@@ -24,10 +24,12 @@ import { MessageService, Messages } from 'src/app/services/message.service';
 const enforceMaxLength = function(cm, change) {
   var maxLength = cm.getOption("maxLength");
   if (maxLength && change.update) {
-      var str = change.text.join("\n");
-      var delta = str.length-(cm.indexFromPos(change.to) - cm.indexFromPos(change.from));
-      if (delta <= 0) { return true; }
-      delta = cm.getValue().length+delta-maxLength;
+      var str = change.text.join('\n');
+      var delta = str.length - (cm.indexFromPos(change.to) - cm.indexFromPos(change.from));
+      if (delta <= 0) {
+        return true;
+      }
+      delta = cm.getValue().length + delta-maxLength;
       if (delta > 0) {
           str = str.substr(0, str.length-delta);
           change.update(change.from, change.to, str.split("\n"));
@@ -193,9 +195,9 @@ export class AskComponent extends BaseComponent {
   }
 
   /**
-   * Submits the question to the backend.
+   * Submits the case to the backend.
    */
-  submit() {
+  private submit() {
     this.service.submitCase({
       subject: this.subject.value,
       body: this.body,
@@ -205,7 +207,7 @@ export class AskComponent extends BaseComponent {
       if (res.result === 'SUCCESS') {
         this.router.navigate(['/case/' + res.extra]);
         this.snack.open(
-          'Case will be open for votes for exactly 30 days from now on',
+          this.translate('CaseSuccessfullyCreated'),
           'ok', {
             duration: 10000,
           })
@@ -231,7 +233,7 @@ export class AskComponent extends BaseComponent {
   /**
    * Closes information content box.
    */
-  closeInfo() {
+  private closeInfo() {
     this.showInfo = false;
   }
 }

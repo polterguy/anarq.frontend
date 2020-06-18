@@ -15,8 +15,8 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
  * Custom imports for component.
  */
 import { BaseComponent } from 'src/app/helpers/base.components';
-import { MessageService, Messages } from 'src/app/services/message.service';
 import { PublicService } from 'src/app/services/http/public.service';
+import { MessageService, Messages } from 'src/app/services/message.service';
 
 /**
  * Component for allowing users to register at the site.
@@ -105,7 +105,7 @@ export class RegisterComponent extends BaseComponent {
     // Checking if user is already logged in, at which point we prohibit him from registering again.
     if (this.messages.getValue(Messages.APP_GET_USERNAME)) {
       this.snack.open(
-        'You are already registered at this site',
+        this.translate('YouAreAlreadyRegistered'),
         'ok');
       setTimeout(() => this.router.navigate(['/']), 1000);
     }
@@ -158,7 +158,7 @@ export class RegisterComponent extends BaseComponent {
             } else {
               this.progress = 20;
               this.snack.open(
-                'Username \'' + this.username.value + '\' is already registered', 
+                this.translate('UsernameAlreadyRegistered', [this.username.value]),
                 'ok', {
                   duration: 3000,
                 });
@@ -276,7 +276,7 @@ export class RegisterComponent extends BaseComponent {
          */
         case Messages.APP_LOGGED_IN:
           this.snack.open(
-            'You can only register once at the site.',
+            this.translate('YouCanOnlyRegisterOnce'),
             'ok', {
               duration: 2000,
             });
@@ -340,7 +340,7 @@ export class RegisterComponent extends BaseComponent {
          * to verify his email address.
          */
         this.snack.open(
-          'Please check your email inbox',
+          this.translate('PleaseCheckEmailInbox'),
           'ok', {
             duration: 3000,
           });

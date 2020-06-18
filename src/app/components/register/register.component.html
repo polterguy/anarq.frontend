@@ -13,7 +13,7 @@
   <div class="progress">
     <mat-progress-bar
       mode="determinate"
-      matTooltip="Progress of registration process"
+      [matTooltip]="translate('ProgressOfRegistration')"
       [value]="progress"></mat-progress-bar>
   </div>
 
@@ -21,10 +21,10 @@
 
     <mat-form-field
       class="email item">
-      <mat-label>{{emailGood === false ? 'Email must be valid and available' : 'Email'}}</mat-label>
+      <mat-label>{{emailGood === false ? translate('EmailMustBeAvilable') : translate('Email')}}</mat-label>
       <input
         matInput
-        placeholder="Email ..."
+        [placeholder]="translate('Email') + ' ...'"
         type="text"
         autocomplete="off"
         [formControl]="email">
@@ -37,10 +37,10 @@
     <mat-form-field
       *ngIf="emailGood === true"
       class="username item">
-      <mat-label>{{usernameGood === false ? '4-30 characters, a-z, 0-9 and \'-\' or \'_\'. Also, username cannot be your email address' : 'Username'}}</mat-label>
+      <mat-label>{{usernameGood === false ? translate('UsernameCharacterPattern') : translate('Username')}}</mat-label>
       <input
         matInput
-        placeholder="Username ..."
+        placeholder="translate('Username') + ' ...'"
         type="text"
         autocomplete="off"
         [formControl]="username">
@@ -53,15 +53,15 @@
     <mat-form-field
       *ngIf="usernameGood === true"
       class="name item">
-      <mat-label>{{nameGood === false ? 'Name must be your full legal name, as written in public records' : 'Full legal name'}}</mat-label>
+      <mat-label>{{nameGood === false ? translate('NamePattern') : translate('FullLegalName')}}</mat-label>
       <input
         matInput
-        placeholder="Full name ..."
+        [placeholder]="translate('FullLegalName') + ' ...'"
         type="text"
         autocomplete="off"
         [formControl]="name">
       <mat-icon
-        matTooltip="Why ...?"
+        [matTooltip]="translate('Why')"
         (click)="showNameInformation()">help</mat-icon>
     </mat-form-field>
 
@@ -71,17 +71,7 @@
     *ngIf="showNameInfo"
     class="form-row">
 
-    <div class="info">
-      <p>
-        In order to make sure you are a real person, and preventing people from registering
-        fake profiles, and such influence votes - We ask you to kindly give us your full name,
-        as it can be found in the yellow pages. Notice, if you cannot prove you are a legal
-        person and citizen of country of registration, <strong>we might suspend your account</strong>,
-        and yes, we will check this up!
-      </p>
-      <p>
-        We will never disclose your personal information to any 3rd parties.
-      </p>
+    <div class="info" [innerHtml]="translate('NameInformation')">
     </div>
 
   </div>
@@ -91,15 +81,15 @@
     <mat-form-field
       *ngIf="nameGood === true"
       class="phone item">
-      <mat-label>{{phoneGood === false ? 'Phone number must be a registered cell phone in your name, and contain only numbers (no spaces)' : 'Cell phone'}}</mat-label>
+      <mat-label>{{phoneGood === false ? translate('PhonePattern') : translate('CellPhone')}}</mat-label>
       <input
         matInput
-        placeholder="Cell phone ..."
+        placeholder="translate('CellPhone') + ' ...'"
         type="text"
         autocomplete="off"
         [formControl]="phone">
       <mat-icon
-        matTooltip="Why ...?"
+        [matTooltip]="translate('Why')"
         (click)="showPhoneInformation()">help</mat-icon>
     </mat-form-field>
 
@@ -109,22 +99,7 @@
     *ngIf="showPhoneInfo"
     class="form-row">
 
-    <div class="info">
-      <p>
-        In order to make sure you are a real person, and preventing people from registering
-        fake profiles, and such influence votes - We ask you to kindly give us your phone number,
-        as it can be found in the yellow pages. Notice, if you cannot prove you are a legal
-        person and citizen of country of registration, <strong>we might suspend your account</strong>,
-        and yes, we will check this up!
-      </p>
-      <p>
-        Notice, we might also send you a text message, to have you verify your phone number
-        as you use the site.
-      </p>
-      <p>
-        We will never disclose your personal information to any 3rd parties.
-      </p>
-    </div>
+    <div class="info" [innerHtml]="translate('PhoneInfo')"></div>
 
   </div>
 
@@ -133,10 +108,10 @@
     <mat-form-field
       *ngIf="nameGood === true && phoneGood === true && usernameGood === true && nameGood === true"
       class="password item">
-      <mat-label>{{passwordGood === false ? 'Password must be at least 10 characters long' : 'Password'}}</mat-label>
+      <mat-label>{{passwordGood === false ? translate('PasswordMustBeAtLeast') : translate('Password')}}</mat-label>
       <input
         matInput
-        placeholder="Password ..."
+        placeholder="translate('Password') + ' ...'"
         [type]="passwordReadable ? 'text' : 'password'"
         autocomplete="new-password"
         [formControl]="password">
@@ -151,10 +126,10 @@
     <mat-form-field
       *ngIf="nameGood === true && phoneGood === true && usernameGood === true && nameGood === true"
       class="password-repeat item">
-      <mat-label>{{passwordRepeatGood === false ? 'Please repeat your password' : 'Repeat password'}}</mat-label>
+      <mat-label>{{passwordRepeatGood === false ? translate('PleaseRepeatPassword') : translate('RepeatPassword')}}</mat-label>
       <input
         matInput
-        placeholder="Password repeat ..."
+        [placeholder]="translate('RepeatPassword') + ' ...'"
         [type]="passwordRepeatReadable ? 'text' : 'password'"
         autocomplete="new-password"
         [formControl]="passwordRepeat">
@@ -168,29 +143,7 @@
       *ngIf="passwordRepeatGood === true && passwordGood === true && phoneGood === true && emailGood === true && usernameGood === true"
       class="information item">
 
-      <label class="bottom-slogan">Terms and Conditions</label>
-
-      <p>
-        By clicking the Submit button below, you guarantee us that the above information is
-        correct, that you have given us your full legal name, and a cell phone number registered
-        to you in the country where you are registering.
-      </p>
-
-      <p>
-        You also explicitly give us permission to <strong>send you email receipts, of every single vote you
-        cast in the system</strong>, in addition to sending you email receipts for every case you create.
-      </p>
-
-      <p>
-        Votes you cast, and your private information, will never be shared by us with anyone.
-        The only exception is in case of that the United Nations appoints an independent 3rd
-        party to audit votes in your region for a particular case - At which point we will
-        under strict supervision allow auditing of your vote, on individual cases,
-        by an independent 3rd party organisation, appointed by the United Nations (only!)
-        At which point the independent 3rd party organisation might contact you to verify your
-        vote for security reasons, in order to influence legislation in and around the area
-        where you live, according to your vote's value.
-      </p>
+      <div [innerHtml]="translate('TermsAndConditions')"></div>
 
     </div>
 
@@ -200,7 +153,7 @@
 
     <mat-checkbox
       *ngIf="passwordRepeatGood === true && passwordGood === true && phoneGood === true && emailGood === true && usernameGood === true"
-      [(ngModel)]="agree">I agree to the above terms and conditions</mat-checkbox>
+      [(ngModel)]="agree">{{translate('IAgreeToTermsAndConditions')}}</mat-checkbox>
 
   </div>
 
@@ -209,11 +162,11 @@
     *ngIf="passwordRepeatGood === true && passwordGood === true && phoneGood === true && emailGood === true && usernameGood === true">
 
     <button
-      matTooltip="Confirm that you are a human being"
+      [matTooltip]="translate('ConfirmThatYouAreHuman')"
       mat-button
       [disabled]="!agree"
       (click)="invisible.execute()">
-      I am a Human Being!
+      {{translate('IAmHuman')}}
     </button>
 
   </div>
@@ -223,10 +176,10 @@
     *ngIf="captchaResponse">
 
     <button
-      matTooltip="Submit the form and accept the terms and conditions of the site"
+      [matTooltip]="translate('SubmitFormAndRegister')"
       mat-button
       (click)="register()">
-      Submit
+      {{translate('Submit')}}
     </button>
 
   </div>
@@ -237,6 +190,6 @@
   *ngIf="done"
   class="register">
   <p>
-    Now confirm your email address.
+    {{translate('ConfirmEmailAddress')}}
   </p>
 </mat-card>

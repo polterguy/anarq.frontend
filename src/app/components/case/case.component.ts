@@ -136,7 +136,7 @@ export class CaseComponent extends BaseComponent {
     this.service.vote(this.id, true).subscribe(res => {
       this.item.opinion = true;
       this.snack.open(
-        'A cryptographically signed email receipt of your vote was sent to your registered email address. Please keep this email safe somewhere in case of auditing of the system.',
+        this.translate('CryptReceiptSent'),
         'ok', {
           duration: 10000,
         });
@@ -150,7 +150,7 @@ export class CaseComponent extends BaseComponent {
     this.service.vote(this.id, false).subscribe(res => {
       this.item.opinion = false;
       this.snack.open(
-        'A cryptographically signed email receipt of your vote was sent to your registered email address. Please keep this email safe somewhere in case of auditing of the system.',
+        this.translate('CryptReceiptSent'),
         'ok', {
           duration: 10000,
         });
@@ -190,14 +190,19 @@ export class CaseComponent extends BaseComponent {
    */
   private getCaseResult() {
     if (this.item.positive > this.item.negative) {
-      return 'Case was won';
+      return this.translate('CaseWasWon');
     } else if (this.item.positive < this.item.negative) {
-      return 'Case was lost';
+      return this.translate('CaseWasLost');
     } else {
-      return 'Case was not determined';
+      return this.translate('CaseWasNotDetermined');
     }
   }
 
+  /**
+   * Returns CSS class for case, which is dependent upon whether or not
+   * case is still open, or if it is closed, whether or not the case was won,
+   * lost or not determined.
+   */
   private getCssClassForCase() {
     if (this.item.closed === 0) {
       // Case is still open.

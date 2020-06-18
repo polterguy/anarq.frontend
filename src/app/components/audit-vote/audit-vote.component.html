@@ -17,20 +17,12 @@
     <div
       *ngIf="voteGood === true">
       <p>
-        Receipt checks out, and does not seem to have been tampered with. In case an external
-        auditing of the system is required, you might need to forward your original receipt (email)
-        to an independent 3rd party organisation.
-      </p>
-      <p>
-        <strong>
-          AnarQ will never disclose your vote to anybody, except an independent 3rd party
-          auditing organisation, appointed by the United Nations.
-        </strong>
+        {{translate('ReceiptChecksOut')}}
       </p>
       <p>
         <a
           [routerLink]="'/case/' + caseId">
-          Check out how the case is proceeding
+          {{translate('CheckOutCase')}}
         </a>
       </p>
       <a
@@ -38,7 +30,7 @@
         mat-stroked-button
         class="previous"
         [routerLink]="'/audit-vote/' + previous">
-        Previous receipt
+        {{translate('PreviousReceipt')}}
       </a>
     </div>
 
@@ -61,7 +53,7 @@
     mat-stroked-button
     class="home-button"
     routerLink="/">
-    Home
+    {{translate('Home')}}
   </a>
 
 </div>

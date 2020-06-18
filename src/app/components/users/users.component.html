@@ -16,10 +16,10 @@
 
     <mat-form-field
       class="filter">
-      <mat-label>Filter</mat-label>
+      <mat-label>{{translate('Filter')}}</mat-label>
       <input
         matInput
-        placeholder="Filter"
+        [placeholder]="translate('Filter')"
         type="text"
         autocomplete="off"
         [formControl]="filter">
@@ -35,7 +35,7 @@
             {{idx.username}}
           </span>
           <small>
-            {{idx.votes}} votes
+            {{idx.votes}} {{translate('VotesSmall')}}
           </small>
         </a>
       </li>
@@ -47,7 +47,7 @@
       class="feed-more"
       matTooltip="Get 25 next users"
       (click)="getNextBatch()">
-      More
+      {{translate('More')}}
     </button>
 
   </div>

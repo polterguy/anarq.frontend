@@ -90,12 +90,18 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
   protected handleError(error: any) {
     console.error(error);
     this.snack.open(
-      error.error?.message || (error.status + ' - ' + error.statusText),
+      this.translate(error.error?.message || (error.status + ' - ' + error.statusText)),
       'ok', {
         duration: 5000
       });
   }
 
+  /**
+   * Translates the specified key according to user's language selection.
+   * 
+   * @param key Key to lookup translations
+   * @param args Arguments to key, will be applied using string interpolation
+   */
   protected translate(key: string, args: any[] = null) {
     const result = BaseComponent.translations.filter(x => x.key === key);
     let returnValue = key;
