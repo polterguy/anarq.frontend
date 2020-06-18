@@ -152,15 +152,6 @@ export class RegionComponent extends BaseComponent {
   }
 
   /**
-   * Capitalizes region's name, making sure it starts with a CAPS character.
-   * 
-   * @param region Region name
-   */
-  private capitalize(region: string) {
-    return region.charAt(0).toUpperCase() + region.slice(1);
-  }
-
-  /**
    * Returns a string representation of open cases,
    * counting positive versus negative votes for the case.
    * 

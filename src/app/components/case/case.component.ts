@@ -136,7 +136,7 @@ export class CaseComponent extends BaseComponent {
     this.service.vote(this.id, true).subscribe(res => {
       this.item.opinion = true;
       this.snack.open(
-        this.translate('CryptReceiptSent'),
+        this.translate('CryptoReceiptSent'),
         'ok', {
           duration: 10000,
         });
@@ -150,20 +150,11 @@ export class CaseComponent extends BaseComponent {
     this.service.vote(this.id, false).subscribe(res => {
       this.item.opinion = false;
       this.snack.open(
-        this.translate('CryptReceiptSent'),
+        this.translate('CryptoReceiptSent'),
         'ok', {
           duration: 10000,
         });
     }, error => this.handleError(error));
-  }
-
-  /**
-   * Capitalizes the specified string.
-   * 
-   * @param region Region to capitalize name of.
-   */
-  capitalize(region: string) {
-    return region.charAt(0).toUpperCase() + region.slice(1);
   }
 
   /**

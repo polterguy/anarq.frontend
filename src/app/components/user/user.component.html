@@ -133,7 +133,7 @@
         <a
           class="case-link"
           [ngClass]="idx.voted === 1 ? 'voted' : ''"
-          [matTooltip]="idx.voted === 1 ? translate('YouHaveAlreadyVoted') : translate('YouHaveNotVoted')'"
+          [matTooltip]="idx.voted === 1 ? translate('YouHaveAlreadyVoted') : translate('YouHaveNotVoted')"
           [routerLink]="'/case/' + idx.id">
           {{idx.subject}}
         </a>

@@ -24,7 +24,7 @@ import { BaseComponent } from 'src/app/helpers/base.components';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent extends BaseComponent {
 
@@ -93,7 +93,7 @@ export class AppComponent extends BaseComponent {
 
     // Retrieving translations for currently selected language.
     this.service.getTranslations(this.language).subscribe(res => {
-      BaseComponent.translations = res;
+      BaseComponent.translations = res || [];
     }, error => this.handleError(error));
   }
 
@@ -313,7 +313,7 @@ export class AppComponent extends BaseComponent {
    */
   private languageSelected() {
     this.service.getTranslations(this.language).subscribe(res => {
-      BaseComponent.translations = res;
+      BaseComponent.translations = res || [];
       localStorage.setItem('stored_language', this.language);
     }, error => this.handleError(error));
   }

@@ -29,7 +29,7 @@ h1 {
             bottom: 1rem;
             right: 1rem;
         }
-        .slogan {
+        ::ng-deep.slogan {
             text-align: center;
             display: block;
             font-weight: bold;

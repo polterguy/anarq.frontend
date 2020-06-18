@@ -115,4 +115,13 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
     }
     return returnValue; // Defaulting to key value, which normally is English'ish.
   }
+
+  /**
+   * Capitalizes region's name, making sure it starts with a CAPS character.
+   * 
+   * @param region Region name
+   */
+  protected capitalize(region: string) {
+    return region.charAt(0).toUpperCase() + region.slice(1);
+  }
 }

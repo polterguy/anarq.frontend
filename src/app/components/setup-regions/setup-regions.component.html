@@ -25,7 +25,7 @@
         role="button"
         (click)="selectRegion(idx)"
         *ngFor="let idx of getFilteredRegions()">
-        {{idx}}
+        {{capitalize(idx)}}
       </li>
     </ul>
 

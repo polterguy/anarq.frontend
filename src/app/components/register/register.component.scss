@@ -56,7 +56,7 @@ h1 {
             color: #a0a0a0;
             text-align: justify;
             font-size: .8rem;
-            .bottom-slogan {
+            ::ng-deep.bottom-slogan {
                 text-align: center;
                 font-weight: bold;
                 color: #303030;

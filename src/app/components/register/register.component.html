@@ -81,10 +81,12 @@
     <mat-form-field
       *ngIf="nameGood === true"
       class="phone item">
-      <mat-label>{{phoneGood === false ? translate('PhonePattern') : translate('CellPhone')}}</mat-label>
+      <mat-label>
+        {{phoneGood === false ? translate('PhonePattern') : translate('CellPhone')}}
+      </mat-label>
       <input
         matInput
-        placeholder="translate('CellPhone') + ' ...'"
+        [placeholder]="translate('CellPhone') + ' ...'"
         type="text"
         autocomplete="off"
         [formControl]="phone">
@@ -108,10 +110,12 @@
     <mat-form-field
       *ngIf="nameGood === true && phoneGood === true && usernameGood === true && nameGood === true"
       class="password item">
-      <mat-label>{{passwordGood === false ? translate('PasswordMustBeAtLeast') : translate('Password')}}</mat-label>
+      <mat-label>
+        {{passwordGood === false ? translate('PasswordMustBeAtLeast') : translate('Password')}}
+      </mat-label>
       <input
         matInput
-        placeholder="translate('Password') + ' ...'"
+        [placeholder]="translate('Password') + ' ...'"
         [type]="passwordReadable ? 'text' : 'password'"
         autocomplete="new-password"
         [formControl]="password">
@@ -126,7 +130,9 @@
     <mat-form-field
       *ngIf="nameGood === true && phoneGood === true && usernameGood === true && nameGood === true"
       class="password-repeat item">
-      <mat-label>{{passwordRepeatGood === false ? translate('PleaseRepeatPassword') : translate('RepeatPassword')}}</mat-label>
+      <mat-label>
+        {{passwordRepeatGood === false ? translate('PleaseRepeatPassword') : translate('RepeatPassword')}}
+      </mat-label>
       <input
         matInput
         [placeholder]="translate('RepeatPassword') + ' ...'"

@@ -14,9 +14,9 @@ import { MatSnackBar } from '@angular/material';
  */
 import { UserSlimModel } from 'src/app/models/user-slim-model';
 import { BaseComponent } from 'src/app/helpers/base.components';
-import { PublicService } from 'src/app/services/http/public.service';
-import { MessageService, Messages } from 'src/app/services/message.service';
+import { MessageService } from 'src/app/services/message.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { PublicService } from 'src/app/services/http/public.service';
 
 /**
  * Component for viewing users registered at site.

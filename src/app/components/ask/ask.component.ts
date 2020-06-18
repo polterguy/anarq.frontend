@@ -222,15 +222,6 @@ export class AskComponent extends BaseComponent {
   }
 
   /**
-   * Capitalizes region's name, making sure it starts with a CAPS character.
-   * 
-   * @param region Region name
-   */
-  private capitalize(region: string) {
-    return region.charAt(0).toUpperCase() + region.slice(1);
-  }
-
-  /**
    * Closes information content box.
    */
   private closeInfo() {

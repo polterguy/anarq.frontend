@@ -150,53 +150,52 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <div>
-      <div
-        class="languages">
-        <mat-form-field>
-          <mat-select
-            placeholder="Language"
-            (selectionChange)="languageSelected()"
-            [(ngModel)]="language">
-            <mat-option
-              *ngFor="let idx of languages"
-              [value]="idx.locale">
-              {{idx.description}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div
-        *ngIf="isLoggedIn === true"
-        class="login-strip">
-        <button
-          mat-button
-          (click)="logout()">
-          Logout {{getUsername()}}
-        </button>
-      </div>
-      <div
-        *ngIf="isLoggedIn === false && showRegisterLink === true"
-        class="login-strip">
-        <button
-          mat-button
-          routerLink="/register">
-          Register
-          {{translate('Register')}}
-        </button>
-        <button
-          mat-button
-          (click)="tryLogin()">
-          {{translate('Login')}}
-        </button>
-      </div>
+
+    <div class="login-strip">
+      
       <button
-        *ngIf="shouldDisplayMenuButton()"
-        (click)="openSideNavigation()"
-        class="sidenav-button"
-        mat-button>Menu</button>
-      <router-outlet></router-outlet>
+        *ngIf="isLoggedIn === true"
+        mat-button
+        (click)="logout()">
+        Logout {{getUsername()}}
+      </button>
+
+      <button
+        *ngIf="isLoggedIn === false && showRegisterLink === true"
+        mat-button
+        routerLink="/register">
+        {{translate('Register')}}
+      </button>
+
+      <button
+        *ngIf="isLoggedIn === false && showRegisterLink === true"
+        mat-button
+        (click)="tryLogin()">
+        {{translate('Login')}}
+      </button>
+
+      <mat-form-field
+        class="language">
+        <mat-select
+          (selectionChange)="languageSelected()"
+          [(ngModel)]="language">
+          <mat-option
+            *ngFor="let idx of languages"
+            [value]="idx.locale">
+            {{idx.description}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
     </div>
+
+    <button
+      *ngIf="shouldDisplayMenuButton()"
+      (click)="openSideNavigation()"
+      class="sidenav-button"
+      mat-button>Menu</button>
+
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 
 <mat-sidenav-container>

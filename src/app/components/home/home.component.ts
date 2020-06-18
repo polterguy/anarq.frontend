@@ -175,15 +175,6 @@ export class HomeComponent extends BaseComponent {
   }
 
   /**
-   * Capitalizes region's name, making sure it starts with a CAPS character.
-   * 
-   * @param region Region name
-   */
-  private capitalize(region: string) {
-    return region.charAt(0).toUpperCase() + region.slice(1);
-  }
-
-  /**
    * Returns true if user is logged in.
    */
   private userIsLoggedIn() {

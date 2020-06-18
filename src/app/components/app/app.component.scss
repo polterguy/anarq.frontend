@@ -57,13 +57,9 @@
     top: 1rem;
     right: 1rem;
     z-index: 1000;
-}
-
-.languages {
-    position: absolute;
-    top: 1rem;
-    right: 10rem;
-    display: block;
+    .language {
+        width: 5rem;
+    }
 }
 
 @media print {
