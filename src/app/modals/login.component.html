@@ -1,28 +1,61 @@
 
-<h1 mat-dialog-title>Login</h1>
+<h1 mat-dialog-title>{{translate('Login')}}</h1>
 <div mat-dialog-content>
 
-  <mat-form-field class="fill-width">
+  <mat-form-field
+    class="fill-width"
+    *ngIf="forgotPasswordClicked === false">
     <input 
       matInput 
-      placeholder="Username"
+      [placeholder]="translate('Username')"
       type="text" 
+      autocomplete="username"
       [(ngModel)]="username">
   </mat-form-field>
 
-  <mat-form-field class="fill-width">
+  <mat-form-field
+    class="fill-width"
+    *ngIf="forgotPasswordClicked === false">
     <input 
       matInput 
-      placeholder="Password"
+      [placeholder]="translate('Password')"
       type="password" 
+      autocomplete="current-password"
       [(ngModel)]="password">
   </mat-form-field>
 
-  <div class="right-aligned">
+  <div
+    class="right-aligned"
+    *ngIf="forgotPasswordClicked === false">
+    <button 
+      *ngIf="!password || password === ''"
+      mat-button
+      (click)="forgotPassword()"
+      [matTooltip]="translate('ForgotYourPassword')">{{translate('ForgotPassword')}}</button>
     <button 
       mat-button
-      (click)="login()"
-      matTooltip="Login to your app">Login</button>
+      [disabled]="!username || !password || username === '' || password === ''"
+      (click)="login()">{{translate('Login')}}</button>
+  </div>
+
+  <mat-form-field
+    class="fill-width"
+    *ngIf="forgotPasswordClicked === true">
+    <input 
+      matInput 
+      [placeholder]="translate('EmailUsedDuringRegistration')"
+      type="text" 
+      autocomplete="email"
+      [(ngModel)]="email">
+  </mat-form-field>
+
+  <div
+    class="right-aligned"
+    *ngIf="forgotPasswordClicked === true">
+    <button 
+      mat-button
+      [disabled]="!email || email === ''"
+      (click)="sendResetLink()">{{translate('Submit')}}</button>
   </div>
 
 </div>

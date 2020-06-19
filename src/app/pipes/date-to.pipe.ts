@@ -3,7 +3,7 @@
  */
 
 import { Pipe, PipeTransform } from '@angular/core';
-import { BaseComponent } from '../helpers/base.components';
+import { BaseComponent } from '../helpers/base.component';
 
  /**
   * Calculates a time in the future, and returns a friendly string

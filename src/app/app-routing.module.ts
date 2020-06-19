@@ -30,6 +30,7 @@ import { SetupRegionsComponent } from './components/setup-regions/setup-regions.
 import { AskComponent } from './components/ask/ask.component';
 import { AuditVoteComponent } from './components/audit-vote/audit-vote.component';
 import { UsersComponent } from './components/users/users.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 
 // Creating our routes, one route for each entity type.
@@ -37,6 +38,7 @@ const routes: Routes = [
 
   { path: '', component: HomeComponent },
   { path: 'ask/:region', component: AskComponent },
+  { path: 'reset-password/:username/:hash', component: ResetPasswordComponent },
   { path: 'audit-vote/:hash', component: AuditVoteComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'register', component: RegisterComponent },

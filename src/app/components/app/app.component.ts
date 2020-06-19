@@ -16,7 +16,7 @@ import { MessageService, Messages } from '../../services/message.service'
 // Custom components needed in this component.
 import { LoginComponent } from '../../modals/login.component';
 import { LanguageModel } from 'src/app/models/language-model';
-import { BaseComponent } from 'src/app/helpers/base.components';
+import { BaseComponent } from 'src/app/helpers/base.component';
 
 /*
  * This is your app's main "wire frame" component.
@@ -232,7 +232,7 @@ export class AppComponent extends BaseComponent {
     dialogRef.afterClosed().subscribe(res => {
 
       // Checking of 'OK' was clicked.
-      if (res !== null && res !== undefined && res.ticket) {
+      if (res !== null && res !== undefined && res.ticket && res.ticket !== '') {
 
         /*
          * We have a valid JWT ticket, now making sure all components
@@ -317,9 +317,11 @@ export class AppComponent extends BaseComponent {
    * Invoked when language is selected.
    */
   private languageSelected() {
+    this.showPage = false;
     this.service.getTranslations(this.language).subscribe(res => {
-      BaseComponent.translations = res || [];
       localStorage.setItem('language', this.language);
+      BaseComponent.translations = res || [];
+      this.showPage = true;
     }, error => this.handleError(error));
   }
 }

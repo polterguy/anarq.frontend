@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material';
  * Custom imports for component.
  */
 import { UserSlimModel } from 'src/app/models/user-slim-model';
-import { BaseComponent } from 'src/app/helpers/base.components';
+import { BaseComponent } from 'src/app/helpers/base.component';
 import { MessageService } from 'src/app/services/message.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { PublicService } from 'src/app/services/http/public.service';

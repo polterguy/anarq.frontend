@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
  */
 import { CaseView } from 'src/app/models/case-view';
 import { FirstCaseModel } from 'src/app/models/first-case';
-import { BaseComponent } from 'src/app/helpers/base.components';
+import { BaseComponent } from 'src/app/helpers/base.component';
 import { PublicService } from 'src/app/services/http/public.service';
 import { MessageService, Messages } from 'src/app/services/message.service';
 

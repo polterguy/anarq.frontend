@@ -14,7 +14,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 /*
  * Custom imports for component.
  */
-import { BaseComponent } from 'src/app/helpers/base.components';
+import { BaseComponent } from 'src/app/helpers/base.component';
 import { PublicService } from 'src/app/services/http/public.service';
 import { MessageService, Messages } from 'src/app/services/message.service';
 

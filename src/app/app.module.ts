@@ -75,6 +75,7 @@ import { CreateUserDialogComponent } from './components/private/auth/modals/crea
 import { CaseComponent } from './components/case/case.component';
 import { UsersComponent } from './components/users/users.component';
 import { UserComponent } from './components/user/user.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { VotesComponent } from './components/private/votes/votes.component';
 import { CasesComponent } from './components/private/cases/cases.component';
 import { RegionsComponent } from './components/private/regions/regions.component';
@@ -128,6 +129,7 @@ export function tokenGetter() {
     CaseComponent,
     UsersComponent,
     UserComponent,
+    ResetPasswordComponent,
     VerifyEmailComponent,
     SetupRegionsComponent,
     EditCasesComponent,

@@ -22,6 +22,7 @@ import { UserSlimModel } from 'src/app/models/user-slim-model';
 import { FirstCaseModel } from 'src/app/models/first-case';
 import { LanguageModel } from 'src/app/models/language-model';
 import { TranslationModel } from 'src/app/models/translation-model';
+import { Pass } from 'codemirror';
 
 /*
  * Your main HTTP service for handling cases, and related objects.
@@ -359,10 +360,45 @@ export class PublicService {
       query);
   }
 
+  /**
+   * Audits a single vote, by verifying its hash value, towards the
+   * previous vote's hash value.
+   * 
+   * @param hash Hash of vote to audit
+   */
   auditVote(hash: string) {
     return this.httpClient.get<ResultAuditModel>(
       environment.apiUrl +
       'magic/modules/anarq/public/votes/audit?hash=' +
+      encodeURIComponent(hash));
+  }
+
+  /**
+   * Sends the user a reset password link.
+   * 
+   * @param email Email address used during registration
+   */
+  sendPasswordResetLink(email: string) {
+    return this.httpClient.get<ResultModel>(
+      environment.apiUrl +
+      'magic/modules/anarq/public/users/send-reset-password-link?email=' +
+      encodeURIComponent(email));
+  }
+
+  /**
+   * 
+   * @param username Username for user to change password of.
+   * @param newPassword New password for user.
+   * @param hash Hash value as sent in email when giving user a reset password link.
+   */
+  resetPassword(username: string, newPassword: string, hash: string) {
+    return this.httpClient.get<ResultModel>(
+      environment.apiUrl +
+      'magic/modules/anarq/public/users/reset-password?username=' +
+      encodeURIComponent(username) + 
+      '&newPassword=' +
+      encodeURIComponent(newPassword) +
+      '&hash=' +
       encodeURIComponent(hash));
   }
 }

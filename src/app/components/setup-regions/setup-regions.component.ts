@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material';
  * Custom imports for component.
  */
 import { RegionsModel } from 'src/app/models/regions-model';
-import { BaseComponent } from 'src/app/helpers/base.components';
+import { BaseComponent } from 'src/app/helpers/base.component';
 import { PublicService } from 'src/app/services/http/public.service';
 import { MessageService, Messages } from 'src/app/services/message.service';
 

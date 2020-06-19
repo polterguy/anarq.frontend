@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 /*
  * Custom imports for component.
  */
-import { BaseComponent } from 'src/app/helpers/base.components';
+import { BaseComponent } from 'src/app/helpers/base.component';
 import { MessageService } from 'src/app/services/message.service';
 import { PublicService } from 'src/app/services/http/public.service';
 

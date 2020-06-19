@@ -13,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
  * Custom imports for component.
  */
 import { CaseSlim } from 'src/app/models/case-slim';
-import { BaseComponent } from 'src/app/helpers/base.components';
+import { BaseComponent } from 'src/app/helpers/base.component';
 import { PublicService } from 'src/app/services/http/public.service';
 import { MessageService, Messages } from 'src/app/services/message.service';
 
