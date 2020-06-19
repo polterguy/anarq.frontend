@@ -173,6 +173,7 @@ export class CaseComponent extends BaseComponent {
    * Closes additional info for first created case.
    */
   private closeInfo() {
+    localStorage.removeItem('first_case');
     this.firstCase = false;
   }
 

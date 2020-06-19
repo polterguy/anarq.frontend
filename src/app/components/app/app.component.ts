@@ -96,7 +96,7 @@ export class AppComponent extends BaseComponent {
       // Retrieving translations for currently selected language.
       this.service.getTranslations(this.language).subscribe(res => {
         BaseComponent.translations = res || [];
-        this.showPage = true;
+        setTimeout(() => this.showPage = true, 250);
       }, error => this.handleError(error));
 
     }, error => this.handleError(error));

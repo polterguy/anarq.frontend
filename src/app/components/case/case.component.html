@@ -17,13 +17,15 @@
         {{translate('AllRightBaby')}}
       </button>
 
-      <div [innerHtml]="translate('ReadThisFirstCase')"></div>
+      <div
+        *ngIf="firstCase"
+        [innerHtml]="translate('ReadThisFirstCase')"></div>
 
     </div>
 
     <a
       class="home-link"
-      [matTooltip]="translate('SeeAllOpenCases')"
+      [matTooltip]="translate('Home')"
       mat-button
       routerLink="/">
       <mat-icon>home</mat-icon>

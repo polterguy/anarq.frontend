@@ -1,5 +1,7 @@
 
-<h1>Start a political rally in {{capitalize(region)}}</h1>
+<h1>
+  {{translate('StartPoliticalRally') + ' ' + capitalize(region)}}
+</h1>
 
 <div class="component-wrapper">
 
@@ -9,7 +11,7 @@
     <a
       class="home-link"
       mat-button
-      matTooltip="See all open cases"
+      [matTooltip]="translate('Home')"
       routerLink="/">
       <mat-icon>home</mat-icon>
     </a>
@@ -82,6 +84,7 @@
         {{translate('CaseOpenLong', ['30'])}}
       </span>
       <mat-select
+        [disabled]="subjectGood === false || body.length < 50"
         [placeholder]="translate('Deadline')"
         [(ngModel)]="deadline">
         <mat-option
@@ -99,7 +102,7 @@
       </mat-select>
       <button
         mat-stroked-button
-        [disabled]="body.length < 50"
+        [disabled]="subjectGood === false || body.length < 50"
         [matTooltip]="translate('SubmitCaseToPeopleRepublic', [capitalize(region)])"
         (click)="submit()">
         {{translate('Submit')}}
