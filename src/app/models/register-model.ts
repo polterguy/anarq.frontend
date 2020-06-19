@@ -9,4 +9,5 @@ export class RegisterModel {
     full_name: string;
     phone: string;
     captcha: string;
+    language: string;
 }

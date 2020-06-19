@@ -347,6 +347,7 @@ export class RegisterComponent extends BaseComponent {
       full_name: this.name.value,
       phone: this.phone.value,
       captcha: this.captchaResponse,
+      language: localStorage.getItem('language'),
     }).subscribe(res => {
       if (res.result === 'SUCCESS') {
 

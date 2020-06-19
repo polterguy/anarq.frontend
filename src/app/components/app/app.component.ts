@@ -86,9 +86,11 @@ export class AppComponent extends BaseComponent {
       this.languages = res;
 
       // Checking if we have stored a current language selection for user.
-      const storedLanguage = localStorage.getItem('stored_language');
+      const storedLanguage = localStorage.getItem('language');
       if (storedLanguage) {
         this.language = storedLanguage;
+      } else {
+        localStorage.setItem('language', this.language);
       }
 
       // Retrieving translations for currently selected language.
@@ -317,7 +319,7 @@ export class AppComponent extends BaseComponent {
   private languageSelected() {
     this.service.getTranslations(this.language).subscribe(res => {
       BaseComponent.translations = res || [];
-      localStorage.setItem('stored_language', this.language);
+      localStorage.setItem('language', this.language);
     }, error => this.handleError(error));
   }
 }
