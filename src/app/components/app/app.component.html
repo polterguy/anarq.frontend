@@ -158,7 +158,7 @@
         *ngIf="isLoggedIn === true"
         mat-button
         (click)="logout()">
-        Logout {{getUsername()}}
+        {{translate('Logout') + ' ' + getUsername()}}
       </button>
 
       <button
