@@ -16,6 +16,12 @@ h1 {
     margin-left: auto;
     margin-right: auto;
     position: relative;
+    .stepper {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        color: #a0a0a0;
+    }
     .progress {
         margin: 2rem 5rem 2rem 5rem;
     }

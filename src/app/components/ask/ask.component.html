@@ -35,7 +35,7 @@
         {{translate('OKIGotIt')}}
       </button>
 
-      <div [innerHTML]="translate('ReadThisFirstCase')"></div>
+      <div [innerHTML]="translate('ReadThisFirstQuestion')"></div>
 
     </div>
 
@@ -66,27 +66,37 @@
     <div
       class="submit"
       *ngIf="isLoggedIn && canCreateCase">
-      <mat-form-field>
-        <mat-select
-          [placeholder]="translate('Deadline')"
-          [(ngModel)]="deadline">
-          <mat-option
-            value="short"
-            [matTooltip]="translate('CaseOpenShort', ['3'])">
-            {{translate('ShortDeadline')}}
-          </mat-option>
-          <mat-option
-            value="medium"
-            [matTooltip]="translate('CaseOpenMedium', ['7'])">
-            {{translate('MediumDeadline')}}
-          </mat-option>
-          <mat-option
-            value="long"
-            [matTooltip]="translate('CaseOpenLong', ['30'])">
-            {{translate('LongDeadline')}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <span
+        class="deadline-info"
+        *ngIf="deadline === 'short'">
+        {{translate('CaseOpenShort', ['3'])}}
+      </span>
+      <span
+        class="deadline-info"
+        *ngIf="deadline === 'medium'">
+        {{translate('CaseOpenMedium', ['7'])}}
+      </span>
+      <span
+        class="deadline-info"
+        *ngIf="deadline === 'long'">
+        {{translate('CaseOpenLong', ['30'])}}
+      </span>
+      <mat-select
+        [placeholder]="translate('Deadline')"
+        [(ngModel)]="deadline">
+        <mat-option
+          value="short">
+          {{translate('ShortDeadline')}}
+        </mat-option>
+        <mat-option
+          value="medium">
+          {{translate('MediumDeadline')}}
+        </mat-option>
+        <mat-option
+          value="long">
+          {{translate('LongDeadline')}}
+        </mat-option>
+      </mat-select>
       <button
         mat-stroked-button
         [disabled]="body.length < 50"

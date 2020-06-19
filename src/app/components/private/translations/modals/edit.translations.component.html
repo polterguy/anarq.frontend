@@ -26,16 +26,10 @@
       autocomplete="off">
   </mat-form-field>
 
-  <mat-form-field
-    *ngIf="canEditColumn('content')"
-    class="entity-edit-field">
-    <input
-      matInput
-      type="text"
-      placeholder="content"
-      [(ngModel)]="data.entity.content"
-      autocomplete="off">
-  </mat-form-field>
+  <ngx-codemirror
+    *ngIf="canEditColumn('content') && codeMirrorIsVisible"
+    [(ngModel)]="data.entity.content"
+    [options]="getCodeMirrorOptions()"></ngx-codemirror>
 
 </div>
 

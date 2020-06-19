@@ -24,6 +24,7 @@
       <li
         role="button"
         (click)="selectRegion(idx)"
+        [matTooltip]="translate('ClickHereIfYouLiveInX', [capitalize(idx)])"
         *ngFor="let idx of getFilteredRegions()">
         {{capitalize(idx)}}
       </li>

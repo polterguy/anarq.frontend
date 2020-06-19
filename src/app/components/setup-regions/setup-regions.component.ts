@@ -82,6 +82,7 @@ export class SetupRegionsComponent extends BaseComponent {
         case Messages.APP_LOGGED_OUT:
           this.canSetRegions = false;
           this.isLoggedIn = false;
+          this.router.navigate(['/']);
           break;
 
         case Messages.APP_LOGGED_IN:

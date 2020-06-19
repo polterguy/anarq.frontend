@@ -10,6 +10,7 @@
 </div>
 
 <mat-sidenav-container
+  *ngIf="showPage"
   mode="side"
   class="sidenav-container">
 
@@ -174,18 +175,16 @@
         {{translate('Login')}}
       </button>
 
-      <mat-form-field
-        class="language">
-        <mat-select
-          (selectionChange)="languageSelected()"
-          [(ngModel)]="language">
-          <mat-option
-            *ngFor="let idx of languages"
-            [value]="idx.locale">
-            {{idx.description}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <mat-select
+        class="language"
+        (selectionChange)="languageSelected()"
+        [(ngModel)]="language">
+        <mat-option
+          *ngFor="let idx of languages"
+          [value]="idx.locale">
+          {{idx.description}}
+        </mat-option>
+      </mat-select>
 
     </div>
 

@@ -35,6 +35,7 @@ export class EditTranslationsComponent implements OnInit {
   private updateColumns: string[] = ['locale', 'key', 'content'];
   private primaryKeys: string[] = ['locale', 'key'];
   public languages: any[];
+  private codeMirrorIsVisible = false;
 
   /*
    * Constructor taking a bunch of services injected using dependency injection.
@@ -49,6 +50,15 @@ export class EditTranslationsComponent implements OnInit {
     this.service.getLanguages({}).subscribe(res => {
       this.languages = res;
     });
+    setTimeout(() => this.codeMirrorIsVisible = true, 250);
+  }
+
+  getCodeMirrorOptions() {
+    return {
+      lineNumbers: true,
+      theme: 'material',
+      mode: 'html'
+    };
   }
 
   canEditColumn(name: string) {

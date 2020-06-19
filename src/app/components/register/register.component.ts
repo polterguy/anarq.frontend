@@ -35,6 +35,8 @@ export class RegisterComponent extends BaseComponent {
   private phone: FormControl;
   private password: FormControl;
   private passwordRepeat: FormControl;
+  private stepNo = 1;
+  private stepTotal = 5;
 
   // If true, password is readable, and not hidden in input.
   private passwordReadable = false;
@@ -128,9 +130,11 @@ export class RegisterComponent extends BaseComponent {
           this.service.emailAvailable(this.email.value).subscribe(res => {
             if (res.result === 'SUCCESS') {
               this.progress = 20;
+              this.stepNo = 2;
               this.emailGood = true;
             } else {
               this.progress = 0;
+              this.stepNo = 1;
               this.snack.open(
                 res.extra,
                 'ok', {
@@ -140,6 +144,7 @@ export class RegisterComponent extends BaseComponent {
             }
           }, error => this.handleError(error));
         } else {
+          this.stepNo = 1;
           this.progress = 0;
           this.emailGood = false;
         }
@@ -154,9 +159,11 @@ export class RegisterComponent extends BaseComponent {
           this.service.usernameAvailable(this.username.value).subscribe(res => {
             if (res.result === 'SUCCESS') {
               this.progress = 40;
+              this.stepNo = 3;
               this.usernameGood = true;
             } else {
               this.progress = 20;
+              this.stepNo = 2;
               this.snack.open(
                 this.translate('UsernameAlreadyRegistered', [this.username.value]),
                 'ok', {
@@ -165,11 +172,13 @@ export class RegisterComponent extends BaseComponent {
               this.usernameGood = null;
             }
           }, error => {
+            this.stepNo = 2;
             this.progress = 20;
             this.usernameGood = false;
             this.handleError(error);
           });
         } else {
+          this.stepNo = 2;
           this.progress = 20;
           this.usernameGood = false;
         }
@@ -184,8 +193,10 @@ export class RegisterComponent extends BaseComponent {
           this.name.value.includes(' ') &&
           this.name.value.toLowerCase() !== this.name.value) {
           this.progress = 60;
+          this.stepNo = 4;
           this.nameGood = true;
         } else {
+          this.stepNo = 3;
           this.progress = 40;
           this.nameGood = false;
         }
@@ -201,9 +212,11 @@ export class RegisterComponent extends BaseComponent {
           this.service.phoneAvailable(this.phone.value).subscribe(res => {
             if (res.result === 'SUCCESS') {
               this.progress = 80;
+              this.stepNo = 5;
               this.phoneGood = true;
             } else {
               this.progress = 60;
+              this.stepNo = 4;
               this.snack.open(
                 res.extra,
                 'ok', {
@@ -213,6 +226,7 @@ export class RegisterComponent extends BaseComponent {
             }
           }, error => this.handleError(error));
         } else {
+          this.stepNo = 4;
           this.progress = 60;
           this.phoneGood = false;
         }
@@ -232,6 +246,7 @@ export class RegisterComponent extends BaseComponent {
           if (this.password.value !== this.passwordRepeat.value) {
             this.passwordRepeatGood = false;
             this.progress = 80;
+            this.stepNo = 5;
           } else {
             this.passwordRepeatGood = true;
           }

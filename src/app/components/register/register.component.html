@@ -1,5 +1,5 @@
 
-<h1>Register</h1>
+<h1>{{translate('Register')}}</h1>
 
 <re-captcha
   size="invisible"
@@ -9,6 +9,10 @@
 <mat-card
   *ngIf="!done"
   class="register">
+
+  <div class="stepper">
+    {{translate('StepXOfY', [stepNo, stepTotal])}}
+  </div>
 
   <div class="progress">
     <mat-progress-bar
@@ -21,7 +25,7 @@
 
     <mat-form-field
       class="email item">
-      <mat-label>{{emailGood === false ? translate('EmailMustBeAvilable') : translate('Email')}}</mat-label>
+      <mat-label>{{emailGood === false ? translate('EmailMustBeAvailable') : translate('Email')}}</mat-label>
       <input
         matInput
         [placeholder]="translate('Email') + ' ...'"

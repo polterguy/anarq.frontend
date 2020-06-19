@@ -30,7 +30,7 @@ export class AppComponent extends BaseComponent {
 
   // Databound towards your side navigation. If true, it implies the navbar menu is expanded.
   private sidenavOpened = false;
-  private language: string = 'en';
+  private language: string = 'no';
 
   /*
    * Smaller optimisation to make it easier to check which roles currently logged in
@@ -41,6 +41,7 @@ export class AppComponent extends BaseComponent {
   private isLoggedIn = false;
   private showRegisterLink = true;
   private languages: LanguageModel[] = [];
+  private showPage = false;
 
   /**
    * 
@@ -83,17 +84,19 @@ export class AppComponent extends BaseComponent {
     // Retrieving supported languages.
     this.service.getLanguages().subscribe(res => {
       this.languages = res;
-    }, error => this.handleError(error));
 
-    // Checking if we have stored a current language selection for user.
-    const storedLanguage = localStorage.getItem('stored_language');
-    if (storedLanguage) {
-      this.language = storedLanguage;
-    }
+      // Checking if we have stored a current language selection for user.
+      const storedLanguage = localStorage.getItem('stored_language');
+      if (storedLanguage) {
+        this.language = storedLanguage;
+      }
 
-    // Retrieving translations for currently selected language.
-    this.service.getTranslations(this.language).subscribe(res => {
-      BaseComponent.translations = res || [];
+      // Retrieving translations for currently selected language.
+      this.service.getTranslations(this.language).subscribe(res => {
+        BaseComponent.translations = res || [];
+        this.showPage = true;
+      }, error => this.handleError(error));
+
     }, error => this.handleError(error));
   }
 
