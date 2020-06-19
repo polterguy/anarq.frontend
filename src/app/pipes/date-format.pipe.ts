@@ -4,6 +4,9 @@
 
 import { Pipe, PipeTransform } from '@angular/core';
 
+/**
+ * Formats a date and time to its date/time string using the current locale.
+ */
 @Pipe({
   name: 'date_format'
 })

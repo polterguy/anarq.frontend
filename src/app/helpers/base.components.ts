@@ -20,7 +20,30 @@ import { MessageService, Messages } from '../services/message.service';
  */
 export abstract class BaseComponent implements OnInit, OnDestroy {
 
+  /**
+   * Contains all translated entities in the system.
+   */
   protected static translations: TranslationModel[] = [];
+
+  /**
+   * Translates the specified key into the user's selected language.
+   * 
+   * @param key Key to look for
+   * @param args Arguments to translator
+   */
+  public static translate(key: string, args: string[] = null) {
+    const result = BaseComponent.translations.filter(x => x.key === key);
+    let returnValue = key;
+    if (result && result.length > 0) {
+      returnValue = result[0].content;
+      if (args && args.length > 0) {
+        for(var idx = 0; idx < args.length; idx++) {
+          returnValue = returnValue.replace('{' + idx + '}', args[idx]);
+        }
+      }
+    }
+    return returnValue; // Defaulting to key value, which normally is English'ish.
+  }
 
   /**
    * Message service subscription, allowing us to communicate with other components

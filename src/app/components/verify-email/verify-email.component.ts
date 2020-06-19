@@ -69,7 +69,7 @@ export class VerifyEmailComponent extends BaseComponent {
             content: res.extra
           });
           this.snack.open(
-            'Your email address was successfully confirmed. Now you must tell us where you live.',
+            this.translate('TicketValidNowTellRegion'),
             'ok', {
               duration: 5000,
             });
