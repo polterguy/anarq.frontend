@@ -1,5 +1,5 @@
 /*
- * Anarchy, a Direct Democracy system. Copyright 2020 - Thomas Hansen thomas@servergardens.com
+ * AnarQ, a Direct Democracy system. Copyright 2020 - Thomas Hansen thomas@servergardens.com
  */
 
  // System includes
@@ -78,7 +78,7 @@ export class PublicService {
   getStatistics() {
     return this.httpClient.get<StatisticsModel>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/meta/statistics');
+      'magic/modules/anarq/public/meta/statistics');
   }
 
   /*
@@ -125,7 +125,7 @@ export class PublicService {
     }
     return this.httpClient.get<CaseSlim[]>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/cases/cases' +
+      'magic/modules/anarq/public/cases/cases' +
       query);
   }
 
@@ -137,7 +137,7 @@ export class PublicService {
   getCase(id: number) {
     return this.httpClient.get<CaseView>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/cases/case?id=' +
+      'magic/modules/anarq/public/cases/case?id=' +
       id);
   }
 
@@ -150,7 +150,7 @@ export class PublicService {
   vote(id: number, vote: boolean) {
     return this.httpClient.post<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/votes/vote', {
+      'magic/modules/anarq/public/votes/vote', {
         id,
         vote,
       });
@@ -166,7 +166,7 @@ export class PublicService {
   getLanguages() {
     return this.httpClient.get<LanguageModel[]>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/meta/languages');
+      'magic/modules/anarq/public/meta/languages');
   }
 
   /**
@@ -175,7 +175,7 @@ export class PublicService {
   getTranslations(locale: string) {
     return this.httpClient.get<TranslationModel[]>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/meta/translations?locale=' +
+      'magic/modules/anarq/public/meta/translations?locale=' +
       encodeURIComponent(locale));
   }
 
@@ -191,7 +191,7 @@ export class PublicService {
   getUser(username: string) {
     return this.httpClient.get<UserView>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/users/user?username=' +
+      'magic/modules/anarq/public/users/user?username=' +
       encodeURIComponent(username));
   }
 
@@ -201,7 +201,7 @@ export class PublicService {
   isFirstCase() {
     return this.httpClient.get<FirstCaseModel>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/users/is-first-case');
+      'magic/modules/anarq/public/users/is-first-case');
   }
 
   /**
@@ -212,7 +212,7 @@ export class PublicService {
   usernameAvailable(username: string) {
     return this.httpClient.get<ResultModel>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/users/username-available?username=' +
+      'magic/modules/anarq/public/users/username-available?username=' +
       encodeURIComponent(username));
   }
 
@@ -224,7 +224,7 @@ export class PublicService {
   emailAvailable(email: string) {
     return this.httpClient.get<ResultModel>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/users/email-available?email=' +
+      'magic/modules/anarq/public/users/email-available?email=' +
       encodeURIComponent(email));
   }
 
@@ -236,7 +236,7 @@ export class PublicService {
   phoneAvailable(phone: string) {
     return this.httpClient.get<ResultModel>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/users/phone-available?phone=' +
+      'magic/modules/anarq/public/users/phone-available?phone=' +
       encodeURIComponent(phone));
   }
 
@@ -248,7 +248,7 @@ export class PublicService {
   register(model: RegisterModel) {
     return this.httpClient.post<ResultModel>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/users/register',
+      'magic/modules/anarq/public/users/register',
       model);
   }
 
@@ -260,7 +260,7 @@ export class PublicService {
   verifyEmail(model: VerifyEmailModel) {
     return this.httpClient.post<ResultModel>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/users/verify-email',
+      'magic/modules/anarq/public/users/verify-email',
       model);
   }
 
@@ -270,7 +270,7 @@ export class PublicService {
   getRegions() {
     return this.httpClient.get<RegionsModel>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/regions/regions');
+      'magic/modules/anarq/public/regions/regions');
   }
 
   /**
@@ -279,7 +279,7 @@ export class PublicService {
   getMyRegions() {
     return this.httpClient.get<RegionsModel>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/regions/my-regions');
+      'magic/modules/anarq/public/regions/my-regions');
   }
 
   /**
@@ -288,7 +288,7 @@ export class PublicService {
   canSetRegions() {
     return this.httpClient.get<ResultModel>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/regions/can-set-region');
+      'magic/modules/anarq/public/regions/can-set-region');
   }
 
   /**
@@ -299,7 +299,7 @@ export class PublicService {
   setRegion(region: string) {
     return this.httpClient.put<ResultModel>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/users/set-region', {
+      'magic/modules/anarq/public/users/set-region', {
         region
       });
   }
@@ -313,7 +313,7 @@ export class PublicService {
   canCreateCase(region: string) {
     return this.httpClient.get<ResultModel>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/cases/can-create-case?region=' +
+      'magic/modules/anarq/public/cases/can-create-case?region=' +
       encodeURIComponent(region));
   }
 
@@ -325,7 +325,7 @@ export class PublicService {
   submitCase(model: CaseModel) {
     return this.httpClient.post<ResultModel>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/cases/create-case',
+      'magic/modules/anarq/public/cases/create-case',
       model);
   }
 
@@ -339,7 +339,7 @@ export class PublicService {
     }
     return this.httpClient.get<UserSlimModel[]>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/users/users' +
+      'magic/modules/anarq/public/users/users' +
       query);
   }
 
@@ -355,14 +355,14 @@ export class PublicService {
     }
     return this.httpClient.get<CaseSlim[]>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/cases/users-cases' +
+      'magic/modules/anarq/public/cases/users-cases' +
       query);
   }
 
   auditVote(hash: string) {
     return this.httpClient.get<ResultAuditModel>(
       environment.apiUrl +
-      'magic/modules/anarchy/public/votes/audit?hash=' +
+      'magic/modules/anarq/public/votes/audit?hash=' +
       encodeURIComponent(hash));
   }
 }

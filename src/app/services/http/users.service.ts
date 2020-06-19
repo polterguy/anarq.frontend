@@ -1,5 +1,5 @@
 /*
- * Anarchy, a Direct Democracy system. Copyright 2020 - Thomas Hansen thomas@servergardens.com
+ * AnarQ, a Direct Democracy system. Copyright 2020 - Thomas Hansen thomas@servergardens.com
  */
 
 import { Injectable } from '@angular/core';
@@ -43,7 +43,7 @@ export class UsersService {
     }
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users' +
+      'magic/modules/anarq/private/users/users' +
       query);
   }
 
@@ -59,7 +59,7 @@ export class UsersService {
     }
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users-count' +
+      'magic/modules/anarq/private/users/users-count' +
       query);
   }
 
@@ -79,7 +79,7 @@ export class UsersService {
     }
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/roles' + query);
+      'magic/modules/anarq/private/users/roles' + query);
   }
 
   /**
@@ -94,7 +94,7 @@ export class UsersService {
     }
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/roles-count' + query);
+      'magic/modules/anarq/private/users/roles-count' + query);
   }
 
   /**
@@ -106,7 +106,7 @@ export class UsersService {
   createUser(username: string, password: string) {
     return this.httpClient.post<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users', {
+      'magic/modules/anarq/private/users/users', {
       username,
       password,
     });
@@ -121,7 +121,7 @@ export class UsersService {
   createRole(name: string, description?: string) {
     return this.httpClient.post<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/roles', {
+      'magic/modules/anarq/private/users/roles', {
       name,
       description,
     });
@@ -135,7 +135,7 @@ export class UsersService {
   deleteUser(username: string) {
     return this.httpClient.delete<any>(
       environment.apiUrl + 
-      'magic/modules/anarchy/private/users/users?username=' +
+      'magic/modules/anarq/private/users/users?username=' +
       encodeURIComponent(username));
   }
 
@@ -147,7 +147,7 @@ export class UsersService {
   deleteRole(name: string) {
     return this.httpClient.delete<any>(
       environment.apiUrl + 
-      'magic/modules/anarchy/private/users/roles?name=' +
+      'magic/modules/anarq/private/users/roles?name=' +
       encodeURIComponent(name));
   }
 
@@ -159,7 +159,7 @@ export class UsersService {
   getUserRoles(username: string) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users_roles?user.eq=' +
+      'magic/modules/anarq/private/users/users_roles?user.eq=' +
       encodeURIComponent(username));
   }
 
@@ -172,7 +172,7 @@ export class UsersService {
   addRoleToUser(user: string, role: string) {
     return this.httpClient.post<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users_roles', {
+      'magic/modules/anarq/private/users/users_roles', {
       user,
       role,
     });
@@ -187,7 +187,7 @@ export class UsersService {
   deleteRoleFromUser(user: string, role: string) {
     return this.httpClient.delete<any>(
       environment.apiUrl + 
-      'magic/modules/anarchy/private/users/users_roles?role=' +
+      'magic/modules/anarq/private/users/users_roles?role=' +
       encodeURIComponent(role) +
       '&user=' + encodeURIComponent(user));
   }
@@ -199,35 +199,35 @@ export class UsersService {
   countUserStatus(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/user_status-count' +
+      'magic/modules/anarq/private/users/user_status-count' +
       getQueryArgs(args));
   }
 
   deleteUserStatus(args: any) {
     return this.httpClient.delete<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/user_status' +
+      'magic/modules/anarq/private/users/user_status' +
       getQueryArgs(args));
   }
 
   getUserStatus(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/user_status' +
+      'magic/modules/anarq/private/users/user_status' +
       getQueryArgs(args));
   }
 
   createUserStatus(args: any) {
     return this.httpClient.post<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/user_status',
+      'magic/modules/anarq/private/users/user_status',
       args);
   }
 
   updateUserStatus(args: any) {
     return this.httpClient.put<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/user_status',
+      'magic/modules/anarq/private/users/user_status',
       args);
   }
 
@@ -238,35 +238,35 @@ export class UsersService {
   countUsersRegions(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users_regions-count' +
+      'magic/modules/anarq/private/users/users_regions-count' +
       getQueryArgs(args));
   }
 
   deleteUsersRegions(args: any) {
     return this.httpClient.delete<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users_regions' +
+      'magic/modules/anarq/private/users/users_regions' +
       getQueryArgs(args));
   }
 
   getUsersRegions(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users_regions' +
+      'magic/modules/anarq/private/users/users_regions' +
       getQueryArgs(args));
   }
 
   createUsersRegions(args: any) {
     return this.httpClient.post<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users_regions',
+      'magic/modules/anarq/private/users/users_regions',
       args);
   }
 
   updateUsersRegions(args: any) {
     return this.httpClient.put<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users_regions',
+      'magic/modules/anarq/private/users/users_regions',
       args);
   }
 
@@ -277,35 +277,35 @@ export class UsersService {
   countExtraTypes(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users_extra_types-count' +
+      'magic/modules/anarq/private/users/users_extra_types-count' +
       getQueryArgs(args));
   }
 
   deleteExtraType(args: any) {
     return this.httpClient.delete<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users_extra_types' +
+      'magic/modules/anarq/private/users/users_extra_types' +
       getQueryArgs(args));
   }
 
   getExtraTypes(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users_extra_types' +
+      'magic/modules/anarq/private/users/users_extra_types' +
       getQueryArgs(args));
   }
 
   createExtraType(args: any) {
     return this.httpClient.post<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users_extra_types',
+      'magic/modules/anarq/private/users/users_extra_types',
       args);
   }
 
   updateExtraType(args: any) {
     return this.httpClient.put<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users_extra_types',
+      'magic/modules/anarq/private/users/users_extra_types',
       args);
   }
 
@@ -316,35 +316,35 @@ export class UsersService {
   countUserExtras(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users_extra-count' +
+      'magic/modules/anarq/private/users/users_extra-count' +
       getQueryArgs(args));
   }
 
   deleteUserExtra(args: any) {
     return this.httpClient.delete<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users_extra' +
+      'magic/modules/anarq/private/users/users_extra' +
       getQueryArgs(args));
   }
 
   getUserExtra(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users_extra' +
+      'magic/modules/anarq/private/users/users_extra' +
       getQueryArgs(args));
   }
 
   createUserExtra(args: any) {
     return this.httpClient.post<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users_extra',
+      'magic/modules/anarq/private/users/users_extra',
       args);
   }
 
   updateUserExtra(args: any) {
     return this.httpClient.put<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users_extra',
+      'magic/modules/anarq/private/users/users_extra',
       args);
   }
 
@@ -355,28 +355,28 @@ export class UsersService {
   countUserRegions(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users_regions-count' +
+      'magic/modules/anarq/private/users/users_regions-count' +
       getQueryArgs(args));
   }
 
   deleteUserRegion(args: any) {
     return this.httpClient.delete<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users_regions' +
+      'magic/modules/anarq/private/users/users_regions' +
       getQueryArgs(args));
   }
 
   getUserRegions(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users_regions' +
+      'magic/modules/anarq/private/users/users_regions' +
       getQueryArgs(args));
   }
 
   createUserRegion(args: any) {
     return this.httpClient.post<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/users/users_regions',
+      'magic/modules/anarq/private/users/users_regions',
       args);
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Anarchy, a Direct Democracy system. Copyright 2020 - Thomas Hansen thomas@servergardens.com
+ * AnarQ, a Direct Democracy system. Copyright 2020 - Thomas Hansen thomas@servergardens.com
  */
 
  // System includes
@@ -31,35 +31,35 @@ export class CaseService {
   countCaseTypes(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/cases/case_types-count' +
+      'magic/modules/anarq/private/cases/case_types-count' +
       getQueryArgs(args));
   }
 
   deleteCaseType(args: any) {
     return this.httpClient.delete<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/cases/case_types' +
+      'magic/modules/anarq/private/cases/case_types' +
       getQueryArgs(args));
   }
 
   getCaseTypes(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/cases/case_types' +
+      'magic/modules/anarq/private/cases/case_types' +
       getQueryArgs(args));
   }
 
   createCaseType(args: any) {
     return this.httpClient.post<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/cases/case_types',
+      'magic/modules/anarq/private/cases/case_types',
       args);
   }
 
   updateCaseType(args: any) {
     return this.httpClient.put<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/cases/case_types',
+      'magic/modules/anarq/private/cases/case_types',
       args);
   }
 
@@ -70,35 +70,35 @@ export class CaseService {
   countCases(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/cases/cases-count' +
+      'magic/modules/anarq/private/cases/cases-count' +
       getQueryArgs(args));
   }
 
   deleteCases(args: any) {
     return this.httpClient.delete<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/cases/cases' +
+      'magic/modules/anarq/private/cases/cases' +
       getQueryArgs(args));
   }
 
   getCases(args: any) {
     return this.httpClient.get<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/cases/cases' +
+      'magic/modules/anarq/private/cases/cases' +
       getQueryArgs(args));
   }
 
   createCase(args: any) {
     return this.httpClient.post<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/cases/cases',
+      'magic/modules/anarq/private/cases/cases',
       args);
   }
 
   updateCase(args: any) {
     return this.httpClient.put<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/cases/cases',
+      'magic/modules/anarq/private/cases/cases',
       args);
   }
 
@@ -114,7 +114,7 @@ export class CaseService {
   acceptCase(args: AcceptCase) {
     return this.httpClient.put<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/cases/cases-accept',
+      'magic/modules/anarq/private/cases/cases-accept',
       args);
   }
 
@@ -126,7 +126,7 @@ export class CaseService {
   rejectCase(id: number) {
     return this.httpClient.put<any>(
       environment.apiUrl +
-      'magic/modules/anarchy/private/cases/cases-reject', {
+      'magic/modules/anarq/private/cases/cases-reject', {
         id
       });
   }
