@@ -29,10 +29,10 @@ import { MessageService, Messages } from 'src/app/services/message.service';
 })
 export class RegionComponent extends BaseComponent {
 
-  private cases: CaseSlim[] = [];
-  private more: boolean;
-  private region: string = null;
-  private canCreateCase = false;
+  public cases: CaseSlim[] = [];
+  public more: boolean;
+  public region: string = null;
+  public canCreateCase = false;
 
   /**
    * Constructor for component.
@@ -118,7 +118,7 @@ export class RegionComponent extends BaseComponent {
    * Returns true if user is legally allowed to ask a question in
    * current region.
    */
-  private canAskQuestion() {
+  public canAskQuestion() {
 
     // Retrieving username first.
     const username = this.messages.getValue(Messages.APP_GET_USERNAME);
@@ -137,7 +137,7 @@ export class RegionComponent extends BaseComponent {
   /**
    * Returns next "batch" of cases relevant to the client.
    */
-  private getNextBatch() {
+  public getNextBatch() {
 
     // Retrieving username, if any for currently authenticated client.
     const username = this.messages.getValue(Messages.APP_GET_USERNAME);
@@ -157,14 +157,14 @@ export class RegionComponent extends BaseComponent {
    * 
    * @param item Case item
    */
-  private getCount(item: CaseSlim) {
+  public getCount(item: CaseSlim) {
     return item.positive + '/' + (item.votes - item.positive);
   }
 
   /**
    * Asks a question within the current region.
    */
-  private askQuestion() {
+  public askQuestion() {
     this.router.navigate(['/ask/' + this.region]);
   }
 }

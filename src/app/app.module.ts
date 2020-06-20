@@ -76,12 +76,10 @@ import { CaseComponent } from './components/case/case.component';
 import { UsersComponent } from './components/users/users.component';
 import { UserComponent } from './components/user/user.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { VotesComponent } from './components/private/votes/votes.component';
 import { CasesComponent } from './components/private/cases/cases.component';
 import { RegionsComponent } from './components/private/regions/regions.component';
 import { LanguagesComponent } from './components/private/languages/languages.component';
 import { Case_typesComponent } from './components/private/case_types/case_types.component';
-import { EditVotesComponent } from './components/private/votes/modals/edit.votes.component';
 import { EditCasesComponent } from './components/private/cases/modals/edit.cases.component';
 import { User_statusComponent } from './components/private/user_status/user_status.component';
 import { Users_extraComponent } from './components/private/users_extra/users_extra.component';
@@ -147,9 +145,7 @@ export function tokenGetter() {
     EditUsers_extra_typesComponent,
     Users_extraComponent,
     EditUsers_extraComponent,
-    VotesComponent,
     RegionComponent,
-    EditVotesComponent,
   ],
   imports: [
     BrowserModule,
@@ -225,7 +221,6 @@ export function tokenGetter() {
     EditUsers_regionsComponent,
     EditUsers_extra_typesComponent,
     EditUsers_extraComponent,
-    EditVotesComponent,
   ]
 })
 export class AppModule { }

@@ -29,45 +29,45 @@ import { MessageService, Messages } from 'src/app/services/message.service';
 export class RegisterComponent extends BaseComponent {
 
   // Form controls, necessary to validate values during writing.
-  private username: FormControl;
-  private email: FormControl;
-  private name: FormControl;
-  private phone: FormControl;
-  private password: FormControl;
-  private passwordRepeat: FormControl;
-  private stepNo = 1;
-  private stepTotal = 5;
+  public username: FormControl;
+  public email: FormControl;
+  public name: FormControl;
+  public phone: FormControl;
+  public password: FormControl;
+  public passwordRepeat: FormControl;
+  public stepNo = 1;
+  public stepTotal = 5;
 
   // If true, password is readable, and not hidden in input.
-  private passwordReadable = false;
-  private passwordRepeatReadable = false;
+  public passwordReadable = false;
+  public passwordRepeatReadable = false;
 
   // If true, we show additional information about the field.
-  private showNameInfo = false;
-  private showPhoneInfo = false;
+  public showNameInfo = false;
+  public showPhoneInfo = false;
 
   // Progress of registration.
-  private progress = 0;
+  public progress = 0;
 
   // Whether or not user agrees to the terms and conditions of the site.
-  private agree = false;
+  public agree = false;
 
   // If true, user has successfully registered, and we show information about verifying his or her email.
-  private done = false;
+  public done = false;
 
   // Validation of fields.
-  private usernameGood?: boolean = null;
-  private emailGood?: boolean = null;
-  private nameGood?: boolean = null;
-  private phoneGood?: boolean = null;
-  private passwordGood?: boolean = null;
-  private passwordRepeatGood?: boolean = null;
+  public usernameGood?: boolean = null;
+  public emailGood?: boolean = null;
+  public nameGood?: boolean = null;
+  public phoneGood?: boolean = null;
+  public passwordGood?: boolean = null;
+  public passwordRepeatGood?: boolean = null;
 
   // Number of milliseconds after a keystroke before validating value of control.
   private debounce = 800;
 
   // Captcha response.
-  private captchaResponse: string = null;
+  public captchaResponse: string = null;
 
   /**
    * Constructor for component.
@@ -304,7 +304,7 @@ export class RegisterComponent extends BaseComponent {
   /**
    * Toggles whether or not password should be shown in plain text or not.
    */
-  private togglePasswordReadability() {
+  public togglePasswordReadability() {
     this.passwordReadable = !this.passwordReadable;
     this.passwordRepeatReadable = !this.passwordRepeatReadable;
   }
@@ -312,14 +312,14 @@ export class RegisterComponent extends BaseComponent {
   /**
    * Shows information about why we need the full legal name for users.
    */
-  private showNameInformation() {
+  public showNameInformation() {
     this.showNameInfo = !this.showNameInfo;
   }
 
   /**
    * Shows information about why we need the phone number for users.
    */
-  private showPhoneInformation() {
+  public showPhoneInformation() {
     this.showPhoneInfo = !this.showPhoneInfo;
   }
 
@@ -328,7 +328,7 @@ export class RegisterComponent extends BaseComponent {
    * 
    * @param data Data from reCAPTCHA
    */
-  private captchaResolved(data) {
+  public captchaResolved(data) {
     this.captchaResponse = data;
   }
 
@@ -337,7 +337,7 @@ export class RegisterComponent extends BaseComponent {
    * 
    * @param token reCAPTCHA token, for verifyin user is a human being
    */
-  private register() {
+  public register() {
 
     // Invokes HTTP service layer to register the user at the site.
     this.service.register({

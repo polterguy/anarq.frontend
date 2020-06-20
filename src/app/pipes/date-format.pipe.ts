@@ -11,7 +11,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'date_format'
 })
 export class DateFormatPipe implements PipeTransform {
-  transform(value: any, args: string[]): any {
+  transform(value: any): any {
     const date = new Date(value);
     return date.toLocaleString();
   }

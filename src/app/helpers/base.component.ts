@@ -125,7 +125,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
    * @param key Key to lookup translations
    * @param args Arguments to key, will be applied using string interpolation
    */
-  protected translate(key: string, args: any[] = null) {
+  public translate(key: string, args: any[] = null) {
     const result = BaseComponent.translations.filter(x => x.key === key);
     let returnValue = key;
     if (result && result.length > 0) {
@@ -144,7 +144,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
    * 
    * @param region Region name
    */
-  protected capitalize(region: string) {
+  public capitalize(region: string) {
     return region.charAt(0).toUpperCase() + region.slice(1);
   }
 }

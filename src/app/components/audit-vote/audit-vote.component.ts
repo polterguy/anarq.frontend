@@ -30,7 +30,7 @@ export class AuditVoteComponent extends BaseComponent {
   public extra: string = null;
   public caseId: number = null;
   public previous: string = null;
-  private hash: string;
+  public hash: string;
 
   /**
    * Constructor for component.

@@ -29,15 +29,15 @@ import { PublicService } from 'src/app/services/http/public.service';
 export class UsersComponent extends BaseComponent {
 
   // Offset from where to start fetching users.
-  private offset = 0;
+  public offset = 0;
 
   // Users currently viewed.
-  private users: UserSlimModel[] = [];
+  public users: UserSlimModel[] = [];
 
   // If true, there are more items.
-  private more = false;
+  public more = false;
 
-  private filter: FormControl;
+  public filter: FormControl;
 
   /**
    * Constructor for component.
@@ -81,7 +81,7 @@ export class UsersComponent extends BaseComponent {
   /**
    * Retrieves next batch of users from backend.
    */
-  private getNextBatch() {
+  public getNextBatch() {
     this.offset += this.users.length;
     let filter = null;
     if (this.filter.value.length > 0) {

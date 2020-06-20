@@ -28,11 +28,11 @@ import { MessageService, Messages } from 'src/app/services/message.service';
 })
 export class ResetPasswordComponent extends BaseComponent {
 
-  private username: string;
-  private hash: string;
-  private password: string;
-  private passwordRepeat: string;
-  private passwordReadable = false;
+  public username: string;
+  public hash: string;
+  public password: string;
+  public passwordRepeat: string;
+  public passwordReadable = false;
 
   /**
    * Constructor for component.
@@ -95,7 +95,7 @@ export class ResetPasswordComponent extends BaseComponent {
   /**
    * Toggles readability of password.
    */
-  private togglePasswordReadability() {
+  public togglePasswordReadability() {
     this.passwordReadable = !this.passwordReadable;
   }
 
@@ -103,7 +103,7 @@ export class ResetPasswordComponent extends BaseComponent {
    * Resets user's password, by invoking the backend, passsing in the hash,
    * username and new password.
    */
-  private resetPassword() {
+  public resetPassword() {
 
     // Verifying passwords are the same.
     if (this.password !== this.passwordRepeat) {

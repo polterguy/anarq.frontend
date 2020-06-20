@@ -28,10 +28,10 @@ import { MessageService, Messages } from 'src/app/services/message.service';
 })
 export class CaseComponent extends BaseComponent {
 
-  private item: CaseView = null;
-  private id: number;
-  private isLoggedIn = false;
-  private firstCase = false;
+  public item: CaseView = null;
+  public id: number;
+  public isLoggedIn = false;
+  public firstCase = false;
 
   /**
    * Constructor for component.
@@ -110,7 +110,7 @@ export class CaseComponent extends BaseComponent {
   /**
    * Fetches case data from backend.
    */
-  private getCaseData() {
+  public getCaseData() {
     this.route.params.subscribe(pars => {
       this.id = +pars.id;
       this.service.getCase(pars.id).subscribe(res => {
@@ -180,7 +180,7 @@ export class CaseComponent extends BaseComponent {
   /**
    * Closes additional info for first created case.
    */
-  private closeInfo() {
+  public closeInfo() {
     localStorage.removeItem('first_case');
     this.firstCase = false;
   }
@@ -188,7 +188,7 @@ export class CaseComponent extends BaseComponent {
   /**
    * Returns a friendly string declaring whether ot not case was won or lost
    */
-  private getCaseResult() {
+  public getCaseResult() {
     if (this.item.positive > this.item.negative) {
       return this.translate('CaseWasWon');
     } else if (this.item.positive < this.item.negative) {
@@ -203,7 +203,7 @@ export class CaseComponent extends BaseComponent {
    * case is still open, or if it is closed, whether or not the case was won,
    * lost or not determined.
    */
-  private getCssClassForCase() {
+  public getCssClassForCase() {
     if (this.item.closed === 0) {
       // Case is still open.
       return 'open';

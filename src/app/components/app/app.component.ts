@@ -29,19 +29,19 @@ import { BaseComponent } from 'src/app/helpers/base.component';
 export class AppComponent extends BaseComponent {
 
   // Databound towards your side navigation. If true, it implies the navbar menu is expanded.
-  private sidenavOpened = false;
-  private language: string = 'no';
+  public sidenavOpened = false;
+  public language: string = 'no';
 
   /*
    * Smaller optimisation to make it easier to check which roles currently logged in
    * user belongs to. Notice, this is needed to figure out which navbar items we want
    * to show, and which we want to hide.
    */
-  private token: any = null;
-  private isLoggedIn = false;
-  private showRegisterLink = true;
-  private languages: LanguageModel[] = [];
-  private showPage = false;
+  public token: any = null;
+  public isLoggedIn = false;
+  public showRegisterLink = true;
+  public languages: LanguageModel[] = [];
+  public showPage = false;
 
   /**
    * 
@@ -316,7 +316,7 @@ export class AppComponent extends BaseComponent {
   /**
    * Invoked when language is selected.
    */
-  private languageSelected() {
+  public languageSelected() {
     this.showPage = false;
     this.service.getTranslations(this.language).subscribe(res => {
       localStorage.setItem('language', this.language);

@@ -49,14 +49,14 @@ const enforceMaxLength = function(cm, change) {
 })
 export class AskComponent extends BaseComponent {
 
-  private subject: FormControl;
-  private region: string;
-  private isLoggedIn = false;
-  private canCreateCase = false;
-  private subjectGood?: boolean = null;
-  private body = '';
-  private showInfo = false;
-  private deadline: string = 'short';
+  public subject: FormControl;
+  public region: string;
+  public isLoggedIn = false;
+  public canCreateCase = false;
+  public subjectGood?: boolean = null;
+  public body = '';
+  public showInfo = false;
+  public deadline: string = 'short';
 
   // Number of milliseconds after a keystroke before filtering should be re-applied.
   private debounce = 800;
@@ -158,7 +158,7 @@ export class AskComponent extends BaseComponent {
   /**
    * Checks to see if user can ask a question in current region or not.
    */
-  private checkIfUserCanCreateCase() {
+  public checkIfUserCanCreateCase() {
 
     // Retrieving username first.
     const username = this.messages.getValue(Messages.APP_GET_USERNAME);
@@ -185,7 +185,7 @@ export class AskComponent extends BaseComponent {
   /**
    * Returns the CodeMirror options for the HTML parts of the component.
    */
-  private getCodeMirrorOptions() {
+  public getCodeMirrorOptions() {
     return {
       lineNumbers: true,
       theme: 'material',
@@ -197,7 +197,7 @@ export class AskComponent extends BaseComponent {
   /**
    * Submits the case to the backend.
    */
-  private submit() {
+  public submit() {
     this.service.submitCase({
       subject: this.subject.value,
       body: this.body,
@@ -224,7 +224,7 @@ export class AskComponent extends BaseComponent {
   /**
    * Closes information content box.
    */
-  private closeInfo() {
+  public closeInfo() {
     this.showInfo = false;
   }
 }

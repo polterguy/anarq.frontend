@@ -10,7 +10,7 @@
     class="sorting">
     <mat-select
       [(ngModel)]="sorting"
-      (selectionChange)="sortingChanged($event)">
+      (selectionChange)="sortingChanged()">
       <mat-option
         value="popular">
         {{translate('Popular')}}

@@ -26,26 +26,26 @@ import { TranslationService } from 'src/app/services/http/translation.service';
 export class LanguagesComponent implements OnInit {
 
   // Actual data currently displayed in the grid. The mat-table will be databound to this list.
-  private data: any[];
+  data: any[];
 
   // Which columns we should display. Reorder to prioritize columns differently.
   // Notice! 'delete-instance' should always come last!
-  private displayedColumns: string[] = ['locale', 'description', 'delete-instance'];
+  displayedColumns: string[] = ['locale', 'description', 'delete-instance'];
 
   // Current filter being applied to filter items from our backend.
-  private filter: any = {
+  filter: any = {
     limit: 10
   };
 
   // Number of items our backend reports are available in total, matching our above filter condition.
-  private count = 0;
-  private hasFiltered = false;
+  count = 0;
+  hasFiltered = false;
 
   // Number of milliseconds after a keystroke before filtering should be re-applied.
-  private debounce = 400;
+  debounce = 400;
 
   // List of items we're currently viewing details for.
-  private viewDetails: any[] = [];
+  viewDetails: any[] = [];
 
   // Need to view paginator as a child to update page index of it.
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -54,11 +54,11 @@ export class LanguagesComponent implements OnInit {
    * This is needed to figure out whether or not user has access to
    * delete, create and update methods.
    */
-  private roles: string [] = [];
+  roles: string [] = [];
 
   // Form control declarations to bind up with reactive form elements.
-  private locale: FormControl;
-  private description: FormControl;
+  locale: FormControl;
+  description: FormControl;
 
 
   // Constructor taking a bunch of services/helpers through dependency injection.

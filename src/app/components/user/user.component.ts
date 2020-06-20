@@ -41,7 +41,7 @@ export class UserComponent extends BaseComponent {
   public cases: CaseSlim[] = null;
 
   // Bar chart options, and data.
-  private barChartOptions: ChartOptions = {
+  public barChartOptions: ChartOptions = {
     responsive: true,
     showLines: false,
     scales: {
@@ -65,9 +65,9 @@ export class UserComponent extends BaseComponent {
       display: false
     },
   };
-  private barChartLabels: Label[] = [];
-  private barChartData: number[] = [];
-  private barChartColors = [{
+  public barChartLabels: Label[] = [];
+  public barChartData: number[] = [];
+  public barChartColors = [{
     backgroundColor: [
       'rgba(180,180,180,0.8)',
       'rgba(195,195,195,0.8)',
@@ -77,15 +77,15 @@ export class UserComponent extends BaseComponent {
     ]}];
 
   // Bar chart options, and data.
-  private pieChartOptions: ChartOptions = {
+  public pieChartOptions: ChartOptions = {
     responsive: true,
     legend: {
       display: false
     },
   };
-  private pieChartLabels: Label[] = [];
-  private pieChartData: number[] = [];
-  private pieChartColors = [{
+  public pieChartLabels: Label[] = [];
+  public pieChartData: number[] = [];
+  public pieChartColors = [{
     backgroundColor: [
       'rgba(180,255,180,0.8)',
       'rgba(255,180,180,0.8)',
@@ -153,7 +153,7 @@ export class UserComponent extends BaseComponent {
   /**
    * Fetches the user from the backend.
    */
-  private fetchUser() {
+  public fetchUser() {
 
     // Need to parse parameters to figure out what user to retrieve.
     this.route.params.subscribe(pars => {
@@ -180,7 +180,7 @@ export class UserComponent extends BaseComponent {
   /**
    * Returns the total number of votes user has voted over.
    */
-  private getTotalVotes() {
+  public getTotalVotes() {
     let result = 0;
     if (this.item && this.item.regions) {
       this.item.regions.forEach(idx => {
@@ -193,7 +193,7 @@ export class UserComponent extends BaseComponent {
   /**
    * Returns true if region chart is supposed to be displayed.
    */
-  private shouldDisplayRegionChart() {
+  public shouldDisplayRegionChart() {
     if (!this.item) {
       return false;
     }
@@ -208,7 +208,7 @@ export class UserComponent extends BaseComponent {
   /**
    * Returns true if winnings chart is supposed to be displayed.
    */
-  private shouldDisplayWinningsChart() {
+  public shouldDisplayWinningsChart() {
     if (!this.item) {
       return false;
     }

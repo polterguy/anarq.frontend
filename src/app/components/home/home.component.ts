@@ -29,11 +29,11 @@ import { MessageService, Messages } from 'src/app/services/message.service';
 })
 export class HomeComponent extends BaseComponent {
 
-  private cases: CaseSlim[] = [];
-  private more: boolean = false;
-  private regions: string[] = [];
-  private statistics: StatisticsModel = null;
-  private sorting = 'popular';
+  public cases: CaseSlim[] = [];
+  public more: boolean = false;
+  public regions: string[] = [];
+  public statistics: StatisticsModel = null;
+  public sorting = 'popular';
 
   /**
    * Constructor for component.
@@ -118,7 +118,7 @@ export class HomeComponent extends BaseComponent {
     });
   }
 
-  private sortingChanged() {
+  public sortingChanged() {
     this.cases = [];
     localStorage.setItem('home_sorting', this.sorting);
     this.getNextBatch();
@@ -132,7 +132,7 @@ export class HomeComponent extends BaseComponent {
    * to him or her. If client is not logged in, all cases will be returned, and no
    * filter applied.
    */
-  private getNextBatch() {
+  public getNextBatch() {
 
     // Retrieving username first.
     const username = this.messages.getValue(Messages.APP_GET_USERNAME);
@@ -147,7 +147,7 @@ export class HomeComponent extends BaseComponent {
   /**
    * Retrieves all relevant regions for currently authenticated user from server.
    */
-  private getRegions() {
+  public getRegions() {
 
     // Retrieving username first.
     const username = this.messages.getValue(Messages.APP_GET_USERNAME);
@@ -177,7 +177,7 @@ export class HomeComponent extends BaseComponent {
   /**
    * Returns true if user is logged in.
    */
-  private userIsLoggedIn() {
+  public userIsLoggedIn() {
     return this.messages.getValue(Messages.APP_GET_USERNAME) !== null;
   }
 }

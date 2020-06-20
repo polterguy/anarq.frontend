@@ -28,11 +28,11 @@ export interface DialogData {
 })
 export class LoginComponent implements OnInit {
 
-  private username: string;
-  private password: string;
-  private email: string;
-  private canRequestNewPassword = true;
-  private forgotPasswordClicked = false;
+  public username: string;
+  public password: string;
+  public email: string;
+  public canRequestNewPassword = true;
+  public forgotPasswordClicked = false;
 
   /*
    * Constructor taking a bunch of services injected using dependency injection.
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
   /**
    * Logs user in by authenticating him or her towards the backend.
    */
-  private login() {
+  public login() {
     this.service.authenticate(this.username, this.password).subscribe(res => {
       this.dialogRef.close({
         ticket: res.ticket,
@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
   /**
    * Invoked when user cancels edit/create operation.
    */
-  private cancel() {
+  public cancel() {
     this.dialogRef.close();
   }
 
@@ -83,28 +83,28 @@ export class LoginComponent implements OnInit {
    * 
    * @param key Key to lookup
    */
-  private translate(key: string) {
+  public translate(key: string) {
     return BaseComponent.translate(key);
   }
 
   /**
    * Invoked when user clicks the forgot password button.
    */
-  private forgotPassword() {
+  public forgotPassword() {
     this.forgotPasswordClicked = true;
   }
 
   /**
    * Aborts the 'send new password' procedure.
    */
-  private abort() {
+  public abort() {
     this.forgotPasswordClicked = false;
   }
 
   /**
    * Sends a reset password link to email address.
    */
-  private sendResetLink() {
+  public sendResetLink() {
     this.service.sendPasswordResetLink(this.email).subscribe(res => {
       if (res.result === 'SUCCESS') {
         this.snackBar.open(

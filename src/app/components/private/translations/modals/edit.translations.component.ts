@@ -31,11 +31,11 @@ export class EditTranslationsComponent implements OnInit {
    * be transmitted to the server when we create records. This is done to
    * make sure we don't submit "automatic" primary key values.
    */
-  private createColumns: string[] = ['locale', 'key', 'content'];
-  private updateColumns: string[] = ['locale', 'key', 'content'];
-  private primaryKeys: string[] = ['locale', 'key'];
-  public languages: any[];
-  private codeMirrorIsVisible = false;
+  createColumns: string[] = ['locale', 'key', 'content'];
+  updateColumns: string[] = ['locale', 'key', 'content'];
+  primaryKeys: string[] = ['locale', 'key'];
+  languages: any[];
+  codeMirrorIsVisible = false;
 
   /*
    * Constructor taking a bunch of services injected using dependency injection.

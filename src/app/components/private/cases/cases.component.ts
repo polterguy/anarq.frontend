@@ -26,14 +26,14 @@ import { EditCasesComponent } from './modals/edit.cases.component';
 export class CasesComponent implements OnInit {
 
   // Actual data currently displayed in the grid. The mat-table will be databound to this list.
-  private data: any[];
+  data: any[];
 
   // Which columns we should display. Reorder to prioritize columns differently.
   // Notice! 'delete-instance' should always come last!
-  private displayedColumns: string[] = ['region', 'subject', 'created', 'type', 'delete-instance'];
+  displayedColumns: string[] = ['region', 'subject', 'created', 'type', 'delete-instance'];
 
   // Current filter being applied to filter items from our backend.
-  private filter: any = {
+  filter: any = {
     limit: 25,
     order: 'created',
     direction: 'asc',
@@ -41,14 +41,14 @@ export class CasesComponent implements OnInit {
   };
 
   // Number of items our backend reports are available in total, matching our above filter condition.
-  private count = 0;
-  private hasFiltered = true;
+  count = 0;
+  hasFiltered = true;
 
   // Number of milliseconds after a keystroke before filtering should be re-applied.
-  private debounce = 400;
+  debounce = 400;
 
   // List of items we're currently viewing details for.
-  private viewDetails: any[] = [];
+  viewDetails: any[] = [];
 
   // Need to view paginator as a child to update page index of it.
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -57,15 +57,15 @@ export class CasesComponent implements OnInit {
    * This is needed to figure out whether or not user has access to
    * delete, create and update methods.
    */
-  private roles: string [] = [];
+  roles: string [] = [];
 
   // Form control declarations to bind up with reactive form elements.
-  private type: FormControl;
-  private region: FormControl;
-  private created: FormControl;
-  private deadline: FormControl;
-  private subject: FormControl;
-  private body: FormControl;
+  type: FormControl;
+  region: FormControl;
+  created: FormControl;
+  deadline: FormControl;
+  subject: FormControl;
+  body: FormControl;
 
 
   // Constructor taking a bunch of services/helpers through dependency injection.

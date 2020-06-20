@@ -15,28 +15,6 @@
       mat-table
       multiTemplateDataRows
       [dataSource]="data">
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef>
-          <mat-form-field appearance="outline" class="fill-width filter-textbox">
-            <mat-label>id</mat-label>
-            <input
-              matInput
-              placeholder="Filter ..."
-              type="number"
-              autocomplete="off"
-              [formControl]="id">
-            <mat-icon matSuffix>search</mat-icon>
-          </mat-form-field>
-          <button
-            class="sort-button"
-            (click)="sort('id')"
-            mat-button>
-            <mat-icon matSuffix>{{getSortIcon('id')}}</mat-icon>
-          </button>
-          <label class="table-header">id</label>
-        </th>
-        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.id}}</td>
-      </ng-container>
       <ng-container matColumnDef="type">
         <th mat-header-cell *matHeaderCellDef>
           <mat-form-field appearance="outline" class="fill-width filter-textbox">
@@ -80,28 +58,6 @@
           <label class="table-header">region</label>
         </th>
         <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.region}}</td>
-      </ng-container>
-      <ng-container matColumnDef="user">
-        <th mat-header-cell *matHeaderCellDef>
-          <mat-form-field appearance="outline" class="fill-width filter-textbox">
-            <mat-label>user</mat-label>
-            <input
-              matInput
-              placeholder="Filter ..."
-              type="text"
-              autocomplete="off"
-              [formControl]="user">
-            <mat-icon matSuffix>search</mat-icon>
-          </mat-form-field>
-          <button
-            class="sort-button"
-            (click)="sort('user')"
-            mat-button>
-            <mat-icon matSuffix>{{getSortIcon('user')}}</mat-icon>
-          </button>
-          <label class="table-header">user</label>
-        </th>
-        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.user}}</td>
       </ng-container>
       <ng-container matColumnDef="created">
         <th mat-header-cell *matHeaderCellDef>

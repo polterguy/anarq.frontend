@@ -29,11 +29,11 @@ import { MessageService, Messages } from 'src/app/services/message.service';
 })
 export class SetupRegionsComponent extends BaseComponent {
 
-  private regions: RegionsModel = null;
-  private filter: string = null;
-  private isLoggedIn = false;
-  private canSetRegions = false;
-  private whyVisible = false;
+  public regions: RegionsModel = null;
+  public filter: string = null;
+  public isLoggedIn = false;
+  public canSetRegions = false;
+  public whyVisible = false;
 
   /**
    * Constructor for component.
@@ -98,7 +98,7 @@ export class SetupRegionsComponent extends BaseComponent {
    * Returns regions filtered to caller, allowing user to filter regions,
    * to look for his specific region in the system.
    */
-  private getFilteredRegions() {
+  public getFilteredRegions() {
     if (this.regions === null) {
       return [];
     }
@@ -111,7 +111,7 @@ export class SetupRegionsComponent extends BaseComponent {
   /**
    * Checks to see if user can set his region.
    */
-  private checkIfUserCanSetRegions() {
+  public checkIfUserCanSetRegions() {
     this.isLoggedIn = this.messages.getValue(Messages.APP_GET_USERNAME);
     if (this.isLoggedIn) {
       this.service.canSetRegions().subscribe(res => {
@@ -128,7 +128,7 @@ export class SetupRegionsComponent extends BaseComponent {
   /**
    * Shows the reasons why we ask the user where he or she lives.
    */
-  private showWhy() {
+  public showWhy() {
     this.whyVisible = true;
   }
 
@@ -138,7 +138,7 @@ export class SetupRegionsComponent extends BaseComponent {
    * 
    * @param region Which region user selected.
    */
-  private selectRegion(region: string) {
+  public selectRegion(region: string) {
     this.service.setRegion(region).subscribe(res => {
       if (res.result === 'SUCCESS') {
         this.router.navigate(['/'])

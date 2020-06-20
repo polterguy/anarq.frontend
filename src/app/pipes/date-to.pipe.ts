@@ -15,7 +15,7 @@ import { BaseComponent } from '../helpers/base.component';
 })
 export class DateToPipe implements PipeTransform {
 
-  transform(value: any, args: string[]): any {
+  transform(value: any): any {
     const when = new Date(value).getTime();
     const now = new Date().getTime();
     const deltaSeconds = Math.round((when - now) / 1000);

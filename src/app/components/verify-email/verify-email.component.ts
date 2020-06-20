@@ -29,7 +29,7 @@ import { MessageService, Messages } from 'src/app/services/message.service';
 })
 export class VerifyEmailComponent extends BaseComponent {
 
-  private success: boolean = null;
+  public success: boolean = null;
 
   /**
    * Constructor for component.
