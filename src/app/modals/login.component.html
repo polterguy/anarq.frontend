@@ -1,5 +1,7 @@
 
-<h1 mat-dialog-title>{{translate('Login')}}</h1>
+<h1 mat-dialog-title>
+  {{forgotPasswordClicked === false ? translate('Login') : translate('ForgotPassword')}}
+</h1>
 <div mat-dialog-content>
 
   <mat-form-field
@@ -28,7 +30,7 @@
     class="right-aligned"
     *ngIf="forgotPasswordClicked === false">
     <button 
-      *ngIf="!password || password === ''"
+      *ngIf="!(password || password === '') && canRequestNewPassword === true"
       mat-button
       (click)="forgotPassword()"
       [matTooltip]="translate('ForgotYourPassword')">{{translate('ForgotPassword')}}</button>

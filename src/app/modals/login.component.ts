@@ -2,7 +2,7 @@
  * AnarQ, a Direct Democracy system. Copyright 2020 - Thomas Hansen thomas@servergardens.com
  */
 
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialogRef,
@@ -26,11 +26,12 @@ export interface DialogData {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   private username: string;
   private password: string;
   private email: string;
+  private canRequestNewPassword = true;
   private forgotPasswordClicked = false;
 
   /*
@@ -41,6 +42,16 @@ export class LoginComponent {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private snackBar: MatSnackBar,
     private service: PublicService) { }
+
+  /**
+   * OnInit implementation, simply checks if user can request a new password.
+   */
+  ngOnInit() {
+    const canRequestNewPassword = localStorage.getItem('canRequestNewPassword');
+    if (canRequestNewPassword) {
+      this.canRequestNewPassword = false;
+    }
+  }
 
   /**
    * Logs user in by authenticating him or her towards the backend.
@@ -88,12 +99,21 @@ export class LoginComponent {
    */
   private sendResetLink() {
     this.service.sendPasswordResetLink(this.email).subscribe(res => {
-      this.snackBar.open(
-        this.translate('ResetPasswordLinkSent'),
-        'ok', {
-          duration: 5000,
-        });
-        this.dialogRef.close();
+      if (res.result === 'SUCCESS') {
+        this.snackBar.open(
+          this.translate('ResetPasswordLinkSent'),
+          'ok', {
+            duration: 5000,
+          });
+          this.dialogRef.close();
+          localStorage.setItem('canRequestNewPassword', 'false');
+      } else {
+        this.snackBar.open(
+          res.extra,
+          'ok', {
+            duration: 5000,
+          });
+      }
     }, error => console.log(error));
   }
 }

@@ -115,6 +115,16 @@ export class ResetPasswordComponent extends BaseComponent {
       return;
     }
 
+    // Verifying password is long enough.
+    if (this.password.length < 10) {
+      this.snack.open(
+        this.translate('PasswordIsNotLongEnough'),
+        'ok', {
+          duration: 5000,
+        });
+      return;
+    }
+
     // Passwords are the same.
     this.service.resetPassword(this.username, this.password, this.hash).subscribe(res => {
       if (res.result === 'SUCCESS') {
@@ -123,6 +133,11 @@ export class ResetPasswordComponent extends BaseComponent {
           'ok', {
             duration: 5000,
           });
+        this.messages.sendMessage({
+          name: Messages.APP_LOGIN,
+          content: res.extra
+        });
+        localStorage.removeItem('canRequestNewPassword');
         this.router.navigate(['/']);
       } else {
         this.snack.open(
