@@ -1,0 +1,4 @@
+{
+    "route": "/*",
+    "serve": "/index.html"
+  }
