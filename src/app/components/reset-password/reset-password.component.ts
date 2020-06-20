@@ -141,7 +141,7 @@ export class ResetPasswordComponent extends BaseComponent {
         this.router.navigate(['/']);
       } else {
         this.snack.open(
-          res.extra,
+          this.translate(res.extra),
           'ok', {
             duration: 5000,
           });

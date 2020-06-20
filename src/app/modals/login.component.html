@@ -56,6 +56,9 @@
     *ngIf="forgotPasswordClicked === true">
     <button 
       mat-button
+      (click)="abort()">{{translate('Abort')}}</button>
+    <button 
+      mat-button
       [disabled]="!email || email === ''"
       (click)="sendResetLink()">{{translate('Submit')}}</button>
   </div>

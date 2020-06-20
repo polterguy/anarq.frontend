@@ -205,15 +205,15 @@ export class AskComponent extends BaseComponent {
       deadline: this.deadline,
     }).subscribe(res => {
       if (res.result === 'SUCCESS') {
-        this.router.navigate(['/case/' + res.extra]);
         this.snack.open(
           this.translate('CaseSuccessfullyCreated'),
           'ok', {
             duration: 10000,
-          })
-      } else {
+          });
+          this.router.navigate(['/case/' + res.extra]);
+        } else {
         this.snack.open(
-          res.extra, 
+          this.translate(res.extra), 
           'ok', {
             duration: 5000
           });

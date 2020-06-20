@@ -134,12 +134,20 @@ export class CaseComponent extends BaseComponent {
    */
   yes() {
     this.service.vote(this.id, true).subscribe(res => {
-      this.item.opinion = true;
-      this.snack.open(
-        this.translate('CryptoReceiptSent'),
-        'ok', {
-          duration: 10000,
-        });
+      if (res.result === 'SUCCESS') {
+        this.item.opinion = true;
+        this.snack.open(
+          this.translate('CryptoReceiptSent'),
+          'ok', {
+            duration: 10000,
+          });
+      } else {
+        this.snack.open(
+          this.translate(res.extra),
+          'ok', {
+            duration: 10000,
+          });
+      }
     }, error => this.handleError(error));
   }
 

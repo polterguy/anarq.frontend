@@ -103,7 +103,6 @@
       <button
         mat-stroked-button
         [disabled]="subjectGood === false || body.length < 50"
-        [matTooltip]="translate('SubmitCaseToPeopleRepublic', [capitalize(region)])"
         (click)="submit()">
         {{translate('Submit')}}
       </button>

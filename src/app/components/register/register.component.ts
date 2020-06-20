@@ -136,7 +136,7 @@ export class RegisterComponent extends BaseComponent {
               this.progress = 0;
               this.stepNo = 1;
               this.snack.open(
-                res.extra,
+                this.translate(res.extra),
                 'ok', {
                   duration: 5000,
                 });
@@ -366,7 +366,7 @@ export class RegisterComponent extends BaseComponent {
           5000);
       } else {
         this.snack.open(
-          res.extra,
+          this.translate(res.extra),
           'ok', {
             duration: 5000,
           });

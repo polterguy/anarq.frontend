@@ -95,21 +95,28 @@ export class LoginComponent implements OnInit {
   }
 
   /**
+   * Aborts the 'send new password' procedure.
+   */
+  private abort() {
+    this.forgotPasswordClicked = false;
+  }
+
+  /**
    * Sends a reset password link to email address.
    */
   private sendResetLink() {
     this.service.sendPasswordResetLink(this.email).subscribe(res => {
       if (res.result === 'SUCCESS') {
         this.snackBar.open(
-          this.translate('ResetPasswordLinkSent'),
+          this.translate(res.extra),
           'ok', {
-            duration: 5000,
+            duration: 10000,
           });
           this.dialogRef.close();
           localStorage.setItem('canRequestNewPassword', 'false');
       } else {
         this.snackBar.open(
-          res.extra,
+          this.translate(res.extra),
           'ok', {
             duration: 5000,
           });
