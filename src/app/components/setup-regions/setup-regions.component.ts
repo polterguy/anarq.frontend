@@ -33,6 +33,7 @@ export class SetupRegionsComponent extends BaseComponent {
   private filter: string = null;
   private isLoggedIn = false;
   private canSetRegions = false;
+  private whyVisible = false;
 
   /**
    * Constructor for component.
@@ -122,6 +123,13 @@ export class SetupRegionsComponent extends BaseComponent {
     } else {
       this.canSetRegions = false;
     }
+  }
+
+  /**
+   * Shows the reasons why we ask the user where he or she lives.
+   */
+  private showWhy() {
+    this.whyVisible = true;
   }
 
   /**

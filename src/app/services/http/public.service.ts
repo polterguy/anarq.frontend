@@ -149,7 +149,7 @@ export class PublicService {
    * @param vote True if yes, otherwise false
    */
   vote(id: number, vote: boolean) {
-    return this.httpClient.post<any>(
+    return this.httpClient.post<ResultModel>(
       environment.apiUrl +
       'magic/modules/anarq/public/votes/vote', {
         id,

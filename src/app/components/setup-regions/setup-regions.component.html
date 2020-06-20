@@ -9,6 +9,19 @@
       {{translate('WhereDoYouLive')}}
     </h3>
 
+    <button
+      class="why-button"
+      mat-button
+      (click)="showWhy()">
+      {{translate('WhyAskMeThis')}}
+    </button>
+
+    <div
+      *ngIf="whyVisible"
+      class="explanation">
+      {{translate('WhyWeNeedRegions')}}
+    </div>
+
     <mat-form-field class="filter">
       <mat-label>{{translate('Filter')}}</mat-label>
       <input
