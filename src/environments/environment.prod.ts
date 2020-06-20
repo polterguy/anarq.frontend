@@ -3,5 +3,11 @@
  */
 
 export const environment = {
-  production: true
+  production: true,
+
+  // The URL to your backend API.
+  apiUrl: 'https://api.anarq.org',
+
+  // The domain for your backend API. Needed for "oauth0".
+  apiDomain: 'https://api.anarq.org',
 };
