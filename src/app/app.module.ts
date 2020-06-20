@@ -158,7 +158,8 @@ export function tokenGetter() {
       config: {
         tokenGetter,
         whitelistedDomains: [
-          'localhost:55247',
+          'localhost:5000',
+          'localhost:5001',
           'anarq.azurewebsites.net',
           'api.anarq.org'
         ],
