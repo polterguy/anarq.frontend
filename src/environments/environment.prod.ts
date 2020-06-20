@@ -7,7 +7,4 @@ export const environment = {
 
   // The URL to your backend API.
   apiUrl: 'https://anarq.azurewebsites.net/',
-
-  // The domain for your backend API. Needed for "oauth0".
-  apiDomain: 'anarq.azurewebsites.net',
 };

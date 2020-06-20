@@ -157,7 +157,11 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter,
-        whitelistedDomains: [environment.apiDomain],
+        whitelistedDomains: [
+          'localhost:55247',
+          'anarq.azurewebsites.net',
+          'api.anarq.org'
+        ],
       }
     }),
     MatButtonModule,
