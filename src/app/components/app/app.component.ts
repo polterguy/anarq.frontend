@@ -274,7 +274,7 @@ export class AppComponent extends BaseComponent {
           name: Messages.APP_TOKEN_REFRESHED,
           content: this.token,
         });
-        setTimeout(() => this.tryRefreshTicket(), 300000);
+        setTimeout(() => this.tryRefreshTicket(), 1200000);
 
       }, error => this.handleError(error));
     }
