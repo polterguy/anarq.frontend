@@ -127,17 +127,6 @@
       <span class="menu-item-text">Users extra</span>
     </a>
     <a
-      *ngIf="inRole(['root', 'admin'])"
-      mat-button
-      routerLink="/votes"
-      routerLinkActive="active-link"
-      class="menu-item"
-      (click)="closeNavigator()"
-      [routerLinkActiveOptions]="{exact:true}">
-      <mat-icon matSuffix>grade</mat-icon>
-      <span class="menu-item-text">Votes</span>
-    </a>
-    <a
       *ngIf="inRole(['root','admin'])"
       mat-button
       routerLink="/auth"

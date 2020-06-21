@@ -204,9 +204,15 @@ export class AppComponent extends BaseComponent {
    * access to one or more of the menu items in the menu.
    */
   public shouldDisplayMenuButton() {
-    return this.token?.role?.split(',').filter((x: any) => {
-      return x === 'admin' || x === 'moderator' || x === 'root';
-    })?.length > 0 || false;
+    if (this.token?.role?.filter) {
+      return this.token?.role?.filter((x: any) => {
+        return x === 'admin' || x === 'moderator' || x === 'root';
+      })?.length > 0 || false;
+    } else {
+      return (this.token?.role === 'admin' ||
+        this.token?.role === 'root' ||
+        this.token?.role === 'root') || false;
+    }
   }
 
   /**
