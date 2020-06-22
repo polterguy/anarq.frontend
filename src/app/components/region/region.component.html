@@ -1,10 +1,4 @@
 
-<h1
-  *ngIf="region"
-  [matTooltip]="translate('ThePeoplesCourt', [capitalize(region)])">
-  {{region}}
-</h1>
-
 <a
   class="home-link"
   mat-button
@@ -13,7 +7,13 @@
   <mat-icon>keyboard_return</mat-icon>
 </a>
 
-<mat-card class="info-card">
+<div class="region">
+
+  <h1
+    *ngIf="region"
+    [matTooltip]="translate('ThePeoplesCourt', [capitalize(region)])">
+    {{capitalize(region)}}
+  </h1>
 
   <button
     mat-stroked-button
@@ -35,10 +35,9 @@
     </span>
   </div>
 
-  <ul class="region-cases">
+  <ul class="cases">
     <li *ngFor="let case of cases">
       <a
-        class="case-link"
         [routerLink]="'/case/' + case.id">
         {{case.subject}}
       </a>
@@ -51,10 +50,10 @@
   <button
     *ngIf="more"
     mat-button
-    class="feed-more"
+    class="page-next"
     [matTooltip]="translate('GetXNextItems', ['25'])"
     (click)="getNextBatch()">
     ...
   </button>
 
-</mat-card>
+</div>

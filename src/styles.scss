@@ -33,6 +33,22 @@ a {
     }
 }
 
+.cases {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 2rem;
+    li {
+        margin-top: 1rem;
+        small {
+            font-size: .7rem;
+            color: #a0a0a0;
+        }
+    }
+}
+.page-next {
+    text-align: right;
+}
+
 .action-bar {
     background-color: #fafafa;
     padding: .5rem 2rem .5rem 2rem;

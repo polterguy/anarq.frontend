@@ -62,7 +62,7 @@
         <a
           [matTooltip]="translate('QuestionWasAskedIn', [capitalize(item.region)])"
           [routerLink]="'/region/' + item.region">
-          {{item.region}}
+          {{capitalize(item.region)}}
         </a>
       </li>
       <li>

@@ -55,7 +55,6 @@
     <li
       *ngFor="let idx of cases">
       <a
-        class="case-link"
         [routerLink]="'/case/' + idx.id">
         {{idx.subject}}
       </a>
@@ -67,7 +66,7 @@
 
   <div
     class="page-next"
-      *ngIf="cases.length >= 25">
+    *ngIf="cases.length >= 25">
     <a
       class="page-next"
       [routerLink]="['/']"
