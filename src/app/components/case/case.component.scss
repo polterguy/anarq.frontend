@@ -135,11 +135,17 @@
         .no {
             width: 10rem;
         }
+        @media (max-width: 1024px) {
+            .yes, .no {
+                width: 7rem;
+            }
+        } 
         .your-vote {
             font-size: 2rem;
         }
     }
     @media print {
+        .voting-bar,
         .action-bar {
             display: none;
         }

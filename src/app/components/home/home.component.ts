@@ -62,9 +62,6 @@ export class HomeComponent extends BaseComponent {
    */
   protected init() {
 
-    // Figuring out how to sort items.
-    this.sorting = localStorage.getItem('home_sorting') || 'popular';
-
     // Figuring out offset to use.
     this.activatedRoute.queryParams.subscribe(res => {
       if (res && res.offset) {
@@ -147,9 +144,17 @@ export class HomeComponent extends BaseComponent {
     // Retrieving username first.
     const username = this.messages.getValue(Messages.APP_GET_USERNAME);
 
+    // Figuring out how to sort items.
+    let localStorageSorting = localStorage.getItem('home_sorting');
+    if (!this.userIsLoggedIn() &&
+      (localStorageSorting === 'my-cases' || localStorageSorting === 'my-votes-cases')) {
+        localStorageSorting = 'popular';
+    }
+    this.sorting = localStorageSorting || 'popular';
+
     // Getting open cases relevant to user, or all cases if no username was given.
     this.service.getOpenCases(this.offset, null, username, this.sorting).subscribe(res => {
-      this.cases = res;
+      this.cases = res || [];
     }, error => this.handleError(error));
   }
 

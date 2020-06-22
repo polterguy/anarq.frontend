@@ -37,6 +37,47 @@
     class="content"
     [innerHtml]="item.body | marked"></div>
 
+  <div
+    class="voting-bar"
+    *ngIf="item.opinion === undefined && isLoggedIn && item.closed !== 1">
+
+    <button
+      (click)="yes()"
+      class="yes"
+      [matTooltip]="translate('VoteAyeForCase')"
+      mat-stroked-button>
+      <mat-icon>thumb_up</mat-icon>
+    </button>
+
+    <button
+      (click)="no()"
+      class="no"
+      [matTooltip]="translate('VoteNayForCase')"
+      mat-stroked-button>
+      <mat-icon>thumb_down</mat-icon>
+    </button>
+
+  </div>
+
+  <div
+    class="voting-bar"
+    [ngClass]="getClass()"
+    *ngIf="item.opinion !== undefined && isLoggedIn">
+
+    <mat-icon
+      class="your-vote"
+      role="button"
+      [matTooltip]="translate('YouVotedAye')"
+      *ngIf="item.opinion === true">thumb_up</mat-icon>
+
+    <mat-icon
+      class="your-vote"
+      role="button"
+      [matTooltip]="translate('YouVotedNay')"
+      *ngIf="item.opinion === false">thumb_down</mat-icon>
+
+  </div>
+
   <qrcode
     class="qr-code"
     [qrdata]="getCaseUrl()"
@@ -87,45 +128,5 @@
       </li>
     </ul>
 
-  <div
-    class="voting-bar"
-    *ngIf="item.opinion === undefined && isLoggedIn && item.closed !== 1">
-
-    <button
-      (click)="yes()"
-      class="yes"
-      [matTooltip]="translate('VoteAyeForCase')"
-      mat-stroked-button>
-      <mat-icon>thumb_up</mat-icon>
-    </button>
-
-    <button
-      (click)="no()"
-      class="no"
-      [matTooltip]="translate('VoteNayForCase')"
-      mat-stroked-button>
-      <mat-icon>thumb_down</mat-icon>
-    </button>
-
   </div>
-
-  <div
-    class="action-bar"
-    [ngClass]="getClass()"
-    *ngIf="item.opinion !== undefined && isLoggedIn">
-
-    <mat-icon
-      class="your-vote"
-      role="button"
-      [matTooltip]="translate('YouVotedAye')"
-      *ngIf="item.opinion === true">thumb_up</mat-icon>
-
-    <mat-icon
-      class="your-vote"
-      role="button"
-      [matTooltip]="translate('YouVotedNay')"
-      *ngIf="item.opinion === false">thumb_down</mat-icon>
-
-  </div>
-
 </div>

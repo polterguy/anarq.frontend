@@ -1,8 +1,4 @@
 
-<h1>
-  {{translate('StartPoliticalRally') + ' ' + capitalize(region)}}
-</h1>
-
 <a
   class="home-link"
   mat-button
@@ -11,106 +7,102 @@
   <mat-icon>keyboard_return</mat-icon>
 </a>
 
-<div class="component-wrapper">
+<div
+  class="ask">
 
   <div
-    class="mat-elevation-z4 ask">
+    *ngIf="canCreateCase === false && isLoggedIn">
+    {{translate('CannotCreateCaseInRegion', [region])}}
+  </div>
 
-    <div
-      *ngIf="canCreateCase === false && isLoggedIn">
-      {{translate('CannotCreateCaseInRegion', [region])}}
-    </div>
+  <div
+    *ngIf="!isLoggedIn">
+    {{translate('OnlyLoggedInUsersCanCreateCases')}}
+  </div>
 
-    <div
-      *ngIf="!isLoggedIn">
-      {{translate('OnlyLoggedInUsersCanCreateCases')}}
-    </div>
+  <div
+    *ngIf="isLoggedIn && showInfo"
+    class="first-information">
 
-    <div
-      *ngIf="isLoggedIn && showInfo"
-      class="first-information">
+    <button
+      mat-stroked-button
+      class="close"
+      (click)="closeInfo()">
+      {{translate('OKIGotIt')}}
+    </button>
 
-      <button
-        mat-stroked-button
-        class="close"
-        (click)="closeInfo()">
-        {{translate('OKIGotIt')}}
-      </button>
+    <div [innerHTML]="translate('ReadThisFirstQuestion')"></div>
 
-      <div [innerHTML]="translate('ReadThisFirstQuestion')"></div>
+  </div>
 
-    </div>
+  <mat-form-field
+    *ngIf="isLoggedIn && canCreateCase"
+    class="subject">
+    <mat-label>{{subjectGood === false ? translate('SubjectMustBe') : (subjectGood === null ? translate('Subject') : translate('Acceptable'))}}</mat-label>
+    <input
+      matInput
+      [placeholder]="translate('Subject') + ' ...'"
+      minlength="15"
+      maxlength="100"
+      type="text"
+      autocomplete="off"
+      [formControl]="subject">
+  </mat-form-field>
 
-    <mat-form-field
-      *ngIf="isLoggedIn && canCreateCase"
-      class="subject">
-      <mat-label>{{subjectGood === false ? translate('SubjectMustBe') : (subjectGood === null ? translate('Subject') : translate('Acceptable'))}}</mat-label>
-      <input
-        matInput
-        [placeholder]="translate('Subject') + ' ...'"
-        minlength="15"
-        maxlength="100"
-        type="text"
-        autocomplete="off"
-        [formControl]="subject">
-    </mat-form-field>
+  <mat-form-field
+    *ngIf="isLoggedIn && canCreateCase"
+    class="subject">
+    <mat-label>{{translate('BodyLength', [body.length, '2500'])}}</mat-label>
+    <textarea
+      [(ngModel)]="body"
+      matInput
+      cols="30"
+      maxlength="2500"
+      minlength="50"
+      rows="10"></textarea>
+  </mat-form-field>
 
-    <mat-form-field
-      *ngIf="isLoggedIn && canCreateCase"
-      class="subject">
-      <mat-label>{{translate('BodyLength', [body.length, '2500'])}}</mat-label>
-      <textarea
-        [(ngModel)]="body"
-        matInput
-        cols="30"
-        maxlength="2500"
-        minlength="50"
-        rows="10"></textarea>
-    </mat-form-field>
-
-    <div
-      class="submit"
-      *ngIf="isLoggedIn && canCreateCase">
-      <span
-        class="deadline-info"
-        *ngIf="deadline === 'short'">
-        {{translate('CaseOpenShort', ['3'])}}
-      </span>
-      <span
-        class="deadline-info"
-        *ngIf="deadline === 'medium'">
-        {{translate('CaseOpenMedium', ['7'])}}
-      </span>
-      <span
-        class="deadline-info"
-        *ngIf="deadline === 'long'">
-        {{translate('CaseOpenLong', ['30'])}}
-      </span>
-      <mat-select
-        [disabled]="subjectGood === false || body.length < 50"
-        [placeholder]="translate('Deadline')"
-        [(ngModel)]="deadline">
-        <mat-option
-          value="short">
-          {{translate('ShortDeadline')}}
-        </mat-option>
-        <mat-option
-          value="medium">
-          {{translate('MediumDeadline')}}
-        </mat-option>
-        <mat-option
-          value="long">
-          {{translate('LongDeadline')}}
-        </mat-option>
-      </mat-select>
-      <button
-        mat-stroked-button
-        [disabled]="subjectGood === false || body.length < 50"
-        (click)="submit()">
-        {{translate('Submit')}}
-      </button>
-    </div>
-
+  <div
+    class="submit"
+    *ngIf="isLoggedIn && canCreateCase">
+    <span
+      class="deadline-info"
+      *ngIf="deadline === 'short'">
+      {{translate('CaseOpenShort', ['3'])}}
+    </span>
+    <span
+      class="deadline-info"
+      *ngIf="deadline === 'medium'">
+      {{translate('CaseOpenMedium', ['7'])}}
+    </span>
+    <span
+      class="deadline-info"
+      *ngIf="deadline === 'long'">
+      {{translate('CaseOpenLong', ['30'])}}
+    </span>
+    <mat-select
+      [disabled]="subjectGood === false || body.length < 50"
+      [placeholder]="translate('Deadline')"
+      [(ngModel)]="deadline">
+      <mat-option
+        value="short">
+        {{translate('ShortDeadline')}}
+      </mat-option>
+      <mat-option
+        value="medium">
+        {{translate('MediumDeadline')}}
+      </mat-option>
+      <mat-option
+        value="long">
+        {{translate('LongDeadline')}}
+      </mat-option>
+    </mat-select>
+    <button
+      mat-stroked-button
+      [disabled]="subjectGood === false || body.length < 50"
+      (click)="submit()">
+      {{translate('Submit')}}
+    </button>
   </div>
 
 </div>
