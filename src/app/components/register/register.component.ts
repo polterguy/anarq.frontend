@@ -207,29 +207,22 @@ export class RegisterComponent extends BaseComponent {
     this.phone.valueChanges
       .pipe(debounceTime(this.debounce), distinctUntilChanged())
       .subscribe(query => {
-        const regex = /^[0-9]{8}$/
-        if (regex.test(this.phone.value)) {
-          this.service.phoneAvailable(this.phone.value).subscribe(res => {
-            if (res.result === 'SUCCESS') {
-              this.progress = 80;
-              this.stepNo = 5;
-              this.phoneGood = true;
-            } else {
-              this.progress = 60;
-              this.stepNo = 4;
-              this.snack.open(
-                res.extra,
-                'ok', {
-                  duration: 10000,
-                });
-              this.phoneGood = false;
-            }
-          }, error => this.handleError(error));
-        } else {
-          this.stepNo = 4;
-          this.progress = 60;
-          this.phoneGood = false;
-        }
+        this.service.phoneAvailable(this.phone.value).subscribe(res => {
+          if (res.result === 'SUCCESS') {
+            this.progress = 80;
+            this.stepNo = 5;
+            this.phoneGood = true;
+          } else {
+            this.progress = 60;
+            this.stepNo = 4;
+            this.snack.open(
+              res.extra,
+              'ok', {
+                duration: 10000,
+              });
+            this.phoneGood = false;
+          }
+        }, error => this.handleError(error));
       });
 
     // Password control.

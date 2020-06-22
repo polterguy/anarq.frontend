@@ -44,7 +44,7 @@
       <mat-label>{{usernameGood === false ? translate('UsernameCharacterPattern') : translate('Username')}}</mat-label>
       <input
         matInput
-        placeholder="translate('Username') + ' ...'"
+        [placeholder]="translate('Username') + ' ...'"
         type="text"
         autocomplete="off"
         [formControl]="username">
