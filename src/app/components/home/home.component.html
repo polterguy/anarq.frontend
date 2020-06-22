@@ -7,40 +7,48 @@
 
   <mat-form-field
     class="sorting">
+
     <mat-select
       [(ngModel)]="sorting"
       (selectionChange)="sortingChanged()">
+
       <mat-option
         value="popular">
         {{translate('Popular')}}
       </mat-option>
+
       <mat-option
         value="newest">
         {{translate('Newest')}}
       </mat-option>
+
       <mat-option
         value="closed">
         {{translate('Closed')}}
       </mat-option>
+
       <mat-option
         value="my-cases"
         *ngIf="userIsLoggedIn()">
         {{translate('MyCases')}}
       </mat-option>
+
       <mat-option
         value="my-voted-cases"
         *ngIf="userIsLoggedIn()">
         {{translate('CasesIHaveVotedFor')}}
       </mat-option>
+
     </mat-select>
+
   </mat-form-field>
 
   <div
     *ngIf="!cases || cases.length === 0"
     class="information">
-    <span>
+    <p>
       {{translate('NothingToSeeHere')}}
-    </span>
+    </p>
   </div>
 
   <ul class="cases">
@@ -68,12 +76,11 @@
 
   <div
     *ngIf="regions.length > 0"
-    class="regions">
+    class="action-bar">
     <ul>
       <li
         *ngFor="let idx of regions">
         <a
-          class="region-link"
           [routerLink]="'/region/' + idx">
           {{capitalize(idx)}}
         </a>
@@ -83,7 +90,7 @@
 
   <div
     *ngIf="statistics"
-    class="statistics">
+    class="action-bar">
     <ul>
       <li
         [matTooltip]="translate('ThereAreXUsersInSystem', [statistics.users])">

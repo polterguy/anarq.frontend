@@ -44,45 +44,12 @@ h1 {
     .cases {
         list-style-type: none;
         padding-left: 0;
+        margin-bottom: 2rem;
         li {
             margin-top: 1rem;
             small {
                 font-size: .7rem;
                 color: #a0a0a0;
-            }
-        }
-    }
-    .regions {
-        background-color: #f0f0f0;
-        padding: 1rem 2rem 1rem 2rem;
-        margin-top: 2rem;
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            li {
-                flex:1;
-                margin-right: 1rem;
-            }
-        }
-    }
-    .statistics {
-        background-color: #fafafa;
-        padding: .5rem 2rem .5rem 2rem;
-        margin: 1rem -2rem 2rem -2rem;
-        border-top: solid 1px #f0f0f0;
-        border-bottom: solid 1px #f0f0f0;
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            li {
-                flex: 1;
-                margin-right: 1rem;
-                color: #c0c0c0;
-                font-size: .7rem;
             }
         }
     }
