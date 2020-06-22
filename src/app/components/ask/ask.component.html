@@ -13,7 +13,7 @@
       mat-button
       [matTooltip]="translate('Home')"
       routerLink="/">
-      <mat-icon>home</mat-icon>
+      <mat-icon>close</mat-icon>
     </a>
 
     <div
@@ -48,22 +48,25 @@
       <input
         matInput
         [placeholder]="translate('Subject') + ' ...'"
+        minlength="15"
+        maxlength="100"
         type="text"
         autocomplete="off"
         [formControl]="subject">
     </mat-form-field>
 
-    <label
+    <mat-form-field
       *ngIf="isLoggedIn && canCreateCase"
-      [matTooltip]="translate('FeelFreeToUseMarkdown')"
-      class="body-label">
-      {{translate('BodyLength', [body.length, '2500'])}}
-    </label>
-
-    <ngx-codemirror
-      *ngIf="isLoggedIn && canCreateCase"
-      [(ngModel)]="body"
-      [options]="getCodeMirrorOptions()"></ngx-codemirror>
+      class="subject">
+      <mat-label>{{translate('BodyLength', [body.length, '2500'])}}</mat-label>
+      <textarea
+        [(ngModel)]="body"
+        matInput
+        cols="30"
+        maxlength="2500"
+        minlength="50"
+        rows="10"></textarea>
+    </mat-form-field>
 
     <div
       class="submit"
