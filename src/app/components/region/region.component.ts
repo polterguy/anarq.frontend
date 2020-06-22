@@ -30,9 +30,9 @@ import { MessageService, Messages } from 'src/app/services/message.service';
 export class RegionComponent extends BaseComponent {
 
   public cases: CaseSlim[] = [];
-  public more: boolean;
   public region: string = null;
   public canCreateCase = false;
+  public offset = 0;
 
   /**
    * Constructor for component.
@@ -40,14 +40,14 @@ export class RegionComponent extends BaseComponent {
    * @param service Service to retrieve data from server.
    * @param messages Message publishing/subscription bus service.
    * @param snack Snack bar required by base class to show errors.
-   * @param route Activated route, used to figure out region user wants to retrieve items from.
+   * @param activatedRoute Activated route, used to figure out region user wants to retrieve items from.
    * @param router Router to allow us to redirect user to router links.
    */
   constructor(
     protected service: PublicService,
     protected messages: MessageService,
     protected snack: MatSnackBar,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private router: Router)
   {
     super(service, messages, snack);
@@ -62,9 +62,16 @@ export class RegionComponent extends BaseComponent {
   protected init() {
 
     // We need to figure out which region we're in before we fetch items.
-    this.route.params.subscribe(pars => {
+    this.activatedRoute.params.subscribe(pars => {
       this.region = pars.region;
-      this.getNextBatch();
+
+      // Figuring out offset to use.
+      this.activatedRoute.queryParams.subscribe(res => {
+        if (res && res.offset) {
+          this.offset = res.offset;
+        }
+        this.getCases();
+      });
     });
 
     // Checking if user can ask a question in current region.
@@ -101,13 +108,13 @@ export class RegionComponent extends BaseComponent {
          */
         case Messages.APP_LOGGED_OUT:
           this.cases = [];
-          this.getNextBatch();
+          this.getCases();
           this.canAskQuestion();
           break;
 
         case Messages.APP_LOGGED_IN:
           this.cases = [];
-          this.getNextBatch();
+          this.getCases();
           this.canAskQuestion();
           break;
       }
@@ -124,7 +131,7 @@ export class RegionComponent extends BaseComponent {
     const username = this.messages.getValue(Messages.APP_GET_USERNAME);
 
     // Figuring out if user is allowed to ask qustions in this region or not.
-    this.route.params.subscribe(pars => {
+    this.activatedRoute.params.subscribe(pars => {
       this.region = pars.region;
       if (username) {
         this.service.canCreateCase(this.region).subscribe(res => {
@@ -137,17 +144,14 @@ export class RegionComponent extends BaseComponent {
   /**
    * Returns next "batch" of cases relevant to the client.
    */
-  public getNextBatch() {
+  public getCases() {
 
     // Retrieving username, if any for currently authenticated client.
     const username = this.messages.getValue(Messages.APP_GET_USERNAME);
 
     // Retrieving next batch of open cases within region.
-    this.service.getOpenCases(this.cases.length, this.region, username).subscribe(res => {
-      this.more = res && res.length === 25;
-      if (res) {
-        this.cases = this.cases.concat(res);
-      }
+    this.service.getOpenCases(this.offset, this.region, username).subscribe(res => {
+      this.cases = res;
     });
   }
 

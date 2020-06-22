@@ -47,13 +47,15 @@
     </li>
   </ul>
 
-  <button
-    *ngIf="more"
-    mat-button
+  <div
     class="page-next"
-    [matTooltip]="translate('GetXNextItems', ['25'])"
-    (click)="getNextBatch()">
-    ...
-  </button>
+    *ngIf="cases.length >= 25">
+    <a
+      class="page-next"
+      [routerLink]="['/region/' + region]"
+      [queryParams]="{offset: offset + 25}">
+      {{translate('Get25NextItems')}}
+    </a>
+  </div>
 
 </div>

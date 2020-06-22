@@ -41,6 +41,8 @@ export class HomeComponent extends BaseComponent {
    * @param service Service to retrieve data from server.
    * @param messages Message publishing/subscription bus service.
    * @param snack Snack bar required by base class to show errors.
+   * @param router Router to navigate to specific cases, etc.
+   * @param activatedRoute Necessary to parse query parameters.
    */
   constructor(
     protected service: PublicService,
