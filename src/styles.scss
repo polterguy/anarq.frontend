@@ -21,9 +21,16 @@ a {
 .home-link {
     position: absolute !important;
     top: 1rem;
-    right: 1rem;
-    width: 3rem;
+    left: .5rem;
     display: block;
+    padding-left:0 !important;
+    padding-right:0 !important;
+}
+
+@media print {
+    .home-link {
+        display: none !important;
+    }
 }
 
 .action-bar {

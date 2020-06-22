@@ -5,6 +5,14 @@
   {{region}}
 </h1>
 
+<a
+  class="home-link"
+  mat-button
+  [matTooltip]="translate('Home')"
+  routerLink="/">
+  <mat-icon>keyboard_return</mat-icon>
+</a>
+
 <mat-card class="info-card">
 
   <button
@@ -15,14 +23,6 @@
     [matTooltip]="translate('BringForthAQuestion', [capitalize(region)])">
     ?
   </button>
-
-  <a
-    class="home-link"
-    mat-button
-    [matTooltip]="translate('Home')"
-    routerLink="/">
-    <mat-icon>close</mat-icon>
-  </a>
 
   <div
     *ngIf="cases.length === 0"

@@ -1,17 +1,17 @@
 
+<a
+  class="home-link"
+  mat-button
+  [matTooltip]="translate('Home')"
+  routerLink="/">
+  <mat-icon>keyboard_return</mat-icon>
+</a>
+
 <div class="component-wrapper">
 
   <div
     *ngIf="item"
     class="mat-elevation-z4 user">
-
-    <a
-      class="home-link"
-      mat-button
-      [matTooltip]="translate('Home')"
-      routerLink="/">
-      <mat-icon>close</mat-icon>
-    </a>
 
     <span
       class="username">

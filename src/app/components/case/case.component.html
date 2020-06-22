@@ -1,144 +1,130 @@
 
-<div class="component-wrapper">
+<a
+  class="home-link"
+  [matTooltip]="translate('Home')"
+  mat-button
+  routerLink="/">
+  <mat-icon>keyboard_return</mat-icon>
+</a>
+
+<div
+  *ngIf="item"
+  [ngClass]="getCssClassForCase()"
+  class="case">
 
   <div
-    *ngIf="item"
-    [ngClass]="getCssClassForCase()"
-    class="mat-elevation-z4 case">
+    *ngIf="firstCase"
+    class="first-information">
+
+    <button
+      mat-stroked-button
+      class="close"
+      (click)="closeInfo()">
+      {{translate('AllRightBaby')}}
+    </button>
 
     <div
       *ngIf="firstCase"
-      class="first-information">
+      [innerHtml]="translate('ReadThisFirstCase')"></div>
 
-      <button
-        mat-stroked-button
-        class="close"
-        (click)="closeInfo()">
-        {{translate('AllRightBaby')}}
-      </button>
+  </div>
 
-      <div
-        *ngIf="firstCase"
-        [innerHtml]="translate('ReadThisFirstCase')"></div>
+  <h1>
+    {{item.subject}}
+  </h1>
 
-    </div>
+  <div
+    class="content"
+    [innerHtml]="item.body | marked"></div>
 
-    <a
-      class="home-link"
-      [matTooltip]="translate('Home')"
-      mat-button
-      routerLink="/">
-      <mat-icon>close</mat-icon>
-    </a>
+  <qrcode
+    class="qr-code"
+    [qrdata]="getCaseUrl()"
+    [width]="128"
+    [errorCorrectionLevel]="'M'"></qrcode>
 
-    <h1>
-      {{item.subject}}
-    </h1>
+  <div
+    *ngIf="item.closed !== 1"
+    class="qr-code-description">
+    {{translate('VoteForCaseAbove')}}
+  </div>
 
-    <div
-      class="content"
-      [innerHtml]="item.body | marked"></div>
+  <div
+    *ngIf="item.closed === 1"
+    class="qr-code-description">
+    {{translate('CheckOutHowTheCaseDid')}}
+  </div>
 
-    <qrcode
-      class="qr-code"
-      [qrdata]="getCaseUrl()"
-      [width]="128"
-      [errorCorrectionLevel]="'M'"></qrcode>
-
-    <div
-      *ngIf="item.closed !== 1"
-      class="qr-code-description">
-      {{translate('VoteForCaseAbove')}}
-    </div>
-
-    <div
-      *ngIf="item.closed === 1"
-      class="qr-code-description">
-      {{translate('CheckOutHowTheCaseDid')}}
-    </div>
-
-    <div
-      class="meta-data">
-
-      <div class="item">
+  <div
+    class="action-bar">
+    <ul>
+      <li>
         <a
-          class="region-link"
           [matTooltip]="translate('QuestionWasAskedIn', [capitalize(item.region)])"
           [routerLink]="'/region/' + item.region">
           {{item.region}}
         </a>
-      </div>
-
-      <div class="item">
+      </li>
+      <li>
         <a
-          class="user-link"
           [matTooltip]="translate('CaseWasBroughtForthBy', [item.user])"
           [routerLink]="'/user/' + item.user">
           {{item.user}}
         </a>
-      </div>
-
-      <div
-        class="item"
+      </li>
+      <li
         *ngIf="item.closed === 0"
         [matTooltip]="translate('VotesCanBeCastUntil', [item.deadline | date_format])">
         {{item.deadline | toDate}}
-      </div>
-
-      <div
-        class="item"
+      </li>
+      <li
         *ngIf="item.closed === 1">
         {{getCaseResult()}}
-      </div>
-
-      <div
-       class="item count"
-       [matTooltip]="translate('XAyeAndUNay', [item.positive, item.negative])">
+      </li>
+      <li
+        [matTooltip]="translate('XAyeAndUNay', [item.positive, item.negative])">
         {{item.positive}} / {{item.negative}}
-      </div>
+      </li>
+    </ul>
 
-    </div>
+  <div
+    class="voting-bar"
+    *ngIf="item.opinion === undefined && isLoggedIn && item.closed !== 1">
 
-    <div
-      class="action-bar"
-      *ngIf="item.opinion === undefined && isLoggedIn && item.closed !== 1">
+    <button
+      (click)="yes()"
+      class="yes"
+      [matTooltip]="translate('VoteAyeForCase')"
+      mat-stroked-button>
+      <mat-icon>thumb_up</mat-icon>
+    </button>
 
-      <button
-        (click)="yes()"
-        class="yes"
-        [matTooltip]="translate('VoteAyeForCase')"
-        mat-stroked-button>
-        <mat-icon>thumb_up</mat-icon>
-      </button>
+    <button
+      (click)="no()"
+      class="no"
+      [matTooltip]="translate('VoteNayForCase')"
+      mat-stroked-button>
+      <mat-icon>thumb_down</mat-icon>
+    </button>
 
-      <button
-        (click)="no()"
-        class="no"
-        [matTooltip]="translate('VoteNayForCase')"
-        mat-stroked-button>
-        <mat-icon>thumb_down</mat-icon>
-      </button>
+  </div>
 
-    </div>
+  <div
+    class="action-bar"
+    [ngClass]="getClass()"
+    *ngIf="item.opinion !== undefined && isLoggedIn">
 
-    <div
-      class="action-bar"
-      [ngClass]="getClass()"
-      *ngIf="item.opinion !== undefined && isLoggedIn">
+    <mat-icon
+      class="your-vote"
+      role="button"
+      [matTooltip]="translate('YouVotedAye')"
+      *ngIf="item.opinion === true">thumb_up</mat-icon>
 
-      <mat-icon
-        class="your-vote"
-        role="button"
-        [matTooltip]="translate('YouVotedAye')"
-        *ngIf="item.opinion === true">thumb_up</mat-icon>
-
-      <mat-icon
-        class="your-vote"
-        role="button"
-        [matTooltip]="translate('YouVotedNay')"
-        *ngIf="item.opinion === false">thumb_down</mat-icon>
-
-    </div>
+    <mat-icon
+      class="your-vote"
+      role="button"
+      [matTooltip]="translate('YouVotedNay')"
+      *ngIf="item.opinion === false">thumb_down</mat-icon>
 
   </div>
 

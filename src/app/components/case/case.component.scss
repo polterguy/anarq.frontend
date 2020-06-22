@@ -2,16 +2,33 @@
  * AnarQ, a Direct Democracy system. Copyright 2020 - Thomas Hansen thomas@servergardens.com
  */
 
+ @media (min-width: 1024px) {
+    .case {
+        padding: 2rem 2rem 0 2rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .case {
+        padding: 2rem 2rem 0 2rem;
+    }
+}
+
+@media print {
+    .case {
+        margin-top: 2rem !important;
+    }
+}
+
 .case {
-    margin:1rem 5rem 2rem 5rem;
-    padding: 3rem;
-    margin-top: 3rem;
-    max-width: 800px;
+    margin-top: 4rem;
+    max-width: 1024px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
     h1 {
         font-size: 1.2rem;
+        margin-bottom: 2rem;
     }
     .first-information {
         background-color: #e0ffe0;
@@ -53,6 +70,7 @@
     }
     .content {
         text-align: justify;
+        margin-bottom: 2rem;;
     }
     .qr-code {
         display: none;
@@ -105,7 +123,7 @@
             display: none;
         }
     }
-    .action-bar {
+    .voting-bar {
         text-align: center;
         margin-top: 2rem;
         padding: 1rem;
