@@ -5,9 +5,9 @@
 /*
  * Common system imports.
  */
-import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
+import { Router, ActivatedRoute } from '@angular/router';
 
 /*
  * Custom imports for component.
@@ -30,10 +30,10 @@ import { MessageService, Messages } from 'src/app/services/message.service';
 export class HomeComponent extends BaseComponent {
 
   public cases: CaseSlim[] = [];
-  public more: boolean = false;
   public regions: string[] = [];
   public statistics: StatisticsModel = null;
-  public sorting = 'popular';
+  public sorting: string;
+  public offset = 0
 
   /**
    * Constructor for component.
@@ -46,7 +46,8 @@ export class HomeComponent extends BaseComponent {
     protected service: PublicService,
     protected messages: MessageService,
     protected snack: MatSnackBar,
-    private router: Router)
+    private router: Router,
+    private activatedRoute: ActivatedRoute)
   {
     super(service, messages, snack);
   }
@@ -58,13 +59,18 @@ export class HomeComponent extends BaseComponent {
    * or not the user is logged in or not.
    */
   protected init() {
-    if (this.messages.getValue(Messages.APP_GET_USERNAME) !== null) {
-      const sorting = localStorage.getItem('home_sorting');
-      if (sorting) {
-        this.sorting = sorting;
+
+    // Figuring out how to sort items.
+    this.sorting = localStorage.getItem('home_sorting') || 'popular';
+
+    // Figuring out offset to use.
+    this.activatedRoute.queryParams.subscribe(res => {
+      if (res && res.offset) {
+        this.offset = res.offset;
       }
-    }
-    this.getNextBatch();
+      this.getCases();
+    });
+
     this.getRegions();
     this.service.getStatistics().subscribe(res => {
       this.statistics = res;
@@ -105,23 +111,25 @@ export class HomeComponent extends BaseComponent {
         case Messages.APP_LOGGED_OUT:
           this.cases = [];
           this.regions = [];
-          this.sorting = 'popular';
-          this.getNextBatch();
+          this.getCases();
           break;
 
         case Messages.APP_LOGGED_IN:
           this.cases = [];
-          this.getNextBatch();
+          this.getCases();
           this.getRegions();
           break;
       }
     });
   }
 
+  /**
+   * Sorting was changed, hence we need to retrieve cases again from backend.
+   */
   public sortingChanged() {
     this.cases = [];
     localStorage.setItem('home_sorting', this.sorting);
-    this.getNextBatch();
+    this.getCases();
   }
 
   /**
@@ -132,14 +140,13 @@ export class HomeComponent extends BaseComponent {
    * to him or her. If client is not logged in, all cases will be returned, and no
    * filter applied.
    */
-  public getNextBatch() {
+  public getCases() {
 
     // Retrieving username first.
     const username = this.messages.getValue(Messages.APP_GET_USERNAME);
 
     // Getting open cases relevant to user, or all cases if no username was given.
-    this.service.getOpenCases(null, null, username, this.sorting).subscribe(res => {
-      this.more = res !== null && res.length === 25;
+    this.service.getOpenCases(this.offset, null, username, this.sorting).subscribe(res => {
       this.cases = res;
     }, error => this.handleError(error));
   }

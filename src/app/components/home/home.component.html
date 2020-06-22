@@ -65,14 +65,16 @@
     </li>
   </ul>
 
-  <button
-    *ngIf="more"
-    mat-button
-    class="feed-more"
-    [matTooltip]="translate('Get25NextItems')"
-    (click)="getNextBatch()">
-    {{translate('More')}}
-  </button>
+  <div
+    class="page-next"
+      *ngIf="cases.length >= 25">
+    <a
+      class="page-next"
+      [routerLink]="['/']"
+      [queryParams]="{offset: offset + 25}">
+      {{translate('Get25NextItems')}}
+    </a>
+  </div>
 
   <div
     *ngIf="regions.length > 0"
