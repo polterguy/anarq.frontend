@@ -2,37 +2,48 @@
  * AnarQ, a Direct Democracy system. Copyright 2020 - Thomas Hansen thomas@servergardens.com
  */
 
+ @media (min-width: 1024px) {
+    .user {
+        padding: 4rem 2rem 0 2rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .user {
+        padding: 0 2rem 0 2rem;
+    }
+}
+
 .user {
-    margin:1rem 5rem 2rem 5rem;
-    padding: 3rem;
-    margin-top: 3rem;
-    max-width: 800px;
+    margin-top: 4rem;
+    max-width: 1024px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
+    padding-top: 2rem;
     .username {
-        position: absolute;
-        top: 1.5rem;
-        left: 1.5rem;
         color: #a0a0a0;
+        font-size: 1.2rem;
+        margin: 0 auto 1rem auto;
+        display: block;
     }
     .verified {
         position: absolute;
-        bottom: .75rem;
+        top: .75rem;
         right: 1rem;
         font-size: 1.8rem;
     }
-    @media (min-width: 801px) {
+    @media (min-width: 1024px) {
         .summary {
             display: flex;
             .summary-table {
-                flex: 1;
                 border-collapse: collapse;
-                width: 50%;
+                flex: 1;
+                margin-left: -1rem;
                 tr {
                     td {
                         border-bottom: solid 1px #f0f0f0;
-                        padding: .5rem 0 .5rem 0;
+                        padding: .5rem 1rem .5rem 1rem;
                         .email {
                             text-decoration: none;
                         }
@@ -46,9 +57,8 @@
                 }
             }
             .summary-regions {
-                flex: 1;
                 margin-left: 1rem;
-                width: 25%;
+                flex: 1;
                 label {
                     text-align: center;
                     display: block;
@@ -71,7 +81,7 @@
             }
         }
     }
-    @media (max-width: 800px) {
+    @media (max-width: 1024px) {
         .summary {
             display: block;
             .summary-table {
@@ -86,6 +96,7 @@
                     }
                     td:nth-child(2) {
                         text-align: right;
+                        display: table-cell;
                     }
                 }
                 tr:hover {
@@ -104,9 +115,7 @@
                 }
             }
             .summary-regions, .summary-winnings {
-                margin-left: 3rem;
-                margin-right: 3rem;
-                margin-top: 4rem;
+                margin-top: 2rem;
             }
         }
     }

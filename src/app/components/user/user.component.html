@@ -11,11 +11,12 @@
 
   <div
     *ngIf="item"
-    class="mat-elevation-z4 user">
+    class="user">
 
     <span
       class="username">
       {{item.username}}
+      {{item.name ? (' - ' + item.name) : '' }}
     </span>
 
     <mat-icon
@@ -25,8 +26,6 @@
       *ngIf="item.status === 'verified'">
       check
     </mat-icon>
-
-    <h1>{{item.name || item.username}}</h1>
 
     <div class="summary">
 
@@ -79,9 +78,6 @@
 
       <div
         class="summary-regions">
-        <label>
-          {{translate('VotesUserHasGivenPerRegion')}}
-        </label>
         <canvas
           *ngIf="shouldDisplayRegionChart()"
           baseChart
@@ -112,7 +108,7 @@
     </div>
 
     <div
-      class="regions">
+      class="action-bar">
       <ul>
         <li
           *ngFor="let idx of item.regions">
@@ -131,7 +127,6 @@
       <li
         *ngFor="let idx of cases">
         <a
-          class="case-link"
           [ngClass]="idx.voted === 1 ? 'voted' : ''"
           [matTooltip]="idx.voted === 1 ? translate('YouHaveAlreadyVoted') : translate('YouHaveNotVoted')"
           [routerLink]="'/case/' + idx.id">
