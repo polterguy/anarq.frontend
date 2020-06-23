@@ -67,7 +67,7 @@ export class AskComponent extends BaseComponent {
    */
   protected init() {
 
-    // Making sure we display language selector.
+    // Making sure we hide language selector.
     this.messages.sendMessage({
       name: Messages.APP_HIDE_LANGUAGE,
     });

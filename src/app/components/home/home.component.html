@@ -51,7 +51,7 @@
     </p>
   </div>
 
-  <ul class="cases">
+  <ul class="list">
     <li
       *ngFor="let idx of cases">
       <a
@@ -94,6 +94,12 @@
     class="action-bar">
     <ul>
       <li
+        [matTooltip]="translate('ThereAreXRegionsInSystem', [statistics.regions])">
+        <a routerLink="/list-regions">
+          {{translate('Regions')}} {{statistics.regions}}
+        </a>
+      </li>
+      <li
         [matTooltip]="translate('ThereAreXUsersInSystem', [statistics.users])">
         <a routerLink="/users">
           {{translate('Users')}} {{statistics.users}}
@@ -106,10 +112,6 @@
       <li
         [matTooltip]="translate('ThereAreXOpenCasesInSystem', [statistics.open])">
         {{translate('Open')}} {{statistics.open}}
-      </li>
-      <li
-        [matTooltip]="translate('ThereAreXVotesInSystem', [statistics.votes])">
-        {{translate('Votes')}} {{statistics.votes}}
       </li>
     </ul>
   </div>
