@@ -1,6 +1,14 @@
 
 <h1>{{translate('Register')}}</h1>
 
+<a
+  class="home-link"
+  mat-button
+  [matTooltip]="translate('Home')"
+  routerLink="/">
+  <mat-icon>home</mat-icon>
+</a>
+
 <re-captcha
   size="invisible"
   #invisible
@@ -8,7 +16,7 @@
 
 <div
   *ngIf="!done"
-  class="register">
+  class="page register">
 
   <div class="stepper">
     {{translate('StepXOfY', [stepNo, stepTotal])}}

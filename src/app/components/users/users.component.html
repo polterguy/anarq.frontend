@@ -8,10 +8,10 @@
 </a>
 
 <div
-  class="users">
+  class="page">
 
   <mat-form-field
-    class="filter">
+    class="filter users-filter">
     <mat-label>{{translate('Filter')}}</mat-label>
     <input
       matInput
@@ -23,7 +23,7 @@
     </mat-form-field>
 
   <ul
-    class="users-list">
+    class="list">
     <li
       *ngFor="let idx of users">
       <a
