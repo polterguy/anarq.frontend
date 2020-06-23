@@ -68,6 +68,16 @@ export class Messages {
      * Sent when register link should be hidden.
      */
     static readonly APP_HIDE_LOGIN_REGISTER = 'app:hide_login_register';
+
+    /**
+     * Sent when language selector should be shown.
+     */
+    static readonly APP_SHOW_LANGUAGE = 'app:show_language-selector';
+
+    /**
+     * Sent when language selector should be shown.
+     */
+    static readonly APP_HIDE_LANGUAGE = 'app:hide_language-selector';
 }
 
 /**

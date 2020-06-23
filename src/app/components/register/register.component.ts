@@ -97,6 +97,11 @@ export class RegisterComponent extends BaseComponent {
    */
   protected init() {
 
+    // Making sure we display language selector.
+    this.messages.sendMessage({
+      name: Messages.APP_HIDE_LANGUAGE,
+    });
+
     // Hiding register link.
     setTimeout(() => {
       this.messages.sendMessage({

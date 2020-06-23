@@ -67,6 +67,11 @@ export class AskComponent extends BaseComponent {
    */
   protected init() {
 
+    // Making sure we display language selector.
+    this.messages.sendMessage({
+      name: Messages.APP_HIDE_LANGUAGE,
+    });
+
     // Making sure we initialize subject FormControl.
     this.subject = new FormControl('');
     this.subject.valueChanges

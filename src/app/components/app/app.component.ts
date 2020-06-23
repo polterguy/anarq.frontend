@@ -31,6 +31,7 @@ export class AppComponent extends BaseComponent {
   // Databound towards your side navigation. If true, it implies the navbar menu is expanded.
   public sidenavOpened = false;
   public language: string = 'no';
+  public showLanguage = false;
 
   /*
    * Smaller optimisation to make it easier to check which roles currently logged in
@@ -140,6 +141,14 @@ export class AppComponent extends BaseComponent {
             name: Messages.APP_LOGGED_IN,
             content: this.token,
           });
+          break;
+
+        case Messages.APP_SHOW_LANGUAGE:
+          setTimeout(() => this.showLanguage = true, 1);
+          break;
+
+        case Messages.APP_HIDE_LANGUAGE:
+          setTimeout(() => this.showLanguage = false, 1);
           break;
 
         /*

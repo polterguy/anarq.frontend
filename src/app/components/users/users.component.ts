@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
  */
 import { UserSlimModel } from 'src/app/models/user-slim-model';
 import { BaseComponent } from 'src/app/helpers/base.component';
-import { MessageService } from 'src/app/services/message.service';
+import { MessageService, Messages } from 'src/app/services/message.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { PublicService } from 'src/app/services/http/public.service';
 
@@ -60,10 +60,17 @@ export class UsersComponent extends BaseComponent {
    * Fetching first 25 users.
    */
   protected init() {
+
+    // Making sure we display language selector.
+    this.messages.sendMessage({
+      name: Messages.APP_HIDE_LANGUAGE,
+    });
+
     this.filter = new FormControl('');
     this.filter.valueChanges
       .pipe(debounceTime(400), distinctUntilChanged())
       .subscribe(query => {
+        this.offset = 0;
         this.getUsers();
       });
 

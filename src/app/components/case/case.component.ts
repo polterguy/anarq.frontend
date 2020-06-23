@@ -58,6 +58,11 @@ export class CaseComponent extends BaseComponent {
    */
   protected init() {
 
+    // Making sure we display language selector.
+    this.messages.sendMessage({
+      name: Messages.APP_HIDE_LANGUAGE,
+    });
+
     // Checking if user is logged in or not.
     this.isLoggedIn = this.messages.getValue(Messages.APP_GET_USERNAME);
 

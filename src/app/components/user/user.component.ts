@@ -115,6 +115,12 @@ export class UserComponent extends BaseComponent {
    * We just fetch the user data here.
    */
   protected init() {
+
+    // Making sure we display language selector.
+    this.messages.sendMessage({
+      name: Messages.APP_HIDE_LANGUAGE,
+    });
+
     this.fetchUser();
   }
 

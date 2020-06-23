@@ -49,7 +49,19 @@
     right: 1rem;
     z-index: 1000;
     .language {
-        width: 5rem;
+        width: 3.75rem;
+    }
+    .no {
+        background-image: url('../../../assets/no.svg');
+        background-position: center;
+        background-size: 28px 28px;
+        background-repeat: no-repeat;
+    }
+    .en {
+        background-image: url('../../../assets/en.svg');
+        background-position: center;
+        background-size: 28px 28px;
+        background-repeat: no-repeat;
     }
 }
 

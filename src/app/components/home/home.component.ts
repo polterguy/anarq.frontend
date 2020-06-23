@@ -62,6 +62,11 @@ export class HomeComponent extends BaseComponent {
    */
   protected init() {
 
+    // Making sure we display language selector.
+    this.messages.sendMessage({
+      name: Messages.APP_SHOW_LANGUAGE,
+    });
+
     // Figuring out offset to use.
     this.activatedRoute.queryParams.subscribe(res => {
       if (res && res.offset) {

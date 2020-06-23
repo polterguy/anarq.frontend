@@ -61,6 +61,11 @@ export class RegionComponent extends BaseComponent {
    */
   protected init() {
 
+    // Making sure we display language selector.
+    this.messages.sendMessage({
+      name: Messages.APP_HIDE_LANGUAGE,
+    });
+
     // We need to figure out which region we're in before we fetch items.
     this.activatedRoute.params.subscribe(pars => {
       this.region = pars.region;
