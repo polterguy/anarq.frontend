@@ -18,6 +18,26 @@ a {
     text-decoration: none;
 }
 
+@media (min-width: 1024px) {
+    .page {
+        padding: 2rem 2rem 0 2rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .page {
+        padding: 2rem 2rem 0 2rem;
+    }
+}
+
+.page {
+    margin-top: 4rem;
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
 .home-link {
     position: absolute !important;
     top: 1rem;
