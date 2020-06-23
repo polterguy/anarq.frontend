@@ -21,17 +21,23 @@
     margin-right: auto;
     position: relative;
     padding-top: 2rem;
-    .username {
-        color: #a0a0a0;
-        font-size: 1.2rem;
-        margin: 0 auto 1rem auto;
-        display: block;
+    .username-wrapper {
+        mat-icon {
+            float: left;
+            margin-right: 1rem;
+        }
+        .username {
+            float: left;
+            color: #a0a0a0;
+            font-size: 1.2rem;
+            margin: 0 auto 1rem auto;
+            display: block;
+        }
     }
-    .verified {
-        position: absolute;
-        top: .75rem;
-        right: 1rem;
-        font-size: 1.8rem;
+    .username-wrapper:after {
+        display: table;
+        content: ' ';
+        clear: both;
     }
     @media (min-width: 1024px) {
         .summary {

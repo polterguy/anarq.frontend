@@ -133,6 +133,13 @@ export class SetupRegionsComponent extends BaseComponent {
   }
 
   /**
+   * Closes explanation parts.
+   */
+  public closeExplanation() {
+    this.whyVisible = false;
+  }
+
+  /**
    * Selects a region on behalf of the user, and redirects him to
    * the landing page afterwards.
    * 
