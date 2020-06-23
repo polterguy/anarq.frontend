@@ -241,6 +241,7 @@ export class RegisterComponent extends BaseComponent {
             this.progress = 80;
             this.stepNo = 5;
           } else {
+            this.progress = 100;
             this.passwordRepeatGood = true;
           }
         }

@@ -8,9 +8,24 @@ h1 {
     margin-top: 2rem;
 }
 
+@media (min-width: 1024px) {
+    .register {
+        padding: 4rem 7rem 0 7rem;
+        .form-row, .progress {
+            padding-left: 7rem;
+            padding-right: 7rem;
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .register {
+        padding: 0 2rem 0 2rem;
+    }
+}
+
 .register {
     margin:1rem 5rem 2rem 5rem;
-    padding: 3rem;
     margin-top: 3rem;
     max-width: 800px;
     margin-left: auto;
@@ -23,7 +38,7 @@ h1 {
         color: #a0a0a0;
     }
     .progress {
-        margin: 2rem 5rem 2rem 5rem;
+        margin: 2rem 0 2rem 0;
     }
     h3 {
         text-align: center;
@@ -42,8 +57,6 @@ h1 {
     }
     .form-row {
         display: flex;
-        padding-left: 5rem;
-        padding-right: 5rem;
         .item {
             animation-name: fly-in;
             animation-timing-function: ease-out;
@@ -92,18 +105,7 @@ h1 {
             box-shadow: 0 0 15px rgba(255,255,128,.5);
         }
     }
-    .password mat-icon,
-    .password-repeat mat-icon {
-        margin-top: -12px;
-        right: 12px;
-        float: right;
-        color: #a0a0ff;
-        cursor: pointer;
-        z-index: 1000;
-        position: absolute;
-    }
-    .name mat-icon,
-    .phone mat-icon {
+    .item mat-icon {
         margin-top: -12px;
         right: 12px;
         float: right;
