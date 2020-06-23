@@ -78,6 +78,25 @@ a {
     content: ' ';
     display: table;
     clear: both;
+    margin-bottom: 4rem;
+}
+
+.filter {
+    display: block !important;
+    mat-icon {
+        margin-top: -12px;
+        right: 12px;
+        float: right;
+        position: absolute;
+        color: #a0a0a0;
+    }
+}
+@media (min-width: 1024px) {
+    .filter {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 .page-next {
