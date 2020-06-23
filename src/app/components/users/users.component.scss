@@ -6,48 +6,44 @@ h1 {
     text-align: center;
 }
 
+@media (min-width: 1024px) {
+    .users {
+        padding: 4rem 2rem 0 2rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .users {
+        padding: 0 2rem 0 2rem;
+    }
+}
+
 .users {
-    margin:1rem 5rem 2rem 5rem;
-    padding: 3rem 3rem 2rem 3rem;
-    margin-top: -2.25rem;
-    max-width: 800px;
+    margin-top: 4rem;
+    max-width: 1024px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
     .filter {
-        width: calc(100% - 10rem);
-        margin-left: 5rem;
-        margin-right: 5rem;
-    }
-    .users-list {
-        margin-top: 2rem;
-        list-style-type: none;
-        padding: 0;
-        li {
-            margin-left: -1rem;
-            margin-right: -1rem;
-            font-size: 1.2rem;
-            a {
-                display: block;
-                padding: 1rem 1rem 1rem 1rem;
-                span {
-                    display: inline-block;
-                    min-width: 25rem;
-                    max-width: 80%;
-                }
-                small {
-                    font-size: .8rem;
-                    color: #a0a0a0;
-                }
-            }
-            a:hover {
-                background-color: rgba(0,0,0,.1);
-            }
+        display: block;
+        mat-icon {
+            margin-top: -12px;
+            right: 12px;
+            float: right;
+            position: absolute;
+            color: #a0a0a0;
         }
     }
-    .feed-more {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
+    .users-list {
+        list-style-type: none;
+        padding-left: 0;
+        margin-bottom: 2rem;
+        li {
+            margin-top: 1rem;
+            small {
+                font-size: .7rem;
+                color: #a0a0a0;
+            }
+        }
     }
 }

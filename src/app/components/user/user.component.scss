@@ -90,15 +90,14 @@
     @media (max-width: 1024px) {
         .summary {
             display: block;
+            width: 100%;
             .summary-table {
                 border-collapse: collapse;
                 tr {
                     td {
+                        width: 100%;
                         border-bottom: solid 1px #f0f0f0;
                         padding: .5rem 0 .5rem 0;
-                        .email {
-                            text-decoration: none;
-                        }
                     }
                     td:nth-child(2) {
                         text-align: right;
