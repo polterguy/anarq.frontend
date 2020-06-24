@@ -3,8 +3,6 @@
 
   <div class="mat-elevation-z4 relativized grid-wrapper">
 
-    <h3>Cases</h3>
-
     <button
       mat-button
       *ngIf="inRole(['root','admin', 'user'])"
@@ -162,10 +160,11 @@
             <h2 class="title">{{el.subject}}</h2>
             <div class="body" [innerHtml]="el.body | marked"></div>
             <div class="items">
-              <span class="item">{{el.type}}</span>
-              <span class="item">{{el.user}}</span>
-              <span class="item">{{el.region}}</span>
-              <span class="item time">Closes {{el.deadline | toDate}}</span>
+              <span
+                class="item"
+                [matTooltip]="el.region">
+                {{el.user}}
+              </span>
               <span class="action-buttons">
                 <button
                   *ngIf="inRole(['root','admin']) && allowEdit(el)"

@@ -43,6 +43,7 @@
 
     <button
       (click)="yes()"
+      [disabled]="loaderService.isLoading | async"
       class="yes"
       [matTooltip]="translate('VoteAyeForCase')"
       mat-stroked-button>
@@ -51,6 +52,7 @@
 
     <button
       (click)="no()"
+      [disabled]="loaderService.isLoading | async"
       class="no"
       [matTooltip]="translate('VoteNayForCase')"
       mat-stroked-button>
