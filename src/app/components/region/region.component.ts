@@ -156,7 +156,7 @@ export class RegionComponent extends BaseComponent {
 
     // Retrieving next batch of open cases within region.
     this.service.getOpenCases(this.offset, this.region, username).subscribe(res => {
-      this.cases = res;
+      this.cases = res || [];
     });
   }
 

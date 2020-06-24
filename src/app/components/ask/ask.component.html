@@ -98,7 +98,7 @@
     </mat-select>
     <button
       mat-stroked-button
-      [disabled]="subjectGood === false || body.length < 50"
+      [disabled]="subjectGood === false || body.length < 50 || (loaderService.isLoading | async)"
       (click)="submit()">
       {{translate('Submit')}}
     </button>

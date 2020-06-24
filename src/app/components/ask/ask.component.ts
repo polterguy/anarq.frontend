@@ -15,6 +15,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
  * Custom imports for component.
  */
 import { BaseComponent } from 'src/app/helpers/base.component';
+import { LoaderService } from 'src/app/services/loader.service';
 import { PublicService } from 'src/app/services/http/public.service';
 import { MessageService, Messages } from 'src/app/services/message.service';
 
@@ -54,7 +55,8 @@ export class AskComponent extends BaseComponent {
     protected messages: MessageService,
     protected snack: MatSnackBar,
     private route: ActivatedRoute,
-    private router: Router)
+    private router: Router,
+    public loaderService: LoaderService)
   {
     super(service, messages, snack);
   }
