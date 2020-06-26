@@ -15,6 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CaseView } from 'src/app/models/case-view';
 import { FirstCaseModel } from 'src/app/models/first-case';
 import { BaseComponent } from 'src/app/helpers/base.component';
+import { LoaderService } from 'src/app/services/loader.service';
 import { PublicService } from 'src/app/services/http/public.service';
 import { MessageService, Messages } from 'src/app/services/message.service';
 
@@ -45,7 +46,8 @@ export class CaseComponent extends BaseComponent {
     protected service: PublicService,
     protected messages: MessageService,
     protected snack: MatSnackBar,
-    private route: ActivatedRoute)
+    private route: ActivatedRoute,
+    public loaderService: LoaderService)
   {
     super(service, messages, snack);
   }
@@ -58,8 +60,14 @@ export class CaseComponent extends BaseComponent {
    */
   protected init() {
 
+    // Making sure we hide language selector.
+    this.messages.sendMessage({
+      name: Messages.APP_HIDE_LANGUAGE,
+    });
+
     // Checking if user is logged in or not.
-    this.isLoggedIn = this.messages.getValue(Messages.APP_GET_USERNAME);
+    const username = this.messages.getValue(Messages.APP_GET_USERNAME);
+    this.isLoggedIn = username !== null;
 
     // Retrieving case data.
     this.getCaseData();
@@ -116,6 +124,15 @@ export class CaseComponent extends BaseComponent {
       this.service.getCase(pars.id).subscribe(res => {
         this.item = res;
       });
+    });
+  }
+
+  /**
+   * Shows login form
+   */
+  showLoginForm() {
+    this.messages.sendMessage({
+      name: Messages.APP_SHOW_LOGIN_FORM
     });
   }
 

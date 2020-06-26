@@ -144,10 +144,18 @@
     <div class="login-strip">
       
       <button
+        *ngIf="shouldDisplayMenuButton()"
+        (click)="openSideNavigation()"
+        mat-button>
+        Menu
+      </button>
+
+      <button
         *ngIf="isLoggedIn === true"
         mat-button
+        [matTooltip]="translate('Logout') + ' ' + getUsername()"
         (click)="logout()">
-        {{translate('Logout') + ' ' + getUsername()}}
+        {{translate('Logout')}}
       </button>
 
       <button
@@ -165,23 +173,23 @@
       </button>
 
       <mat-select
+        *ngIf="showLanguage"
         class="language"
+        [ngClass]="language"
         (selectionChange)="languageSelected()"
         [(ngModel)]="language">
         <mat-option
           *ngFor="let idx of languages"
           [value]="idx.locale">
-          {{idx.description}}
+          <img
+            [src]="'../assets/' + idx.locale + '.svg'"
+            class="locale-flag"
+            width="28px"
+            [alt]="idx.description">
         </mat-option>
       </mat-select>
 
     </div>
-
-    <button
-      *ngIf="shouldDisplayMenuButton()"
-      (click)="openSideNavigation()"
-      class="sidenav-button"
-      mat-button>Menu</button>
 
     <router-outlet></router-outlet>
   </mat-sidenav-content>

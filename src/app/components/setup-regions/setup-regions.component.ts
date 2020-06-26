@@ -58,6 +58,12 @@ export class SetupRegionsComponent extends BaseComponent {
    * Implementation simply retrieves all regions from backend.
    */
   protected init() {
+
+    // Making sure we hide language selector.
+    this.messages.sendMessage({
+      name: Messages.APP_HIDE_LANGUAGE,
+    });
+
     this.checkIfUserCanSetRegions();
   }
 
@@ -130,6 +136,13 @@ export class SetupRegionsComponent extends BaseComponent {
    */
   public showWhy() {
     this.whyVisible = true;
+  }
+
+  /**
+   * Closes explanation parts.
+   */
+  public closeExplanation() {
+    this.whyVisible = false;
   }
 
   /**

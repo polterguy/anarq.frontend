@@ -1,14 +1,22 @@
 
 <h1>{{translate('Register')}}</h1>
 
+<a
+  class="home-link"
+  mat-button
+  [matTooltip]="translate('Home')"
+  routerLink="/">
+  <mat-icon>home</mat-icon>
+</a>
+
 <re-captcha
   size="invisible"
   #invisible
   (resolved)="captchaResolved($event)"></re-captcha>
 
-<mat-card
+<div
   *ngIf="!done"
-  class="register">
+  class="page register">
 
   <div class="stepper">
     {{translate('StepXOfY', [stepNo, stepTotal])}}
@@ -24,7 +32,7 @@
   <div class="form-row">
 
     <mat-form-field
-      class="email item">
+      class="item">
       <mat-label>{{emailGood === false ? translate('EmailMustBeAvailable') : translate('Email')}}</mat-label>
       <input
         matInput
@@ -40,11 +48,11 @@
 
     <mat-form-field
       *ngIf="emailGood === true"
-      class="username item">
+      class="item">
       <mat-label>{{usernameGood === false ? translate('UsernameCharacterPattern') : translate('Username')}}</mat-label>
       <input
         matInput
-        placeholder="translate('Username') + ' ...'"
+        [placeholder]="translate('Username') + ' ...'"
         type="text"
         autocomplete="off"
         [formControl]="username">
@@ -56,7 +64,7 @@
 
     <mat-form-field
       *ngIf="usernameGood === true"
-      class="name item">
+      class="item">
       <mat-label>{{nameGood === false ? translate('NamePattern') : translate('FullLegalName')}}</mat-label>
       <input
         matInput
@@ -84,7 +92,7 @@
 
     <mat-form-field
       *ngIf="nameGood === true"
-      class="phone item">
+      class="item">
       <mat-label>
         {{phoneGood === false ? translate('PhonePattern') : translate('CellPhone')}}
       </mat-label>
@@ -113,7 +121,7 @@
 
     <mat-form-field
       *ngIf="nameGood === true && phoneGood === true && usernameGood === true && nameGood === true"
-      class="password item">
+      class="item">
       <mat-label>
         {{passwordGood === false ? translate('PasswordMustBeAtLeast') : translate('Password')}}
       </mat-label>
@@ -133,7 +141,7 @@
 
     <mat-form-field
       *ngIf="nameGood === true && phoneGood === true && usernameGood === true && nameGood === true"
-      class="password-repeat item">
+      class="item">
       <mat-label>
         {{passwordRepeatGood === false ? translate('PleaseRepeatPassword') : translate('RepeatPassword')}}
       </mat-label>
@@ -194,12 +202,12 @@
 
   </div>
 
-</mat-card>
+</div>
 
-<mat-card
+<div
   *ngIf="done"
   class="register">
   <p>
     {{translate('ConfirmEmailAddress')}}
   </p>
-</mat-card>
+</div>

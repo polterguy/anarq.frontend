@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
  * Custom imports for component.
  */
 import { BaseComponent } from 'src/app/helpers/base.component';
-import { MessageService } from 'src/app/services/message.service';
+import { MessageService, Messages } from 'src/app/services/message.service';
 import { PublicService } from 'src/app/services/http/public.service';
 
 /**
@@ -54,6 +54,11 @@ export class AuditVoteComponent extends BaseComponent {
    * Implementation only retrieves vote's integrity from backend.
    */
   protected init() {
+
+    // Making sure we hide language selector.
+    this.messages.sendMessage({
+      name: Messages.APP_HIDE_LANGUAGE,
+    });
 
     // Retrieving cote's integrity, which depends upon the has URL value.
     this.route.params.subscribe(pars => {

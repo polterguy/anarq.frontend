@@ -1,22 +1,18 @@
 
-<div class="component-wrapper">
+<a
+  class="home-link"
+  mat-button
+  [matTooltip]="translate('Home')"
+  routerLink="/">
+  <mat-icon>home</mat-icon>
+</a>
+
+<div
+  *ngIf="item"
+  class="user">
 
   <div
-    *ngIf="item"
-    class="mat-elevation-z4 user">
-
-    <a
-      class="home-link"
-      mat-button
-      [matTooltip]="translate('Home')"
-      routerLink="/">
-      <mat-icon>home</mat-icon>
-    </a>
-
-    <span
-      class="username">
-      {{item.username}}
-    </span>
+    class="username-wrapper">
 
     <mat-icon
       class="verified"
@@ -26,123 +22,123 @@
       check
     </mat-icon>
 
-    <h1>{{item.name || item.username}}</h1>
+    <span
+      class="username">
+      {{item.username}}
+      {{item.name ? (' - ' + item.name) : '' }}
+    </span>
 
-    <div class="summary">
+  </div>
 
-      <table class="summary-table">
-        <tr>
-          <td
-            [matTooltip]="translate('ThisIsHowManyCases')">
-            {{translate('CasesCreated')}}
-          </td>
-          <td>
-            {{item.cases}}
-          </td>
-        </tr>
-        <tr>
-          <td
-            [matTooltip]="translate('ThisIsHowManyVotesReceived')">
-            {{translate('VotesGiven')}}
-          </td>
-          <td>
-            {{item.votes}}
-          </td>
-        </tr>
-        <tr>
-          <td
-            [matTooltip]="translate('ThisIsHowManyVotesGiven')">
-            {{translate('VotesUserHasGiven')}}
-          </td>
-          <td>
-            {{getTotalVotes()}}
-          </td>
-        </tr>
-        <tr *ngIf="item.phone">
-          <td>
-            {{translate('Phone')}}
-          </td>
-          <td>
-            {{item.phone}}
-          </td>
-        </tr>
-        <tr *ngIf="item.email">
-          <td colspan="2">
-            <a
-              [href]="'mailto:' + item.email"
-              class="email">
-              {{item.email}}
-            </a>
-          </td>
-        </tr>
-      </table>
+  <div class="summary">
 
-      <div
-        class="summary-regions">
-        <label>
-          {{translate('VotesUserHasGivenPerRegion')}}
-        </label>
-        <canvas
-          *ngIf="shouldDisplayRegionChart()"
-          baseChart
-          chartType="bar"
-          [options]="barChartOptions"
-          [data]="barChartData"
-          [labels]="barChartLabels"
-          [colors]="barChartColors">
-        </canvas>
-      </div>
+    <table class="summary-table">
+      <tr>
+        <td
+          [matTooltip]="translate('ThisIsHowManyCases')">
+          {{translate('CasesCreated')}}
+        </td>
+        <td>
+          {{item.cases}}
+        </td>
+      </tr>
+      <tr>
+        <td
+          [matTooltip]="translate('ThisIsHowManyVotesReceived')">
+          {{translate('VotesGiven')}}
+        </td>
+        <td>
+          {{item.votes}}
+        </td>
+      </tr>
+      <tr>
+        <td
+          [matTooltip]="translate('ThisIsHowManyVotesGiven')">
+          {{translate('VotesUserHasGiven')}}
+        </td>
+        <td>
+          {{getTotalVotes()}}
+        </td>
+      </tr>
+      <tr *ngIf="item.phone">
+        <td>
+          {{translate('Phone')}}
+        </td>
+        <td>
+          {{item.phone}}
+        </td>
+      </tr>
+      <tr *ngIf="item.email">
+        <td colspan="2">
+          <a
+            [href]="'mailto:' + item.email"
+            class="email">
+            {{item.email}}
+          </a>
+        </td>
+      </tr>
+    </table>
 
-      <div
-        *ngIf="shouldDisplayWinningsChart()"
-        class="summary-winnings">
-        <label>
-          {{translate('WinningsAndLoosings')}}
-        </label>
-        <canvas
-          baseChart
-          chartType="pie"
-          [options]="pieChartOptions"
-          [data]="pieChartData"
-          [labels]="pieChartLabels"
-          [colors]="pieChartColors">
-        </canvas>
-      </div>
-
+    <div
+      class="summary-regions">
+      <canvas
+        *ngIf="shouldDisplayRegionChart()"
+        baseChart
+        chartType="bar"
+        [options]="barChartOptions"
+        [data]="barChartData"
+        [labels]="barChartLabels"
+        [colors]="barChartColors">
+      </canvas>
     </div>
 
     <div
-      class="regions">
-      <ul>
-        <li
-          *ngFor="let idx of item.regions">
-          <a
-            class="region-link"
-            [routerLink]="'/region/' + idx.name">
-            {{idx.name}}
-          </a>
-        </li>
-      </ul>
+      *ngIf="shouldDisplayWinningsChart()"
+      class="summary-winnings">
+      <label>
+        {{translate('WinningsAndLoosings')}}
+      </label>
+      <canvas
+        baseChart
+        chartType="pie"
+        [options]="pieChartOptions"
+        [data]="pieChartData"
+        [labels]="pieChartLabels"
+        [colors]="pieChartColors">
+      </canvas>
     </div>
 
-    <ul
-      *ngIf="cases !== null"
-      class="cases">
+  </div>
+
+  <div
+    class="action-bar">
+    <ul>
       <li
-        *ngFor="let idx of cases">
+        *ngFor="let idx of item.regions">
         <a
-          class="case-link"
-          [ngClass]="idx.voted === 1 ? 'voted' : ''"
-          [matTooltip]="idx.voted === 1 ? translate('YouHaveAlreadyVoted') : translate('YouHaveNotVoted')"
-          [routerLink]="'/case/' + idx.id">
-          {{idx.subject}}
+          class="region-link"
+          [routerLink]="'/region/' + idx.name">
+          {{idx.name}}
         </a>
-        <small>
-          {{capitalize(idx.region)}} ({{idx.positive + '/' + (idx.votes - idx.positive)}})
-        </small>
       </li>
     </ul>
-
   </div>
+
+  <ul
+    *ngIf="cases !== null"
+    class="list users-cases">
+    <li
+      *ngFor="let idx of cases">
+      <a
+        [ngClass]="idx.voted === 1 ? 'voted' : ''"
+        [matTooltip]="idx.voted === 1 ? translate('YouHaveAlreadyVoted') : translate('YouHaveNotVoted')"
+        [routerLink]="'/case/' + idx.id">
+        {{idx.subject}}
+      </a>
+      <small>
+        {{capitalize(idx.region)}} ({{idx.positive + '/' + (idx.votes - idx.positive)}})
+      </small>
+    </li>
+  </ul>
 
 </div>

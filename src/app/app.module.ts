@@ -63,6 +63,7 @@ import { AuthComponent } from './components/private/auth/auth.component';
 import { RegionComponent } from './components/region/region.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuditVoteComponent } from './components/audit-vote/audit-vote.component';
+import { ListRegionsComponent } from './components/list-regions/list-regions.component';
 import { EditUserDialogComponent } from './components/private/auth/modals/edit-user-dialog';
 import { CreateRoleDialogComponent } from './components/private/auth/modals/create-role-dialog';
 import { CreateUserDialogComponent } from './components/private/auth/modals/create-user-dialog';
@@ -112,6 +113,7 @@ export function tokenGetter() {
     LoginComponent,
     RegisterComponent,
     AuditVoteComponent,
+    ListRegionsComponent,
     AuthComponent,
     CreateRoleDialogComponent,
     CreateUserDialogComponent,

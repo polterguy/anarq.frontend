@@ -15,28 +15,9 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
  * Custom imports for component.
  */
 import { BaseComponent } from 'src/app/helpers/base.component';
+import { LoaderService } from 'src/app/services/loader.service';
 import { PublicService } from 'src/app/services/http/public.service';
 import { MessageService, Messages } from 'src/app/services/message.service';
-
-/**
- * Max length support for CodeMirror.
- */
-const enforceMaxLength = function(cm, change) {
-  var maxLength = cm.getOption("maxLength");
-  if (maxLength && change.update) {
-      var str = change.text.join('\n');
-      var delta = str.length - (cm.indexFromPos(change.to) - cm.indexFromPos(change.from));
-      if (delta <= 0) {
-        return true;
-      }
-      delta = cm.getValue().length + delta-maxLength;
-      if (delta > 0) {
-          str = str.substr(0, str.length-delta);
-          change.update(change.from, change.to, str.split("\n"));
-      }
-  }
-  return true;
-}
 
 
 /**
@@ -74,7 +55,8 @@ export class AskComponent extends BaseComponent {
     protected messages: MessageService,
     protected snack: MatSnackBar,
     private route: ActivatedRoute,
-    private router: Router)
+    private router: Router,
+    public loaderService: LoaderService)
   {
     super(service, messages, snack);
   }
@@ -86,6 +68,11 @@ export class AskComponent extends BaseComponent {
    * user is allowed to ask a question in current region.
    */
   protected init() {
+
+    // Making sure we hide language selector.
+    this.messages.sendMessage({
+      name: Messages.APP_HIDE_LANGUAGE,
+    });
 
     // Making sure we initialize subject FormControl.
     this.subject = new FormControl('');
@@ -169,29 +156,9 @@ export class AskComponent extends BaseComponent {
       if (username) {
         this.service.canCreateCase(this.region).subscribe(res => {
           this.canCreateCase = res.result === 'SUCCESS';
-
-          // Making sure we get max length support on CM instance.
-          if (this.isLoggedIn && this.canCreateCase) {
-            setTimeout(() => {
-              const cm = document.querySelector('.CodeMirror')['CodeMirror'];
-              cm.on("beforeChange", enforceMaxLength);
-            }, 1);
-          }
         });
       }
     }, error => this.handleError(error));
-  }
-
-  /**
-   * Returns the CodeMirror options for the HTML parts of the component.
-   */
-  public getCodeMirrorOptions() {
-    return {
-      lineNumbers: true,
-      theme: 'material',
-      mode: 'markdown',
-      maxLength: 2500,
-    };
   }
 
   /**

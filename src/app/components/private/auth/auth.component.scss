@@ -56,7 +56,7 @@
     }
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 1024px) {
     .auth-flex-grid {
         display: flex;
         margin: 5rem 2rem 0 2rem;
@@ -68,5 +68,10 @@
             flex: 1;
             margin-left: .5rem;
         }
+    }
+}
+@media screen and (max-width: 1024px) {
+    .auth-flex-grid {
+        margin: 5rem 1rem 3rem 1rem;
     }
 }

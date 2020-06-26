@@ -2,103 +2,38 @@
  * AnarQ, a Direct Democracy system. Copyright 2020 - Thomas Hansen thomas@servergardens.com
  */
 
-.logo {
-    width: 100px;
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 1rem;
-    margin-bottom: -1rem;
-}
 h1 {
-    text-align: center;
-    small {
-        font-size: .8rem;
-        color: #a0a0a0;
-        vertical-align: middle;
-        display: inline-block;
-        margin-left: 2rem;
+    position: absolute;
+    top: 1.3rem;
+    left: 1rem;
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+@media (min-width: 1024px) {
+    .home-page {
+        padding: 4rem 2rem 0 2rem;
     }
 }
-.info-card {
-    margin: -.75rem 5rem 2rem 5rem;
-    padding: 3rem;
-    margin-top: 2rem;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
+
+@media (max-width: 1024px) {
+    .home-page {
+        padding: 0 2rem 0 2rem;
+    }
+}
+
+.home-page {
     .sorting {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        width: 10rem;
-    }
-    .add-case {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        color: #909090;
-    }
-    .front-page-cases {
-        list-style-type: none;
-        padding-left: 0;
-        li {
-            margin-top: 1rem;
-            font-size: 1.2rem;
-            .case-link {
-                text-decoration: none;
-            }
-            small {
-                font-size: .8rem;
-                color: #a0a0a0;
-            }
-        }
-    }
-    .feed-more {
+        width: 9rem;
         display: block;
         margin-left: auto;
         margin-right: auto;
     }
-    .regions {
-        background-color: #f0f0f0;
-        padding: 1rem 2rem 1rem 2rem;
-        margin-top: 3rem;
-        margin-left: -2rem;
-        margin-right: -2rem;
-        margin-bottom: -2rem;
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: inline-block;
-            li {
-                float: left;
-                margin-right: 1rem;
-                .region-link {
-                    text-decoration: none;
-                }
-            }
-        }
-    }
-    .statistics {
-        background-color: #fafafa;
-        padding: .5rem 2rem .5rem 2rem;
-        margin-top: 3rem;
-        margin-left: -2rem;
-        margin-right: -2rem;
-        margin-bottom: -2rem;
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: inline-block;
-            li {
-                float: left;
-                margin-right: 1rem;
-                color: #c0c0c0;
-                font-size: .8rem;
-            }
+    @media (min-width: 1024px) {
+        .sorting {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
         }
     }
 }

@@ -3,15 +3,11 @@
  */
 
 .case {
-    margin:1rem 5rem 2rem 5rem;
-    padding: 3rem;
-    margin-top: 3rem;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
     h1 {
+        text-align: center;
         font-size: 1.2rem;
+        margin-bottom: 2rem;
+        margin-top: 0;
     }
     .first-information {
         background-color: #e0ffe0;
@@ -37,22 +33,23 @@
             margin-bottom: 2rem;
         }
     }
+    .register-to-vote {
+        text-align: center;
+        a {
+            margin-right: 1rem;
+        }
+    }
     @media print {
         .first-information {
             display: none;
         }
-    }
-
-    h1 {
-        text-align: center;
-    }
-    .votes-chart {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
+        .register-to-vote {
+            display: none;
+        }
     }
     .content {
         text-align: justify;
+        margin-bottom: 2rem;;
     }
     .qr-code {
         display: none;
@@ -88,13 +85,6 @@
         color: #a0a0a0;
         .item {
             flex: 1;
-            .user-link {
-                text-decoration: none;
-            }
-            .region-link {
-                text-transform: capitalize;
-                text-decoration: none;
-            }
         }
         .item.count {
             text-align: right;
@@ -105,7 +95,7 @@
             display: none;
         }
     }
-    .action-bar {
+    .voting-bar {
         text-align: center;
         margin-top: 2rem;
         padding: 1rem;
@@ -116,11 +106,17 @@
         .no {
             width: 10rem;
         }
+        @media (max-width: 1024px) {
+            .yes, .no {
+                width: 7rem;
+            }
+        } 
         .your-vote {
             font-size: 2rem;
         }
     }
     @media print {
+        .voting-bar,
         .action-bar {
             display: none;
         }

@@ -1,11 +1,19 @@
 
-<h1
-  *ngIf="region"
-  [matTooltip]="translate('ThePeoplesCourt', [capitalize(region)])">
-  {{region}}
-</h1>
+<a
+  class="home-link"
+  mat-button
+  [matTooltip]="translate('Home')"
+  routerLink="/">
+  <mat-icon>home</mat-icon>
+</a>
 
-<mat-card class="info-card">
+<div class="page region">
+
+  <h1
+    *ngIf="region"
+    [matTooltip]="translate('ThePeoplesCourt', [capitalize(region)])">
+    {{capitalize(region)}}
+  </h1>
 
   <button
     mat-stroked-button
@@ -13,16 +21,8 @@
     *ngIf="canCreateCase"
     (click)="askQuestion()"
     [matTooltip]="translate('BringForthAQuestion', [capitalize(region)])">
-    ?
+    <mat-icon>add</mat-icon>
   </button>
-
-  <a
-    class="home-link"
-    mat-button
-    [matTooltip]="translate('Home')"
-    routerLink="/">
-    <mat-icon>home</mat-icon>
-  </a>
 
   <div
     *ngIf="cases.length === 0"
@@ -35,10 +35,9 @@
     </span>
   </div>
 
-  <ul class="region-cases">
+  <ul class="list">
     <li *ngFor="let case of cases">
       <a
-        class="case-link"
         [routerLink]="'/case/' + case.id">
         {{case.subject}}
       </a>
@@ -48,13 +47,15 @@
     </li>
   </ul>
 
-  <button
-    *ngIf="more"
-    mat-button
-    class="feed-more"
-    [matTooltip]="translate('GetXNextItems', ['25'])"
-    (click)="getNextBatch()">
-    ...
-  </button>
+  <div
+    class="page-next"
+    *ngIf="cases.length >= 25">
+    <a
+      class="page-next"
+      [routerLink]="['/region/' + region]"
+      [queryParams]="{offset: offset + 25}">
+      {{translate('Get25NextItems')}}
+    </a>
+  </div>
 
-</mat-card>
+</div>

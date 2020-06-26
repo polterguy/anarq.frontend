@@ -30,11 +30,11 @@ export class CasesComponent implements OnInit {
 
   // Which columns we should display. Reorder to prioritize columns differently.
   // Notice! 'delete-instance' should always come last!
-  displayedColumns: string[] = ['region', 'subject', 'created', 'type', 'delete-instance'];
+  displayedColumns: string[] = ['type', 'region', 'subject', 'created', 'delete-instance'];
 
   // Current filter being applied to filter items from our backend.
   filter: any = {
-    limit: 25,
+    limit: 10,
     order: 'created',
     direction: 'asc',
     type: 'new',

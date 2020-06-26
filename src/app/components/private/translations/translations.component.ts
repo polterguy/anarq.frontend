@@ -30,7 +30,7 @@ export class TranslationsComponent implements OnInit {
 
   // Which columns we should display. Reorder to prioritize columns differently.
   // Notice! 'delete-instance' should always come last!
-  displayedColumns: string[] = ['locale', 'key', 'content', 'delete-instance'];
+  displayedColumns: string[] = ['key', 'locale', 'content', 'delete-instance'];
 
   // Current filter being applied to filter items from our backend.
   filter: any = {

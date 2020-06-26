@@ -1,54 +1,60 @@
 
-<h1
-  [matTooltip]="translate('HomeSlogan')">
+<h1>
   AnarQ
 </h1>
 
-<mat-card class="info-card">
+<div class="page home-page">
 
   <mat-form-field
     class="sorting">
+
     <mat-select
       [(ngModel)]="sorting"
       (selectionChange)="sortingChanged()">
+
       <mat-option
         value="popular">
         {{translate('Popular')}}
       </mat-option>
+
       <mat-option
         value="newest">
         {{translate('Newest')}}
       </mat-option>
+
       <mat-option
         value="closed">
         {{translate('Closed')}}
       </mat-option>
+
       <mat-option
         value="my-cases"
         *ngIf="userIsLoggedIn()">
         {{translate('MyCases')}}
       </mat-option>
+
       <mat-option
         value="my-voted-cases"
         *ngIf="userIsLoggedIn()">
         {{translate('CasesIHaveVotedFor')}}
       </mat-option>
+
     </mat-select>
+
   </mat-form-field>
 
   <div
     *ngIf="!cases || cases.length === 0"
     class="information">
-    <span>
+    <p>
       {{translate('NothingToSeeHere')}}
-    </span>
+    </p>
   </div>
 
-  <ul class="front-page-cases">
+  <ul class="list">
     <li
       *ngFor="let idx of cases">
       <a
-        class="case-link"
         [routerLink]="'/case/' + idx.id">
         {{idx.subject}}
       </a>
@@ -58,23 +64,24 @@
     </li>
   </ul>
 
-  <button
-    *ngIf="more"
-    mat-button
-    class="feed-more"
-    [matTooltip]="translate('Get25NextItems')"
-    (click)="getNextBatch()">
-    {{translate('More')}}
-  </button>
+  <div
+    class="page-next"
+    *ngIf="cases.length >= 25">
+    <a
+      class="page-next"
+      [routerLink]="['/']"
+      [queryParams]="{offset: offset + 25}">
+      {{translate('Get25NextItems')}}
+    </a>
+  </div>
 
   <div
     *ngIf="regions.length > 0"
-    class="regions">
+    class="action-bar">
     <ul>
       <li
         *ngFor="let idx of regions">
         <a
-          class="region-link"
           [routerLink]="'/region/' + idx">
           {{capitalize(idx)}}
         </a>
@@ -84,8 +91,14 @@
 
   <div
     *ngIf="statistics"
-    class="statistics">
+    class="action-bar">
     <ul>
+      <li
+        [matTooltip]="translate('ThereAreXRegionsInSystem', [statistics.regions])">
+        <a routerLink="/list-regions">
+          {{translate('Regions')}} {{statistics.regions}}
+        </a>
+      </li>
       <li
         [matTooltip]="translate('ThereAreXUsersInSystem', [statistics.users])">
         <a routerLink="/users">
@@ -100,11 +113,7 @@
         [matTooltip]="translate('ThereAreXOpenCasesInSystem', [statistics.open])">
         {{translate('Open')}} {{statistics.open}}
       </li>
-      <li
-        [matTooltip]="translate('ThereAreXVotesInSystem', [statistics.votes])">
-        {{translate('Votes')}} {{statistics.votes}}
-      </li>
     </ul>
   </div>
 
-</mat-card>
+</div>

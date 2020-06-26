@@ -1,0 +1,34 @@
+
+<a
+  class="home-link"
+  [matTooltip]="translate('Home')"
+  mat-button
+  routerLink="/">
+  <mat-icon>home</mat-icon>
+</a>
+
+<div class="page">
+
+  <mat-form-field
+    class="filter">
+    <mat-label>{{translate('Filter')}}</mat-label>
+    <input
+      matInput
+      [placeholder]="translate('Filter') + ' ...'"
+      type="text"
+      autocomplete="off"
+      [(ngModel)]="filter">
+    <mat-icon>search</mat-icon>
+  </mat-form-field>
+
+  <ul class="long-list">
+    <li
+      *ngFor="let idx of filterRegions()">
+      <a
+        [routerLink]="'/region/' + idx">
+        {{capitalize(idx)}}
+      </a>
+    </li>
+  </ul>
+
+</div>
