@@ -7,4 +7,5 @@ export class StatisticsModel {
     open: number;
     votes: number;
     users: number;
+    regions: string[];
 }
