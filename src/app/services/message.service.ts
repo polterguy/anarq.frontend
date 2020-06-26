@@ -70,6 +70,11 @@ export class Messages {
     static readonly APP_HIDE_LOGIN_REGISTER = 'app:hide_login_register';
 
     /**
+     * Sent when login form should be displayed allowing user to login.
+     */
+    static readonly APP_SHOW_LOGIN_FORM = 'app:show_login_form';
+
+    /**
      * Sent when language selector should be shown.
      */
     static readonly APP_SHOW_LANGUAGE = 'app:show_language-selector';

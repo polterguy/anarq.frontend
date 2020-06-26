@@ -66,7 +66,8 @@ export class CaseComponent extends BaseComponent {
     });
 
     // Checking if user is logged in or not.
-    this.isLoggedIn = this.messages.getValue(Messages.APP_GET_USERNAME);
+    const username = this.messages.getValue(Messages.APP_GET_USERNAME);
+    this.isLoggedIn = username !== null;
 
     // Retrieving case data.
     this.getCaseData();
@@ -123,6 +124,15 @@ export class CaseComponent extends BaseComponent {
       this.service.getCase(pars.id).subscribe(res => {
         this.item = res;
       });
+    });
+  }
+
+  /**
+   * Shows login form
+   */
+  showLoginForm() {
+    this.messages.sendMessage({
+      name: Messages.APP_SHOW_LOGIN_FORM
     });
   }
 

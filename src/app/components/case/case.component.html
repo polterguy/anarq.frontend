@@ -38,6 +38,21 @@
     [innerHtml]="item.body | marked"></div>
 
   <div
+    *ngIf="!isLoggedIn"
+    class="register-to-vote">
+    <a
+      routerLink="/register"
+      mat-raised-button>
+      {{translate('RegisterToVote')}}
+    </a>
+    <button
+      mat-raised-button
+      (click)="showLoginForm()">
+      {{translate('Login')}}
+    </button>
+  </div>
+
+  <div
     class="voting-bar"
     *ngIf="item.opinion === undefined && isLoggedIn && item.closed !== 1">
 

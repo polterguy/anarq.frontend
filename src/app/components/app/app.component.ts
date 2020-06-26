@@ -118,6 +118,10 @@ export class AppComponent extends BaseComponent {
 
       switch (msg.name) {
 
+        case Messages.APP_SHOW_LOGIN_FORM:
+          this.tryLogin();
+          break;
+
         /*
          * Sent when user is logging in.
          *
