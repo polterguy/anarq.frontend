@@ -568,7 +568,7 @@ export class AnarqService {
        * 
        * @param limit Maximum number of users to return
        * @param offset Offset of where to start returning users
-       * @returns 
+       * @returns Users matching the specified condition(s)
        */
       list: (limit: number = 25, offset: number = 0) => {
         return this.httpClient.get(
