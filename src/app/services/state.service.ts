@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MessageService } from './message.service';
 
 /**
  * State service, allowing us to keep state around shared by multiple
@@ -8,6 +9,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class StateService {
+
+  constructor(private messageService: MessageService) {}
 
   /**
    * If true, the user is logged in.
@@ -22,9 +25,15 @@ export class StateService {
   public set ticket(value: string) {
     if (!value) {
       localStorage.removeItem('ticket');
+      this.messageService.sendMessage({
+        name: 'app.logout'
+      });
       return;
     }
     localStorage.setItem('ticket', value);
+    this.messageService.sendMessage({
+      name: 'app.login'
+    });
   }
 
   /**
