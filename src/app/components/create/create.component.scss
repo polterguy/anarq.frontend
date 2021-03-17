@@ -3,4 +3,12 @@ mat-card {
   margin: 2rem auto 2rem auto;
   width: 60rem;
   padding: 3rem 3rem;
+  position: relative;
+  .visibility-description {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    font-style: italic;
+    color: #777;
+  }
 }

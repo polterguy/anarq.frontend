@@ -29,7 +29,7 @@ export class CreateComponent implements OnInit {
    */
   public visibilities: string[] = [
     'public',
-    'protected',
+    'friends',
   ];
 
   /**

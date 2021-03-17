@@ -12,12 +12,14 @@
   <div class="button-strip">
 
     <mat-form-field class="small">
+      <mat-label>Topic</mat-label>
       <mat-select [(ngModel)]="topic">
         <mat-option *ngFor="let idx of topics" [value]="idx">{{idx.name}}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="small">
+      <mat-label>Visibility</mat-label>
       <mat-select [(ngModel)]="visibility">
         <mat-option *ngFor="let idx of visibilities" [value]="idx">{{idx}}</mat-option>
       </mat-select>
@@ -31,6 +33,10 @@
       Submit
     </button>
 
+  </div>
+
+  <div class="visibility-description">
+    {{visibility === 'public' ? 'Post will be publicly visible for all, also people not registered at the site' : 'Post will only be visible for registered users at the site'}}
   </div>
 
 </mat-card>

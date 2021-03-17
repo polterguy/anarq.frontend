@@ -57,4 +57,20 @@ export class StateService {
     }
     return roles === 'moderator' || roles === 'admin' || roles === 'root';
   }
+
+  /**
+   * Returns true if user is allowed to like, post and comment.
+   */
+  public get isVerified() {
+    if (!this.isLoggedIn) {
+      return false;
+    }
+    const payload = <string>atob(this.ticket.split('.')[1]);
+    const roles = JSON.parse(payload).role;
+    console.log(roles);
+    if (Array.isArray(roles)) {
+      return (<string[]>roles).filter(x => x === 'guest' || x === 'moderator' || x === 'admin' || x === 'root').length > 0;
+    }
+    return roles === 'guest' || roles === 'moderator' || roles === 'admin' || roles === 'root';
+  }
 }

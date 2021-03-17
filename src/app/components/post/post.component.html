@@ -9,22 +9,25 @@
     Moderate
   </button>
 
-  <mat-icon class="visibility" *ngIf="post.visibility === 'public'" matTooltip="Post is public">public</mat-icon>
-  <mat-icon class="visibility" *ngIf="post.visibility === 'protected'" matTooltip="Post is protected">security</mat-icon>
-  <mat-icon class="visibility" *ngIf="post.visibility === 'moderated'" matTooltip="Post has been moderated">block</mat-icon>
+  <mat-icon class="visibility" *ngIf="post.visibility === 'public'" matTooltip="Post is publicly visible also for guests not authenticated">public</mat-icon>
+  <mat-icon class="visibility" *ngIf="post.visibility === 'friends'" matTooltip="Post is only visible for registered user">security</mat-icon>
+  <mat-icon class="visibility" *ngIf="post.visibility === 'moderated'" matTooltip="Post has been moderated and only admins can see it">block</mat-icon>
 
-  <div class="created">{{post.created | since}}</div>
+  <div class="meta">Posted {{post.created | since}} by <a [routerLink]="'/users/' + post.user">{{post.user}}</a></div>
 
   <div class="content" [innerHtml]="post.content | md"></div>
 
 </mat-card>
 
-<mat-card *ngIf="comments">
-  <div *ngFor="let idx of comments" class="comment" [innerHtml]="idx.content | md">
+<mat-card *ngIf="comments && comments.length > 0">
+  <div *ngFor="let idx of comments" class="comment">
+    <div class="meta">Posted {{idx.created | since}} by <a [routerLink]="'/users/' + post.user">{{idx.user}}</a></div>
+    <div [innerHtml]="idx.content | md"></div>
   </div>
 </mat-card>
 
-<mat-card *ngIf="post">
+<mat-card
+  *ngIf="post && (post.visibility === 'public' || post.visibility === 'friends') && stateService.isVerified">
 
   <mat-form-field class="fill-width">
     <mat-label>Comment (Markdown OK) ...</mat-label>

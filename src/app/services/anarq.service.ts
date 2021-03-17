@@ -20,6 +20,21 @@ import { environment } from 'src/environments/environment';
 }
 
 /**
+ * Result returned by some endpoints when endpoint was successfully invoked.
+ */
+ export class ResultModel {
+  result: string;
+}
+
+/**
+ * Model returned by some endpoints indicating availability of resource.
+ */
+ export class EntityAvailable {
+  result: boolean;
+  message: string;
+}
+
+/**
  * Number of items affected by operation.
  */
  export class Affected {
@@ -204,8 +219,8 @@ export class AnarqService {
        * @returns Success if email address is available
        */
       emailAvailable: (email: string) => {
-        return this.httpClient.get(
-          environment.apiUrl + 'magic/modules/anarq/profile/email-available' +
+        return this.httpClient.get<EntityAvailable>(
+          environment.apiUrl + 'magic/modules/anarq/profile/email-available?email=' +
           encodeURIComponent(email));
       },
 
@@ -216,8 +231,8 @@ export class AnarqService {
        * @returns Success if username is available
        */
        usernameAvailable: (username: string) => {
-        return this.httpClient.get(
-          environment.apiUrl + 'magic/modules/anarq/profile/username-available' +
+        return this.httpClient.get<EntityAvailable>(
+          environment.apiUrl + 'magic/modules/anarq/profile/username-available?username=' +
           encodeURIComponent(username));
       },
 
@@ -241,7 +256,7 @@ export class AnarqService {
        * @returns Whether or not operation was a success
        */
       register: (username: string, password: string, email: string, fullName: string) => {
-        return this.httpClient.post(
+        return this.httpClient.post<ResultModel>(
           environment.apiUrl + 'magic/modules/anarq/profile/register', {
             username,
             password,
@@ -344,15 +359,13 @@ export class AnarqService {
        * 
        * @param parent Parent comment or post user wants to associate his or her reply towards
        * @param content Actual Markdown content of comment
-       * @param visibility Visibility, typically 'public' or 'protected'
        * @returns Whether or not operation was a success
        */
-      create: (parent: number, content: string, visibility: string) => {
-        return this.httpClient.post(
+      create: (parent: number, content: string) => {
+        return this.httpClient.post<CreateModel>(
           environment.apiUrl + 'magic/modules/anarq/comments/comment', {
             parent,
             content,
-            visibility,
           });
       },
 

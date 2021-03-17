@@ -1,0 +1,56 @@
+
+<mat-card>
+
+  <mat-form-field class="fill-width">
+    <mat-label>Username</mat-label>
+    <input
+      matInput
+      [(ngModel)]="username"
+      autocomplete="username"
+      (change)="checkUsername()">
+  </mat-form-field>
+
+  <mat-form-field class="fill-width">
+    <mat-label>Email</mat-label>
+    <input
+      matInput
+      [(ngModel)]="email"
+      autocomplete="email"
+      (change)="checkEmail()">
+  </mat-form-field>
+
+  <mat-form-field class="fill-width">
+    <mat-label>Full name</mat-label>
+    <input
+      matInput
+      [(ngModel)]="name"
+      autocomplete="name">
+  </mat-form-field>
+
+  <mat-form-field class="fill-width">
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      [(ngModel)]="password"
+      type="password"
+      autocomplete="new-password">
+  </mat-form-field>
+
+  <mat-form-field class="fill-width">
+    <mat-label>Repeat password</mat-label>
+    <input
+      matInput
+      [(ngModel)]="repeatPassword"
+      type="password"
+      autocomplete="new-password">
+  </mat-form-field>
+
+  <div class="button-strip">
+
+    <button
+      mat-button
+      (click)="register()">Register</button>
+
+  </div>
+
+</mat-card>

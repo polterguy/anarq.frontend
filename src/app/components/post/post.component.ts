@@ -1,7 +1,11 @@
-import { ActivatedRoute, Router } from '@angular/router';
+
+// Angular imports.
 import { Component, OnInit } from '@angular/core';
-import { Affected, AnarqService, Post } from 'src/app/services/anarq.service';
+import { ActivatedRoute, Router } from '@angular/router';
+
+// Application specific imports.
 import { StateService } from 'src/app/services/state.service';
+import { Affected, AnarqService, CreateModel, Post } from 'src/app/services/anarq.service';
 
 @Component({
   selector: 'app-post',
@@ -76,7 +80,7 @@ export class PostComponent implements OnInit {
    * Invoked when comment is submitted.
    */
   submitComment() {
-    this.anarqService.comments.create(this.post.id, this.comment, this.post.visibility).subscribe((result: Comment[]) => {
+    this.anarqService.comments.create(this.post.id, this.comment).subscribe((result: CreateModel) => {
       this.comment = '';
       this.getComments();
     });

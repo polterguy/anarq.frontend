@@ -4,6 +4,10 @@ mat-card {
   width: 60rem;
   padding: 3rem 3rem;
   position: relative;
+  blockquote {
+    font-size: 1.1rem;
+    color: #aaa;
+  }
   .visibility {
     display: block;
     position: absolute;
@@ -16,7 +20,7 @@ mat-card {
     bottom: .5rem;
     right: .5rem;
   }
-  .created {
+  .meta {
     position: absolute;
     bottom: 1rem;
     left: 1rem;
@@ -27,7 +31,8 @@ mat-card {
   .comment {
     background-color: rgb(245, 245, 245);
     margin-bottom: 1rem;
-    padding: 2rem 2rem 1rem 2rem;
+    padding: 2rem 2rem 2rem 2rem;
     border-radius: .5rem;
+    position: relative;
   }
 }

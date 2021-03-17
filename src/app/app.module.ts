@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 /*
  * Application specific imports.
@@ -28,10 +29,12 @@ import { MarkdownPipe } from './services/markdown.pipe';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { UserComponent } from './components/user/user.component';
 import { FeedComponent } from './components/feed/feed.component';
 import { PostComponent } from './components/post/post.component';
 import { LoginComponent } from './components/login/login.component';
 import { CreateComponent } from './components/create/create.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,8 @@ import { CreateComponent } from './components/create/create.component';
     MarkdownPipe,
     SincePipe,
     CreateComponent,
+    UserComponent,
+    RegisterComponent,
   ],
   imports: [
     FormsModule,
@@ -53,6 +58,7 @@ import { CreateComponent } from './components/create/create.component';
     AppRoutingModule,
     MatTooltipModule,
     MatToolbarModule,
+    MatSnackBarModule,
     MatIconModule,
     MatCardModule,
     MatInputModule,
