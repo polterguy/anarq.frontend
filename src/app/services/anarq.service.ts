@@ -3,6 +3,14 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 /**
+ * Authenticate model, returned from backend when user authenticates
+ * with a username and a password.
+ */
+export class AuthenticateModel {
+  ticket: string;
+}
+
+/**
  * Main service for AnarQ allowing you to invoke AnarQ backend.
  */
 @Injectable({
@@ -107,7 +115,7 @@ export class AnarqService {
        * @returns An authorisation token needed to authorise user in consecutive requests
        */
       authenticate: (username: string, password: string) => {
-        return this.httpClient.get(
+        return this.httpClient.get<AuthenticateModel>(
           environment.apiUrl + 'magic/modules/anarq/profile/authenticate?username=' +
           encodeURIComponent(username) + '&password=' + encodeURIComponent(password));
       },

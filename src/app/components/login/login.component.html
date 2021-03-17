@@ -1,0 +1,29 @@
+
+<mat-card>
+  
+  <mat-form-field class="fill-width">
+    <mat-label>Username</mat-label>
+    <input
+      matInput
+      [(ngModel)]="username"
+      autocomplete="username">
+  </mat-form-field>
+
+  <mat-form-field class="fill-width">
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      [(ngModel)]="password"
+      type="password"
+      autocomplete="current-password">
+  </mat-form-field>
+
+  <div class="button-strip">
+
+    <button
+      mat-button
+      (click)="login()">Login</button>
+
+  </div>
+
+</mat-card>

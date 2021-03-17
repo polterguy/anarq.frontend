@@ -1,26 +1,51 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+/*
+ * Angular specific and system types of imports.
+ */
+import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+/*
+ * Angular Material imports.
+ */
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
+/*
+ * Application specific imports.
+ */
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { FeedComponent } from './components/feed/feed.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    FeedComponent,
+    LoginComponent,
     ToolbarComponent,
-    FeedComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
