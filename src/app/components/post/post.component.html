@@ -2,7 +2,7 @@
 <mat-card *ngIf="post">
 
   <button
-    *ngIf="stateService.isModerator"
+    *ngIf="stateService.isModerator && post && post.visibility !== 'moderated'"
     class="moderate"
     mat-button
     (click)="moderate()">

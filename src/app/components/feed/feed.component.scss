@@ -19,6 +19,12 @@ mat-card {
         vertical-align: super;
         text-decoration: none;
       }
+      mat-icon {
+        color: #777;
+      }
+    }
+    .moderated {
+      text-decoration: line-through;
     }
   }
 }

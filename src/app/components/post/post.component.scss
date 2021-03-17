@@ -7,14 +7,14 @@ mat-card {
   .visibility {
     display: block;
     position: absolute;
-    bottom: .5rem;
-    left: .5rem;
+    top: .5rem;
+    right: .5rem;
     color: #777;
   }
   .moderate {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    bottom: .5rem;
+    left: .5rem;
   }
   .created {
     position: absolute;
