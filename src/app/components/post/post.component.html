@@ -1,4 +1,8 @@
 
 <mat-card *ngIf="post">
-  <div [innerHtml]="post.content | md"></div>
+
+  <div class="created">{{post.created | since}}</div>
+
+  <div class="content" [innerHtml]="post.content | md"></div>
+
 </mat-card>

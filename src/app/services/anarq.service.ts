@@ -415,7 +415,7 @@ export class AnarqService {
        * @param offset Offset of where to start returning items from
        * @returns All posts matching specified conditions
        */
-      feed: (topic: string = null, username: string = null, minutes: number = 604800, limit: number = 25, offset: number = 0) => {
+      feed: (topic: string = null, username: string = null, minutes: number = 10080, limit: number = 25, offset: number = 0) => {
         let query = '?limit=' + limit + '&offset=' + offset + '&minutes=' + minutes;
         if (topic) {
           query += '&topic=' + topic;

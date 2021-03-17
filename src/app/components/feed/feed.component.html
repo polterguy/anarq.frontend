@@ -1,6 +1,13 @@
 
 <mat-card>
 
+  <a
+    class="create"
+    mat-button
+    routerLink="/create">
+    New ...
+  </a>
+
   <ul *ngIf="posts.length > 0" class="feed">
     <li *ngFor="let idx of posts">
       <a [routerLink]="'/post/' + idx.id">

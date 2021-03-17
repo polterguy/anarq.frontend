@@ -3,6 +3,12 @@ mat-card {
   margin: 2rem auto 2rem auto;
   width: 60rem;
   padding: 3rem 3rem;
+  position: relative;
+  .create {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
   .feed {
     padding: 0;
     font-size: 1.2rem;

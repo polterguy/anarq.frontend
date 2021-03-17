@@ -3,4 +3,13 @@ mat-card {
   margin: 2rem auto 2rem auto;
   width: 60rem;
   padding: 3rem 3rem;
+  position: relative;
+  .created {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: .8rem;
+    font-style: italic;
+    color: #999;
+  }
 }
