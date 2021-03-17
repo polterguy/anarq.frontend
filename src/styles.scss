@@ -9,4 +9,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .button-strip {
   text-align: right;
+  mat-form-field {
+    margin-right: 1rem;
+    display: inline-block;
+  }
+  .small {
+    width: 7rem;
+  }
+}
+
+a {
+  text-decoration: none;
 }

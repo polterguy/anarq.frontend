@@ -3,6 +3,23 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 /**
+ * A single topic.
+ */
+ export class Topic {
+  name: string;
+  description: string;
+  items: number;
+  last_activity: Date;
+}
+
+/**
+ * Result returned by some endpoints when item was successfully created.
+ */
+ export class CreateModel {
+  id: number;
+}
+
+/**
  * Authenticate model, returned from backend when user authenticates
  * with a username and a password.
  */
@@ -459,7 +476,7 @@ export class AnarqService {
        * @returns Whether or not operation was a success
        */
       create: (content: string, topic: string, visibility: string) => {
-        return this.httpClient.post(
+        return this.httpClient.post<CreateModel>(
           environment.apiUrl + 'magic/modules/anarq/posts/post', {
             content,
             topic,
@@ -575,6 +592,16 @@ export class AnarqService {
             name,
             description,
           });
+      },
+
+      /**
+       * Retrieves all topics from backend.
+       * 
+       * @returns Returns all topics from backend
+       */
+      list: () => {
+        return this.httpClient.get<Topic[]>(
+          environment.apiUrl + 'magic/modules/anarq/topics/topics');
       }
     }
   }

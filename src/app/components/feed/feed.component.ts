@@ -2,6 +2,7 @@ import { Subscription } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AnarqService, PostExcerpt } from 'src/app/services/anarq.service';
 import { Message, MessageService } from 'src/app/services/message.service';
+import { StateService } from 'src/app/services/state.service';
 
 @Component({
   selector: 'app-feed',
@@ -23,10 +24,12 @@ export class FeedComponent implements OnInit, OnDestroy {
    * 
    * @param anarqService AnarQ main HTTP service
    * @param messageService Used to subscribe to and transmit messages to and from other components.
+   * @param stateService Needed to determine if we're logged in or not
    */
   constructor(
     private anarqService: AnarqService,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    public stateService: StateService) { }
 
   /**
    * Implementation of OnInit.

@@ -1,4 +1,36 @@
 
 <mat-card>
-  sdfouh sdf
+
+  <mat-form-field class="fill-width">
+    <mat-label>Content (Markdown OK) ...</mat-label>
+    <textarea
+      matInput
+      [(ngModel)]="content"
+      rows="10"></textarea>
+  </mat-form-field>
+
+  <div class="button-strip">
+
+    <mat-form-field class="small">
+      <mat-select [(ngModel)]="topic">
+        <mat-option *ngFor="let idx of topics" [value]="idx">{{idx.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="small">
+      <mat-select [(ngModel)]="visibility">
+        <mat-option *ngFor="let idx of visibilities" [value]="idx">{{idx}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button
+      [disabled]="!isGood()"
+      mat-raised-button
+      color="primary"
+      (click)="submit()">
+      Submit
+    </button>
+
+  </div>
+
 </mat-card>
