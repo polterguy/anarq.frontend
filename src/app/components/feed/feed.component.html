@@ -1,4 +1,12 @@
 
 <mat-card>
-  sdfoiuh
+
+  <ul *ngIf="posts.length > 0" class="feed">
+    <li *ngFor="let idx of posts">
+      <a [routerLink]="'/post/' + idx.id">
+        {{idx.excerpt}}
+      </a>
+    </li>
+  </ul>
+
 </mat-card>

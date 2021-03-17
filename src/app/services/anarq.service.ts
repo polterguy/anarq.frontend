@@ -10,6 +10,16 @@ export class AuthenticateModel {
   ticket: string;
 }
 
+export class Post {
+  id: number;
+  created: Date;
+  excerpt: string;
+  licks: number;
+  topic: string;
+  user: string;
+  visibility: string;
+}
+
 /**
  * Main service for AnarQ allowing you to invoke AnarQ backend.
  */
@@ -397,7 +407,7 @@ export class AnarqService {
         if (username) {
           query += '&username=' + username;
         }
-        return this.httpClient.get(
+        return this.httpClient.get<Post[]>(
           environment.apiUrl + 'magic/modules/anarq/posts/feed' + query);
       },
 

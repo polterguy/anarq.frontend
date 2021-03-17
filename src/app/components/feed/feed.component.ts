@@ -1,6 +1,6 @@
 import { Subscription } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AnarqService } from 'src/app/services/anarq.service';
+import { AnarqService, Post } from 'src/app/services/anarq.service';
 import { Message, MessageService } from 'src/app/services/message.service';
 
 @Component({
@@ -12,6 +12,11 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   // Used to subscribe to relevant application messages transmitted by other components.
   private _subscription: Subscription;
+
+  /**
+   * Posts currently being viewed.
+   */
+  public posts: Post[] = [];
 
   /**
    * Creates an instance of your component.
@@ -53,8 +58,8 @@ export class FeedComponent implements OnInit, OnDestroy {
    * Retrieves feed from backend, and binds result to model.
    */
   private getFeed() {
-    this.anarqService.posts.feed().subscribe((result: any) => {
-      console.log(result);
+    this.anarqService.posts.feed().subscribe((result: Post[]) => {
+      this.posts = result;
     });
   }
 }
