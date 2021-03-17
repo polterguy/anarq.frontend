@@ -11,7 +11,7 @@ export class FeedComponent implements OnInit {
   constructor(private service: AnarqService) { }
 
   ngOnInit() {
-    this.service.site.pages().subscribe(result => {
+    this.service.pages.list().subscribe((result: any) => {
       console.log(result);
     });
   }
