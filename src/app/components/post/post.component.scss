@@ -4,16 +4,22 @@ mat-card {
   width: 60rem;
   padding: 3rem 3rem;
   position: relative;
+  .karma {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    span {
+      font-size: 1.3rem;
+      vertical-align: top;
+    }
+    mat-icon {
+      font-size: 1.3rem;
+      margin-right: .25rem;
+    }
+  }
   blockquote {
     font-size: 1.1rem;
     color: #aaa;
-  }
-  .visibility {
-    display: block;
-    position: absolute;
-    top: .5rem;
-    right: .5rem;
-    color: #777;
   }
   .moderate {
     position: absolute;
