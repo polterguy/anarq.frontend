@@ -15,7 +15,7 @@
       <mat-icon *ngIf="idx.visibility === 'friends'">security</mat-icon>
       <mat-icon *ngIf="idx.visibility === 'moderated'">block</mat-icon>
       <a [routerLink]="'/post/' + idx.id">
-        [{{idx.licks}}] {{idx.excerpt}}
+        [{{idx.licks}}] {{idx.excerpt}} - [{{idx.user}}]
       </a>
     </li>
   </ul>

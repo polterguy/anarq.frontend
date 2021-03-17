@@ -9,7 +9,7 @@
   <button
     *ngIf="stateService.isLoggedIn"
     mat-button
-    (click)="logout()">Logout</button>
+    (click)="logout()">Logout [{{stateService.username}}]</button>
 
   <a
     *ngIf="!stateService.isLoggedIn"

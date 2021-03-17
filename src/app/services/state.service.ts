@@ -67,10 +67,21 @@ export class StateService {
     }
     const payload = <string>atob(this.ticket.split('.')[1]);
     const roles = JSON.parse(payload).role;
-    console.log(roles);
     if (Array.isArray(roles)) {
       return (<string[]>roles).filter(x => x === 'guest' || x === 'moderator' || x === 'admin' || x === 'root').length > 0;
     }
     return roles === 'guest' || roles === 'moderator' || roles === 'admin' || roles === 'root';
+  }
+
+  /**
+   * Returns the username of the currently authenticated user.
+   */
+  public get username() {
+    if (!this.isLoggedIn) {
+      return '';
+    }
+    const payload = <string>atob(this.ticket.split('.')[1]);
+    const json = JSON.parse(payload);
+    return json.unique_name;
   }
 }
