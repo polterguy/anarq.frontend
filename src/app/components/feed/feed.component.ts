@@ -41,6 +41,7 @@ export class FeedComponent implements OnInit, OnDestroy {
       switch(msg.name) {
 
         case 'app.login':
+        case 'app.logout':
           this.getFeed();
           break;
       }

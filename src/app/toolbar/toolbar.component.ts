@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { MessageService } from '../services/message.service';
 import { StateService } from '../services/state.service';
 
 @Component({
@@ -20,6 +21,7 @@ export class ToolbarComponent implements OnInit {
    */
   constructor(
     public stateService: StateService,
+    private messageService: MessageService,
     private router: Router) { }
 
   /**
@@ -34,5 +36,8 @@ export class ToolbarComponent implements OnInit {
   logout() {
     this.stateService.ticket = null;
     this.router.navigate(['/']);
+    this.messageService.sendMessage({
+      name: 'app.logout'
+    });
   }
 }

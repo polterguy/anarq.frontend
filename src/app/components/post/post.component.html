@@ -1,6 +1,18 @@
 
 <mat-card *ngIf="post">
 
+  <button
+    *ngIf="stateService.isModerator"
+    class="moderate"
+    mat-button
+    (click)="moderate()">
+    Moderate
+  </button>
+
+  <mat-icon class="visibility" *ngIf="post.visibility === 'public'" matTooltip="Post is public">public</mat-icon>
+  <mat-icon class="visibility" *ngIf="post.visibility === 'protected'" matTooltip="Post is protected">security</mat-icon>
+  <mat-icon class="visibility" *ngIf="post.visibility === 'moderated'" matTooltip="Post has been moderated">block</mat-icon>
+
   <div class="created">{{post.created | since}}</div>
 
   <div class="content" [innerHtml]="post.content | md"></div>

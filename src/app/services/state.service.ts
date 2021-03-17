@@ -42,4 +42,19 @@ export class StateService {
   public get ticket() {
     return localStorage.getItem('ticket');
   }
+
+  /**
+   * Returns true if user is allowed to moderate posts.
+   */
+  public get isModerator() {
+    if (!this.isLoggedIn) {
+      return false;
+    }
+    const payload = <string>atob(this.ticket.split('.')[1]);
+    const roles = JSON.parse(payload).role;
+    if (Array.isArray(roles)) {
+      return (<string[]>roles).filter(x => x === 'moderator' || x === 'admin' || x === 'root').length > 0;
+    }
+    return roles === 'moderator' || roles === 'admin' || roles === 'root';
+  }
 }

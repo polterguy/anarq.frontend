@@ -11,12 +11,12 @@ mat-card {
   }
   .feed {
     padding: 0;
-    font-size: 1.2rem;
     li {
       list-style-type: none;
-      line-height: 1.8rem;
       margin-bottom: .5rem;
       a {
+        font-size: 1.2rem;
+        vertical-align: super;
         text-decoration: none;
       }
     }

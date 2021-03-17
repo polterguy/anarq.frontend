@@ -4,6 +4,18 @@ mat-card {
   width: 60rem;
   padding: 3rem 3rem;
   position: relative;
+  .visibility {
+    display: block;
+    position: absolute;
+    bottom: .5rem;
+    left: .5rem;
+    color: #777;
+  }
+  .moderate {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
   .created {
     position: absolute;
     bottom: 1rem;

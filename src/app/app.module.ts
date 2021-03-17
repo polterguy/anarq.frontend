@@ -16,6 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 /*
@@ -50,6 +51,7 @@ import { CreateComponent } from './components/create/create.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    MatTooltipModule,
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
