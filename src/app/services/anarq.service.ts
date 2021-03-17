@@ -10,10 +10,26 @@ export class AuthenticateModel {
   ticket: string;
 }
 
-export class Post {
+/**
+ * Post excerpt, implying not entire content.
+ */
+export class PostExcerpt {
   id: number;
   created: Date;
   excerpt: string;
+  licks: number;
+  topic: string;
+  user: string;
+  visibility: string;
+}
+
+/**
+ * Post including full content.
+ */
+export class Post {
+  id: number;
+  created: Date;
+  content: string;
   licks: number;
   topic: string;
   user: string;
@@ -407,7 +423,7 @@ export class AnarqService {
         if (username) {
           query += '&username=' + username;
         }
-        return this.httpClient.get<Post[]>(
+        return this.httpClient.get<PostExcerpt[]>(
           environment.apiUrl + 'magic/modules/anarq/posts/feed' + query);
       },
 
@@ -430,7 +446,7 @@ export class AnarqService {
        * @returns The post content, in addition to its number of licks
        */
       get: (id: number) => {
-        return this.httpClient.get(
+        return this.httpClient.get<Post>(
           environment.apiUrl + 'magic/modules/anarq/posts/post?id=' + id);
       },
 
