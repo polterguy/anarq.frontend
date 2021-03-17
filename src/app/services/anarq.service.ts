@@ -51,7 +51,7 @@ export class AnarqService {
        * @param url URL of new page
        * @param name Name or title for your new page
        * @param content Markdown content for your new page
-       * @returns Whether or not creation was successful
+       * @returns Whether or not operation was a success
        */
       create: (url: string, name: string, content: string) => {
         return this.httpClient.post(
@@ -68,7 +68,7 @@ export class AnarqService {
        * @param url URL of page to update
        * @param name New name or title for your page
        * @param content New Markdown content for your page
-       * @returns Whether or not creation was successful
+       * @returns Whether or not operation was a success
        */
        update: (url: string, name: string, content: string) => {
         return this.httpClient.put(
@@ -83,7 +83,7 @@ export class AnarqService {
        * Deletes a specific page in your backend.
        * 
        * @param url URL of page to delete
-       * @returns Whether or not invocation was successful or not
+       * @returns Whether or not operation was a success
        */
       delete: (url: string) => {
         return this.httpClient.delete(
@@ -117,7 +117,7 @@ export class AnarqService {
        * 
        * @param email Email address of user
        * @param secret Secret sent to user's email address
-       * @returns Whether or not confirmation was successful or not
+       * @returns Whether or not operation was a success
        */
       confirmEmail: (email: string, secret: string) => {
         return this.httpClient.post(
@@ -144,7 +144,7 @@ export class AnarqService {
        * Checks if an username is available or not.
        * 
        * @param username Username to check
-       * @returns Success if email address is available
+       * @returns Success if username is available
        */
        usernameAvailable: (username: string) => {
         return this.httpClient.get(
@@ -169,7 +169,7 @@ export class AnarqService {
        * @param password Chosen password
        * @param email Email of user
        * @param fullName Full name of user
-       * @returns Whether or not operation was successful or not
+       * @returns Whether or not operation was a success
        */
       register: (username: string, password: string, email: string, fullName: string) => {
         return this.httpClient.post(
@@ -196,7 +196,7 @@ export class AnarqService {
        * Notice, you probably want to use moderateComment instead.
        * 
        * @param id Comment to delete
-       * @returns Whether or not operation was success or not
+       * @returns Whether or not operation was a success
        */
       deleteComment: (id: number) => {
         return this.httpClient.delete(
@@ -208,7 +208,7 @@ export class AnarqService {
        * Notice, you probably want to use moderatePost instead.
        * 
        * @param id Post to delete
-       * @returns Whether or not operation was success or not
+       * @returns Whether or not operation was a success
        */
        deletePost: (id: number) => {
         return this.httpClient.delete(
@@ -220,7 +220,7 @@ export class AnarqService {
        * moderators, admins, and root account.
        * 
        * @param id Comment to moderate
-       * @returns Whether or not operation was success or not
+       * @returns Whether or not operation was a success
        */
       moderateComment: (id: number) => {
         return this.httpClient.delete(
@@ -232,7 +232,7 @@ export class AnarqService {
        * moderators, admins, and root account.
        * 
        * @param id Post to moderate
-       * @returns Whether or not operation was success or not
+       * @returns Whether or not operation was a success
        */
        moderatePost: (id: number) => {
         return this.httpClient.delete(
@@ -276,7 +276,7 @@ export class AnarqService {
        * @param parent Parent comment or post user wants to associate his or her reply towards
        * @param content Actual Markdown content of comment
        * @param visibility Visibility, typically 'public' or 'protected'
-       * @returns 
+       * @returns Whether or not operation was a success
        */
       create: (parent: number, content: string, visibility: string) => {
         return this.httpClient.post(
@@ -294,7 +294,7 @@ export class AnarqService {
        * @param id Id of previously created comment
        * @param content New Markdown content of comment
        * @param visibility New visibility, typically 'public' or 'protected'
-       * @returns 
+       * @returns Whether or not operation was a success
        */
        update: (id: number, content: string, visibility: string) => {
         return this.httpClient.put(
@@ -311,6 +311,7 @@ export class AnarqService {
        * @param parent Parent post to retrieve comments for
        * @param limit Maximum number of comments to return
        * @param offset Offset of where to start fetching comments
+       * @returns Comment content, and other information associated with comment
        */
       get: (parent: number, limit: number = 25, offset: number = 0) => {
         return this.httpClient.get(
@@ -361,6 +362,219 @@ export class AnarqService {
         return this.httpClient.get(
           environment.apiUrl + 'magic/modules/anarq/licks/lickers?id=' + id);
       },
+    };
+  }
+
+  /**
+   * Allows users to retrieve posts, create posts, see their feed, etc.
+   */
+  get posts() {
+    return {
+
+      /**
+       * Returns the feed from backend.
+       * 
+       * @param topic Topic to filter feed according to
+       * @param username Filter of user to return posts for 
+       * @param minutes Maximum age in minutes of posts to include in feed
+       * @param limit Maximum number of posts to return
+       * @param offset Offset of where to start returning items from
+       * @returns All posts matching specified conditions
+       */
+      feed: (topic: string = null, username: string = null, minutes: number = 604800, limit: number = 25, offset: number = 0) => {
+        let query = '?limit=' + limit + '&offset=' + offset + '&minutes=' + minutes;
+        if (topic) {
+          query += '&topic=' + topic;
+        }
+        if (username) {
+          query += '&username=' + username;
+        }
+        return this.httpClient.get(
+          environment.apiUrl + 'magic/modules/anarq/posts/feed' + query);
+      },
+
+      /**
+       * Sodt deletes the specified post.
+       * Notice, users can only delete their own posts.
+       * 
+       * @param id Id of post to delete
+       * @returns Whether or not operation was a success or not
+       */
+      delete: (id: number) => {
+        return this.httpClient.delete(
+          environment.apiUrl + 'magic/modules/anarq/posts/post?id=' + id);
+      },
+
+      /**
+       * Retrieves a post, including its number of licks.
+       * 
+       * @param id Id of post to return
+       * @returns The post content, in addition to its number of licks
+       */
+      get: (id: number) => {
+        return this.httpClient.get(
+          environment.apiUrl + 'magic/modules/anarq/posts/post?id=' + id);
+      },
+
+      /**
+       * Creates a new post in the backend.
+       * 
+       * @param content Markdown content of post
+       * @param topic What topic to associate post with
+       * @param visibility Visibility of post, typically 'public' or 'protected'
+       * @returns Whether or not operation was a success
+       */
+      create: (content: string, topic: string, visibility: string) => {
+        return this.httpClient.post(
+          environment.apiUrl + 'magic/modules/anarq/posts/post', {
+            content,
+            topic,
+            visibility,
+          });
+      },
+
+      /**
+       * 
+       * @param id Id of post to update
+       * @param content New Markdown content for post
+       * @param visibility New visibility for post
+       * @returns Whether or not operation was a success
+       */
+      update: (id: number, content: string, visibility: string) => {
+        return this.httpClient.put(
+          environment.apiUrl + 'magic/modules/anarq/posts/post', {
+            id,
+            content,
+            visibility,
+          });
+      },
+
+      /**
+       * Counts number of posts from backend.
+       * 
+       * @param topic Topic to filter counting within
+       * @param username If specified, only count posts by user
+       * @returns Number of posts matching your optional condition(s)
+       */
+      count: (topic: string = null, username: string = null) => {
+        let query = '';
+        if (topic) {
+          query += '?topic=' + topic;
+        }
+        if (username) {
+          if (query === '') {
+            query += '?';
+          } else {
+            query += '&';
+          }
+          query += 'username=' + username;
+        }
+        return this.httpClient.get(
+          environment.apiUrl + 'magic/modules/anarq/posts/posts-count' + query);
+      },
+
+      /**
+       * Returns posts matching the specified conditions(s).
+       * 
+       * @param topic Optional topic to retrieve posts from within
+       * @param username Optional username having created the post
+       * @param limit Maximum number of posts to return
+       * @param offset Offset of where to start returning posts
+       * @returns All posts matching specified condition(s)
+       */
+      list: (topic: string = null, username: string = null, limit: number = 25, offset: number = 0) => {
+        let query = '?limit=' + limit + '&offset=' + offset;
+        if (topic) {
+          query += '&topic=' + topic;
+        }
+        if (username) {
+          query += '&username=' + username;
+        }
+        return this.httpClient.get(
+          environment.apiUrl + 'magic/modules/anarq/posts/posts' + query);
+      },
+    };
+  }
+
+  /**
+   * Allows you to administrate topics in the system
+   */
+  get topics() {
+    return {
+
+      /**
+       * Deletes the specified topic from the backend.
+       * 
+       * @param name Name of topic to delete
+       * @returns 
+       */
+      delete: (name: string) => {
+        return this.httpClient.delete(
+          environment.apiUrl + 'magic/modules/anarq/topics/topic?name=' + encodeURIComponent(name));
+      },
+
+      /**
+       * Creates a new topic in your backend.
+       * 
+       * @param name Name of new topic to create
+       * @param description Descriptive text for topic to create
+       * @returns 
+       */
+      create: (name: string, description: string) => {
+        return this.httpClient.post(
+          environment.apiUrl + 'magic/modules/anarq/topics/topic', {
+            name,
+            description,
+          });
+      },
+
+      /**
+       * Updates an existing topic in your backend.
+       * 
+       * @param name Name of topic to update
+       * @param description New descriptive text for topic
+       * @returns 
+       */
+      update: (name: string, description: string) => {
+        return this.httpClient.put(
+          environment.apiUrl + 'magic/modules/anarq/topics/topic', {
+            name,
+            description,
+          });
+      }
+    }
+  }
+
+  /**
+   * Allows you to retrieve users from your backend.
+   */
+  get users() {
+    return {
+
+      /**
+       * Retrieves the specified user from the backend.
+       * 
+       * @param username Username of user to return
+       * @returns The user with the specified username
+       */
+      get: (username: string) => {
+        return this.httpClient.get(
+          environment.apiUrl + 'magic/modules/anarq/users/user?username=' +
+          encodeURIComponent(username));
+      },
+
+      /**
+       * Retrieves users from the backend.
+       * 
+       * @param limit Maximum number of users to return
+       * @param offset Offset of where to start returning users
+       * @returns 
+       */
+      list: (limit: number = 25, offset: number = 0) => {
+        return this.httpClient.get(
+          environment.apiUrl + 'magic/modules/anarq/users/users?limit=' + limit +
+          '&offset=' + offset);
+      }
     };
   }
 }
