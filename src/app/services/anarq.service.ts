@@ -20,6 +20,13 @@ import { environment } from 'src/environments/environment';
 }
 
 /**
+ * Number of items affected by operation.
+ */
+ export class Affected {
+  affected: number;
+}
+
+/**
  * Authenticate model, returned from backend when user authenticates
  * with a username and a password.
  */
@@ -51,6 +58,17 @@ export class Post {
   topic: string;
   user: string;
   visibility: string;
+}
+
+/**
+ * Comment including full content.
+ */
+ export class Comment {
+  id: number;
+  created: Date;
+  content: string;
+  licks: number;
+  user: string;
 }
 
 /**
@@ -286,7 +304,7 @@ export class AnarqService {
        * @returns Whether or not operation was a success
        */
        moderatePost: (id: number) => {
-        return this.httpClient.delete(
+        return this.httpClient.delete<Affected>(
           environment.apiUrl + 'magic/modules/anarq/admin/moderate-post?id=' + id);
       },
 
@@ -365,7 +383,7 @@ export class AnarqService {
        * @returns Comment content, and other information associated with comment
        */
       get: (parent: number, limit: number = 25, offset: number = 0) => {
-        return this.httpClient.get(
+        return this.httpClient.get<Comment[]>(
           environment.apiUrl + 'magic/modules/anarq/comments/comments?parent=' + parent +
           '&limit=' + limit + '&offset=' + offset);
       }

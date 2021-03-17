@@ -19,6 +19,30 @@
 
 </mat-card>
 
-<mat-card>
-  Comments
+<mat-card *ngIf="comments">
+  <div *ngFor="let idx of comments" class="comment" [innerHtml]="idx.content | md">
+  </div>
+</mat-card>
+
+<mat-card *ngIf="post">
+
+  <mat-form-field class="fill-width">
+    <mat-label>Comment (Markdown OK) ...</mat-label>
+    <textarea
+      matInput
+      [(ngModel)]="comment"
+      rows="10"></textarea>
+  </mat-form-field>
+
+  <div class="button-strip">
+
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="submitComment()">
+      Submit
+    </button>
+
+  </div>
+
 </mat-card>

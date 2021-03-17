@@ -14,14 +14,20 @@ mat-card {
   .moderate {
     position: absolute;
     bottom: .5rem;
-    left: .5rem;
+    right: .5rem;
   }
   .created {
     position: absolute;
     bottom: 1rem;
-    right: 1rem;
+    left: 1rem;
     font-size: .8rem;
     font-style: italic;
     color: #999;
+  }
+  .comment {
+    background-color: rgb(245, 245, 245);
+    margin-bottom: 1rem;
+    padding: 2rem 2rem 1rem 2rem;
+    border-radius: .5rem;
   }
 }
