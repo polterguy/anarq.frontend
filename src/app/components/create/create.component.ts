@@ -67,7 +67,7 @@ export class CreateComponent implements OnInit {
    * @returns True if post can be saved
    */
   isGood() {
-    return this.topic && this.visibility && this.content && this.content.length > 0;
+    return this.topic && this.visibility && this.content && this.content.length > 25;
   }
 
   /**

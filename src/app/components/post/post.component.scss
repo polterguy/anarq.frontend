@@ -2,7 +2,7 @@
 mat-card {
   margin: 2rem auto 2rem auto;
   width: 60rem;
-  padding: 3rem 3rem;
+  padding: 2rem;
   position: relative;
   .karma {
     position: absolute;
@@ -19,8 +19,8 @@ mat-card {
   }
   .like-button {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: .5rem;
+    right: .5rem;
   }
   blockquote {
     font-size: 1.1rem;
@@ -31,19 +31,30 @@ mat-card {
     bottom: .5rem;
     right: .5rem;
   }
-  .meta {
-    position: absolute;
-    bottom: 1rem;
-    left: 1rem;
-    font-size: .8rem;
-    font-style: italic;
-    color: #999;
-  }
+}
+.comments {
+  margin: 2rem auto 2rem auto;
+  width: 64rem;
+  position: relative;
   .comment {
-    background-color: rgb(245, 245, 245);
+    border: solid 1px #f5f5f5;
     margin-bottom: 1rem;
-    padding: 2rem 2rem 2rem 2rem;
+    padding: 2rem;
     border-radius: .5rem;
     position: relative;
+  }
+}
+.content {
+  margin-bottom: 3rem !important;
+}
+.meta {
+  position: absolute;
+  bottom: .3rem;
+  right: .5rem;
+  font-size: .8rem;
+  font-style: italic;
+  color: #999;
+  a {
+    color: #77f;
   }
 }

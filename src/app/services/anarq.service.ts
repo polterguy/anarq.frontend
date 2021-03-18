@@ -20,6 +20,18 @@ import { environment } from 'src/environments/environment';
 }
 
 /**
+ * User model, wrapping a single user in the system.
+ */
+ export class User {
+  comments: number;
+  full_name: string;
+  karma: number;
+  licks: number;
+  posts: number;
+  roles: string[];
+}
+
+/**
  * Result returned by some endpoints when endpoint was successfully invoked.
  */
  export class ResultModel {
@@ -650,7 +662,7 @@ export class AnarqService {
        * @returns The user with the specified username
        */
       get: (username: string) => {
-        return this.httpClient.get(
+        return this.httpClient.get<User>(
           environment.apiUrl + 'magic/modules/anarq/users/user?username=' +
           encodeURIComponent(username));
       },

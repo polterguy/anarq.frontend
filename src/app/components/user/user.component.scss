@@ -1,0 +1,41 @@
+
+mat-card {
+  margin: 2rem auto 2rem auto;
+  width: 60rem;
+  padding: 2rem;
+  position: relative;
+  .username {
+    position: absolute;
+    top: .5rem;
+    right: 1rem;
+    font-weight: bold;
+  }
+  .entity {
+    display: block;
+    font-weight: bold;
+    margin-bottom: .25rem;
+    color: #777;
+  }
+  .full_name {
+    font-size: 1.2rem;
+    color: #000;
+    margin-bottom: 1rem;
+  }
+  hr {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  .feed {
+    padding: 0;
+    li {
+      list-style-type: none;
+      margin-bottom: .5rem;
+      a {
+        text-decoration: none;
+      }
+    }
+    .moderated {
+      text-decoration: line-through;
+    }
+  }
+}

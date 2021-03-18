@@ -12,7 +12,7 @@
   <ul *ngIf="posts.length > 0" class="feed">
     <li *ngFor="let idx of posts" [class]="idx.visibility">
       <a [routerLink]="'/post/' + idx.id">
-        {{idx.excerpt}} <small>{{idx.user}} - {{idx.licks}}</small>
+        [{{idx.licks}}] - {{idx.excerpt}}
       </a>
     </li>
   </ul>

@@ -1,13 +1,6 @@
 
 <mat-card *ngIf="post">
 
-  <div class="karma" [matTooltip]="getLickersTooltip()">
-    <mat-icon *ngIf="post.visibility === 'public'">public</mat-icon>
-    <mat-icon *ngIf="post.visibility === 'friends'">security</mat-icon>
-    <mat-icon *ngIf="post.visibility === 'moderated'">block</mat-icon>
-    <span>{{post.licks}}</span>
-  </div>
-
   <button
     *ngIf="stateService.isModerator && post && post.visibility !== 'moderated'"
     class="moderate"
@@ -16,12 +9,12 @@
     Moderate
   </button>
 
-  <div class="meta">Posted {{post.created | since}} by <a [routerLink]="'/users/' + post.user">{{post.user}}</a></div>
+  <div class="meta">Posted {{post.created | since}} by <a [routerLink]="'/users/' + post.user">{{post.user}}</a>, {{post.licks}} licks</div>
 
   <button
+    *ngIf="canLike()"
     mat-icon-button
     [color]="liked ? 'primary' : 'secondary'"
-    [matTooltip]="liked ? 'You have already liked this post' : 'Click to like post'"
     class="like-button"
     (click)="likePost()">
     <mat-icon>thumb_up</mat-icon>
@@ -31,16 +24,19 @@
 
 </mat-card>
 
-<mat-card *ngIf="comments && comments.length > 0">
+<div class="comments" *ngIf="comments">
 
   <div *ngFor="let idx of comments" class="comment">
+
     <div class="meta">Posted {{idx.created | since}} by <a [routerLink]="'/users/' + post.user">{{idx.user}}</a></div>
-    <div [innerHtml]="idx.content | md"></div>
+
+    <div class="content" [innerHtml]="idx.content | md"></div>
+
   </div>
 
   <div *ngIf="post && (post.visibility === 'public' || post.visibility === 'friends') && stateService.isVerified">
 
-    <mat-form-field class="fill-width">
+    <mat-form-field class="fill-width" appearance="outline">
       <mat-label>Comment ...</mat-label>
       <textarea
         matInput
@@ -61,4 +57,4 @@
 
   </div>
 
-</mat-card>
+</div>

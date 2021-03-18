@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 // Application specific imports.
 import { StateService } from 'src/app/services/state.service';
-import { Affected, AnarqService, CreateModel, Post } from 'src/app/services/anarq.service';
+import { Affected, AnarqService, CreateModel, Post, Comment } from 'src/app/services/anarq.service';
 
 @Component({
   selector: 'app-post',
@@ -61,7 +61,10 @@ export class PostComponent implements OnInit {
       const id = +params.id;
 
       // Retrieving post's content from backend.
-      this.getPost(id, () => { this.getComments() });
+      this.getPost(id, () => {
+        this.getComments();
+        this.getLickers();
+      });
     });
   }
 
@@ -71,11 +74,23 @@ export class PostComponent implements OnInit {
   getPost(id: number, lambda:() => void = null) {
     this.anarqService.posts.get(id).subscribe((result: Post) => {
       this.post = result;
-      this.getLickers();
       if (lambda) {
         lambda();
       }
     });
+  }
+
+  /**
+   * Returns true if currently authenticated user can like post.
+   */
+  canLike() {
+    if (!this.stateService.isVerified) {
+      return false;
+    }
+    if (this.post.user === this.stateService.username) {
+      return false;
+    }
+    return true;
   }
 
   /**
@@ -84,11 +99,15 @@ export class PostComponent implements OnInit {
   likePost() {
     if (this.liked) {
       this.anarqService.licks.unlick(this.post.id).subscribe((result: any) => {
-        this.getPost(this.post.id);
+        this.lickers.splice(this.lickers.indexOf(this.stateService.username));
+        this.liked = false;
+        this.post.licks -= 1;
       });
     } else {
       this.anarqService.licks.lick(this.post.id).subscribe((result: any) => {
-        this.getPost(this.post.id);
+        this.lickers.push(this.stateService.username);
+        this.liked = true;
+        this.post.licks += 1;
       });
     }
   }
@@ -124,13 +143,6 @@ export class PostComponent implements OnInit {
       this.lickers = [];
       this.liked = false;
     }
-  }
-
-  /**
-   * Invoked when tooltip is requested by HTML for displaying all lickers of the post.
-   */
-  getLickersTooltip() {
-    return this.lickers.join(',');
   }
 
   /**

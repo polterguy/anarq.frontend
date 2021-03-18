@@ -1,1 +1,26 @@
-<p>users works!</p>
+
+
+<mat-card *ngIf="user">
+
+  <span class="username">{{username}}</span>
+  <span class="entity full_name">{{user.full_name}}</span>
+  <span class="entity posts">{{user.posts}} posts</span>
+  <span class="entity comments">{{user.comments}} comments</span>
+  <span class="entity karma">{{user.karma}} karma</span>
+  <span class="entity licks">{{user.licks}} licks</span>
+
+  <hr>
+
+  <div class="posts">
+
+    <ul *ngIf="posts.length > 0" class="feed">
+      <li *ngFor="let idx of posts" [class]="idx.visibility">
+        <a [routerLink]="'/post/' + idx.id">
+          [{{idx.licks}}] - {{idx.excerpt}}
+        </a>
+      </li>
+    </ul>
+
+  </div>
+
+</mat-card>
