@@ -4,6 +4,7 @@ import { AnarqService, PostExcerpt, Topic } from 'src/app/services/anarq.service
 import { Message, MessageService } from 'src/app/services/message.service';
 import { StateService } from 'src/app/services/state.service';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-feed',
@@ -45,6 +46,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   constructor(
     private anarqService: AnarqService,
     private messageService: MessageService,
+    private snackBar: MatSnackBar,
     public stateService: StateService) { }
 
   /**
@@ -137,6 +139,10 @@ export class FeedComponent implements OnInit, OnDestroy {
       null,
       +this.minuteFilter).subscribe((result: PostExcerpt[]) => {
       this.posts = result;
+    }, (error: any) => {
+      this.snackBar.open(error.error.message, 'ok', {
+        duration: 5000,
+      });
     });
   }
 }
