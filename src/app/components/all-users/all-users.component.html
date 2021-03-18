@@ -1,0 +1,12 @@
+
+<mat-card>
+
+  <ul *ngIf="users && users.length > 0" class="users">
+    <li *ngFor="let idx of users">
+      <a [routerLink]="'/users/' + idx.user">
+        {{idx.user}} [{{idx.karma}}]
+      </a>
+    </li>
+  </ul>
+
+</mat-card>

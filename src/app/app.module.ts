@@ -42,6 +42,7 @@ import { LoginComponent } from './components/login/login.component';
 import { CreateComponent } from './components/create/create.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DonateComponent } from './components/donate/donate.component';
+import { AllUsersComponent } from './components/all-users/all-users.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { DonateComponent } from './components/donate/donate.component';
     UserComponent,
     RegisterComponent,
     DonateComponent,
+    AllUsersComponent,
   ],
   imports: [
     FormsModule,

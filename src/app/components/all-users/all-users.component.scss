@@ -1,0 +1,22 @@
+
+mat-card {
+  margin: 2rem auto 2rem auto;
+  width: 60rem;
+  padding: 3rem 3rem;
+  position: relative;
+  .users {
+    padding: 0;
+    li {
+      list-style-type: none;
+      margin-bottom: .5rem;
+      a {
+        font-size: 1.2rem;
+        text-decoration: none;
+      }
+    }
+  }
+  .feed-more {
+    text-align: center;
+    margin-bottom: -2rem;
+  }
+}

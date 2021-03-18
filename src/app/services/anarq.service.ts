@@ -32,6 +32,14 @@ import { environment } from 'src/environments/environment';
 }
 
 /**
+ * User excerpt model, wrapping a single user in the system, but only partially.
+ */
+ export class UserExcerpt {
+  user: string;
+  karma: number;
+}
+
+/**
  * Result returned by some endpoints when endpoint was successfully invoked.
  */
  export class ResultModel {
@@ -701,7 +709,7 @@ export class AnarqService {
        * @returns Users matching the specified condition(s)
        */
       list: (limit: number = 25, offset: number = 0) => {
-        return this.httpClient.get(
+        return this.httpClient.get<UserExcerpt[]>(
           environment.apiUrl + 'magic/modules/anarq/users/users?limit=' + limit +
           '&offset=' + offset);
       }
