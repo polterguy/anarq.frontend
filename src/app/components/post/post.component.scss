@@ -45,7 +45,7 @@ mat-card {
   }
 }
 .content {
-  margin-bottom: 3rem !important;
+  margin-bottom: 1rem !important;
 }
 .meta {
   position: absolute;
@@ -57,4 +57,28 @@ mat-card {
   a {
     color: #77f;
   }
+}
+
+::ng-deep.card {
+  margin: 3rem 0 1rem 0;
+  border: solid 1px #e5e5e5;
+  border-radius: .5rem;
+  background-color: #fafafa;
+  a {
+    padding: 1rem;
+    display: block;
+    overflow: auto;
+    color: #000;
+  }
+  img {
+    max-width: 300px;
+    float: right;
+    margin-left: 1rem;
+    border-radius: .5rem;
+  }
+}
+::ng-deep.card:after {
+  content: "";
+  clear: both;
+  display: table;
 }

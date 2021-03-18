@@ -11,4 +11,10 @@ mat-card {
     font-style: italic;
     color: #777;
   }
+  .button-strip {
+    display: flex;
+    .hyperlink {
+      flex-grow: 1;
+    }
+  }
 }

@@ -2,8 +2,7 @@
 
 <mat-card *ngIf="user">
 
-  <span class="username">{{username}}</span>
-  <span class="entity full_name">{{user.full_name}}</span>
+  <span class="entity full_name">{{user.full_name}} - {{username}}</span>
   <span class="entity posts">{{user.posts}} posts</span>
   <span class="entity comments">{{user.comments}} comments</span>
   <span class="entity karma">{{user.karma}} karma</span>
@@ -11,7 +10,7 @@
 
   <hr>
 
-  <div class="posts">
+  <div *ngIf="posts" class="list">
 
     <ul *ngIf="posts.length > 0" class="feed">
       <li *ngFor="let idx of posts" [class]="idx.visibility">

@@ -516,14 +516,16 @@ export class AnarqService {
        * @param content Markdown content of post
        * @param topic What topic to associate post with
        * @param visibility Visibility of post, typically 'public' or 'protected'
+       * @param hyperlink Optional hyperlink for post
        * @returns Whether or not operation was a success
        */
-      create: (content: string, topic: string, visibility: string) => {
+      create: (content: string, topic: string, visibility: string, hyperlink: string = null) => {
         return this.httpClient.post<CreateModel>(
           environment.apiUrl + 'magic/modules/anarq/posts/post', {
             content,
             topic,
             visibility,
+            hyperlink,
           });
       },
 

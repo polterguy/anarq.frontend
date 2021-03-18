@@ -4,12 +4,6 @@ mat-card {
   width: 60rem;
   padding: 2rem;
   position: relative;
-  .username {
-    position: absolute;
-    top: .5rem;
-    right: 1rem;
-    font-weight: bold;
-  }
   .entity {
     display: block;
     font-weight: bold;
@@ -25,17 +19,19 @@ mat-card {
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
-  .feed {
-    padding: 0;
-    li {
-      list-style-type: none;
-      margin-bottom: .5rem;
-      a {
-        text-decoration: none;
+  .list {
+    .feed {
+      padding: 0;
+      li {
+        list-style-type: none;
+        margin-bottom: .5rem;
+        a {
+          text-decoration: none;
+        }
       }
-    }
-    .moderated {
-      text-decoration: line-through;
+      .moderated {
+        text-decoration: line-through;
+      }
     }
   }
 }

@@ -15,6 +15,11 @@ export class CreateComponent implements OnInit {
   public content: string;
 
   /**
+   * Hyperlink user wants to associate with post.
+   */
+  public hyperlink: string = '';
+
+  /**
    * All topics user can associate a post with.
    */
   public topics: Topic[] = [];
@@ -67,14 +72,20 @@ export class CreateComponent implements OnInit {
    * @returns True if post can be saved
    */
   isGood() {
-    return this.topic && this.visibility && this.content && this.content.length > 25;
+    return this.topic && this.visibility && this.content && this.content.length > 25 &&
+      this.content.indexOf('https://') === -1 && this.content.indexOf('http://') === -1 &&
+      (this.hyperlink === '' || this.hyperlink.startsWith('https://') || this.hyperlink.startsWith('http://'));
   }
 
   /**
    * Invoked when user wants to submit his post.
    */
   submit() {
-    this.anarqService.posts.create(this.content, this.topic.name, this.visibility).subscribe((result: CreateModel) => {
+    this.anarqService.posts.create(
+      this.content,
+      this.topic.name,
+      this.visibility,
+      this.hyperlink).subscribe((result: CreateModel) => {
       this.router.navigate(['/post/' + result.id]);
     });
   }

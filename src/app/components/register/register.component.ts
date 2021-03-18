@@ -81,7 +81,7 @@ export class RegisterComponent {
   register() {
     this.anarqService.profile.register(this.username, this.password, this.email, this.name).subscribe((result: ResultModel) => {
       if (result.result === 'success') {
-        this.snackBar.open('Please check your email for an email from AnarQ', 'ok', {
+        this.snackBar.open('Please check your inbox for an email from AnarQ', 'ok', {
           duration: 5000,
         });
         this.router.navigate(['/']);
