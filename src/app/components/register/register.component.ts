@@ -113,6 +113,9 @@ export class RegisterComponent {
     if (this.emailGood !== 'ok') {
       return false;
     }
+    if (this.username.length < 3) {
+      return false;
+    }
     return true;
   }
 
