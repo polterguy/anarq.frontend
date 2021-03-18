@@ -61,4 +61,13 @@ export class UserComponent implements OnInit {
       this.posts = result;
     });
   }
+
+  /**
+   * Invoked when caller wants to see more posts.
+   */
+   feedMore() {
+    this.anarqService.posts.feed(null, null, null, 10, this.posts.length).subscribe((result: PostExcerpt[]) => {
+      this.posts = this.posts.concat(result);
+    });
+  }
 }

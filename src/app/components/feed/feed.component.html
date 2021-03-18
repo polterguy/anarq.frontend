@@ -3,7 +3,7 @@
 
   <div class="button-strip">
 
-    <mat-button-toggle-group value="1440" (change)="filterHot($event)">
+    <mat-button-toggle-group #group="matButtonToggleGroup" [value]="minuteFilter" (change)="filterHot(group.value)">
 
       <mat-button-toggle value="60">Last hour</mat-button-toggle>
 
@@ -24,5 +24,13 @@
       </a>
     </li>
   </ul>
+
+  <div
+    *ngIf="posts && posts.length >= 10 && posts.length % 10 === 0"
+    class="feed-more">
+    <button
+      mat-button
+      (click)="feedMore()">More</button>
+  </div>
 
 </mat-card>

@@ -22,4 +22,12 @@
 
   </div>
 
+  <div
+    *ngIf="posts && posts.length >= 10 && posts.length % 10 === 0"
+    class="feed-more">
+    <button
+      mat-button
+      (click)="feedMore()">More</button>
+  </div>
+
 </mat-card>

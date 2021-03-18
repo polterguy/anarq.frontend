@@ -2,8 +2,14 @@
 mat-card {
   margin: 2rem auto 2rem auto;
   width: 60rem;
-  padding: 2rem;
+  padding: 2rem 2rem 3rem 2rem;
   position: relative;
+  .mat-icon.visibility {
+    position: absolute;
+    bottom: .5rem;
+    left: .5rem;
+    color: #999;
+  }
   .karma {
     position: absolute;
     bottom: 1rem;
@@ -28,8 +34,8 @@ mat-card {
   }
   .moderate {
     position: absolute;
-    bottom: .5rem;
-    right: .5rem;
+    bottom: .1rem;
+    left: 2.5rem;
   }
 }
 .comments {

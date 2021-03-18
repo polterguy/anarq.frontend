@@ -23,7 +23,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   /**
    * How many minutes user wants to filter his feed according to.
    */
-  public minuteFilter: number = 1440;
+  public minuteFilter: string;
 
   /**
    * Creates an instance of your component.
@@ -42,8 +42,17 @@ export class FeedComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
 
+    // Checking if we've stored current filter condition in local storage
+    const ls = localStorage.getItem('timespan_filter');
+    if (ls) {
+      this.minuteFilter = ls;
+    } else {
+      this.minuteFilter = '1440';
+    }
+
     // Making sure we subscribe to relevant messages.
     this._subscription = this.messageService.subscriber().subscribe((msg: Message) => {
+
       switch(msg.name) {
 
         case 'app.login':
@@ -67,19 +76,27 @@ export class FeedComponent implements OnInit, OnDestroy {
   /**
    * Invoked when filter condition changes, as in for how long
    * period user wants to display his or her feed.
-   * 
-   * @param e Event
    */
-  filterHot(e: MatButtonToggleChange) {
-    this.minuteFilter = +e.value;
+  filterHot(value: string) {
+    this.minuteFilter = value;
+    localStorage.setItem('timespan_filter', this.minuteFilter.toString());
     this.getFeed();
+  }
+
+  /**
+   * Invoked when caller wants to see more posts.
+   */
+  feedMore() {
+    this.anarqService.posts.feed(null, null, +this.minuteFilter, 10, this.posts.length).subscribe((result: PostExcerpt[]) => {
+      this.posts = this.posts.concat(result);
+    });
   }
 
   /*
    * Retrieves feed from backend, and binds result to model.
    */
   private getFeed() {
-    this.anarqService.posts.feed(null, null, this.minuteFilter).subscribe((result: PostExcerpt[]) => {
+    this.anarqService.posts.feed(null, null, +this.minuteFilter).subscribe((result: PostExcerpt[]) => {
       this.posts = result;
     });
   }

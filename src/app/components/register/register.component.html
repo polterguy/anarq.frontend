@@ -5,6 +5,7 @@
     <mat-label>Username</mat-label>
     <input
       matInput
+      [class]="usernameGood === 'no' ? 'error' : ''"
       [(ngModel)]="username"
       autocomplete="username"
       (change)="checkUsername()">
@@ -14,6 +15,7 @@
     <mat-label>Email</mat-label>
     <input
       matInput
+      [class]="emailGood === 'no' ? 'error' : ''"
       [(ngModel)]="email"
       autocomplete="email"
       (change)="checkEmail()">
@@ -48,6 +50,7 @@
   <div class="button-strip">
 
     <button
+      [disabled]="!isGood()"
       mat-button
       (click)="register()">Register</button>
 

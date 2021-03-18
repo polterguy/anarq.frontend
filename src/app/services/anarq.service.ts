@@ -475,13 +475,19 @@ export class AnarqService {
        * @param offset Offset of where to start returning items from
        * @returns All posts matching specified conditions
        */
-      feed: (topic: string = null, username: string = null, minutes: number = 10080, limit: number = 25, offset: number = 0) => {
-        let query = '?limit=' + limit + '&offset=' + offset + '&minutes=' + minutes;
+      feed: (topic: string = null, username: string = null, minutes: number = null, limit: number = 10, offset: number = 0) => {
+        let query = '?limit=' + limit;
         if (topic) {
           query += '&topic=' + topic;
         }
         if (username) {
           query += '&username=' + username;
+        }
+        if (minutes) {
+          query += '&minutes=' + minutes;
+        }
+        if (offset && offset !== 0) {
+          query += '&offset=' + offset;
         }
         return this.httpClient.get<PostExcerpt[]>(
           environment.apiUrl + 'magic/modules/anarq/posts/feed' + query);

@@ -1,6 +1,10 @@
 
 <mat-card *ngIf="post">
 
+  <mat-icon class="visibility" matTooltip="Public post" *ngIf="post.visibility === 'public'">public</mat-icon>
+  <mat-icon class="visibility" matTooltip="Friends only" *ngIf="post.visibility === 'friends'">security</mat-icon>
+  <mat-icon class="visibility" matTooltip="Moderated by admin" *ngIf="post.visibility === 'moderated'">block</mat-icon>
+
   <button
     *ngIf="stateService.isModerator && post && post.visibility !== 'moderated'"
     class="moderate"
@@ -9,7 +13,7 @@
     Moderate
   </button>
 
-  <div class="meta">Posted {{post.created | since}} by <a [routerLink]="'/users/' + post.user">{{post.user}}</a>, {{post.licks}} licks</div>
+  <div class="meta">Posted {{post.created | since}} by <a [routerLink]="'/users/' + post.user">{{post.user}}</a>, {{post.licks}} licks, {{post.visibility}}</div>
 
   <button
     *ngIf="canLike()"
