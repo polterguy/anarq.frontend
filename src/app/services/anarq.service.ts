@@ -350,6 +350,24 @@ export class AnarqService {
   }
 
   /**
+   * Returns miscelanous methods, such as PayPal donate configuration retriever, etc.
+   */
+  get misc() {
+    return {
+
+      /**
+       * Returns client ID for PayPal account associated with donations.
+       * 
+       * @returns ClientID needed to make PayPal donations work
+       */
+      payPalClientId: () => {
+        return this.httpClient.get<ResultModel>(
+          environment.apiUrl + 'magic/modules/anarq/misc/paypal-configuration')
+      }
+    }
+  }
+
+  /**
    * Allows users to create, read, update and delete comments in the backend.
    */
   get comments() {

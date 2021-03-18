@@ -22,6 +22,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 /*
+ * 3rd party library imports.
+ */
+import { NgxPayPalModule } from 'ngx-paypal';
+
+/*
  * Application specific imports.
  */
 import { AppComponent } from './app.component';
@@ -36,6 +41,7 @@ import { PostComponent } from './components/post/post.component';
 import { LoginComponent } from './components/login/login.component';
 import { CreateComponent } from './components/create/create.component';
 import { RegisterComponent } from './components/register/register.component';
+import { DonateComponent } from './components/donate/donate.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +55,7 @@ import { RegisterComponent } from './components/register/register.component';
     CreateComponent,
     UserComponent,
     RegisterComponent,
+    DonateComponent,
   ],
   imports: [
     FormsModule,
@@ -66,6 +73,7 @@ import { RegisterComponent } from './components/register/register.component';
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
+    NgxPayPalModule,
   ],
   providers: [
     {
