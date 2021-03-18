@@ -1,4 +1,8 @@
 
+<mat-card *ngIf="is404" class="big-404">
+  <img src="../assets/404.jpg">
+</mat-card>
+
 <mat-card *ngIf="post">
 
   <mat-icon class="visibility" matTooltip="Public post" *ngIf="post.visibility === 'public'">public</mat-icon>
@@ -43,6 +47,22 @@
     <div class="meta">Posted {{idx.created | since}} by <a [routerLink]="'/users/' + post.user">{{idx.user}}</a></div>
 
     <div class="content" [innerHtml]="idx.content | md"></div>
+
+    <button
+      *ngIf="stateService.isModerator && idx.visibility !== 'moderated'"
+      class="moderate"
+      mat-button
+      (click)="moderateComment(idx)">
+      Moderate
+    </button>
+
+    <button
+      *ngIf="stateService.isModerator && idx.visibility === 'moderated'"
+      class="moderate"
+      mat-button
+      (click)="unModerateComment(idx)">
+      Un-moderate
+    </button>
 
   </div>
 

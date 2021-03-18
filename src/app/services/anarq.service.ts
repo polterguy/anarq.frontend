@@ -104,6 +104,7 @@ export class Post {
   content: string;
   licks: number;
   user: string;
+  visibility: string;
 }
 
 /**
@@ -329,6 +330,17 @@ export class AnarqService {
       moderateComment: (id: number) => {
         return this.httpClient.delete(
           environment.apiUrl + 'magic/modules/anarq/admin/moderate-comment?id=' + id);
+      },
+
+      /**
+       * Un-moderates a comment in the backend, making it public for all again.
+       * 
+       * @param id Comment to moderate
+       * @returns Whether or not operation was a success
+       */
+       unModerateComment: (id: number) => {
+        return this.httpClient.delete(
+          environment.apiUrl + 'magic/modules/anarq/admin/un-moderate-comment?id=' + id);
       },
 
       /**

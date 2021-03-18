@@ -41,6 +41,11 @@ export class PostComponent implements OnInit {
   public comment: string;
 
   /**
+   * If post was not found, this will be true.
+   */
+  public is404: boolean = false;
+
+  /**
    * Creates an instance of your component.
    * 
    * @param route Needed to figure out which post user wants to see
@@ -79,6 +84,11 @@ export class PostComponent implements OnInit {
       if (lambda) {
         lambda();
       }
+    }, (error: any) => {
+      this.snackBar.open(error.error.message, 'ok', {
+        duration: 2000,
+      });
+      this.is404 = true;
     });
   }
 
@@ -119,10 +129,12 @@ export class PostComponent implements OnInit {
    */
   moderate() {
     this.anarqService.admin.moderatePost(this.post.id).subscribe((result: Affected) => {
-      this.post.visibility = 'moderated';
-      this.snackBar.open('Post was moderated', 'ok', {
-        duration: 2000,
-      });
+      if (result.affected === 1) {
+        this.post.visibility = 'moderated';
+        this.snackBar.open('Post was moderated', 'ok', {
+          duration: 2000,
+        });
+      }
     });
   }
 
@@ -131,10 +143,40 @@ export class PostComponent implements OnInit {
    */
    unModerate() {
     this.anarqService.admin.unModeratePost(this.post.id).subscribe((result: Affected) => {
-      this.post.visibility = 'public';
-      this.snackBar.open('Post was made public again', 'ok', {
-        duration: 2000,
-      });
+      if (result.affected === 1) {
+        this.post.visibility = 'public';
+        this.snackBar.open('Post was made public again', 'ok', {
+          duration: 2000,
+        });
+      }
+    });
+  }
+
+  /**
+   * Invoked when a comment should be moderated.
+   */
+   moderateComment(comment: Comment) {
+    this.anarqService.admin.moderateComment(comment.id).subscribe((result: Affected) => {
+      if (result.affected === 1) {
+        comment.visibility = 'moderated';
+        this.snackBar.open('Comment was moderated', 'ok', {
+          duration: 2000,
+        });
+      }
+    });
+  }
+
+  /**
+   * Invoked when a comment should be un-moderated.
+   */
+   unModerateComment(comment: Comment) {
+    this.anarqService.admin.unModerateComment(comment.id).subscribe((result: Affected) => {
+      if (result.affected === 1) {
+        comment.visibility = 'public';
+        this.snackBar.open('Comment was made public again', 'ok', {
+          duration: 2000,
+        });
+      }
     });
   }
 
@@ -142,7 +184,7 @@ export class PostComponent implements OnInit {
    * Invoked when comments needs to be retrieved for post.
    */
   getComments() {
-    this.anarqService.comments.get(this.post.id).subscribe((result: any) => {
+    this.anarqService.comments.get(this.post.id).subscribe((result: Comment[]) => {
       this.comments = result;
     });
   }

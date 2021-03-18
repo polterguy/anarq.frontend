@@ -48,6 +48,10 @@ mat-card {
     padding: 2rem;
     border-radius: .5rem;
     position: relative;
+    .moderate {
+      margin-left: -1rem;
+      bottom: -2rem;
+    }
   }
 }
 .content {
@@ -63,6 +67,10 @@ mat-card {
   a {
     color: #77f;
   }
+}
+
+mat-card.big-404 {
+  text-align: center;
 }
 
 ::ng-deep.card {
