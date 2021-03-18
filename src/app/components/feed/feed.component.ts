@@ -1,6 +1,6 @@
 import { Subscription } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AnarqService, PostExcerpt } from 'src/app/services/anarq.service';
+import { AnarqService, PostExcerpt, Topic } from 'src/app/services/anarq.service';
 import { Message, MessageService } from 'src/app/services/message.service';
 import { StateService } from 'src/app/services/state.service';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
@@ -20,6 +20,16 @@ export class FeedComponent implements OnInit, OnDestroy {
    */
   public posts: PostExcerpt[] = [];
 
+  /**
+   * All topics that exists in backend.
+   */
+   public topics: Topic[] = [];
+
+   /**
+    * Topic we should filter according to.
+    */
+   public topic: Topic;
+ 
   /**
    * How many minutes user wants to filter his feed according to.
    */
@@ -62,8 +72,29 @@ export class FeedComponent implements OnInit, OnDestroy {
       }
     });
 
-    // Databinding feed initially.
-    this.getFeed();
+    // Retrieving all topics from backend, to allow user to select topic to associate post with.
+    this.anarqService.topics.list().subscribe((result: Topic[]) => {
+
+      // Assigning models.
+      const all: Topic[] = [{ name: 'No filter ...', description: null, items: 0, last_activity: null }];
+      this.topics = all.concat(result);
+
+      // Checking if we've stored a topic filter.
+      const tp = localStorage.getItem('topic_filter');
+      if (tp) {
+        const old = this.topics.filter(x => x.name === tp);
+        if (old.length > 0) {
+          this.topic = old[0];
+        } else {
+          this.topic = this.topics[0];
+        }
+      } else {
+        this.topic = this.topics[0];
+      }
+
+      // Databinding feed initially.
+      this.getFeed();
+    });
   }
 
   /**
@@ -92,11 +123,19 @@ export class FeedComponent implements OnInit, OnDestroy {
     });
   }
 
-  /*
+  /**
    * Retrieves feed from backend, and binds result to model.
    */
-  private getFeed() {
-    this.anarqService.posts.feed(null, null, +this.minuteFilter).subscribe((result: PostExcerpt[]) => {
+  getFeed() {
+
+    // Storing selected topic into local storage.
+    localStorage.setItem('topic_filter', this.topic.name);
+
+    // Retrieving items from backend.
+    this.anarqService.posts.feed(
+      this.topic.description === null ? null : this.topic.name,
+      null,
+      +this.minuteFilter).subscribe((result: PostExcerpt[]) => {
       this.posts = result;
     });
   }
