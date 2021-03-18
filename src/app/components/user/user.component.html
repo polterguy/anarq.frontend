@@ -21,7 +21,7 @@
   <span class="entity licks">{{user.licks}} licks</span>
   <span class="entity licks">Roles; {{getRoles()}}</span>
 
-  <hr>
+  <hr *ngIf="posts && posts.length > 0">
 
   <div *ngIf="posts" class="list">
 
