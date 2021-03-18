@@ -92,7 +92,20 @@ export class UserComponent implements OnInit {
    * Returns true if use can be blocked.
    */
   canBlock() {
-    return this.user.roles.indexOf('blocked') === -1;
+    return this.user.roles.indexOf('root') === -1 && 
+      this.user.roles.indexOf('admin') === -1 &&
+      this.user.roles.indexOf('moderated') === -1 &&
+      this.user.roles.indexOf('blocked') === -1;
+  }
+
+  /**
+   * Returns true if use can be unblocked.
+   */
+   canUnBlock() {
+    return this.user.roles.indexOf('root') === -1 && 
+      this.user.roles.indexOf('admin') === -1 &&
+      this.user.roles.indexOf('moderated') === -1 &&
+      this.user.roles.indexOf('blocked') !== -1;
   }
 
   /**

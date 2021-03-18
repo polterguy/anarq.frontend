@@ -9,7 +9,7 @@
     (click)="blockUser()">Block</button>
 
   <button
-    *ngIf="stateService.isModerator && !canBlock()"
+    *ngIf="stateService.isModerator && canUnBlock()"
     mat-button
     class="block-button"
     (click)="unblockUser()">Unblock</button>
