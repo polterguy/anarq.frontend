@@ -11,11 +11,8 @@
 
   <ul *ngIf="posts.length > 0" class="feed">
     <li *ngFor="let idx of posts" [class]="idx.visibility">
-      <mat-icon *ngIf="idx.visibility === 'public'">public</mat-icon>
-      <mat-icon *ngIf="idx.visibility === 'friends'">security</mat-icon>
-      <mat-icon *ngIf="idx.visibility === 'moderated'">block</mat-icon>
       <a [routerLink]="'/post/' + idx.id">
-        [{{idx.licks}}] {{idx.excerpt}} - [{{idx.user}}]
+        {{idx.excerpt}} <small>{{idx.user}} - {{idx.licks}}</small>
       </a>
     </li>
   </ul>

@@ -417,7 +417,7 @@ export class AnarqService {
        * @returns Whether or not operation was successful
        */
       unlick: (id: number) => {
-        return this.httpClient.delete(
+        return this.httpClient.delete<Affected>(
           environment.apiUrl + 'magic/modules/anarq/licks/lick?id=' + id);
       },
 
@@ -428,7 +428,7 @@ export class AnarqService {
        * @returns Whether or not operation was a success
        */
       lick: (id: number) => {
-        return this.httpClient.post(
+        return this.httpClient.post<Affected>(
           environment.apiUrl + 'magic/modules/anarq/licks/lick', {
             id
           });
@@ -441,7 +441,7 @@ export class AnarqService {
        * @returns All users that licked the specified post or comment
        */
       lickers: (id: number) => {
-        return this.httpClient.get(
+        return this.httpClient.get<string[]>(
           environment.apiUrl + 'magic/modules/anarq/licks/lickers?id=' + id);
       },
     };

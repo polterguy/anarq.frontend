@@ -6,9 +6,8 @@ mat-card {
   position: relative;
   .karma {
     position: absolute;
-    top: 1rem;
+    bottom: 1rem;
     right: 1rem;
-    color: #777;
     span {
       font-size: 1.3rem;
       vertical-align: top;
@@ -17,6 +16,11 @@ mat-card {
       font-size: 1.3rem;
       margin-right: .25rem;
     }
+  }
+  .like-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
   }
   blockquote {
     font-size: 1.1rem;

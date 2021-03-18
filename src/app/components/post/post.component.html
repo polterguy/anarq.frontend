@@ -1,11 +1,11 @@
 
 <mat-card *ngIf="post">
 
-  <div class="karma">
-    <mat-icon *ngIf="post.visibility === 'public'" matTooltip="Post is publicly visible for everybody">public</mat-icon>
-    <mat-icon *ngIf="post.visibility === 'friends'" matTooltip="Post is only visible for registered user">security</mat-icon>
-    <mat-icon *ngIf="post.visibility === 'moderated'" matTooltip="Post has been moderated and only admins can see it">block</mat-icon>
-    <span matTooltip="Post karma">{{post.licks}}</span>
+  <div class="karma" [matTooltip]="getLickersTooltip()">
+    <mat-icon *ngIf="post.visibility === 'public'">public</mat-icon>
+    <mat-icon *ngIf="post.visibility === 'friends'">security</mat-icon>
+    <mat-icon *ngIf="post.visibility === 'moderated'">block</mat-icon>
+    <span>{{post.licks}}</span>
   </div>
 
   <button
@@ -17,6 +17,15 @@
   </button>
 
   <div class="meta">Posted {{post.created | since}} by <a [routerLink]="'/users/' + post.user">{{post.user}}</a></div>
+
+  <button
+    mat-icon-button
+    [color]="liked ? 'primary' : 'secondary'"
+    [matTooltip]="liked ? 'You have already liked this post' : 'Click to like post'"
+    class="like-button"
+    (click)="likePost()">
+    <mat-icon>thumb_up</mat-icon>
+  </button>
 
   <div class="content" [innerHtml]="post.content | md"></div>
 
@@ -32,7 +41,7 @@
   <div *ngIf="post && (post.visibility === 'public' || post.visibility === 'friends') && stateService.isVerified">
 
     <mat-form-field class="fill-width">
-      <mat-label>Comment (Markdown OK) ...</mat-label>
+      <mat-label>Comment ...</mat-label>
       <textarea
         matInput
         [(ngModel)]="comment"
