@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 // Application specific imports.
 import { StateService } from 'src/app/services/state.service';
 import { Affected, AnarqService, CreateModel, Post, Comment } from 'src/app/services/anarq.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-post',
@@ -49,6 +50,7 @@ export class PostComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private anarqService: AnarqService,
+    private snackBar: MatSnackBar,
     public stateService: StateService) { }
 
   /**
@@ -117,7 +119,22 @@ export class PostComponent implements OnInit {
    */
   moderate() {
     this.anarqService.admin.moderatePost(this.post.id).subscribe((result: Affected) => {
-      this.router.navigate(['/']);
+      this.post.visibility = 'moderated';
+      this.snackBar.open('Post was moderated', 'ok', {
+        duration: 2000,
+      });
+    });
+  }
+
+  /**
+   * Invoked when a post should be un-moderated.
+   */
+   unModerate() {
+    this.anarqService.admin.unModeratePost(this.post.id).subscribe((result: Affected) => {
+      this.post.visibility = 'public';
+      this.snackBar.open('Post was made public again', 'ok', {
+        duration: 2000,
+      });
     });
   }
 

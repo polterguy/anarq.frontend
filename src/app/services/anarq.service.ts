@@ -344,6 +344,17 @@ export class AnarqService {
       },
 
       /**
+       * Un-moderates a post in the backend, making it public for all.
+       * 
+       * @param id Post to moderate
+       * @returns Whether or not operation was a success
+       */
+       unModeratePost: (id: number) => {
+        return this.httpClient.delete<Affected>(
+          environment.apiUrl + 'magic/modules/anarq/admin/un-moderate-post?id=' + id);
+      },
+
+      /**
        * Returns information about a specific user
        * 
        * @param username Username to retrieve information about

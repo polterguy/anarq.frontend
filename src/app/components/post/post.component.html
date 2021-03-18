@@ -13,6 +13,14 @@
     Moderate
   </button>
 
+  <button
+    *ngIf="stateService.isModerator && post && post.visibility === 'moderated'"
+    class="moderate"
+    mat-button
+    (click)="unModerate()">
+    Un-moderate
+  </button>
+
   <div class="meta">Posted {{post.created | since}} by <a [routerLink]="'/users/' + post.user">{{post.user}}</a>, {{post.licks}} licks, {{post.visibility}}</div>
 
   <button
