@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AnarqService, CreateModel, Topic } from 'src/app/services/anarq.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create',
@@ -49,6 +50,7 @@ export class CreateComponent implements OnInit {
    */
   constructor(
     private anarqService: AnarqService,
+    private snackBar: MatSnackBar,
     private router: Router) { }
 
   /**
@@ -87,6 +89,12 @@ export class CreateComponent implements OnInit {
       this.visibility,
       this.hyperlink).subscribe((result: CreateModel) => {
       this.router.navigate(['/post/' + result.id]);
+    }, (error: any) => {
+
+      // Oops ...
+      this.snackBar.open(error.error.message, 'ok', {
+        duration: 2000,
+      });
     });
   }
 }

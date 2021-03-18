@@ -1,13 +1,21 @@
 
 <mat-card>
 
-  <a
-    *ngIf="stateService.isLoggedIn"
-    class="create"
-    mat-button
-    routerLink="/create">
-    New ...
-  </a>
+  <div class="button-strip">
+
+    <mat-button-toggle-group value="1440" (change)="filterHot($event)">
+
+      <mat-button-toggle value="60">Last hour</mat-button-toggle>
+
+      <mat-button-toggle value="1440">Today</mat-button-toggle>
+
+      <mat-button-toggle value="10080">This week</mat-button-toggle>
+
+      <mat-button-toggle value="42336">This month</mat-button-toggle>
+
+    </mat-button-toggle-group>
+
+  </div>
 
   <ul *ngIf="posts.length > 0" class="feed">
     <li *ngFor="let idx of posts" [class]="idx.visibility">

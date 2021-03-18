@@ -4,10 +4,9 @@ mat-card {
   width: 60rem;
   padding: 3rem 3rem;
   position: relative;
-  .create {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
+  .button-strip {
+    margin-top: -2rem;
+    margin-right: -2rem;
   }
   .feed {
     padding: 0;

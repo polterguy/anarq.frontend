@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AnarqService, PostExcerpt } from 'src/app/services/anarq.service';
 import { Message, MessageService } from 'src/app/services/message.service';
 import { StateService } from 'src/app/services/state.service';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
 
 @Component({
   selector: 'app-feed',
@@ -18,6 +19,11 @@ export class FeedComponent implements OnInit, OnDestroy {
    * Posts currently being viewed.
    */
   public posts: PostExcerpt[] = [];
+
+  /**
+   * How many minutes user wants to filter his feed according to.
+   */
+  public minuteFilter: number = 1440;
 
   /**
    * Creates an instance of your component.
@@ -58,11 +64,22 @@ export class FeedComponent implements OnInit, OnDestroy {
     this._subscription.unsubscribe();
   }
 
+  /**
+   * Invoked when filter condition changes, as in for how long
+   * period user wants to display his or her feed.
+   * 
+   * @param e Event
+   */
+  filterHot(e: MatButtonToggleChange) {
+    this.minuteFilter = +e.value;
+    this.getFeed();
+  }
+
   /*
    * Retrieves feed from backend, and binds result to model.
    */
   private getFeed() {
-    this.anarqService.posts.feed().subscribe((result: PostExcerpt[]) => {
+    this.anarqService.posts.feed(null, null, this.minuteFilter).subscribe((result: PostExcerpt[]) => {
       this.posts = result;
     });
   }

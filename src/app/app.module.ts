@@ -19,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 /*
  * Application specific imports.
@@ -59,6 +60,7 @@ import { RegisterComponent } from './components/register/register.component';
     MatTooltipModule,
     MatToolbarModule,
     MatSnackBarModule,
+    MatButtonToggleModule,
     MatIconModule,
     MatCardModule,
     MatInputModule,

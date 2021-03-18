@@ -1,7 +1,7 @@
 
 <mat-toolbar color="primary">
   <span>
-    <a routerLink="/" class="logo">AnarQ</a>
+    <a routerLink="/" class="logo">Feed</a>
   </span>
 
   <span class="spacer"></span>
@@ -9,7 +9,7 @@
   <button
     *ngIf="stateService.isLoggedIn"
     mat-button
-    (click)="logout()">Logout [{{stateService.username}}]</button>
+    (click)="logout()">Logout</button>
 
   <a
     *ngIf="!stateService.isLoggedIn"
@@ -20,5 +20,13 @@
     *ngIf="!stateService.isLoggedIn"
     routerLink="/login"
     mat-button>Login</a>
+
+  <a
+    *ngIf="stateService.isLoggedIn"
+    class="create"
+    mat-button
+    routerLink="/create">
+    New ...
+  </a>
 
 </mat-toolbar>
