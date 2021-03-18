@@ -7,11 +7,26 @@ mat-card {
 @media screen and (min-width: 800px) {
   mat-card {
     margin: 5rem auto 2rem auto;
-    width: 25rem;
-    padding: 5rem 5rem 3rem 5rem;
+    width: 50rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: row;
+    div.part {
+      width: 50%;
+    }
+    div.part:nth-child(2) {
+      margin-left: 2rem;
+    }
   }
 }
 
 .error {
   color: #a00;
+}
+
+::ng-deep.tnc {
+  text-align: justify;
+  ol, ul {
+    padding-left: 1rem;
+  }
 }

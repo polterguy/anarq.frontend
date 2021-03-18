@@ -4,6 +4,11 @@ mat-card {
   width: 60rem;
   padding: 2rem;
   position: relative;
+  .block-button {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+  }
   .entity {
     display: block;
     font-weight: bold;

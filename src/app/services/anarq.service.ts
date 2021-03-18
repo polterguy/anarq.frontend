@@ -377,6 +377,30 @@ export class AnarqService {
           environment.apiUrl + 'magic/modules/anarq/admin/user?username=' +
           encodeURIComponent(username));
       },
+
+      /**
+       * Blocks the specified user.
+       * 
+       * @param username User to block
+       * @returns Whether or not operation was a success
+       */
+      blockUser: (username: string) => {
+        return this.httpClient.delete<ResultModel>(
+          environment.apiUrl + 'magic/modules/anarq/admin/block-user?username=' +
+          encodeURIComponent(username));
+      },
+
+      /**
+       * Unblocks the specified user.
+       * 
+       * @param username User to unblock
+       * @returns Whether or not operation was a success
+       */
+       unblockUser: (username: string) => {
+        return this.httpClient.delete<ResultModel>(
+          environment.apiUrl + 'magic/modules/anarq/admin/un-block-user?username=' +
+          encodeURIComponent(username));
+      },
     };
   }
 
@@ -394,6 +418,16 @@ export class AnarqService {
       payPalClientId: () => {
         return this.httpClient.get<ResultModel>(
           environment.apiUrl + 'magic/modules/anarq/misc/paypal-configuration')
+      },
+
+      /**
+       * Returns client ID for PayPal account associated with donations.
+       * 
+       * @returns ClientID needed to make PayPal donations work
+       */
+       termsAndConditions: () => {
+        return this.httpClient.get<ResultModel>(
+          environment.apiUrl + 'magic/modules/anarq/misc/tnc')
       }
     }
   }

@@ -2,11 +2,24 @@
 
 <mat-card *ngIf="user">
 
+  <button
+    *ngIf="stateService.isModerator && canBlock()"
+    mat-button
+    class="block-button"
+    (click)="blockUser()">Block</button>
+
+  <button
+    *ngIf="stateService.isModerator && !canBlock()"
+    mat-button
+    class="block-button"
+    (click)="unblockUser()">Unblock</button>
+
   <span class="entity full_name">{{user.full_name}} - {{username}}</span>
   <span class="entity posts">{{user.posts}} posts</span>
   <span class="entity comments">{{user.comments}} comments</span>
   <span class="entity karma">{{user.karma}} karma point(s)</span>
   <span class="entity licks">{{user.licks}} licks</span>
+  <span class="entity licks">Roles; {{getRoles()}}</span>
 
   <hr>
 
@@ -15,7 +28,7 @@
     <ul *ngIf="posts.length > 0" class="feed">
       <li *ngFor="let idx of posts" [class]="idx.visibility">
         <a [routerLink]="'/post/' + idx.id">
-          [{{idx.licks}}] - {{idx.excerpt}}
+          [{{idx.licks}}] {{idx.excerpt}}
         </a>
       </li>
     </ul>

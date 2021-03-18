@@ -1,59 +1,65 @@
 
 <mat-card>
 
-  <mat-form-field class="fill-width">
-    <mat-label>Username</mat-label>
-    <input
-      matInput
-      [class]="usernameGood === 'no' ? 'error' : ''"
-      [(ngModel)]="username"
-      autocomplete="username"
-      (change)="checkUsername()">
-  </mat-form-field>
+  <div class="part">
 
-  <mat-form-field class="fill-width">
-    <mat-label>Email</mat-label>
-    <input
-      matInput
-      [class]="emailGood === 'no' ? 'error' : ''"
-      [(ngModel)]="email"
-      autocomplete="email"
-      (change)="checkEmail()">
-  </mat-form-field>
+    <mat-form-field class="fill-width">
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        [class]="usernameGood === 'no' ? 'error' : ''"
+        [(ngModel)]="username"
+        autocomplete="username"
+        (change)="checkUsername()">
+    </mat-form-field>
 
-  <mat-form-field class="fill-width">
-    <mat-label>Full name</mat-label>
-    <input
-      matInput
-      [(ngModel)]="name"
-      autocomplete="name">
-  </mat-form-field>
+    <mat-form-field class="fill-width">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        [class]="emailGood === 'no' ? 'error' : ''"
+        [(ngModel)]="email"
+        autocomplete="email"
+        (change)="checkEmail()">
+    </mat-form-field>
 
-  <mat-form-field class="fill-width">
-    <mat-label>Password</mat-label>
-    <input
-      matInput
-      [(ngModel)]="password"
-      type="password"
-      autocomplete="new-password">
-  </mat-form-field>
+    <mat-form-field class="fill-width">
+      <mat-label>Full name</mat-label>
+      <input
+        matInput
+        [(ngModel)]="name"
+        autocomplete="name">
+    </mat-form-field>
 
-  <mat-form-field class="fill-width">
-    <mat-label>Repeat password</mat-label>
-    <input
-      matInput
-      [(ngModel)]="repeatPassword"
-      type="password"
-      autocomplete="new-password">
-  </mat-form-field>
+    <mat-form-field class="fill-width">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        [(ngModel)]="password"
+        type="password"
+        autocomplete="new-password">
+    </mat-form-field>
 
-  <div class="button-strip">
+    <mat-form-field class="fill-width">
+      <mat-label>Repeat password</mat-label>
+      <input
+        matInput
+        [(ngModel)]="repeatPassword"
+        type="password"
+        autocomplete="new-password">
+    </mat-form-field>
 
-    <button
-      [disabled]="!isGood()"
-      mat-button
-      (click)="register()">Register</button>
+    <div class="button-strip">
+
+      <button
+        [disabled]="!isGood()"
+        mat-button
+        (click)="register()">Register</button>
+
+    </div>
 
   </div>
+
+  <div class="tnc part" [innerHTML]="terms | md"></div>
 
 </mat-card>

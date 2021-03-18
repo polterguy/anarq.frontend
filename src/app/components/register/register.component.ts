@@ -1,7 +1,7 @@
 
 // Angular imports.
 import { Router } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Application specific imports.
@@ -12,7 +12,12 @@ import { AnarqService, EntityAvailable, ResultModel } from 'src/app/services/ana
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
+
+  /**
+   * Terms and conditions of using site.
+   */
+  public terms: string = '';
 
   /**
    * Username user wants to use on site.
@@ -27,17 +32,17 @@ export class RegisterComponent {
   /**
    * Email address of user.
    */
-   public email: string;
+  public email: string;
 
    /**
     * 'ok' if email is good.
     */
-   public emailGood: string = '';
+  public emailGood: string = '';
 
    /**
     * Full name of user.
     */
-   public name: string;
+  public name: string;
 
   /**
    * Password user types.
@@ -58,6 +63,17 @@ export class RegisterComponent {
     private anarqService: AnarqService,
     private snackBar: MatSnackBar,
     private router: Router) { }
+
+  /**
+   * Implementation of OnInit.
+   */
+  ngOnInit() {
+
+    // Fetching terms and conditions from backend.
+    this.anarqService.misc.termsAndConditions().subscribe((result: ResultModel) => {
+      this.terms = result.result;
+    });
+  }
 
   /**
    * Verifies username is not already taken.
@@ -115,6 +131,11 @@ export class RegisterComponent {
     }
     if (this.username.length < 3) {
       return false;
+    }
+    for (const idx of this.username) {
+      if ('abcdefghijklmnopqrstuvwxyz1234567890_-'.indexOf(idx.toLowerCase()) === -1) {
+        return false;
+      }
     }
     return true;
   }

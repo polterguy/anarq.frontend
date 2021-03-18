@@ -8,6 +8,11 @@
   <span class="spacer"></span>
 
   <a
+    routerLink="/"
+    class="feed"
+    mat-button>Feed</a>
+
+  <a
     *ngIf="stateService.isLoggedIn"
     routerLink="/donate"
     class="donate"
@@ -37,8 +42,6 @@
     *ngIf="stateService.isLoggedIn"
     class="create"
     mat-button
-    routerLink="/create">
-    New ...
-  </a>
+    routerLink="/create">New</a>
 
 </mat-toolbar>

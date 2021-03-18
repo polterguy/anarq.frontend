@@ -1,6 +1,12 @@
+
+// Angular imports.
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { AnarqService, PostExcerpt, User } from 'src/app/services/anarq.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+// Application specific imports.
+import { StateService } from 'src/app/services/state.service';
+import { AnarqService, PostExcerpt, ResultModel, User } from 'src/app/services/anarq.service';
 
 @Component({
   selector: 'app-user',
@@ -32,7 +38,9 @@ export class UserComponent implements OnInit {
    */
   constructor(
     private route: ActivatedRoute,
-    private anarqService: AnarqService) { }
+    private anarqService: AnarqService,
+    private snackBar: MatSnackBar,
+    public stateService: StateService) { }
 
   /**
    * Implementation of OnInit.
@@ -68,6 +76,50 @@ export class UserComponent implements OnInit {
    feedMore() {
     this.anarqService.posts.feed(null, null, null, 10, this.posts.length).subscribe((result: PostExcerpt[]) => {
       this.posts = this.posts.concat(result);
+    });
+  }
+
+  /**
+   * Returns roles user belongs to.
+   * 
+   * @returns Returns all roles user belongs to separated by comma
+   */
+  getRoles() {
+    return this.user.roles.join(', ');
+  }
+
+  /**
+   * Returns true if use can be blocked.
+   */
+  canBlock() {
+    return this.user.roles.indexOf('blocked') === -1;
+  }
+
+  /**
+   * Invoked if user needs to be blocked.
+   */
+  blockUser() {
+    this.anarqService.admin.blockUser(this.username).subscribe((result: ResultModel) => {
+      this.snackBar.open('User was blocked from site', 'ok', {
+        duration: 2000,
+      });
+      this.user.roles = ['blocked'];
+    }, (error: any) => {
+      this.snackBar.open(error.error.message, 'ok', {
+        duration: 2000,
+      });
+    });
+  }
+
+  /**
+   * Invoked if user needs to be blocked.
+   */
+   unblockUser() {
+    this.anarqService.admin.unblockUser(this.username).subscribe((result: ResultModel) => {
+      this.snackBar.open('User was unblocked from site', 'ok', {
+        duration: 2000,
+      });
+      this.user.roles = ['guest'];
     });
   }
 }

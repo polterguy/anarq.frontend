@@ -7,13 +7,16 @@ mat-toolbar {
   .spacer {
     flex: 1 1 auto;
   }
+  .feed {
+    margin-right: 1rem;
+  }
   .users {
-    margin-right: 2rem;
+    margin-right: 1rem;
   }
   .donate {
-    margin-right: 2rem;
+    margin-right: 1rem;
   }
   .create {
-    margin-left: 2rem;
+    margin-left: 1rem;
   }
 }
