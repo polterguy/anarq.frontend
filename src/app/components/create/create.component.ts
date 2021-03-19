@@ -75,7 +75,6 @@ export class CreateComponent implements OnInit {
    */
   isGood() {
     return this.topic && this.visibility && this.content && this.content.length >= 5 &&
-      this.content.indexOf('https://') === -1 && this.content.indexOf('http://') === -1 &&
       (this.hyperlink === '' || this.hyperlink.startsWith('https://') || this.hyperlink.startsWith('http://'));
   }
 

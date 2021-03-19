@@ -9,9 +9,7 @@
       (click)="deleteTopic(idx)">Delete</button>
     <div *ngIf="idx.last_activity" class="last_activity">{{idx.last_activity | since}}, {{idx.items}} items</div>
     <h3>{{idx.name}}</h3>
-    <p>
-      {{idx.description}}
-    </p>
+    <div [innerHTML]="idx.description | md"></div>
   </div>
 
   <mat-form-field class="fill-width">
