@@ -93,7 +93,7 @@ export class CreateComponent implements OnInit {
 
       // Oops ...
       this.snackBar.open(error.error.message, 'ok', {
-        duration: 2000,
+        duration: 5000,
       });
     });
   }
