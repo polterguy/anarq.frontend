@@ -42,7 +42,9 @@
 
 <div class="comments" *ngIf="comments">
 
-  <div *ngFor="let idx of comments" class="comment">
+  <div *ngFor="let idx of comments" [class]="'comment ' + idx.visibility">
+
+    <mat-icon class="moderated-comment" matTooltip="Moderated by admin" *ngIf="idx.visibility === 'moderated'">block</mat-icon>
 
     <div class="meta">Posted {{idx.created | since}} by <a [routerLink]="'/users/' + post.user">{{idx.user}}</a></div>
 

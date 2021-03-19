@@ -52,6 +52,14 @@ mat-card {
       margin-left: -1rem;
       bottom: -2rem;
     }
+    .moderated-comment {
+      position: absolute;
+      top: .5rem;
+      right: .5rem;
+    }
+  }
+  .comment.moderated {
+    color: #ccc;
   }
 }
 .content {
