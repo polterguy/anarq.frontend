@@ -2,10 +2,16 @@
 <mat-toolbar color="primary">
 
   <span>
-    <a routerLink="/" class="logo">AnarQ</a>
+    <a routerLink="/" matTooltip="Free Speech, One Each!" class="logo">AnarQ</a>
   </span>
 
   <span class="spacer"></span>
+
+  <a
+    *ngIf="stateService.isAdmin"
+    routerLink="/admin"
+    class="admin"
+    mat-button>Admin</a>
 
   <a
     routerLink="/"

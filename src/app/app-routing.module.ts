@@ -9,6 +9,7 @@ import { FeedComponent } from './components/feed/feed.component';
 import { PostComponent } from './components/post/post.component';
 import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/login/login.component';
+import { AdminComponent } from './components/admin/admin.component';
 import { CreateComponent } from './components/create/create.component';
 import { DonateComponent } from './components/donate/donate.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: '', component: FeedComponent },
   { path: 'me', component: MeComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'admin', component: AdminComponent },
   { path: 'create', component: CreateComponent },
   { path: 'post/:id', component: PostComponent },
   { path: 'donate', component: DonateComponent },

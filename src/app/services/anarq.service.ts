@@ -715,7 +715,7 @@ export class AnarqService {
        * @returns 
        */
       delete: (name: string) => {
-        return this.httpClient.delete(
+        return this.httpClient.delete<Affected>(
           environment.apiUrl + 'magic/modules/anarq/topics/topic?name=' + encodeURIComponent(name));
       },
 
@@ -727,7 +727,7 @@ export class AnarqService {
        * @returns 
        */
       create: (name: string, description: string) => {
-        return this.httpClient.post(
+        return this.httpClient.post<ResultModel>(
           environment.apiUrl + 'magic/modules/anarq/topics/topic', {
             name,
             description,

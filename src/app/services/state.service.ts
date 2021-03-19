@@ -59,6 +59,21 @@ export class StateService {
   }
 
   /**
+   * Returns true if user is an administrator on the site.
+   */
+   public get isAdmin() {
+    if (!this.isLoggedIn) {
+      return false;
+    }
+    const payload = <string>atob(this.ticket.split('.')[1]);
+    const roles = JSON.parse(payload).role;
+    if (Array.isArray(roles)) {
+      return (<string[]>roles).filter(x => x === 'admin' || x === 'root').length > 0;
+    }
+    return roles === 'admin' || roles === 'root';
+  }
+
+  /**
    * Returns true if user is allowed to like, post and comment.
    */
   public get isVerified() {

@@ -1,0 +1,45 @@
+
+<mat-card>
+
+  <div *ngFor="let idx of topics" class="topic">
+    <button
+      *ngIf="!idx.last_activity"
+      mat-button
+      class="delete-button"
+      (click)="deleteTopic(idx)">Delete</button>
+    <div *ngIf="idx.last_activity" class="last_activity">{{idx.last_activity | since}}, {{idx.items}} items</div>
+    <h3>{{idx.name}}</h3>
+    <p>
+      {{idx.description}}
+    </p>
+  </div>
+
+  <mat-form-field class="fill-width">
+    <mat-label>Name ...</mat-label>
+    <input
+      matInput
+      [(ngModel)]="name"
+      autocomplete="off">
+  </mat-form-field>
+
+  <mat-form-field class="fill-width" appearance="outline">
+    <mat-label>Description ...</mat-label>
+    <textarea
+      matInput
+      [(ngModel)]="description"
+      rows="10"></textarea>
+  </mat-form-field>
+
+  <div class="button-strip">
+
+    <button
+      [disabled]="!isGood()"
+      mat-raised-button
+      color="primary"
+      (click)="submitNewTopic()">
+      Submit
+    </button>
+
+  </div>
+
+</mat-card>
