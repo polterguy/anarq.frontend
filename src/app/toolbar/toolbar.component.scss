@@ -1,8 +1,11 @@
 
 mat-toolbar {
   .logo {
-    color: whitesmoke;
-    text-decoration: none;    
+    background-image: url(/assets/anarq.svg);
+    background-size: cover;
+    width: 14rem;
+    height: 4rem;
+    display: block;
   }
   .spacer {
     flex: 1 1 auto;
