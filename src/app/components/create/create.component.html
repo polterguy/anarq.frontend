@@ -1,9 +1,17 @@
 
+<mat-spinner
+  *ngIf="submitting"
+  mode="indeterminate"
+  diameter="50">
+</mat-spinner>
+
+
 <mat-card>
 
   <mat-form-field class="fill-width" appearance="outline">
     <mat-label>Content ...</mat-label>
     <textarea
+      [disabled]="submitting"
       matInput
       [(ngModel)]="content"
       rows="10"></textarea>
@@ -14,6 +22,7 @@
     <mat-form-field class="hyperlink">
       <mat-label>Link</mat-label>
       <input
+        [disabled]="submitting"
         matInput
         [(ngModel)]="hyperlink"
         autocomplete="url">
@@ -21,20 +30,20 @@
 
     <mat-form-field class="small">
       <mat-label>Topic</mat-label>
-      <mat-select [(ngModel)]="topic">
+      <mat-select [disabled]="submitting" [(ngModel)]="topic">
         <mat-option *ngFor="let idx of topics" [value]="idx">{{idx.name}}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="small">
       <mat-label>Visibility</mat-label>
-      <mat-select [(ngModel)]="visibility">
+      <mat-select [disabled]="submitting" [(ngModel)]="visibility">
         <mat-option *ngFor="let idx of visibilities" [value]="idx">{{idx}}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <button
-      [disabled]="!isGood()"
+      [disabled]="!isGood() || submitting"
       mat-raised-button
       color="primary"
       (click)="submit()">

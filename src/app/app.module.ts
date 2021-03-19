@@ -20,6 +20,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 
 /*
  * 3rd party library imports.
@@ -74,6 +75,7 @@ import { AdminComponent } from './components/admin/admin.component';
     MatToolbarModule,
     MatSnackBarModule,
     MatButtonToggleModule,
+    MatProgressSpinnerModule,
     MatIconModule,
     MatCardModule,
     MatInputModule,

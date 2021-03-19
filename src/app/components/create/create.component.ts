@@ -44,6 +44,11 @@ export class CreateComponent implements OnInit {
   public visibility: string;
 
   /**
+   * If true, the post is being submitted.
+   */
+  public submitting: boolean = false;
+
+  /**
    * Creates an instance of your component.
    * 
    * @param anarqService Needed to retrieve topics and save post
@@ -82,15 +87,20 @@ export class CreateComponent implements OnInit {
    * Invoked when user wants to submit his post.
    */
   submit() {
+
+    // Making sure we obscure things while post is being submitted.
+    this.submitting = true;
     this.anarqService.posts.create(
       this.content,
       this.topic.name,
       this.visibility,
       this.hyperlink).subscribe((result: CreateModel) => {
-      this.router.navigate(['/post/' + result.id]);
+        this.submitting = false;
+        this.router.navigate(['/post/' + result.id]);
     }, (error: any) => {
 
       // Oops ...
+      this.submitting = false;
       this.snackBar.open(error.error.message, 'ok', {
         duration: 5000,
       });

@@ -1,4 +1,11 @@
 
+mat-spinner {
+  position: absolute;
+  top: 5rem;
+  right: 1rem;
+  z-index: 1000;
+}
+
 mat-card {
   margin: 2rem auto 2rem auto;
   width: 60rem;
