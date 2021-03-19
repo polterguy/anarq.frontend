@@ -13,6 +13,17 @@ import { environment } from 'src/environments/environment';
 }
 
 /**
+ * Profile mode for currently authenticated user.
+ */
+ export class Profile {
+  email: string;
+  created: Date;
+  full_name: string;
+  locked: boolean;
+  roles: string[];
+}
+
+/**
  * Result returned by some endpoints when item was successfully created.
  */
  export class CreateModel {
@@ -263,7 +274,7 @@ export class AnarqService {
        * @returns Information for the currently authenticated user
        */
       me: () => {
-        return this.httpClient.get(
+        return this.httpClient.get<Profile>(
           environment.apiUrl + 'magic/modules/anarq/profile/me');
       },
 

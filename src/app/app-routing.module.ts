@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // Application specific imports.
+import { MeComponent } from './components/me/me.component';
 import { FeedComponent } from './components/feed/feed.component';
 import { PostComponent } from './components/post/post.component';
 import { UserComponent } from './components/user/user.component';
@@ -15,6 +16,7 @@ import { AllUsersComponent } from './components/all-users/all-users.component';
 
 const routes: Routes = [
   { path: '', component: FeedComponent },
+  { path: 'me', component: MeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'create', component: CreateComponent },
   { path: 'post/:id', component: PostComponent },

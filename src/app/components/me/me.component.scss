@@ -1,0 +1,23 @@
+
+mat-card {
+  margin: 2rem auto 2rem auto;
+  width: 60rem;
+  padding: 2rem 2rem 3rem 2rem;
+  position: relative;
+  .entity {
+    display: block;
+    font-weight: bold;
+    margin-bottom: .25rem;
+    color: #777;
+  }
+  .full_name {
+    font-size: 1.2rem;
+    color: #000;
+    margin-bottom: 1rem;
+  }
+  .public-information {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+  }
+}

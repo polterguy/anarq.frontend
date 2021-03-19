@@ -43,6 +43,7 @@ import { CreateComponent } from './components/create/create.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DonateComponent } from './components/donate/donate.component';
 import { AllUsersComponent } from './components/all-users/all-users.component';
+import { MeComponent } from './components/me/me.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { AllUsersComponent } from './components/all-users/all-users.component';
     RegisterComponent,
     DonateComponent,
     AllUsersComponent,
+    MeComponent,
   ],
   imports: [
     FormsModule,
