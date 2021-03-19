@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+
+// Angular imports.
 import { Subscription } from 'rxjs';
-import { MessageService } from '../services/message.service';
+import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+
+// Application specific imports.
+import { AnarqService } from '../services/anarq.service';
 import { StateService } from '../services/state.service';
+import { MessageService } from '../services/message.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -15,6 +20,11 @@ export class ToolbarComponent implements OnInit {
   private _subscription: Subscription = null;
 
   /**
+   * True if donations are turned on for the site.
+   */
+  public donations: boolean = false;
+
+  /**
    * Creates an instance of your component.
    * 
    * @param stateService Service keeping track of global states required to dender UI correctly
@@ -22,12 +32,16 @@ export class ToolbarComponent implements OnInit {
   constructor(
     public stateService: StateService,
     private messageService: MessageService,
+    private anarqService: AnarqService,
     private router: Router) { }
 
   /**
    * Implementation of OnInit.
    */
   ngOnInit() {
+    this.anarqService.misc.donations().subscribe((result: boolean) => {
+      this.donations = result;
+    });
   }
 
   /**

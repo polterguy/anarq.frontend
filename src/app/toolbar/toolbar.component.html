@@ -13,7 +13,7 @@
     mat-button>Feed</a>
 
   <a
-    *ngIf="stateService.isLoggedIn"
+    *ngIf="stateService.isLoggedIn && donations"
     routerLink="/donate"
     class="donate"
     mat-button>Donate</a>

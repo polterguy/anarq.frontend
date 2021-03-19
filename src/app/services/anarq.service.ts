@@ -411,6 +411,16 @@ export class AnarqService {
     return {
 
       /**
+       * Returns true if donations are turned on for the site.
+       * 
+       * @returns Whether or not donations have been turned on for the site or not.
+       */
+       donations: () => {
+        return this.httpClient.get<boolean>(
+          environment.apiUrl + 'magic/modules/anarq/misc/donations')
+      },
+
+      /**
        * Returns client ID for PayPal account associated with donations.
        * 
        * @returns ClientID needed to make PayPal donations work
