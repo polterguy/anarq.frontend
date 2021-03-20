@@ -1,70 +1,32 @@
 
-mat-card, .big-404 {
-  margin: 2rem auto 2rem auto;
-  width: 60rem;
-  padding: 2rem 2rem 3rem 2rem;
-  position: relative;
-  overflow: auto;
-  .mat-icon.visibility {
-    position: absolute;
-    bottom: .5rem;
-    left: .5rem;
-    color: #999;
-  }
-  .karma {
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    span {
-      font-size: 1.3rem;
-      vertical-align: top;
-    }
-    mat-icon {
-      font-size: 1.3rem;
-      margin-right: .25rem;
-    }
-  }
-  .like-button {
-    position: absolute;
-    top: .5rem;
-    right: .5rem;
-  }
-  blockquote {
-    font-size: 1.1rem;
-    color: #aaa;
-  }
-  .moderate {
-    position: absolute;
-    bottom: .1rem;
-    left: 2.5rem;
-  }
+/*
+ * Misc buttons and icons.
+ */
+.like-button {
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
 }
-.comments {
-  margin: 2rem auto 2rem auto;
-  width: 64rem;
-  position: relative;
-  .comment {
-    border: solid 1px #f5f5f5;
-    margin-bottom: 1rem;
-    padding: 2rem;
-    border-radius: .5rem;
-    position: relative;
-    .moderate {
-      margin-left: -1rem;
-      bottom: -2rem;
-    }
-    .moderated-comment {
-      position: absolute;
-      top: .5rem;
-      right: .5rem;
-    }
-  }
-  .comment.moderated {
-    color: #ccc;
-  }
+
+.moderate {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: black;
 }
+
+.moderated-icon {
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  color: #ccc;
+}
+
+/*
+ * Markdown content, shared between OP post and comments.
+ */
 ::ng-deep.content {
-  margin-bottom: 1rem !important;
+  text-align: justify;
   h3 {
     font-weight: bold;;
   }
@@ -77,22 +39,22 @@ mat-card, .big-404 {
     color: #777;
   }
 }
+
 .meta {
   position: absolute;
   bottom: .3rem;
   right: .5rem;
   font-size: .8rem;
   font-style: italic;
-  color: #999;
+  color: #aaa;
   a {
     color: #77f;
   }
 }
 
-div.big-404 {
-  text-align: center;
-}
-
+/*
+ * Open Graph links in post.
+ */
 ::ng-deep.card {
   float: right;
   margin-left: 1rem;
@@ -101,7 +63,7 @@ div.big-404 {
   border-radius: .5rem;
   background-color: #fafafa;
   width: 25rem;
-  box-shadow: 2px 1px 1px rgba(0,0,0,.2);
+  box-shadow: 2px 2px 1px rgba(0,0,0,.2);
   transition: box-shadow .1s ease-in;
   a {
     padding: 1rem;
@@ -114,15 +76,32 @@ div.big-404 {
     max-height: 200px;
     float: right;
     margin-left: 1rem;
+    margin-bottom: 1rem;
     border-radius: .5rem;
   }
 }
+
 ::ng-deep.card:after {
   content: '';
   clear: both;
   display: table;
 }
+
 ::ng-deep.card:hover {
   transition: box-shadow .1s ease-in;
-  box-shadow: 5px 3px 3px rgba(0,0,0,.5);
+  box-shadow: 2px 2px 5px rgba(0,0,0,.5);
+}
+
+::ng-deep.card {
+  @media screen and (max-width: 700px) {
+    float: none;
+    width: 100%;
+    margin: 0 0 2rem 0;
+  }
+}
+@media screen and (max-width: 1024px) {
+  mat-card {
+    margin-bottom: 3rem;
+    border-color: black;;
+  }
 }

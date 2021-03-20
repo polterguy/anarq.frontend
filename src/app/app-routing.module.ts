@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'create', component: CreateComponent },
   { path: 'post/:id', component: PostComponent },
   { path: 'donate', component: DonateComponent },
-  { path: 'users/:user', component: UserComponent },
+  { path: 'user/:user', component: UserComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'all-users', component: AllUsersComponent },
 ];

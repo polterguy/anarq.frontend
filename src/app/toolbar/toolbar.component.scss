@@ -10,19 +10,12 @@ mat-toolbar {
   .spacer {
     flex: 1 1 auto;
   }
-  .feed {
+  .button {
     margin-right: 1rem;
   }
-  .me {
-    margin-right: 1rem;
-  }
-  .users {
-    margin-right: 1rem;
-  }
-  .donate {
-    margin-right: 1rem;
-  }
-  .create {
-    margin-left: 1rem;
+  @media screen and (max-width: 800px) {
+    .logo {
+      display: none;
+    }
   }
 }

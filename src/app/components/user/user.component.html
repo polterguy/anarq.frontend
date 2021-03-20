@@ -1,4 +1,12 @@
 
+<mat-card
+  *ngIf="is404"
+  class="big-404">
+
+  <h1>404 - User seems to have escaped from its Kokorona prison :/</h1>
+  <img src="../assets/anarq.svg">
+
+</mat-card>
 
 <mat-card *ngIf="user">
 
@@ -14,21 +22,22 @@
     class="block-button"
     (click)="unblockUser()">Unblock</button>
 
+  <span class="entity karma" matTooltip="User's karma">{{user.karma}}</span>
   <span class="entity full_name">{{user.full_name}} - {{username}}</span>
+  <span class="entity created">Member since {{user.created | since}}</span>
   <span class="entity posts">{{user.posts}} posts</span>
   <span class="entity comments">{{user.comments}} comments</span>
-  <span class="entity karma">{{user.karma}} karma point(s)</span>
   <span class="entity licks">{{user.licks}} licks</span>
   <span class="entity licks">Roles; {{getRoles()}}</span>
 
   <hr *ngIf="posts && posts.length > 0">
 
-  <div *ngIf="posts" class="list">
+  <div *ngIf="posts">
 
     <ul *ngIf="posts.length > 0" class="feed">
       <li *ngFor="let idx of posts" [class]="idx.visibility">
         <a [routerLink]="'/post/' + idx.id">
-          [{{idx.licks}}] {{idx.excerpt}}
+          {{idx.excerpt}}
         </a>
       </li>
     </ul>

@@ -1,34 +1,44 @@
 
 <mat-card>
 
-  <div class="button-strip">
+  <div class="button-strip filter-strip">
 
-    <mat-form-field *ngIf="topics" class="small">
+    <mat-form-field
+      *ngIf="topics"
+      class="small">
+
       <mat-label>Topic filter ...</mat-label>
-      <mat-select [(ngModel)]="topic" (selectionChange)="getFeed()">
-        <mat-option *ngFor="let idx of topics" [value]="idx">{{idx.name}}</mat-option>
+      <mat-select
+        [(ngModel)]="topic"
+        (selectionChange)="getFeed()">
+        <mat-option
+          *ngFor="let idx of topics"
+          [value]="idx">{{idx.name}}</mat-option>
       </mat-select>
+
     </mat-form-field>
 
-    <mat-button-toggle-group #group="matButtonToggleGroup" [value]="minuteFilter" (change)="filterHot(group.value)">
+    <mat-button-toggle-group
+      #group="matButtonToggleGroup"
+      [value]="minuteFilter"
+      (change)="filterHot(group.value)">
 
-      <mat-button-toggle value="60">Last hour</mat-button-toggle>
-
-      <mat-button-toggle value="1440">Last day</mat-button-toggle>
-
-      <mat-button-toggle value="10080">Last week</mat-button-toggle>
-
-      <mat-button-toggle value="42336">Last month</mat-button-toggle>
+      <mat-button-toggle value="60">Hour</mat-button-toggle>
+      <mat-button-toggle value="1440">Day</mat-button-toggle>
+      <mat-button-toggle value="10080">Week</mat-button-toggle>
+      <mat-button-toggle value="42336">Month</mat-button-toggle>
 
     </mat-button-toggle-group>
 
   </div>
 
-  <ul *ngIf="posts.length > 0" class="feed">
-    <li *ngFor="let idx of posts" [class]="idx.visibility">
-      <a [routerLink]="'/post/' + idx.id">
-        [{{idx.licks}}] {{idx.excerpt}}
-      </a>
+  <ul
+    *ngIf="posts.length > 0"
+    class="feed">
+    <li
+      *ngFor="let idx of posts"
+      [class]="idx.visibility">
+      <a [routerLink]="'/post/' + idx.id">{{idx.excerpt}}</a>
     </li>
   </ul>
 

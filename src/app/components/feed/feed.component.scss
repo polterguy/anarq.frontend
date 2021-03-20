@@ -1,33 +1,48 @@
 
-mat-card {
-  margin: 2rem auto 2rem auto;
-  width: 60rem;
-  padding: 3rem 3rem;
-  position: relative;
-  .button-strip {
-    margin-top: -2rem;
-    margin-right: -2rem;
-  }
-  .feed {
-    padding: 0;
-    li {
-      list-style-type: none;
-      margin-bottom: .5rem;
-      a {
-        font-size: 1.2rem;
-        text-decoration: none;
-      }
-    }
-    .moderated {
-      text-decoration: line-through;
+/*
+ * List of posts.
+ */
+.feed {
+  padding: 0;
+  li {
+    list-style-type: none;
+    margin-bottom: .5rem;
+    background-color: rgba(0,0,0,0);
+    a {
+      font-size: 1.2rem;
+      text-decoration: none;
+      display: block;
+      padding: .5rem;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
-  .feed-more {
-    text-align: center;
-    margin-bottom: -2rem;
+  li:hover {
+    background-color: rgba(0,0,0,.05);
+    border-radius: .5rem;
+  }
+  .moderated {
+    text-decoration: line-through;
   }
 }
-.mat-button-toggle-group {
-  height: 32px;
-  align-items: center;
+
+/*
+ * Get more items button.
+ */
+.feed-more {
+  text-align: center;
+  margin-bottom: -2rem;
+}
+
+/*
+ * Filter button strip.
+ */
+.filter-strip {
+  margin-top: -1rem !important;
+  margin-right: -1rem;
+  .mat-button-toggle-group {
+    height: 32px;
+    align-items: center;
+  }
 }

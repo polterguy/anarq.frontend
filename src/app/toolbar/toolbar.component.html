@@ -10,49 +10,52 @@
   <a
     *ngIf="stateService.isAdmin"
     routerLink="/admin"
-    class="admin"
+    class="button"
     mat-button>Admin</a>
 
   <a
     routerLink="/"
-    class="feed"
+    class="button"
     mat-button>Feed</a>
 
   <a
     *ngIf="stateService.isLoggedIn && donations"
     routerLink="/donate"
-    class="donate"
+    class="button"
     mat-button>Donate</a>
 
   <a
     routerLink="/all-users"
-    class="users"
+    class="button"
     mat-button>Users</a>
 
   <a
     *ngIf="stateService.isLoggedIn"
     routerLink="/me"
-    class="me"
+    class="button"
     mat-button>Me</a>
 
   <button
     *ngIf="stateService.isLoggedIn"
     mat-button
+    class="button"
     (click)="logout()">Logout</button>
 
   <a
     *ngIf="!stateService.isLoggedIn"
     routerLink="/register"
+    class="button"
     mat-button>Register</a>
 
   <a
     *ngIf="!stateService.isLoggedIn"
     routerLink="/login"
+    class="button"
     mat-button>Login</a>
 
   <a
     *ngIf="stateService.isLoggedIn"
-    class="create"
+    class="button"
     mat-button
     routerLink="/create">New</a>
 

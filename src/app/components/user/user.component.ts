@@ -31,6 +31,11 @@ export class UserComponent implements OnInit {
   public posts: PostExcerpt[];
 
   /**
+   * If user was not found, this will be true.
+   */
+   public is404: boolean = false;
+
+  /**
    * Creates an instance of your component.
    * 
    * @param route Needed to extract username
@@ -54,6 +59,11 @@ export class UserComponent implements OnInit {
       this.username = params.user;
       this.anarqService.users.get(this.username).subscribe((result: User) => {
         this.user = result;
+      }, (error: any) => {
+        this.snackBar.open(error.error.result, 'ok', {
+          duration: 5000,
+        });
+        this.is404 = true;
       });
     });
 

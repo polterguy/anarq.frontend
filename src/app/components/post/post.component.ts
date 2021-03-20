@@ -102,6 +102,9 @@ export class PostComponent implements OnInit {
     if (this.post.user === this.stateService.username) {
       return false;
     }
+    if (this.post.visibility === 'moderated') {
+      return false;
+    }
     return true;
   }
 

@@ -1,15 +1,65 @@
-/* You can add global styles to this file, and also import other style files */
 
+/*
+ * Globally changing appearance of elements.
+ */
 html, body {
   height: auto;
   min-height: 100%;
 }
+
 body {
   margin: 0;
   padding-bottom: 3rem;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
+/*
+ * Wireframe styles.
+ */
+app-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 4rem;
+  z-index: 1000;
+}
+
+.router-content {
+  margin-top: 4rem;
+  display: block;
+  overflow: auto;
+  height: auto;
+  width: 100vw;
+}
+
+mat-card {
+  margin: 2rem auto 2rem auto;
+  width: 60rem;
+  padding: 2rem 2rem 3rem 2rem !important;
+  position: relative;
+  overflow: auto;
+}
+
+/*
+ * Overrides for clients with smaller pixel resolution.
+ */
+ @media screen and(max-width: 1024px) {
+  mat-card {
+    width: 100vw;
+    padding: 1rem;
+    margin: 0;
+    box-sizing: border-box;
+  }
+}
+
+/*
+ * Utility styles.
+ */
 .fill-width {
   width: 100%;
 }
@@ -25,6 +75,11 @@ body {
   }
 }
 
-a {
-  text-decoration: none;
+/*
+ * 404 - Page not found parts.
+ */
+ .big-404 {
+  text-align: center;
+  height: 15rem;
+  margin-top: 5rem;
 }

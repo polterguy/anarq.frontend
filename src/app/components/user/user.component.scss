@@ -1,46 +1,68 @@
 
-mat-card {
-  margin: 2rem auto 2rem auto;
-  width: 60rem;
-  padding: 2rem;
-  position: relative;
-  .block-button {
-    position: absolute;
-    top: .5rem;
-    right: .5rem;
-  }
-  .entity {
-    display: block;
-    font-weight: bold;
-    margin-bottom: .25rem;
-    color: #777;
-  }
-  .full_name {
-    font-size: 1.2rem;
-    color: #000;
-    margin-bottom: 1rem;
-  }
-  hr {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
-  .list {
-    .feed {
-      padding: 0;
-      li {
-        list-style-type: none;
-        margin-bottom: .5rem;
-        a {
-          text-decoration: none;
-        }
-      }
-      .moderated {
-        text-decoration: line-through;
-      }
+/*
+ * Block button.
+ */
+.block-button {
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+}
+
+/*
+ * Entity value, such as name, username, licks, etc.
+ */
+.entity {
+  display: block;
+  font-weight: bold;
+  margin-bottom: .25rem;
+  color: #777;
+}
+
+/* Overrides for full name and username of user */
+.full_name {
+  font-size: 1.2rem;
+  color: #000;
+  margin-bottom: 1rem;
+}
+
+/* Override for karma entity */
+.karma {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  color: #000;
+}
+
+/*
+ * Separates user data from posts created by user.
+ */
+hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/*
+ * User's posts in system.
+ */
+.feed {
+  padding: 0;
+  li {
+    list-style-type: none;
+    margin-bottom: .5rem;
+    a {
+      text-decoration: none;
     }
   }
-  .feed-more {
-    text-align: center;
-    margin-bottom: -1rem;
+  .moderated {
+    text-decoration: line-through;
   }
+}
+
+/*
+ * Retrieve more posts button.
+ */
+.feed-more {
+  text-align: center;
+  margin-bottom: -1rem;
 }

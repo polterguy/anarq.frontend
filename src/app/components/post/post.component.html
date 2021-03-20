@@ -1,14 +1,19 @@
 
-<div *ngIf="is404" class="big-404">
-  <h1>404 - Page escaped from its prison :/</h1>
+<mat-card
+  *ngIf="is404"
+  class="big-404">
+
+  <h1>404 - Page seems to have escaped from its Kokorona prison :/</h1>
   <img src="../assets/anarq.svg">
-</div>
+
+</mat-card>
 
 <mat-card *ngIf="post">
 
-  <mat-icon class="visibility" matTooltip="Public post" *ngIf="post.visibility === 'public'">public</mat-icon>
-  <mat-icon class="visibility" matTooltip="Friends only" *ngIf="post.visibility === 'friends'">security</mat-icon>
-  <mat-icon class="visibility" matTooltip="Moderated by admin" *ngIf="post.visibility === 'moderated'">block</mat-icon>
+  <mat-icon
+    class="moderated-icon"
+    matTooltip="Moderated by admin"
+    *ngIf="post.visibility === 'moderated'">block</mat-icon>
 
   <button
     *ngIf="stateService.isModerator && post && post.visibility !== 'moderated'"
@@ -23,10 +28,13 @@
     class="moderate"
     mat-button
     (click)="unModerate()">
-    Un-moderate
+    Publish
   </button>
 
-  <div class="meta">Posted {{post.created | since}} by <a [routerLink]="'/users/' + post.user">{{post.user}}</a>, {{post.licks}} licks, {{post.visibility}}</div>
+  <div class="meta">
+    Posted {{post.created | since}} by <a [routerLink]="'/user/' + post.user">{{post.user}}</a>,
+    {{post.licks}} licks, {{post.visibility}}
+  </div>
 
   <button
     *ngIf="canLike()"
@@ -37,19 +45,32 @@
     <mat-icon>thumb_up</mat-icon>
   </button>
 
-  <div class="content" [innerHtml]="post.content | md"></div>
+  <div
+    class="content"
+    [innerHtml]="post.content | md"></div>
 
 </mat-card>
 
-<div class="comments" *ngIf="comments">
+<div
+  class="comments"
+  *ngIf="comments">
 
-  <div *ngFor="let idx of comments" [class]="'comment ' + idx.visibility">
+  <mat-card
+    *ngFor="let idx of comments"
+    [class]="'comment ' + idx.visibility">
 
-    <mat-icon class="moderated-comment" matTooltip="Moderated by admin" *ngIf="idx.visibility === 'moderated'">block</mat-icon>
+    <mat-icon
+      *ngIf="idx.visibility === 'moderated'"
+      class="moderated-icon"
+      matTooltip="Moderated by admin">block</mat-icon>
 
-    <div class="meta">Posted {{idx.created | since}} by <a [routerLink]="'/users/' + post.user">{{idx.user}}</a></div>
+    <div class="meta">
+      Posted {{idx.created | since}} by <a [routerLink]="'/user/' + post.user">{{idx.user}}</a>
+    </div>
 
-    <div class="content" [innerHtml]="idx.content | md"></div>
+    <div
+      class="content"
+      [innerHtml]="idx.content | md"></div>
 
     <button
       *ngIf="stateService.isModerator && idx.visibility !== 'moderated'"
@@ -64,19 +85,24 @@
       class="moderate"
       mat-button
       (click)="unModerateComment(idx)">
-      Un-moderate
+      Publish
     </button>
 
-  </div>
+  </mat-card>
 
-  <div *ngIf="post && (post.visibility === 'public' || post.visibility === 'friends') && stateService.isVerified">
+  <mat-card
+    *ngIf="post && (post.visibility === 'public' || post.visibility === 'friends') && stateService.isVerified">
 
-    <mat-form-field class="fill-width" appearance="outline">
+    <mat-form-field
+      class="fill-width"
+      appearance="outline">
+
       <mat-label>Comment ...</mat-label>
       <textarea
         matInput
         [(ngModel)]="comment"
         rows="10"></textarea>
+
     </mat-form-field>
 
     <div class="button-strip">
@@ -90,6 +116,6 @@
 
     </div>
 
-  </div>
+  </mat-card>
 
 </div>

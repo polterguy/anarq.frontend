@@ -4,10 +4,10 @@
   <span class="entity full_name">{{profile.full_name}} - {{stateService.username}}</span>
   <span class="entity email">{{profile.email}}</span>
   <span class="entity created">Member since {{profile.created | since}}</span>
-  <span class="entity locked">Locked; {{profile.locked}}</span>
-  <span class="entity roles">Roles; {{getRoles()}}</span>
+  <span class="entity locked">Locked {{profile.locked}}</span>
+  <span class="entity roles">Roles {{getRoles()}}</span>
   <span class="entity public-information">
-    <a mat-button [routerLink]="'/users/' + stateService.username">Public info</a>
+    <a mat-button [routerLink]="'/user/' + stateService.username">Public info</a>
   </span>
 
 </mat-card>
