@@ -236,7 +236,7 @@ export class AnarqService {
        * @returns Whether or not operation was a success
        */
       confirmEmail: (email: string, secret: string) => {
-        return this.httpClient.post(
+        return this.httpClient.post<AuthenticateModel>(
           environment.apiUrl() + 'magic/modules/anarq/profile/confirm-email', {
             email,
             secret,
