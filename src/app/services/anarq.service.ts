@@ -147,7 +147,7 @@ export class AnarqService {
        */
       get: (url: string) => {
         return this.httpClient.get(
-          environment.apiUrl + 'magic/modules/anarq/site/page?url=' +
+          environment.apiUrl() + 'magic/modules/anarq/site/page?url=' +
           encodeURIComponent(url));
       },
 
@@ -158,7 +158,7 @@ export class AnarqService {
        */
       list: () => {
         return this.httpClient.get(
-          environment.apiUrl + 'magic/modules/anarq/site/pages');
+          environment.apiUrl() + 'magic/modules/anarq/site/pages');
       },
 
       /**
@@ -171,7 +171,7 @@ export class AnarqService {
        */
       create: (url: string, name: string, content: string) => {
         return this.httpClient.post(
-          environment.apiUrl + 'magic/modules/anarq/site/page', {
+          environment.apiUrl() + 'magic/modules/anarq/site/page', {
             url,
             name,
             content,
@@ -188,7 +188,7 @@ export class AnarqService {
        */
        update: (url: string, name: string, content: string) => {
         return this.httpClient.put(
-          environment.apiUrl + 'magic/modules/anarq/site/page', {
+          environment.apiUrl() + 'magic/modules/anarq/site/page', {
             url,
             name,
             content,
@@ -203,7 +203,7 @@ export class AnarqService {
        */
       delete: (url: string) => {
         return this.httpClient.delete(
-          environment.apiUrl + 'magic/modules/anarq/site/page?url=' +
+          environment.apiUrl() + 'magic/modules/anarq/site/page?url=' +
           encodeURIComponent(url));
       }
     };
@@ -224,7 +224,7 @@ export class AnarqService {
        */
       authenticate: (username: string, password: string) => {
         return this.httpClient.get<AuthenticateModel>(
-          environment.apiUrl + 'magic/modules/anarq/profile/authenticate?username=' +
+          environment.apiUrl() + 'magic/modules/anarq/profile/authenticate?username=' +
           encodeURIComponent(username) + '&password=' + encodeURIComponent(password));
       },
 
@@ -237,7 +237,7 @@ export class AnarqService {
        */
       confirmEmail: (email: string, secret: string) => {
         return this.httpClient.post(
-          environment.apiUrl + 'magic/modules/anarq/profile/confirm-email', {
+          environment.apiUrl() + 'magic/modules/anarq/profile/confirm-email', {
             email,
             secret,
           }
@@ -252,7 +252,7 @@ export class AnarqService {
        */
       emailAvailable: (email: string) => {
         return this.httpClient.get<EntityAvailable>(
-          environment.apiUrl + 'magic/modules/anarq/profile/email-available?email=' +
+          environment.apiUrl() + 'magic/modules/anarq/profile/email-available?email=' +
           encodeURIComponent(email));
       },
 
@@ -264,7 +264,7 @@ export class AnarqService {
        */
        usernameAvailable: (username: string) => {
         return this.httpClient.get<EntityAvailable>(
-          environment.apiUrl + 'magic/modules/anarq/profile/username-available?username=' +
+          environment.apiUrl() + 'magic/modules/anarq/profile/username-available?username=' +
           encodeURIComponent(username));
       },
 
@@ -275,7 +275,7 @@ export class AnarqService {
        */
       me: () => {
         return this.httpClient.get<Profile>(
-          environment.apiUrl + 'magic/modules/anarq/profile/me');
+          environment.apiUrl() + 'magic/modules/anarq/profile/me');
       },
 
       /**
@@ -289,7 +289,7 @@ export class AnarqService {
        */
       register: (username: string, password: string, email: string, fullName: string) => {
         return this.httpClient.post<ResultModel>(
-          environment.apiUrl + 'magic/modules/anarq/profile/register', {
+          environment.apiUrl() + 'magic/modules/anarq/profile/register', {
             username,
             password,
             email,
@@ -316,7 +316,7 @@ export class AnarqService {
        */
       deleteComment: (id: number) => {
         return this.httpClient.delete(
-          environment.apiUrl + 'magic/modules/anarq/admin/comment?id=' + id);
+          environment.apiUrl() + 'magic/modules/anarq/admin/comment?id=' + id);
       },
 
       /**
@@ -328,7 +328,7 @@ export class AnarqService {
        */
        deletePost: (id: number) => {
         return this.httpClient.delete(
-          environment.apiUrl + 'magic/modules/anarq/admin/post?id=' + id);
+          environment.apiUrl() + 'magic/modules/anarq/admin/post?id=' + id);
       },
 
       /**
@@ -340,7 +340,7 @@ export class AnarqService {
        */
       moderateComment: (id: number) => {
         return this.httpClient.delete(
-          environment.apiUrl + 'magic/modules/anarq/admin/moderate-comment?id=' + id);
+          environment.apiUrl() + 'magic/modules/anarq/admin/moderate-comment?id=' + id);
       },
 
       /**
@@ -351,7 +351,7 @@ export class AnarqService {
        */
        unModerateComment: (id: number) => {
         return this.httpClient.delete(
-          environment.apiUrl + 'magic/modules/anarq/admin/un-moderate-comment?id=' + id);
+          environment.apiUrl() + 'magic/modules/anarq/admin/un-moderate-comment?id=' + id);
       },
 
       /**
@@ -363,7 +363,7 @@ export class AnarqService {
        */
        moderatePost: (id: number) => {
         return this.httpClient.delete<Affected>(
-          environment.apiUrl + 'magic/modules/anarq/admin/moderate-post?id=' + id);
+          environment.apiUrl() + 'magic/modules/anarq/admin/moderate-post?id=' + id);
       },
 
       /**
@@ -374,7 +374,7 @@ export class AnarqService {
        */
        unModeratePost: (id: number) => {
         return this.httpClient.delete<Affected>(
-          environment.apiUrl + 'magic/modules/anarq/admin/un-moderate-post?id=' + id);
+          environment.apiUrl() + 'magic/modules/anarq/admin/un-moderate-post?id=' + id);
       },
 
       /**
@@ -385,7 +385,7 @@ export class AnarqService {
        */
       user: (username: string) => {
         return this.httpClient.get(
-          environment.apiUrl + 'magic/modules/anarq/admin/user?username=' +
+          environment.apiUrl() + 'magic/modules/anarq/admin/user?username=' +
           encodeURIComponent(username));
       },
 
@@ -397,7 +397,7 @@ export class AnarqService {
        */
       blockUser: (username: string) => {
         return this.httpClient.delete<ResultModel>(
-          environment.apiUrl + 'magic/modules/anarq/admin/block-user?username=' +
+          environment.apiUrl() + 'magic/modules/anarq/admin/block-user?username=' +
           encodeURIComponent(username));
       },
 
@@ -409,7 +409,7 @@ export class AnarqService {
        */
        unblockUser: (username: string) => {
         return this.httpClient.delete<ResultModel>(
-          environment.apiUrl + 'magic/modules/anarq/admin/un-block-user?username=' +
+          environment.apiUrl() + 'magic/modules/anarq/admin/un-block-user?username=' +
           encodeURIComponent(username));
       },
     };
@@ -428,7 +428,7 @@ export class AnarqService {
        */
        donations: () => {
         return this.httpClient.get<boolean>(
-          environment.apiUrl + 'magic/modules/anarq/misc/donations')
+          environment.apiUrl() + 'magic/modules/anarq/misc/donations')
       },
 
       /**
@@ -438,7 +438,7 @@ export class AnarqService {
        */
       payPalClientId: () => {
         return this.httpClient.get<ResultModel>(
-          environment.apiUrl + 'magic/modules/anarq/misc/paypal-configuration')
+          environment.apiUrl() + 'magic/modules/anarq/misc/paypal-configuration')
       },
 
       /**
@@ -448,7 +448,7 @@ export class AnarqService {
        */
        termsAndConditions: () => {
         return this.httpClient.get<ResultModel>(
-          environment.apiUrl + 'magic/modules/anarq/misc/tnc')
+          environment.apiUrl() + 'magic/modules/anarq/misc/tnc')
       }
     }
   }
@@ -467,7 +467,7 @@ export class AnarqService {
        */
       delete: (id: number) => {
         return this.httpClient.delete(
-          environment.apiUrl + 'magic/modules/anarq/comments/comment?id=' + id);
+          environment.apiUrl() + 'magic/modules/anarq/comments/comment?id=' + id);
       },
 
       /**
@@ -479,7 +479,7 @@ export class AnarqService {
        */
       create: (parent: number, content: string) => {
         return this.httpClient.post<CreateModel>(
-          environment.apiUrl + 'magic/modules/anarq/comments/comment', {
+          environment.apiUrl() + 'magic/modules/anarq/comments/comment', {
             parent,
             content,
           });
@@ -496,7 +496,7 @@ export class AnarqService {
        */
        update: (id: number, content: string, visibility: string) => {
         return this.httpClient.put(
-          environment.apiUrl + 'magic/modules/anarq/comments/comment', {
+          environment.apiUrl() + 'magic/modules/anarq/comments/comment', {
             id,
             content,
             visibility,
@@ -513,7 +513,7 @@ export class AnarqService {
        */
       get: (parent: number, limit: number = 25, offset: number = 0) => {
         return this.httpClient.get<Comment[]>(
-          environment.apiUrl + 'magic/modules/anarq/comments/comments?parent=' + parent +
+          environment.apiUrl() + 'magic/modules/anarq/comments/comments?parent=' + parent +
           '&limit=' + limit + '&offset=' + offset);
       }
     };
@@ -534,7 +534,7 @@ export class AnarqService {
        */
       unlick: (id: number) => {
         return this.httpClient.delete<Affected>(
-          environment.apiUrl + 'magic/modules/anarq/licks/lick?id=' + id);
+          environment.apiUrl() + 'magic/modules/anarq/licks/lick?id=' + id);
       },
 
       /**
@@ -545,7 +545,7 @@ export class AnarqService {
        */
       lick: (id: number) => {
         return this.httpClient.post<Affected>(
-          environment.apiUrl + 'magic/modules/anarq/licks/lick', {
+          environment.apiUrl() + 'magic/modules/anarq/licks/lick', {
             id
           });
       },
@@ -558,7 +558,7 @@ export class AnarqService {
        */
       lickers: (id: number) => {
         return this.httpClient.get<string[]>(
-          environment.apiUrl + 'magic/modules/anarq/licks/lickers?id=' + id);
+          environment.apiUrl() + 'magic/modules/anarq/licks/lickers?id=' + id);
       },
     };
   }
@@ -594,7 +594,7 @@ export class AnarqService {
           query += '&offset=' + offset;
         }
         return this.httpClient.get<PostExcerpt[]>(
-          environment.apiUrl + 'magic/modules/anarq/posts/feed' + query);
+          environment.apiUrl() + 'magic/modules/anarq/posts/feed' + query);
       },
 
       /**
@@ -606,7 +606,7 @@ export class AnarqService {
        */
       delete: (id: number) => {
         return this.httpClient.delete(
-          environment.apiUrl + 'magic/modules/anarq/posts/post?id=' + id);
+          environment.apiUrl() + 'magic/modules/anarq/posts/post?id=' + id);
       },
 
       /**
@@ -617,7 +617,7 @@ export class AnarqService {
        */
       get: (id: number) => {
         return this.httpClient.get<Post>(
-          environment.apiUrl + 'magic/modules/anarq/posts/post?id=' + id);
+          environment.apiUrl() + 'magic/modules/anarq/posts/post?id=' + id);
       },
 
       /**
@@ -631,7 +631,7 @@ export class AnarqService {
        */
       create: (content: string, topic: string, visibility: string, hyperlink: string = null) => {
         return this.httpClient.post<CreateModel>(
-          environment.apiUrl + 'magic/modules/anarq/posts/post', {
+          environment.apiUrl() + 'magic/modules/anarq/posts/post', {
             content,
             topic,
             visibility,
@@ -648,7 +648,7 @@ export class AnarqService {
        */
       update: (id: number, content: string, visibility: string) => {
         return this.httpClient.put(
-          environment.apiUrl + 'magic/modules/anarq/posts/post', {
+          environment.apiUrl() + 'magic/modules/anarq/posts/post', {
             id,
             content,
             visibility,
@@ -676,7 +676,7 @@ export class AnarqService {
           query += 'username=' + username;
         }
         return this.httpClient.get(
-          environment.apiUrl + 'magic/modules/anarq/posts/posts-count' + query);
+          environment.apiUrl() + 'magic/modules/anarq/posts/posts-count' + query);
       },
 
       /**
@@ -697,7 +697,7 @@ export class AnarqService {
           query += '&username=' + username;
         }
         return this.httpClient.get(
-          environment.apiUrl + 'magic/modules/anarq/posts/posts' + query);
+          environment.apiUrl() + 'magic/modules/anarq/posts/posts' + query);
       },
     };
   }
@@ -716,7 +716,7 @@ export class AnarqService {
        */
       delete: (name: string) => {
         return this.httpClient.delete<Affected>(
-          environment.apiUrl + 'magic/modules/anarq/topics/topic?name=' + encodeURIComponent(name));
+          environment.apiUrl() + 'magic/modules/anarq/topics/topic?name=' + encodeURIComponent(name));
       },
 
       /**
@@ -728,7 +728,7 @@ export class AnarqService {
        */
       create: (name: string, description: string) => {
         return this.httpClient.post<ResultModel>(
-          environment.apiUrl + 'magic/modules/anarq/topics/topic', {
+          environment.apiUrl() + 'magic/modules/anarq/topics/topic', {
             name,
             description,
           });
@@ -743,7 +743,7 @@ export class AnarqService {
        */
       update: (name: string, description: string) => {
         return this.httpClient.put(
-          environment.apiUrl + 'magic/modules/anarq/topics/topic', {
+          environment.apiUrl() + 'magic/modules/anarq/topics/topic', {
             name,
             description,
           });
@@ -756,7 +756,7 @@ export class AnarqService {
        */
       list: () => {
         return this.httpClient.get<Topic[]>(
-          environment.apiUrl + 'magic/modules/anarq/topics/topics');
+          environment.apiUrl() + 'magic/modules/anarq/topics/topics');
       }
     }
   }
@@ -775,7 +775,7 @@ export class AnarqService {
        */
       get: (username: string) => {
         return this.httpClient.get<User>(
-          environment.apiUrl + 'magic/modules/anarq/users/user?username=' +
+          environment.apiUrl() + 'magic/modules/anarq/users/user?username=' +
           encodeURIComponent(username));
       },
 
@@ -788,7 +788,7 @@ export class AnarqService {
        */
       list: (limit: number = 25, offset: number = 0) => {
         return this.httpClient.get<UserExcerpt[]>(
-          environment.apiUrl + 'magic/modules/anarq/users/users?limit=' + limit +
+          environment.apiUrl() + 'magic/modules/anarq/users/users?limit=' + limit +
           '&offset=' + offset);
       }
     };

@@ -1,4 +1,8 @@
+
+// Production overrides.
 export const environment = {
   production: true,
-  apiUrl: 'https://api.anarq.org/',
+  apiUrl: () => {
+    return window.location.protocol + "//api." + window.location.host;
+  },
 };
