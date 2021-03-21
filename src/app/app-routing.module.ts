@@ -14,6 +14,7 @@ import { CreateComponent } from './components/create/create.component';
 import { DonateComponent } from './components/donate/donate.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AllUsersComponent } from './components/all-users/all-users.component';
+import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.component';
 
 const routes: Routes = [
   { path: '', component: FeedComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'user/:user', component: UserComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'all-users', component: AllUsersComponent },
+  { path: 'confirm-email', component: ConfirmEmailComponent },
 ];
 
 @NgModule({

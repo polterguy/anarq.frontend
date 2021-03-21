@@ -46,6 +46,7 @@ import { DonateComponent } from './components/donate/donate.component';
 import { AllUsersComponent } from './components/all-users/all-users.component';
 import { MeComponent } from './components/me/me.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { AdminComponent } from './components/admin/admin.component';
     AllUsersComponent,
     MeComponent,
     AdminComponent,
+    ConfirmEmailComponent,
   ],
   imports: [
     FormsModule,
