@@ -8,11 +8,23 @@ mat-card {
     padding: 0;
     li {
       list-style-type: none;
-      margin-bottom: .5rem;
+      background-color: rgba(0,0,0,0);
       a {
         font-size: 1.2rem;
         text-decoration: none;
+        display: block;
+        padding: .5rem;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        .right {
+          float: right;
+        }
       }
+    }
+    li:hover {
+      background-color: rgba(0,0,0,.05);
+      border-radius: .5rem;
     }
   }
   .feed-more {

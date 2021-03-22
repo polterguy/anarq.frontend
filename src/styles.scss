@@ -34,7 +34,7 @@ app-toolbar {
   overflow: auto;
   height: auto;
   width: 100vw;
-  min-height: 100vh;
+  min-height: calc(100vh - 7rem);
   background-color: #d9caf3;
   padding-bottom: 3rem;
 }

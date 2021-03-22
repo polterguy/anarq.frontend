@@ -4,7 +4,8 @@
   <ul *ngIf="users && users.length > 0" class="users">
     <li *ngFor="let idx of users">
       <a [routerLink]="'/user/' + idx.user">
-        [{{idx.karma}}] {{idx.user}}
+        {{idx.user}}
+        <span *ngIf="idx.karma !== 0" class="right">{{idx.karma}}</span>
       </a>
     </li>
   </ul>

@@ -38,6 +38,7 @@
       <li *ngFor="let idx of posts" [class]="idx.visibility">
         <a [routerLink]="'/post/' + idx.id">
           {{idx.excerpt}}
+          <span *ngIf="idx.licks !== 0" class="right">{{idx.licks}}</span>
         </a>
       </li>
     </ul>
