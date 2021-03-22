@@ -4,10 +4,22 @@
   <span class="entity full_name">{{profile.full_name}} - {{stateService.username}}</span>
   <span class="entity email">{{profile.email}}</span>
   <span class="entity created">Member since {{profile.created | since}}</span>
-  <span class="entity locked">Locked {{profile.locked}}</span>
   <span class="entity roles">Roles {{getRoles()}}</span>
   <span class="entity public-information">
     <a mat-button [routerLink]="'/user/' + stateService.username">Public info</a>
   </span>
+
+  <mat-icon class="locked" *ngIf="profile.locked" matTooltip="You have been locked out from site">open</mat-icon>
+  <mat-icon class="locked" *ngIf="!profile.locked" matTooltip="You can freely post as you wish">verified_user</mat-icon>
+
+  <mat-form-field class="paypal-id">
+    <mat-label>PayPal ID</mat-label>
+    <input
+      matInput
+      [matTooltip]="!profile.payPalId ? 'If you provide me with your PayPal ID readers can donate to you for your work' : ''"
+      [(ngModel)]="profile.payPalId"
+      (change)="payPalIdChanged()"
+      autocomplete="off">
+  </mat-form-field>
 
 </mat-card>

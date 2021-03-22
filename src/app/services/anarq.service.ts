@@ -28,6 +28,7 @@ import { environment } from 'src/environments/environment';
   full_name: string;
   locked: boolean;
   roles: string[];
+  payPalId: string;
 }
 
 /**
@@ -47,6 +48,7 @@ import { environment } from 'src/environments/environment';
   licks: number;
   posts: number;
   roles: string[];
+  payPalId: string;
 }
 
 /**
@@ -304,6 +306,19 @@ export class AnarqService {
             email_type: 'web'
         });
       },
+
+      /**
+       * Stores user's PayPalID
+       * 
+       * @param payPalId New PayPalID for user
+       * @returns Whether or not invocation was a success
+       */
+       storePayPalId: (payPalId: string) => {
+        return this.httpClient.put<ResultModel>(
+          environment.apiUrl() + 'magic/modules/anarq/profile/paypal-id', {
+            payPalId
+          });
+      },
     }
   }
 
@@ -435,7 +450,24 @@ export class AnarqService {
        */
        donations: () => {
         return this.httpClient.get<boolean>(
-          environment.apiUrl() + 'magic/modules/anarq/misc/donations')
+          environment.apiUrl() + 'magic/modules/anarq/misc/donations');
+      },
+
+      /**
+       * Logs a donation to an author by invoking server.
+       * 
+       * @param user User that received the donation
+       * @param donator Email address of person donating to user
+       * @param amount Amount that was donated
+       * @returns Whether or not operation was successful
+       */
+       logDonation: (user: string, donator: string, amount: number) => {
+        return this.httpClient.post<ResultModel>(
+          environment.apiUrl() + 'magic/modules/anarq/misc/log-donation', {
+            user,
+            donator,
+            amount
+          });
       },
 
       /**
@@ -445,7 +477,7 @@ export class AnarqService {
        */
       payPalClientId: () => {
         return this.httpClient.get<ResultModel>(
-          environment.apiUrl() + 'magic/modules/anarq/misc/paypal-configuration')
+          environment.apiUrl() + 'magic/modules/anarq/misc/paypal-configuration');
       },
 
       /**

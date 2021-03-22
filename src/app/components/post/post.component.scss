@@ -110,3 +110,23 @@
     border-color: black;;
   }
 }
+
+.donations {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: -1rem;
+  margin-bottom: -1rem;
+  .donate-button {
+    margin-left: -2rem;
+    margin-right: -4rem;
+    width: calc(100% + 4rem);
+    text-align: center;
+    display: block;
+
+  }
+  ngx-paypal {
+    margin: 2rem 2rem 0 2rem;
+    display: block;
+    text-align: center;
+  }
+}

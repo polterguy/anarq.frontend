@@ -2,11 +2,14 @@
 // Angular imports.
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+// Utility imports.
+import { ICreateOrderRequest, IPayPalConfig } from 'ngx-paypal';
 
 // Application specific imports.
 import { StateService } from 'src/app/services/state.service';
-import { Affected, AnarqService, CreateModel, Post, Comment } from 'src/app/services/anarq.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Affected, AnarqService, CreateModel, Post, Comment, User, ResultModel } from 'src/app/services/anarq.service';
 
 @Component({
   selector: 'app-post',
@@ -14,6 +17,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
+
+  /**
+   * PayPal donate configuration.
+   */
+   public payPalConfig? : IPayPalConfig;
 
   /**
    * Model for post.
@@ -41,9 +49,19 @@ export class PostComponent implements OnInit {
   public comment: string;
 
   /**
+   * Model for user, including PayPal ID.
+   */
+  public user: User;
+
+  /**
    * If post was not found, this will be true.
    */
   public is404: boolean = false;
+
+  /**
+   * If true, the PayPal donate buttons should be shown.
+   */
+  public showPayPal: boolean = false;
 
   /**
    * Creates an instance of your component.
@@ -71,6 +89,7 @@ export class PostComponent implements OnInit {
       this.getPost(id, () => {
         this.getComments();
         this.getLickers();
+        this.getUserMeta();
       });
     });
   }
@@ -80,13 +99,17 @@ export class PostComponent implements OnInit {
    */
   getPost(id: number, lambda:() => void = null) {
     this.anarqService.posts.get(id).subscribe((result: Post) => {
+
+      // Success!
       this.post = result;
       if (lambda) {
         lambda();
       }
     }, (error: any) => {
+
+      // Oops ...!!
       this.snackBar.open(error.error.message, 'ok', {
-        duration: 2000,
+        duration: 5000,
       });
       this.is404 = true;
     });
@@ -120,6 +143,8 @@ export class PostComponent implements OnInit {
    * Invoked when user clicks the like button of the post.
    */
   likePost() {
+
+    // Checking if we're supposed to like or remove existing like.
     if (this.liked) {
       this.anarqService.licks.unlick(this.post.id).subscribe((result: any) => {
         this.lickers.splice(this.lickers.indexOf(this.stateService.username));
@@ -213,6 +238,92 @@ export class PostComponent implements OnInit {
       this.lickers = [];
       this.liked = false;
     }
+  }
+
+  /**
+   * Invoked when user's meta information needs to be retrieved.
+   */
+  getUserMeta() {
+
+    // Invoking backend to retrieve user information.
+    this.anarqService.users.get(this.post.user).subscribe((result: User) => {
+
+      // Assigning model.
+      this.user = result;
+      this.payPalConfig = {
+        currency: 'EUR',
+        clientId: result.payPalId,
+        createOrderOnClient: (data) => <ICreateOrderRequest> {
+          intent: 'CAPTURE',
+          purchase_units: [{
+            amount: {
+              currency_code: 'EUR',
+              value: '5',
+              breakdown: {
+                item_total: {
+                  currency_code: 'EUR',
+                  value: '5'
+                }
+              }
+            },
+            items: [{
+              name: 'AnarQ Donation',
+              quantity: '1',
+              category: 'DIGITAL_GOODS',
+              unit_amount: {
+                currency_code: 'EUR',
+                value: '5',
+              },
+            }]
+          }]
+        },
+        advanced: {
+          commit: 'true'
+        },
+        style: {
+          label: 'paypal',
+          layout: 'vertical'
+        },
+        onApprove: (data, actions) => {
+          console.log('onApprove - transaction was approved, but not authorized', data, actions);
+          actions.order.get().then(details => {
+            console.log('onApprove - you can get full order details inside onApprove: ', details);
+          });
+        },
+        onClientAuthorization: (data) => {
+
+          // Invoking server to log the fact that somebody donated to author.
+          const donator = data.payer.email_address;
+          const donations = data.purchase_units.length;
+          this.anarqService.misc.logDonation(this.post.user, donator, donations * 5).subscribe((result: ResultModel) => {
+            console.log('Donation was logged on server');
+          });
+        },
+        onCancel: (data, actions) => {
+          console.log('OnCancel', data, actions);
+        },
+        onError: err => {
+          console.log('OnError', err);
+        },
+        onClick: (data, actions) => {
+          console.log('onClick', data, actions);
+        }
+      };
+
+    }, (error: any) => {
+
+      // Oops ...!!
+      this.snackBar.open(error.error.message, 'ok', {
+        duration: 5000,
+      })
+    });
+  }
+
+  /**
+   * Invoked when user clicks the "Buy author coffee" button.
+   */
+  showPayPalClicked() {
+    this.showPayPal = true;
   }
 
   /**

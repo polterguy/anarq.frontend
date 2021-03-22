@@ -52,6 +52,25 @@
 
 </mat-card>
 
+<mat-card
+  *ngIf="user && user.payPalId"
+  class="donations">
+
+  <button
+    *ngIf="!showPayPal"
+    mat-button
+    class="donate-button"
+    matTooltip="Donate €5 to author"
+    (click)="showPayPalClicked()">
+    Buy author a cup of coffee
+  </button>
+
+  <ngx-paypal
+    *ngIf="showPayPal"
+    [config]="payPalConfig"></ngx-paypal>
+
+</mat-card>
+
 <div
   class="comments"
   *ngIf="comments">

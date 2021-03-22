@@ -52,7 +52,7 @@
 
   </div>
 
-  <div class="meta-description">
+  <div *ngIf="topic" class="meta-description">
     <div [innerHTML]="topic.description | md"></div>
     <p class="visibility">
       {{visibility === 'public' ? 'Post will be publicly visible for all, also people not registered at the site' : 'Post will only be visible for registered users at the site'}}

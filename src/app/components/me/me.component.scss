@@ -1,4 +1,8 @@
 
+mat-card {
+  padding-bottom: 7rem !important;
+}
+
 .entity {
   display: block;
   font-weight: bold;
@@ -14,4 +18,16 @@
   position: absolute;
   top: 0;
   right: 0;
+}
+.paypal-id {
+  width: 15rem;
+  position: absolute;
+  bottom: .5rem;
+  right: 1rem;
+}
+.locked {
+  position: absolute;
+  bottom: .5rem;
+  left: .5rem;
+  color: #999;
 }

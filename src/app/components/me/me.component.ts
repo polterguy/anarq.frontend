@@ -1,10 +1,11 @@
 
 // Angular imports.
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Application specific imports.
 import { StateService } from 'src/app/services/state.service';
-import { AnarqService, Profile } from 'src/app/services/anarq.service';
+import { AnarqService, Profile, ResultModel } from 'src/app/services/anarq.service';
 
 @Component({
   selector: 'app-me',
@@ -25,6 +26,7 @@ export class MeComponent implements OnInit {
    */
   constructor(
     private anarqService: AnarqService,
+    private snackBar: MatSnackBar,
     public stateService: StateService) { }
 
   /**
@@ -43,5 +45,32 @@ export class MeComponent implements OnInit {
    */
   getRoles() {
     return this.profile.roles.join(', ');
+  }
+
+  /**
+   * Invoked when PayPalID has changed.
+   */
+  payPalIdChanged() {
+    
+    // Storing PayPalID by invoking backend.
+    this.anarqService.profile.storePayPalId(this.profile.payPalId).subscribe(() => {
+
+      // Success!
+      if (this.profile.payPalId === '') {
+        this.snackBar.open('Your PayPal ID was successfully removed', 'ok', {
+          duration: 5000,
+        });
+      } else {
+        this.snackBar.open('Your PayPal ID was successfully updated', 'ok', {
+          duration: 5000,
+        });
+      }
+    }, (error: any) => {
+
+      // Oops ...!!
+      this.snackBar.open(error.error.message, 'ok', {
+        duration: 5000,
+      });
+    });
   }
 }
