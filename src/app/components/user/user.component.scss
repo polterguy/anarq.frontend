@@ -71,10 +71,20 @@ hr {
   }
 }
 
+mat-card {
+  padding-bottom: 1rem !important;
+}
+
 /*
- * Retrieve more posts button.
+ * Get more items button.
  */
 .feed-more {
-  text-align: center;
-  margin-bottom: -1rem;
+  margin-left: -2rem;
+  margin-right: -2rem;
+  margin-bottom: -1rem !important;
+  button {
+    text-align: center;
+    display: block;
+    width: 100%;
+  }
 }
