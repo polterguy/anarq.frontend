@@ -13,6 +13,13 @@ import { environment } from 'src/environments/environment';
 }
 
 /**
+ * Count result model.
+ */
+ export class CountModel {
+  count: number;
+}
+
+/**
  * Profile mode for currently authenticated user.
  */
  export class Profile {
@@ -515,7 +522,31 @@ export class AnarqService {
         return this.httpClient.get<Comment[]>(
           environment.apiUrl() + 'magic/modules/anarq/comments/comments?parent=' + parent +
           '&limit=' + limit + '&offset=' + offset);
-      }
+      },
+
+      /**
+       * Counts number of comments from backend.
+       * 
+       * @param topic Topic to filter counting within
+       * @param username If specified, only count posts by user
+       * @returns Number of comments matching your optional condition(s)
+       */
+       count: (topic: string = null, username: string = null) => {
+        let query = '';
+        if (topic) {
+          query += '?topic=' + topic;
+        }
+        if (username) {
+          if (query === '') {
+            query += '?';
+          } else {
+            query += '&';
+          }
+          query += 'username=' + username;
+        }
+        return this.httpClient.get<CountModel>(
+          environment.apiUrl() + 'magic/modules/anarq/comments/comments-count' + query);
+      },
     };
   }
 
@@ -677,7 +708,7 @@ export class AnarqService {
           }
           query += 'username=' + username;
         }
-        return this.httpClient.get(
+        return this.httpClient.get<CountModel>(
           environment.apiUrl() + 'magic/modules/anarq/posts/posts-count' + query);
       },
 
@@ -792,7 +823,17 @@ export class AnarqService {
         return this.httpClient.get<UserExcerpt[]>(
           environment.apiUrl() + 'magic/modules/anarq/users/users?limit=' + limit +
           '&offset=' + offset);
-      }
+      },
+
+      /**
+       * Counts number of users from backend.
+       * 
+       * @returns Number of users in the system
+       */
+       count: () => {
+        return this.httpClient.get<CountModel>(
+          environment.apiUrl() + 'magic/modules/anarq/users/users-count');
+      },
     };
   }
 }

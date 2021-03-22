@@ -1,10 +1,13 @@
+
+// Angular imports.
 import { Subscription } from 'rxjs';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AnarqService, PostExcerpt, Topic } from 'src/app/services/anarq.service';
-import { Message, MessageService } from 'src/app/services/message.service';
-import { StateService } from 'src/app/services/state.service';
-import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+
+// Application specific imports.
+import { StateService } from 'src/app/services/state.service';
+import { Message, MessageService } from 'src/app/services/message.service';
+import { AnarqService, CountModel, PostExcerpt, Topic } from 'src/app/services/anarq.service';
 
 @Component({
   selector: 'app-feed',
@@ -35,6 +38,21 @@ export class FeedComponent implements OnInit, OnDestroy {
    * How many minutes user wants to filter his feed according to.
    */
   public minuteFilter: string;
+
+  /**
+   * Number of OP posts in the system.
+   */
+  public countPosts: number;
+
+  /**
+   * Number of comments in the system.
+   */
+   public countComments: number;
+
+  /**
+   * Number of users in the system.
+   */
+   public countUsers: number;
 
   /**
    * Creates an instance of your component.
@@ -96,7 +114,17 @@ export class FeedComponent implements OnInit, OnDestroy {
 
       // Databinding feed initially.
       this.getFeed();
+
+    }, (error: any) => {
+
+      // Oops ...!!
+      this.snackBar.open(error.error.message, 'ok', {
+        duration: 5000
+      });
     });
+
+    // Retrieving meta information from backend.
+    this.getMetaInformation();
   }
 
   /**
@@ -143,6 +171,58 @@ export class FeedComponent implements OnInit, OnDestroy {
       this.snackBar.open(error.error.message, 'ok', {
         duration: 5000,
       });
+    });
+  }
+
+  /*
+   * Private helper methods.
+   */
+
+  /*
+   * Returns meta information from the backend.
+   */
+  private getMetaInformation() {
+
+    // Counting posts in system.
+    this.anarqService.posts.count().subscribe((result: CountModel) => {
+
+      // Assigning model
+      this.countPosts = result.count;
+
+    }, (error: any) => {
+
+      // Oops ...!!
+      this.snackBar.open(error.error.message, 'ok', {
+        duration: 5000,
+      })
+    });
+
+    // Counting comments in system.
+    this.anarqService.comments.count().subscribe((result: CountModel) => {
+
+      // Assigning model
+      this.countComments = result.count;
+
+    }, (error: any) => {
+
+      // Oops ...!!
+      this.snackBar.open(error.error.message, 'ok', {
+        duration: 5000,
+      })
+    });
+
+    // Counting users in system.
+    this.anarqService.users.count().subscribe((result: CountModel) => {
+
+      // Assigning model
+      this.countUsers = result.count;
+
+    }, (error: any) => {
+
+      // Oops ...!!
+      this.snackBar.open(error.error.message, 'ok', {
+        duration: 5000,
+      })
     });
   }
 }
