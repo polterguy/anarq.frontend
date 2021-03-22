@@ -6,12 +6,12 @@ mat-spinner {
   z-index: 1000;
 }
 
-.visibility-description {
-  position: absolute;
-  bottom: 1rem;
-  left: 1rem;
-  font-style: italic;
-  color: #777;
+.meta-description {
+  .visibility {
+    font-style: italic;
+    color: #777;
+    margin-bottom: -2rem !important;
+  }
 }
 .button-strip {
   display: flex;
