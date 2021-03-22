@@ -2,49 +2,58 @@
 /*
  * List of posts.
  */
-.feed {
-  padding: 0;
-  li {
-    list-style-type: none;
-    background-color: rgba(0,0,0,0);
-    a {
-      font-size: 1.2rem;
-      text-decoration: none;
-      display: block;
-      padding: .5rem;
-      overflow-x: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      .right {
-        float: right;
+mat-card {
+  padding-bottom: 1rem !important;
+  .feed {
+    padding: 0;
+    li {
+      list-style-type: none;
+      background-color: rgba(0,0,0,0);
+      a {
+        font-size: 1.2rem;
+        text-decoration: none;
+        display: block;
+        padding: .5rem;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        .right {
+          float: right;
+        }
       }
     }
+    li:hover {
+      background-color: rgba(0,0,0,.05);
+      border-radius: .5rem;
+    }
+    .moderated {
+      text-decoration: line-through;
+    }
   }
-  li:hover {
-    background-color: rgba(0,0,0,.05);
-    border-radius: .5rem;
-  }
-  .moderated {
-    text-decoration: line-through;
-  }
-}
 
-/*
- * Get more items button.
- */
-.feed-more {
-  text-align: center;
-  margin-bottom: -2rem;
-}
+  /*
+  * Get more items button.
+  */
+  .feed-more {
+    margin-left: -2rem;
+    margin-right: -2rem;
+    margin-bottom: -1rem;
+    button {
+      text-align: center;
+      display: block;
+      width: 100%;
+    }
+  }
 
-/*
- * Filter button strip.
- */
-.filter-strip {
-  margin-top: -1rem !important;
-  margin-right: -1rem;
-  .mat-button-toggle-group {
-    height: 32px;
-    align-items: center;
+  /*
+  * Filter button strip.
+  */
+  .filter-strip {
+    margin-top: -1rem !important;
+    margin-right: -1rem;
+    .mat-button-toggle-group {
+      height: 32px;
+      align-items: center;
+    }
   }
 }
