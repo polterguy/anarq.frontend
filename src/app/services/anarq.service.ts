@@ -646,12 +646,14 @@ export class AnarqService {
        * @param visibility New visibility for post
        * @returns Whether or not operation was a success
        */
-      update: (id: number, content: string, visibility: string) => {
+      update: (id: number, content: string, topic: string, visibility: string, hyperlink: string) => {
         return this.httpClient.put(
           environment.apiUrl() + 'magic/modules/anarq/posts/post', {
             id,
             content,
+            topic,
             visibility,
+            hyperlink,
           });
       },
 

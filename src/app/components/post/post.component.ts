@@ -109,6 +109,14 @@ export class PostComponent implements OnInit {
   }
 
   /**
+   * Returns true if currently authenticated user can edit the current post.
+   */
+  canEditPost() {
+    return this.stateService.isModerator || this.stateService.username === this.post.user;
+  }
+
+
+  /**
    * Invoked when user clicks the like button of the post.
    */
   likePost() {

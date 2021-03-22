@@ -1,10 +1,12 @@
 
 mat-toolbar {
+  border-bottom: solid 1px #555;
+  box-shadow: 0 3px 5px rgba(0,0,0,.5);
   .logo {
     background-image: url(/assets/anarq.svg);
     background-size: cover;
     width: 14rem;
-    height: 4rem;
+    height: 63px;
     display: block;
   }
   .spacer {

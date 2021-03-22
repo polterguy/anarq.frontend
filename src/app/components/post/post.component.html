@@ -32,8 +32,9 @@
   </button>
 
   <div class="meta">
-    Posted {{post.created | since}} by <a [routerLink]="'/user/' + post.user">{{post.user}}</a>,
+    {{post.created | since}} by <a [routerLink]="'/user/' + post.user">{{post.user}}</a>,
     {{post.licks}} licks, {{post.visibility}}
+    <a *ngIf="canEditPost()" [routerLink]="'/edit/' + post.id">edit</a>
   </div>
 
   <button
@@ -65,7 +66,7 @@
       matTooltip="Moderated by admin">block</mat-icon>
 
     <div class="meta">
-      Posted {{idx.created | since}} by <a [routerLink]="'/user/' + post.user">{{idx.user}}</a>
+      {{idx.created | since}} by <a [routerLink]="'/user/' + post.user">{{idx.user}}</a>
     </div>
 
     <div

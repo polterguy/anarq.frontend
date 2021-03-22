@@ -1,6 +1,6 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { AnarqService, CreateModel, Topic } from 'src/app/services/anarq.service';
+import { AnarqService, CreateModel, Post, Topic } from 'src/app/services/anarq.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -9,6 +9,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./create.component.scss']
 })
 export class CreateComponent implements OnInit {
+
+  /**
+   * Only assigned when editing a post.
+   */
+  public id: number;
 
   /**
    * Actual content user submits.
@@ -56,6 +61,7 @@ export class CreateComponent implements OnInit {
   constructor(
     private anarqService: AnarqService,
     private snackBar: MatSnackBar,
+    private route: ActivatedRoute,
     private router: Router) { }
 
   /**
@@ -70,6 +76,41 @@ export class CreateComponent implements OnInit {
     this.anarqService.topics.list().subscribe((result: Topic[]) => {
       this.topics = result;
       this.topic = this.topics[0];
+
+      // If this is an edit operation, the ID of the post we want to edit can be found as the 'id' parameter.
+      this.route.params.subscribe((params: any) => {
+        
+        // Checking if we're editing a post.
+        const id = params.id;
+        if (id) {
+
+          // Assigning model.
+          this.id = id;
+
+          // Retrieving post content.
+          this.anarqService.posts.get(id).subscribe((result: Post) => {
+            
+            // Assigning model.
+            const topics = this.topics.filter(x => x.name === result.topic);
+            if (topics.length > 0) {
+              this.topic = topics[0];
+            }
+            this.visibility = result.visibility;
+            if (result.content.indexOf('<!-- End of Open Graph -->') !== -1) {
+              this.content = result.content.split('<!-- End of Open Graph -->')[1].trim();
+              this.hyperlink = result.content.split('<a href="')[1].split('"')[0];
+            } else {
+              this.content = result.content;
+            }
+          }, (error: any) => {
+
+            // Oops ...!!
+            this.snackBar.open(error.error.message, 'ok', {
+              duration: 5000,
+            });
+          });
+        }
+      });
     });
   }
 
@@ -90,20 +131,52 @@ export class CreateComponent implements OnInit {
 
     // Making sure we obscure things while post is being submitted.
     this.submitting = true;
-    this.anarqService.posts.create(
-      this.content,
-      this.topic.name,
-      this.visibility,
-      this.hyperlink).subscribe((result: CreateModel) => {
-        this.submitting = false;
-        this.router.navigate(['/post/' + result.id]);
-    }, (error: any) => {
 
-      // Oops ...
-      this.submitting = false;
-      this.snackBar.open(error.error.message, 'ok', {
-        duration: 5000,
+    // Checking if we're creating a new post or updating an existing.
+    if (this.id) {
+
+      // Updating an existing.
+      this.anarqService.posts.update(
+        this.id,
+        this.content,
+        this.topic.name,
+        this.visibility,
+        this.hyperlink).subscribe((res: any) => {
+
+          // Success!
+          this.submitting = false;
+          this.router.navigate(['/post/' + this.id]);
+
+      }, (error: any) => {
+
+        // Oops ...
+        this.submitting = false;
+        this.snackBar.open(error.error.message, 'ok', {
+          duration: 5000,
+        });
       });
-    });
+
+    } else {
+
+      // Creating a new post.
+      this.anarqService.posts.create(
+        this.content,
+        this.topic.name,
+        this.visibility,
+        this.hyperlink).subscribe((result: CreateModel) => {
+
+          // Success!
+          this.submitting = false;
+          this.router.navigate(['/post/' + result.id]);
+
+      }, (error: any) => {
+
+        // Oops ...
+        this.submitting = false;
+        this.snackBar.open(error.error.message, 'ok', {
+          duration: 5000,
+        });
+      });
+    }
   }
 }

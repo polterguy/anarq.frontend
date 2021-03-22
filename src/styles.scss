@@ -9,7 +9,6 @@ html, body {
 
 body {
   margin: 0;
-  padding-bottom: 3rem;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
@@ -35,6 +34,8 @@ app-toolbar {
   overflow: auto;
   height: auto;
   width: 100vw;
+  background-color: #d9caf3;
+  padding-bottom: 3rem;
 }
 
 mat-card {
