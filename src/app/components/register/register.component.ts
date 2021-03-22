@@ -55,6 +55,11 @@ export class RegisterComponent implements OnInit {
   public repeatPassword: string;
 
   /**
+   * If true, the post is being submitted.
+   */
+   public submitting: boolean = false;
+
+  /**
    * Creates an instance of your component.
    * 
    * @param anarqService Needed to invoke backend to perform actual registration of user
@@ -144,13 +149,32 @@ export class RegisterComponent implements OnInit {
    * Invoked when user clicks the register button.
    */
   register() {
-    this.anarqService.profile.register(this.username, this.password, this.email, this.name).subscribe((result: ResultModel) => {
+
+    // Making sure we obscure things while post is being submitted.
+    this.submitting = true;
+
+    // Invoking backend to register user
+    this.anarqService.profile.register(
+      this.username,
+      this.password,
+      this.email,
+      this.name).subscribe((result: ResultModel) => {
       if (result.result === 'success') {
+
+        // Providing feedback to user.
+        this.submitting = false;
         this.snackBar.open('Please check your inbox for an email from AnarQ', 'ok', {
           duration: 5000,
         });
         this.router.navigate(['/']);
       }
+    }, (error: any) => {
+
+      // Oops ...!!
+      this.submitting = false;
+      this.snackBar.open(error.error.message, 'ok', {
+        duration: 5000,
+      });
     });
   }
 }

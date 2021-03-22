@@ -1,4 +1,10 @@
 
+<mat-spinner
+  *ngIf="submitting"
+  mode="indeterminate"
+  diameter="50">
+</mat-spinner>
+
 <mat-card>
 
   <div class="part">
@@ -7,6 +13,7 @@
       <mat-label>Username</mat-label>
       <input
         matInput
+        [disabled]="submitting"
         [class]="usernameGood === 'no' ? 'error' : ''"
         [(ngModel)]="username"
         autocomplete="username"
@@ -17,6 +24,7 @@
       <mat-label>Email</mat-label>
       <input
         matInput
+        [disabled]="submitting"
         [class]="emailGood === 'no' ? 'error' : ''"
         [(ngModel)]="email"
         autocomplete="email"
@@ -27,6 +35,7 @@
       <mat-label>Full name</mat-label>
       <input
         matInput
+        [disabled]="submitting"
         [(ngModel)]="name"
         autocomplete="name">
     </mat-form-field>
@@ -35,6 +44,7 @@
       <mat-label>Password</mat-label>
       <input
         matInput
+        [disabled]="submitting"
         [(ngModel)]="password"
         type="password"
         autocomplete="new-password">
@@ -44,6 +54,7 @@
       <mat-label>Repeat password</mat-label>
       <input
         matInput
+        [disabled]="submitting"
         [(ngModel)]="repeatPassword"
         type="password"
         autocomplete="new-password">
@@ -52,7 +63,7 @@
     <div class="button-strip">
 
       <button
-        [disabled]="!isGood()"
+        [disabled]="!isGood() || submitting"
         mat-button
         (click)="register()">Register</button>
 
