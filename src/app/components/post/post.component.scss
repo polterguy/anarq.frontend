@@ -1,7 +1,14 @@
 
 /*
- * Misc buttons and icons.
+ * Misc buttons and elements.
  */
+mat-spinner {
+  position: fixed;
+  top: 5rem;
+  right: 1rem;
+  z-index: 1000;
+}
+
 .like-button {
   position: absolute;
   top: 0;

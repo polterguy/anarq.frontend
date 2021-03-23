@@ -64,6 +64,11 @@ export class PostComponent implements OnInit {
   public showPayPal: boolean = false;
 
   /**
+   * If true, the post is being submitted.
+   */
+   public submitting: boolean = false;
+
+  /**
    * Creates an instance of your component.
    * 
    * @param route Needed to figure out which post user wants to see
@@ -330,9 +335,26 @@ export class PostComponent implements OnInit {
    * Invoked when comment is submitted.
    */
   submitComment() {
+
+    // Making sure we show spinner while comment is submitted.
+    this.submitting = true;
     this.anarqService.comments.create(this.post.id, this.comment).subscribe((result: CreateModel) => {
+
+      // Success, emptying model and retreiving comments again, making sure we hid obscurer.
       this.comment = '';
       this.getComments();
+      this.submitting = false;
+      this.snackBar.open('Your comment was successfully saved', 'ok', {
+        duration: 5000,
+      });
+
+    }, (error: any) => {
+
+      // Oops ...!!
+      this.submitting = false;
+      this.snackBar.open(error.error.message, 'ok', {
+        duration: 5000,
+      });
     });
   }
 }

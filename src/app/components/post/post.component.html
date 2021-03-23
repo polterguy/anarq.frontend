@@ -1,4 +1,10 @@
 
+<mat-spinner
+  *ngIf="submitting"
+  mode="indeterminate"
+  diameter="50">
+</mat-spinner>
+
 <mat-card
   *ngIf="is404"
   class="big-404">
@@ -120,6 +126,7 @@
       <mat-label>Comment ...</mat-label>
       <textarea
         matInput
+        [disabled]="submitting"
         [(ngModel)]="comment"
         rows="10"></textarea>
 
@@ -129,6 +136,7 @@
 
       <button
         mat-raised-button
+        [disabled]="submitting || !comment || comment.length === 0"
         color="primary"
         (click)="submitComment()">
         Submit
