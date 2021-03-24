@@ -29,6 +29,11 @@ mat-card {
           float: right;
         }
       }
+      @media screen and (max-width: 800px) {
+        a span {
+          display: none;
+        }
+      }
     }
     li:hover {
       background-color: rgba(0,0,0,.05);

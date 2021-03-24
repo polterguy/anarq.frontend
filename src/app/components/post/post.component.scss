@@ -71,6 +71,9 @@ mat-spinner {
   width: 25rem;
   box-shadow: 2px 2px 1px rgba(0,0,0,.2);
   transition: box-shadow .1s ease-in;
+  h1 {
+    text-align: left;
+  }
   a {
     padding: 1rem;
     display: block;
