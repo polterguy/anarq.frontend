@@ -78,8 +78,8 @@ export class AdminComponent implements OnInit {
     this.anarqService.topics.create(this.name, this.description).subscribe((result: ResultModel) => {
       this.name = '';
       this.description = '';
-      this.snackBar.open('Topic was created', 'ok', {
-        duration: 2000,
+      this.snackBar.open('Topic was created. Notice, due to caching it might take some time before disappearing', 'ok', {
+        duration: 5000,
       });
       this.getTopics();
     });
@@ -92,8 +92,8 @@ export class AdminComponent implements OnInit {
    */
   deleteTopic(topic: Topic) {
     this.anarqService.topics.delete(topic.name).subscribe((result: Affected) => {
-      this.snackBar.open('Topic was deleted', 'ok', {
-        duration: 2000,
+      this.snackBar.open('Topic was deleted. Notice, due to caching it might take some time before disappearing', 'ok', {
+        duration: 5000,
       });
       this.getTopics();
     });

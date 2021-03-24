@@ -19,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 
@@ -76,6 +77,7 @@ import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.
     MatTooltipModule,
     MatToolbarModule,
     MatSnackBarModule,
+    MatSlideToggleModule,
     MatButtonToggleModule,
     MatProgressSpinnerModule,
     MatIconModule,

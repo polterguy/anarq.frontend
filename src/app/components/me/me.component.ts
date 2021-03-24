@@ -73,4 +73,25 @@ export class MeComponent implements OnInit {
       });
     });
   }
+
+  /**
+   * Invoked when email notifications are changed.
+   */
+  emailNotificationsChanged() {
+    
+    // Storing PayPalID by invoking backend.
+    this.anarqService.profile.storeEmailNotifications(this.profile.email_notifications).subscribe(() => {
+
+      // Success!
+      this.snackBar.open('Your email preferences was successfully updated', 'ok', {
+        duration: 5000,
+      });
+    }, (error: any) => {
+
+      // Oops ...!!
+      this.snackBar.open(error.error.message, 'ok', {
+        duration: 5000,
+      });
+    });
+  }
 }

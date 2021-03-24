@@ -29,6 +29,7 @@ import { environment } from 'src/environments/environment';
   locked: boolean;
   roles: string[];
   payPalId: string;
+  email_notifications: boolean;
 }
 
 /**
@@ -317,6 +318,19 @@ export class AnarqService {
         return this.httpClient.put<ResultModel>(
           environment.apiUrl() + 'magic/modules/anarq/profile/paypal-id', {
             payPalId
+          });
+      },
+
+      /**
+       * Stores user's email notifications preferences
+       * 
+       * @param notifications Whether or not user wants to have email notifications from AnarQ
+       * @returns Whether or not invocation was a success
+       */
+       storeEmailNotifications: (notifications: boolean) => {
+        return this.httpClient.put<ResultModel>(
+          environment.apiUrl() + 'magic/modules/anarq/profile/email-notifications', {
+            notifications
           });
       },
     }
