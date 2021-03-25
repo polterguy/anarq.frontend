@@ -50,7 +50,7 @@ export class AdminComponent implements OnInit {
    * Invoked when topics needs to be retrieved.
    */
   getTopics() {
-    this.anarqService.topics.list().subscribe((result: Topic[]) => {
+    this.anarqService.topics.listNoCache().subscribe((result: Topic[]) => {
       this.topics = result;
     });
   }

@@ -225,7 +225,7 @@ export class PostComponent implements OnInit {
    * Invoked when comments needs to be retrieved for post.
    */
   getComments() {
-    this.anarqService.comments.get(this.post.id).subscribe((result: Comment[]) => {
+    this.anarqService.comments.list(this.post.id).subscribe((result: Comment[]) => {
       this.comments = result;
     });
   }
