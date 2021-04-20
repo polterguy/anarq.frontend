@@ -784,7 +784,7 @@ export class AnarqService {
   }
 
   /**
-   * Returns miscelanous methods, such as PayPal donate configuration retriever, etc.
+   * Returns miscellaneous methods, such as PayPal donate configuration retriever, etc.
    */
   get misc() {
     return {
