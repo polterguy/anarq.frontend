@@ -22,7 +22,7 @@
     "@angular/platform-browser-dynamic": "~10.2.0",
     "@angular/router": "~10.2.0",
     "angular-marked": "^1.2.2",
-    "marked": "^2.0.1",
+    "marked": "^4.0.10",
     "ngx-paypal": "^7.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
